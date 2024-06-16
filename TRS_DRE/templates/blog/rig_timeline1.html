@@ -1,154 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        {% load static %}
-        <title>Calendar</title>
-    </head>
-    <body>
-        <style>
-        .month {
-            color: blue;
-            display: grid;
-            grid-template-columns: repeat(12, 1fr);
-        }
-        
-        .project {
-            display: block;
-            background-color: blue;
-            color: white;
-        }
-        
-        * {
-            padding: 0;
-            margin: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            line-height: 1.5;
-            font-size: 16px;
-            background-color: #f5f5f5;
-            color: #000000c9;
-        }
-        
-        .container {
-            width: 90%;
-            margin: 40px auto 0;
-            text-align: center;
-            border: 1px solid #00000024;
-            border-radius: 10px;
-            box-shadow: 0px 0px 20px 3px rgba(0, 0, 0, 0.1);
-            overflow-x: auto;
-        }
-        
-        .container h2 {
-            font-size: 30px;
-            font-weight: 800;
-            padding: 15px 0;
-            background-color: #00a3e0;
-            color: #f5f5f5;
-        }
-        
-        .rig-row {
-            min-width: 100%;
-        }
-        
-        .calendar-row {
-            display: flex;
-        }
-        
-        .rig-row_months {
-            display: flex;
-            font-weight: 800;
-            border-bottom: 1px solid #00000024;
-        }
-        
-        .rig-row_months div {
-            width: 8.33%;
-            border-right: 1px solid #00000024;
-            padding: 10px;
-            background-color: #eeecec;
-        }
-        
-        .rig-row_months div:last-child {
-            border: none;
-        }
-        
-        .rig-data {
-            font-size: 12px;
-            position: relative;
-        }
-        
-        .rig-block {
-            padding: 3px 10px;
-            display: flex;
-            flex-direction: column;
-            border: 1px solid #00000024;
-            border-bottom: 1px solid #00000024;
-            background-color: #00a3e0;
-            color: white;
-            position: absolute;
-        }
-        
-        .rig-block .rig-dates {
-            margin: 5px 0;
-            display: flex;
-            justify-content: space-between;
-        }
-        
-        .rig-block .rig-name {
-            margin-bottom: 10px;
-        }
-        </style>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% load static %}
+    <title>Calendar</title>
+  </head>
+  <body>
+    <style>
+      .month {
+        color: blue;
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+      }
+      
+      .project {
+        display: block;
+        background-color: blue;
+        color: white;
+      }
+      
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+      
+      body {
+        font-family: 'Inter', sans-serif;
+        line-height: 1.5;
+        font-size: 16px;
+        background-color: #f5f5f5;
+        color: #000000c9;
+      }
+      
+      .container {
+        width: 90%;
+        margin: 40px auto 0;
+        text-align: center;
+        border: 1px solid #00000024;
+        border-radius: 10px;
+        box-shadow: 0px 0px 20px 3px rgba(0, 0, 0, 0.1);
+        overflow-x: auto;
+      }
+      
+      .container h2 {
+        font-size: 30px;
+        font-weight: 800;
+        padding: 15px 0;
+        background-color: #00a3e0;
+        color: #f5f5f5;
+      }
+      
+      .rig-row {
+        min-width: 100%;
+      }
+      
+      .calendar-row {
+        display: flex;
+      }
+      
+      .rig-row_months {
+        display: flex;
+        font-weight: 800;
+        border-bottom: 1px solid #00000024;
+      }
+      
+      .rig-row_months div {
+        width: 8.33%;
+        border-right: 1px solid #00000024;
+        padding: 10px;
+        background-color: #eeecec;
+      }
+      
+      .rig-row_months div:last-child {
+        border: none;
+      }
+      
+      .rig-data {
+        font-size: 12px;
+        position: relative;
+      }
+      
+      .rig-block {
+        padding: 3px 10px;
+        display: flex;
+        flex-direction: column;
+        border: 1px solid #00000024;
+        border-bottom: 1px solid #00000024;
+        background-color: #00a3e0;
+        color: white;
+        position: absolute;
+      }
+      
+      .rig-block .rig-dates {
+        margin: 5px 0;
+        display: flex;
+        justify-content: space-between;
+      }
+      
+      .rig-block .rig-name {
+        margin-bottom: 10px;
+      }
+    </style>
 
-        <div class="container">
-        <div class="calendar-row">
-            <div>
-            <h2 style="height: 75px;"></h2>
-            <div class="rig-row_months" style="padding: 10px;">Project</div>
-            {% for rig in rigs %}
-                <div style="height: 68px; background-color: aqua; display: flex; justify-content: center; align-items: center;">{{ rig.name }}</div>
+    <div class="container">
+      <div class="calendar-row">
+        <div>
+          <h2 style="height: 75px;"></h2>
+          <div class="rig-row_months" style="padding: 10px;">Project</div>
+          {% for rig in rigs %}
+            <div style="height: 68px; background-color: aqua; display: flex; justify-content: center; align-items: center;">{{ rig.name }}</div>
+          {% endfor %}
+        </div>
+        <div>
+          <div class="calendar-row">
+            {% for year in years %}
+              <div class="rig-row">
+                <h2>{{ year }}</h2>
+                <div class="rig-row_months">
+                  {% for month in months %}
+                    <div>{{ month }}</div>
+                  {% endfor %}
+                </div>
+              </div>
             {% endfor %}
-            </div>
-            <div>
-            <div class="calendar-row">
-                {% for year in years %}
-                <div class="rig-row">
-                    <h2>{{ year }}</h2>
-                    <div class="rig-row_months">
-                    {% for month in months %}
-                        <div>{{ month }}</div>
-                    {% endfor %}
+          </div>
+          {% for rig in rigs %}
+            <div class="rig-data">
+              {% for movement in movements %}
+                {% if movement.rig == rig %}
+                  {% if movement.start_date.year in years %}
+                    <div class="rig-block" style="left: calc({{ movement.start_month_index }} * 8.33%); width: calc({{ movement.month_span }}%);">
+                    <div class="rig-dates">
+                        <span>{{ movement.start_date|date:'M d, Y' }}</span>
+                        <span>{{ movement.end_date|date:'M d, Y' }}</span>
+                      </div>
+                      <div class="rig-name">
+                        <h4>{{ movement.well.name }}</h4>
+                      </div>
                     </div>
-                </div>
-                {% endfor %}
+                  {% endif %}
+                {% endif %}
+              {% endfor %}
             </div>
-            {% for rig in rigs %}
-                <div class="rig-data">
-                {% for movement in movements %}
-                    {% if movement.rig == rig %}
-                    {% if movement.start_date.year in years %}
-                        <div class="rig-block" style="left: calc({{ movement.start_month_index }} * 8.33%); width: calc({{ movement.month_span }}%);">
-                        <div class="rig-dates">
-                            <span>{{ movement.start_date|date:'M d, Y' }}</span>
-                            <span>{{ movement.end_date|date:'M d, Y' }}</span>
-                        </div>
-                        <div class="rig-name">
-                            <h4>{{ movement.well.name }}</h4>
-                        </div>
-                        </div>
-                    {% endif %}
-                    {% endif %}
-                {% endfor %}
-                </div>
-            {% endfor %}
-            </div>
+          {% endfor %}
         </div>
-        </div>
+      </div>
+    </div>
 
-        <script src="{% static 'my_app/my_script.js' %}"></script>
-    </body>
+    <script src="{% static 'my_app/my_script.js' %}"></script>
+  </body>
 </html>
