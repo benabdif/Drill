@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        
+    .month {
+        color: blue;
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+    }
+    .project {
+        display: block;
+        background-color: blue;
+        color: white;
+    }
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: "Inter", sans-serif;
+      line-height: 1.5;
+      font-size: 16px;
+    
+      background-color: #f5f5f5;
+      color: #000000c9;
+    }
+    
+    .container {
+      width: 90%;
+      margin: 0 auto;
+      margin-top: 40px;
+      text-align: center;
+      border: 1px solid #00000024;
+      /* padding: 20px; */
+      border-radius: 10px;
+      box-shadow: 0px 0px 20px 3px rgba(0, 0, 0, 0.1);
+      -webkit-box-shadow: 0px 0px 20px 3px rgba(0, 0, 0, 0.1);
+      -moz-box-shadow: 0px 0px 20px 3px rgba(0, 0, 0, 0.1);
+      overflow-x: scroll;
+    }
+    .container h2 {
+      font-size: 30px;
+      font-weight: 800;
+      border-right: 1px solid #f5f5f53d;
+      padding: 15px 0;
+      font-weight: 800;
+      background-color: #00a3e0;
+      color: #f5f5f5;
+    }
+    .rig-row {
+      min-width: 100%;
+    }
+    .calender-row {
+      /* overflow-x: scroll; */
+      display: flex;
+    }
+    .rig-row_months {
+      display: flex;
+      font-weight: 800;
+      border-bottom: 1px solid #00000024;
+    }
+    
+    .rig-row_months div {
+      width: 8.33%;
+      /* width: 100px; */
+      border-right: 1px solid #00000024;
+      padding: 10px;
+      background-color: #eeecec;
+    }
+    .rig-row_months div:last-child {
+      border: none;
+    }
+    .clearfix {
+      clear: both;
+    }
+    .rig-data {
+      font-size: 12px;
+    }
+    .rig-block {
+      padding: 3px;
+    
+      display: flex;
+      flex-direction: column;
+      /* width: 20%; */
+      padding: 0 10px;
+      border: 1px solid #00000024;
+      border-bottom: 1px solid #00000024;
+      float: left;
+    }
+    
+    .rig-block .rig-dates {
+      margin: 5px 0;
+      display: flex;
+      justify-content: space-between;
+    }
+    .rig-block .rig-percent,
+    .rig-block .rig-name {
+      margin-bottom: 20px;
+    }
+    .rig-block .rig-number,
+    .rig-block .rig-approval {
+      margin-bottom: 5px;
+    }
+    .rig-block .rig-percent,
+    .rig-block .rig-approval,
+    .rig-block .rig-number {
+      display: flex;
+      justify-content: space-between;
+    }
+    
+    .rig-data .rig-block:first-child {
+      width: 20%;
+    }
+    
+    .rig-data .rig-block:last-child {
+      width: 35%;
+    }
+    </style>
+
+
+
+<div class="container">
+    <div class="calender-row">
+      <div class="rig-row">
+        <div class="rig-row_months">
+            {% for month in months %}
+          <div>{{ month }}</div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    <!-- Individual Rig Data -->
+    {% for rig, activity in rig_data %}
+    <div class="rig-data">
+      <div class="rig-block">
+        <div class="rig-dates">
+          <span>{{ rig.name }}</span>
+          {% for status in activity %}
+          <span>{% if status == 1 %}Active{% endif %}</span>
+          {% endfor %}
+          <span>{{ project.end_date }}</span>
+
+        </div>
+        <div class="rig-name">
+          <h4>{{ project.name }}</h4>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+<script src="script.js"></script>
+
+    
+</body>
+</html>
+
+
+<!--     
+<div class="grid-wrapper">
+    <div class="grid-header">Rig</div>
+    {% for month in months %}
+        <div class="grid-header">{{ month }}</div>
+    {% endfor %}
+    {% for rig, activity in rig_data %}
+        <div class="grid-cell">{{ rig.name }}</div>
+        {% for active in activity %}
+            <div class=" {% if active == 1 %}active{% else %}inactive{% endif %}"></div>
+        {% endfor %}
+        
+    {% endfor %}
+</div> -->
+
+
+
+    
+    
+
+
+            
+           
+    
+        
+        
+    
+    
+    
+

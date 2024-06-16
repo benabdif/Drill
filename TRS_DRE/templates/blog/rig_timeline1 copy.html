@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <title>Current Rigs</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: "Inter", sans-serif;
+            line-height: 1.5;
+            font-size: 16px;
+            background-color: #f5f5f5;
+            color: #000000c9;
+        }
+        .container {
+            width: 90%;
+            margin: 0 auto;
+            margin-top: 40px;
+            text-align: center;
+            border: 1px solid #00000024;
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px 3px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+        .container h2 {
+            font-size: 30px;
+            font-weight: 800;
+            border-right: 1px solid #f5f5f53d;
+            padding: 15px 0;
+            font-weight: 800;
+            background-color: #00a3e0;
+            color: #f5f5f5;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #00000024;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #eeecec;
+        }
+        .movement-cell {
+            background-color: #aaf0d1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Project</th>
+                
+                    
+                    {% for year in years %}
+                        {% for month in months %}
+                            <th>{{ year }} - {{ month|slice:":3" }}</th>
+                        {% endfor %}
+                    {% endfor %}
+                
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for rig in rigs %}
+                    <tr>
+                        <td>{{ rig.name }}</td>
+                        <!-- <td>project 1</td> -->
+                        {% for year in years %}
+                            {% for month in months %}
+                                
+                                    {% for movement in movements %}
+                                        {% if movement.rig == rig %}
+                                            {% with movement_start_year=movement.start_date.year movement_end_year=movement.end_date.year %}
+                                            {% if movement_start_year == year and movement.start_date|date:"M" == month|slice:":3" %}
+
+                                                    <td class="movement-cell" colspan="{{ movement.month_span }}">
+                                                        <p>
+                                                            {{ movement_start_year  }}
+                                                        </p>
+                                                        <div class="movement-details">
+                                                            <div style="justify-content: space-between; display: flex;">
+                                                                <p style="margin: 0; ">{{ movement.start_date|date:"M d, Y" }}</p>
+                                                                <p style="margin: 0;">{{ movement.end_date|date:"M d, Y" }}</p>
+                                                            </div>
+                                                            <p class="movement-description"><a href="#">{{ movement.well.name }}</a></p> 
+                                                        </div>
+                                                    </td>
+                                                {% endif %} 
+                                            {% endwith %}
+                                        {% endif %}
+                                    {% endfor %}
+                                
+                            {% endfor %}
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="infor">
+<!--         
+        <h1>{{ rigs }}</h1>
+        <h1>{{ months }}</h1> -->
+        <!-- <p>{{ movements.1}}</p> -->
+    </div>
+
+  
+    
+    <div class="button-container" style="text-align: center;">
+        <a onclick="loadCreateRigInfo()">Create Rig Info</a>
+        <a onclick="loadViewRigInfo()">View All Rig Info</a>
+    </div>
+
+    <div id="rig-info"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+        function loadCreateRigInfo() {
+            fetch('/create_rig_info/')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('rig-info').innerHTML = html;
+                    document.getElementById('rig-info').style.display = 'block';
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        function loadViewRigInfo() {
+            fetch('/view_rig_info/')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('rig-info').innerHTML = html;
+                    document.getElementById('rig-info').style.display = 'block';
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    </script>
+
+
+    
+  
+</body>
+</html>

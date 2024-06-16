@@ -1,0 +1,135 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Schedule</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+        }
+        .grid-wrapper {
+            /* display: grid; */
+            grid-template-columns: repeat(13, 1fr); /* 12 months + 1 column for rig names */
+            width: 100%;
+            margin: 20px auto;
+            gap: 0px;/* This acts like the border */
+        }
+        .grid-header, .grid-cell { 
+            /* background-color: #ffffff; */
+            text-align: center;
+            padding: 8px;
+        } 
+        .grid-header {
+           /* background-color: #004165;  Header background color */
+            color: #ffffff;
+        }
+        .active {
+            background-color: #28e42e; /* Active month */
+        }
+        .inactive {
+            background-color: #eeeeee; /* Inactive month */
+        }
+        .grid-cell {
+            border: 1px solid #cccccc;
+        }
+
+
+.grid-wrapper {
+    /* display: grid; */
+    grid-template-columns: 120px repeat(12, 1fr); /* Fixed width for the rig column, equal fractions for the months */
+    background: #fff;
+    gap: 2px; /* Optional: creates gaps between cells */
+    padding: 10px; /* Padding around the grid for better spacing */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Soft shadow around the entire grid */
+}
+
+.grid-header {
+    /*background-color: #4CAF50;  Green background for headers */
+    color: white; /* White text color */
+    font-weight: bold;
+    padding: 8px;
+    text-align: center;
+    border: 0.5px solid #dddddd40;  /*Subtle borders for the header cells */
+    width: 100%;
+}
+
+.grid-cell {
+    background-color: #f9f9f9; /* Light grey background for rig names */
+    padding: 8px;
+    text-align: left; /* Align the rig names to the left */
+    border: 1px solid #ddd; /* Border for cells */
+}
+
+.active {
+    background-color: #8BC34A; /* Lighter green for active months */
+    padding: 8px;
+    text-align: center;
+    grid-column: span auto; /* Takes up as many columns as defined by 'span' */
+    border: 1px solid #ddd; /* Consistent borders */
+}
+
+.inactive {
+    background-color: #f9f9f9; /* Same as the rig cell for a uniform look */
+    border: 1px solid #ddd; /* Consistent borders */
+}
+
+/* Custom CSS */
+
+.parents-div {
+    display: flex;
+}
+.info-div{
+    flex: 2;
+}
+.grid-header-parent {
+    display: flex;
+    justify-content: space-between;
+    background-color: #4CAF50;
+}
+/* .grid-cells-parent {
+    display: flex;
+} */
+.rig-name {
+    margin-top: 36px;
+}
+
+    </style>
+</head>
+<body>
+    <div class="parents-div">
+        <div class="rig-name">
+        {% for rig, activity_ranges in rig_data %}
+            <div class="grid-cell">{{ rig.name }}</div>
+        {% endfor %}
+        </div>
+        <div class="info-div">
+            <div class="grid-header-parent">
+                {% for month in months %}
+                    <div class="grid-header">{{ month }}</div>
+                    
+                {% endfor %}
+            </div>
+            <div class="grid-cells-parent">
+                {% for rig in rig_data %}
+                    {% for x in active_number %}
+                        <div class="active" style="width: {{x.0}}%;">Active</div>
+                    {% endfor %}
+                {% endfor %}
+               
+            </div>  
+
+        </div>
+
+    </div>
+    
+  
+ 
+
+  
+</body>
+</html>

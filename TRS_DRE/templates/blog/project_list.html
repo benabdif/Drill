@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Project List</title>
+</head>
+<body>
+    <h1>Project List</h1>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Month Difference</th>
+        </tr>
+        {% for project in projects %}
+        <tr>
+            <td>{{ project.id }}</td>
+            <td>{{ project.start_date }}</td>
+            <td>{{ project.end_date }}</td>
+            <td>{{ project.month_diff }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rig Movement Timeline</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            text-align: center;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .AKPF {
+            width: 90%;
+            margin: 0 auto;
+            display: flex;
+        }
+        .KPI-1 {
+            flex: 3;
+        }
+        .KPF {
+            margin-top: 36px;
+        }
+        .KPF li {
+            list-style: none;
+            list-style: none;
+    height: 98px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Rig Movement Timeline - 2024</h1>
+
+    <div class="AKPF">
+       
+
+        <div class="KPF">
+            {% for rig in rigs  %}
+
+            <li>
+                 <th>{{ rig.name }}</th>
+                {% endfor %}
+            </li>
+
+        </div>
+        <div class="KPI-1">
+            <table>
+                <tr>
+                    <th></th>
+                    {% for month in months %}
+                        <th>{{ month|slice:":3" }}</th>
+                    {% endfor %}
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <th></th>
+                    {% for month in months %}
+                        <th>{{ month|slice:":3" }}</th>
+                    {% endfor %}
+                </tr>
+            </table>
+        
+        </div>
+    </div>
+   </body>
+</html>

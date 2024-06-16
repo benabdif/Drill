@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rig List</title>
+    <!-- Link to the CSS file -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+  
+    <h1>Rig List</h1>
+    <div class="container-wrapper">
+        {% for rig in rigs %}
+            <div class="container">
+                <div class="corner top-left">{{ rig.start_date }}</div>
+                <div class="corner top-right">{{ rig.end_date }}</div>
+                <div class="corner bottom-left">{{ rig.contact_phone }}</div>
+                <div class="corner bottom-right">{{ rig.address }}</div>
+                <div class="center">{{ rig.id }}</div>
+                <div class="rig-details">
+                    <h2>{{ rig.rig_name }} ({{ rig.location }})</h2>
+                    <p>Well Site Name {{ rig.well_site_name }}</p>
+                    <h3>Engineers:</h3>
+                    <ul>
+                        {% for engineer in rig.engineers.all %}
+                            <li>{{ engineer.name }} - {{ engineer.department }}</li>
+                        {% empty %}
+                            <li>No engineers assigned.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        {% empty %}
+            <p>No rigs found.</p>
+        {% endfor %}
+    </div>
+
+
+    <div class="infoW1">
+        <h1>fadhel</h1>
+        <a href="#">w</a>
+    </div>
+
+
+    
+</body>
+</html>

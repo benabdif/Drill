@@ -1,0 +1,26 @@
+<h1>Project Names</h1>
+<ul>
+    <style>
+        .num {
+            justify-content:space-between;
+            display: flex;
+            font-family: 'Courier New', Courier, monospace;
+
+            
+            
+        }
+
+    </style>
+    {% for x in mysql %}
+        <div>
+            <p>{{ x.start_date }}    | {{x}}  {{x.end_date}}</p>
+        </div>
+      
+    {% endfor %}
+</ul>
+
+<div class="test">
+    <p style="font-size: {{ color }}px;">Fadhel</p>
+    <p>{{ color }}</p>
+</div>
+

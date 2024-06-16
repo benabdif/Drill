@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+    <title>Current Rigs</title>
+    <style>
+        * {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  line-height: 1.5;
+  font-size: 16px;
+
+  background-color: #f5f5f5;
+  color: #000000c9;
+}
+
+.container {
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 40px;
+  text-align: center;
+  border: 1px solid #00000024;
+  /* padding: 20px; */
+  border-radius: 10px;
+  box-shadow: 0px 0px 20px 3px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0px 0px 20px 3px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0px 0px 20px 3px rgba(0, 0, 0, 0.1);
+  overflow-x: scroll;
+}
+.container h2 {
+  font-size: 30px;
+  font-weight: 800;
+  border-right: 1px solid #f5f5f53d;
+  padding: 15px 0;
+  font-weight: 800;
+  background-color: #00a3e0;
+  color: #f5f5f5;
+}
+.rig-row {
+  min-width: 100%;
+}
+.calender-row {
+  /* overflow-x: scroll; */
+  display: flex;
+}
+.rig-row_months {
+  display: flex;
+  font-weight: 800;
+  border-bottom: 1px solid #00000024;
+}
+
+.rig-row_months div {
+  width: 8.33%;
+  /* width: 100px; */
+  border-right: 1px solid #00000024;
+  padding: 10px;
+  background-color: #eeecec;
+}
+.rig-row_months div:last-child {
+  border: none;
+}
+.clearfix {
+  clear: both;
+}
+.rig-data {
+  font-size: 12px;
+  display: flex;
+}
+.rig-block {
+  padding: 3px;
+
+  display: flex;
+  flex-direction: column;
+  /* width: 20%; */
+  padding: 0 10px;
+  border: 1px solid #00000024;
+  border-bottom: 1px solid #00000024;
+  float: left;
+}
+
+.rig-block .rig-dates {
+  margin: 5px 0;
+  display: flex;
+  justify-content: space-between;
+}
+.rig-block .rig-percent,
+.rig-block .rig-name {
+  margin-bottom: 20px;
+}
+.rig-block .rig-number,
+.rig-block .rig-approval {
+  margin-bottom: 5px;
+}
+.rig-block .rig-percent,
+.rig-block .rig-approval,
+.rig-block .rig-number {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* .rig-data .rig-block:first-child {
+  width: 20%;
+}
+
+.rig-data .rig-block:last-child {
+  width: 35%;
+} */
+
+/*  */
+
+.rig-1,
+.rig-2,
+.rig-4 {
+  width: 15%;
+}
+
+.rig-3 {
+  width: 25%;
+}
+.rig-5 {
+  width: 35%;
+}
+    </style>
+  </head>
+
+  <body>
+    <style>
+        
+    </style>
+    <div class="container">
+      <div class="row">
+        <div class="calender-row">
+          <div class="rig-row">
+            <h2>2024</h2>
+            <div class="rig-row_months">
+              <div>January</div>            
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+<!--  -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rig Movement Timeline</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            color: #333;
+        }
+        .container {
+            width: 90%;
+            margin: 0 auto;
+        }
+        .rigs-list {
+            margin-top: 20px;
+        }
+        .rigs-list li {
+            list-style: none;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        .timeline {
+            margin-top: 20px;
+            overflow-x: auto; /* Enable horizontal scrolling */
+            border: 2px solid #333;
+            padding: 10px;
+            background-color: #fff;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            /* table-layout: fixed; */
+        }
+        th, td {
+            border: 1px solid #333;
+            text-align: center;
+            padding: 8px;
+            height: 100px; /* Increased height for better visibility */
+        }
+        th {
+            background-color: #f2f2f2;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+        .movement-cell {
+            background-color: aquamarine;
+            border: 2px solid #333;
+            height: 100px; /* Ensuring the movement cells match the table cell height */
+        }
+        .movement-details {
+            display: flex;
+            justify-content: space-between;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 12px; /* Slightly increased font size */
+        }
+        .movement-description {
+            font-family: 'Courier New', Courier, monospace;
+            margin: 2px;
+        }
+        .rig-name {
+            font-weight: bold;
+        }
+        
+        /* .parent-years{
+            display: flex;
+            justify-content: space-between;
+        } */
+        
+        .years-title1 {
+            background-color: aqua;
+            text-align: center;
+            width: 592px;
+            border: 1px solid;
+            /* border-radius: 10px; */
+            width: 100%;
+    display: flex;
+    justify-content: space-between;
+        }
+        .years-title2 {
+            background-color: aqua;
+            text-align: center;
+            width: 592px;
+            border: 1px solid;
+            /* border-radius: 10px; */
+        }
+      
+    </style>
+</head>
+<body>
+    <h1>Rig Movement Timeline</h1>
+    
+    <div class="container">
+        <!-- <div class="rigs-list">
+
+        </div> -->
+        <div class="timeline">
+            <div class="parent-years">
+                <div class="years-title1">
+                   
+                    {% for year in years %}
+                        <div style="min-width: 100vw; background-color: aqua;">{{year}}</div>
+                         <!-- {{year}}      -->
+                    {% endfor %}
+                </div>
+                <div>
+                    {% for year in years %}
+                                {% for month in months %}
+                                    <div  style="display: inline-block;">{{ month|slice:":3" }}</div>
+                                {% endfor %}
+                            {% endfor %}
+                </div>
+                
+
+
+                <!-- <div class="years-title2">
+                    
+
+                </div> -->
+            </div>
+           
+
+            <table style="overflow-x: auto;">
+                <thead>
+                    <!-- <div>
+                        <tr>
+                            <th>Mohth</th>
+                            {% for year in years %}
+                                {% for month in months %}
+                                    <th>{{ month|slice:":3" }}</th>
+                                {% endfor %}
+                            {% endfor %}
+                        </tr>
+
+                    </div> -->
+                   
+                </thead>
+                <tbody>
+                    {% for rig in rigs %}
+                    <tr>
+                        <!-- <td class="rig-name">{{ rig.name }}</td> -->
+                        {% for year in years %}
+                            {% for month in months %}
+                                <td>
+                                    {% for movement in movements %}
+                                        {% if movement.rig == rig %}
+                                            {% if movement.start_date.year == year and movement.start_date|date:"F" == month %}
+                                                <td class="movement-cell" colspan="{{ movement.month_span }}">
+                                                    <div>
+                                                        <div class="movement-details">
+                                                            <p style="margin: 0;">{{ movement.start_date|date:"M d, Y" }}</p>
+                                                            <p style="margin: 0;">{{ movement.end_date|date:"M d, Y" }}</p>
+                                                        </div>
+                                                        <p class="movement-description">{{ movement.well.name }}</p>
+                                                    </div>
+                                                </td>
+                                            {% endif %}
+                                            {% if movement.start_date.year < year and movement.end_date.year >= year %}
+                                            {% if month == 'January' %}
+                                                    <td class="movement-cell" colspan="{{ movement.month_span }}">
+                                                        <div>
+                                                            <div class="movement-details">
+                                                                <p style="margin: 0;">{{ movement.start_date|date:"M d, Y" }}</p>
+                                                                <p style="margin: 0;">{{ movement.end_date|date:"M d, Y" }}</p>
+                                                            </div>
+                                                            <p class="movement-description">{{ movement.well.name }}</p>
+                                                        </div>
+                                                    </td>
+                                                {% endif %}
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endfor %}
+                                </td>
+                            {% endfor %}
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+
+<!-- models we try to fix it -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <title>Current Rigs</title>
+    <style>
+        /* Add your existing CSS here */
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: "Inter", sans-serif;
+            line-height: 1.5;
+            font-size: 16px;
+            background-color: #f5f5f5;
+            color: #000000c9;
+        }
+        .container {
+            width: 90%;
+            margin: 0 auto;
+            margin-top: 40px;
+            text-align: center;
+            border: 1px solid #00000024;
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px 3px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+        .container h2 {
+            font-size: 30px;
+            font-weight: 800;
+            border-right: 1px solid #f5f5f53d;
+            padding: 15px 0;
+            font-weight: 800;
+            background-color: #00a3e0;
+            color: #f5f5f5;
+        }
+        .rig-row {
+            display: inline-block;
+            min-width: 100%;
+            white-space: nowrap;
+        }
+        .calender-row {
+            display: flex;
+            white-space: nowrap;
+        }
+        .rig-row_months {
+            display: flex;
+            font-weight: 800;
+            border-bottom: 1px solid #00000024;
+        }
+        .rig-row_months div {
+            width: 8.33%;
+            border-right: 1px solid #00000024;
+            padding: 10px;
+            background-color: #eeecec;
+        }
+        .rig-row_months div:last-child {
+            border: none;
+        }
+        .clearfix {
+            clear: both;
+        }
+        .rig-data {
+            font-size: 12px;
+            display: flex;
+        }
+        .rig-block {
+            padding: 3px;
+            display: flex;
+            flex-direction: column;
+            padding: 0 10px;
+            border: 1px solid #00000024;
+            border-bottom: 1px solid #00000024;
+            float: left;
+        }
+        .rig-block .rig-dates {
+            margin: 5px 0;
+            display: flex;
+            justify-content: space-between;
+        }
+        .rig-block .rig-percent,
+        .rig-block .rig-name {
+            margin-bottom: 20px;
+        }
+        .rig-block .rig-number,
+        .rig-block .rig-approval {
+            margin-bottom: 5px;
+        }
+        .rig-block .rig-percent,
+        .rig-block .rig-approval,
+        .rig-block .rig-number {
+            display: flex;
+            justify-content: space-between;
+        }
+        .rig-1,
+        .rig-2,
+        .rig-4 {
+            width: 15%;
+        }
+        .rig-3 {
+            width: 25%;
+        }
+        .rig-5 {
+            width: 35%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        {% for year in years %}
+        <div class="rig-row">
+            <div style="min-width: 100vw; background-color: aqua;">{{ year }}</div>
+            <div class="rig-row_months">
+                {% for month in months %}
+                <div style="display: inline-block;">{{ month|slice:":3" }}</div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+
+        <div class="rig">
+            {% for rig in rigs %}
+            <div class="rig-data">
+                <div class="rig-block rig-1" style="display:contents">
+                    <div class="rig-dates">
+                        <!-- <span>{{ rig.name }}</span> -->
+                    </div>
+                    {% for movement in movements %}
+                        {% if movement.rig == rig %}
+                            <div class="movement-cell" style="border: 1px solid #00000024; flex-grow: {{ movement.month_span}};">
+
+                                <div class="movement-details">
+                                    <p style="margin: 0;">{{ movement.start_date|date:"M d, Y" }}</p>
+                                    <p style="margin: 0;">{{ movement.end_date|date:"M d, Y" }}</p>
+                                    <p class="movement-description">{{ movement.well.name }}</p>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
