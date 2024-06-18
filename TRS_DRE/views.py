@@ -279,19 +279,21 @@ def get_month_span(start_date, end_date):
 
 def rig_timeline1(request):
     riggs = Rigg.objects.prefetch_related("movementg_set").all()
-    earliest_start_date = Movementg.objects.aggregate(Min("start_date"))[
-        "start_date__min"
-    ]
-    latest_end_date = Movementg.objects.aggregate(Max("end_date"))["end_date__max"]
-    years = list(range(earliest_start_date.year, latest_end_date.year + 1))
+    if riggs:
+        earliest_start_date = Movementg.objects.aggregate(Min("start_date"))[
+            "start_date__min"
+        ]
+        latest_end_date = Movementg.objects.aggregate(Max("end_date"))["end_date__max"]
+        years = list(range(earliest_start_date.year, latest_end_date.year + 1))
 
-    context = {
-        "riggs": riggs,
-        "years": years,
-        'earliest_start_date': earliest_start_date,
-    }
+        context = {
+            "riggs": riggs,
+            "years": years,
+            'earliest_start_date': earliest_start_date,
+        }
+        return render(request, "blog/rig_timeline1.html", context or {})
 
-    return render(request, "blog/rig_timeline1.html", context)
+    return render(request, "blog/rig_timeline1.html")
 
     # movements = Movementg.objects.all().order_by('start_date')
     # movement_spans = []
