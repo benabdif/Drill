@@ -19,7 +19,7 @@ def get_current_span(start_date):
     now = datetime.now().date()
     span = (now - start_date).days
     print(span)
-    return span * (200 / 30)
+    return (span * (200 / 30)) + 300
 
 
 @register.filter
