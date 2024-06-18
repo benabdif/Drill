@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calendar</title>
+</head>
+
+<body>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.5;
+      font-size: 16px;
+      background-color: #f5f5f5;
+      color: #000000c9;
+    }
+
+    .container {
+      width: 90%;
+      margin: 40px auto 0;
+      text-align: center;
+      border: 1px solid #00000024;
+      border-radius: 10px;
+      box-shadow: 0px 0px 20px 3px rgba(0, 0, 0, 0.1);
+      overflow-x: auto;
+    }
+
+    .timeline {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .timeline.header {
+      display: flex;
+      flex-direction: row;
+      color: #fff;
+    }
+
+    .timeline.year {
+      display: flex;
+      flex-direction: column;
+      background-color: #38a4e2;
+      position: relative;
+    }
+
+    .timeline.year>div:first-child {
+      font-size: 30px;
+      font-weight: 800;
+      padding: 10px;
+    }
+
+    .timeline.year>div:not(:first-child) {
+      display: flex;
+      flex-direction: row;
+    }
+
+    .timeline .title {
+      display: flex;
+      font-weight: 800;
+      color: #000000c9;
+      background-color: #fff;
+      justify-content: center;
+      align-items: center;
+      padding: 0 15px;
+      max-width: 80px;
+    }
+
+    .timeline.year>div:not(:first-child) .month {
+      border-right: 1px solid #00000024;
+      width: 200px;
+      padding: 10px 30px;
+      font-weight: 800;
+      color: #000000c9;
+      background-color: #eeecec;
+    }
+
+    .timeline.rows {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .timeline .project {
+      display: flex;
+      flex-direction: row;
+      height: 80px;
+    }
+
+    .timeline .project .name {
+      align-self: flex-start;
+      background-color: #57ffff;
+      min-width: 80px;
+      min-height: 80px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .timeline .project .movements {
+      display: flex;
+      flex-direction: row;
+    }
+
+    .timeline .project .movement {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      color: #fff;
+      background-color: #38a4e2;
+      min-width: 400px;
+      justify-content: center;
+      padding: 15px;
+    }
+
+    .timeline .project .movement .area {
+      align-self: center;
+      font-weight: 800;
+    }
+
+    .timeline .project .movement>div {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  </style>
+
+  <div class="container">
+    <div class="timeline">
+      <div class="timeline header">
+        <div class="timeline year">
+          <div>2024</div>
+          <div>
+            <div class="title">Project</div>
+            <div class="month">January</div>
+            <div class="month">February</div>
+            <div class="month">March</div>
+            <div class="month">April</div>
+            <div class="month">May</div>
+            <div class="month">June</div>
+            <div class="month">July</div>
+            <div class="month">August</div>
+            <div class="month">September</div>
+            <div class="month">October</div>
+            <div class="month">November</div>
+            <div class="month">December</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="timeline rows">
+      <div class="project">
+        <div class="name">T-1</div>
+        <div class="movements">
+          <div class="movement" style="left: 0px;">
+            <div>
+              <div class="start">Jan 01, 2024</div>
+              <div class="end">Feb 15, 2024</div>
+            </div>
+            <div class="area">W-1</div>
+          </div>
+          <div class="movement" style="left: 600px;">
+            <div>
+              <div class="start">Jan 01, 2024</div>
+              <div class="end">Feb 15, 2024</div>
+            </div>
+            <div class="area">W-1</div>
+          </div>
+        </div>
+      </div>
+      <div class="project">
+        <div class="name">T-2</div>
+        <div class="movements">
+          <div class="movement" style="left: 400px;">
+            <div>
+              <div class="start">Jan 01, 2024</div>
+              <div class="end">Feb 15, 2024</div>
+            </div>
+            <div class="area">W-1</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="{% static 'my_app/my_script.js' %}"></script>
+</body>
+
+</html>

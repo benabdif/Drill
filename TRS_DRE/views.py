@@ -5,6 +5,7 @@ from django.shortcuts import render
 from .models import Rigg, Movementg
 from datetime import datetime
 from django.db import connection
+from django.db.models import Min, Max
 
 # from .models import Rig
 
@@ -276,37 +277,35 @@ def get_month_span(start_date, end_date):
     return month_span
 
 
-def get_month_span(start_date, end_date):
-    return (end_date.year - start_date.year) * 12 + end_date.month - start_date.month + 1
-
 def rig_timeline1(request):
-    rigs = Rigg.objects.all()
-    movements = Movementg.objects.all().order_by('start_date')
-    months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-    years = list(range(2024, 2027))  # Adjust the range as necessary
-
-    movement_spans = []
-    for movement in movements:
-        month_span = get_month_span(movement.start_date, movement.end_date)
-        start_month_index = (movement.start_date.year - years[0]) * 12 + (movement.start_date.month - 1)
-        movement_spans.append({
-            'rig': movement.rig,
-            'well': movement.well,
-            'start_date': movement.start_date,
-            'end_date': movement.end_date,
-            'month_span': month_span * 8.33,  # Width in percentage
-            'start_month_index': start_month_index,  # Position in the calendar
-        })
+    riggs = Rigg.objects.prefetch_related("movementg_set").all()
+    earliest_start_date = Movementg.objects.aggregate(Min("start_date"))[
+        "start_date__min"
+    ]
+    latest_end_date = Movementg.objects.aggregate(Max("end_date"))["end_date__max"]
+    years = list(range(earliest_start_date.year, latest_end_date.year + 1))
 
     context = {
-        'rigs': rigs,
-        'movements': movement_spans,
-        'months': months,
-        'years': years,
+        "riggs": riggs,
+        "years": years,
+        'earliest_start_date': earliest_start_date,
     }
-    
-    return render(request, 'blog/rig_timeline1.html', context)
 
+    return render(request, "blog/rig_timeline1.html", context)
+
+    # movements = Movementg.objects.all().order_by('start_date')
+    # movement_spans = []
+    # for movement in movements:
+    #     month_span = get_month_span(movement.start_date, movement.end_date)
+    #     start_month_index = (movement.start_date.year - years[0]) * 12 + (movement.start_date.month - 1)
+    #     movement_spans.append({
+    #         'rig': movement.rig,
+    #         'well': movement.well,
+    #         'start_date': movement.start_date,
+    #         'end_date': movement.end_date,
+    #         'month_span': month_span * 8.33,  # Width in percentage
+    #         'start_month_index': start_month_index,  # Position in the calendar
+    #     })
 
 
 # def rig_timeline1(request):
