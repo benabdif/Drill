@@ -22,10 +22,11 @@
         font-size: 16px;
         background-color: #f5f5f5;
         color: #000000c9;
+        height: 300vh;
       }
       
       .container {
-        width: 90%;
+        width: 90vw;
         margin: 40px auto 0;
         text-align: center;
         border: 1px solid #00000024;
@@ -100,7 +101,7 @@
       .timeline.rows {
         display: flex;
         flex-direction: column;
-        position: relative;
+        /* position: relative;*/
         gap: 10px;
       }
       
@@ -110,42 +111,11 @@
         height: 100px;
       }
       
-      .timeline .project .name {
-        align-self: flex-start;
-        background-color: #57ffff;
-        min-width: 80px;
-        min-height: 100px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: fixed;
-        z-index: 2;
-        left: 308px;
-        transition-duration: 0.3s;
-      }
-      
-      .timeline .project .movements {
-        display: flex;
-        flex-direction: row;
-        position: relative;
-      }
-      
-      .timeline .project .movement {
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        color: #fff;
-        background-color: #38a4e2;
-        justify-content: center;
-        padding: 0 15px;
-        height: 100px;
-      }
-      
       .timeline.rows .now {
-        position: absolute;
+        position: relative;
         left: 0;
         top: 0;
-        height: 100%;
+        height: 110%;
         width: 2px;
         background-color: red;
         z-index: 2;
@@ -188,9 +158,18 @@
         opacity: 1;
       }
       
-      .timeline .project .movement .area {
-        align-self: center;
-        font-weight: 800;
+      .project .name {
+        align-self: flex-start;
+        background-color: #57ffff;
+        min-width: 80px;
+        min-height: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        z-index: 2;
+        right: 0;
+        transition-duration: 0.3s;
       }
       
       .project .project-info {
@@ -199,12 +178,20 @@
         color: #fff;
         font-weight: 800;
         font-size: 30px;
-        position: fixed;
+        /* position: fixed;*/
         height: 100px;
         display: flex;
         justify-content: center;
         align-items: center;
         z-index: 2;
+      }
+      
+      .project .project-card {
+        display: flex;
+        flex-direction: row;
+        position: absolute;
+        z-index: 3;
+        transition-duration: 0.3s;
       }
       
       .project .name-placeholder {
@@ -213,6 +200,43 @@
       
       .project .project-info:hover + .name {
         opacity: 0;
+      }
+      
+      .project .movements {
+        display: flex;
+        flex-direction: row;
+        position: relative;
+      }
+      
+      .project .movement {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        color: #fff;
+        background-color: #38a4e2;
+        justify-content: center;
+        padding: 0 15px;
+        height: 100px;
+      }
+      
+      .today {
+        position: absolute;
+        z-index: 3;
+        margin: 13px;
+        padding: 10px 25px;
+        border: none;
+        outline: none;
+        transition-duration: 0.2s;
+      }
+      
+      .today:active {
+        background-color: #777;
+        color: #fff;
+      }
+      
+      .timeline .project .movement .area {
+        align-self: center;
+        font-weight: 800;
       }
       
       .timeline .project .movement > div {
@@ -225,6 +249,7 @@
     <div class="container">
       <div class="timeline">
         <div class="timeline header">
+          <button onclick="scrollToDiv('now')" class="today">To Day</button>
           {% for year in years %}
             <div class="timeline year">
               <div>{{ year }}</div>
@@ -248,39 +273,49 @@
             </div>
           {% endfor %}
         </div>
-      </div>
-      <div class="timeline rows">
-        {% for rig in riggs %}
-          {% if forloop.first %}
-            <div class="now" style="left: {{ earliest_start_date|get_current_span }}px;">
-              <div class="date">
-                {% now 'Y-n-d' %}
+        <div class="timeline rows">
+          {% for rig in riggs %}
+            <div class="project">
+              {% if forloop.first %}
+                <div class="now" id="now" style="left: {{ earliest_start_date|get_current_span }}px;"></div>
+              {% elif forloop.last %}
+                <div class="now" style="left: {{ earliest_start_date|get_current_span }}px; height: 100%;"></div>
+              {% else %}
+                <div class="now" style="left: {{ earliest_start_date|get_current_span }}px"></div>
+              {% endif %}
+              <div class="project-card">
+                <div class="project-info">
+                  {{ rig.engineering_name }}
+                  <br /> {% if rig.field_type %}
+                    {{ rig.field_type }}
+                  {% endif %}
+                </div>
+                <div class="name">{{ rig.name }}</div>
+              </div>
+              <div class="name-placeholder"></div>
+              <div class="movements">
+                {% for movement in rig.movementg_set.all %}
+                  <div class="movement" style="left: calc({{ movement|calculate_start_month_index:2024 }} * 200px); width: calc({{ movement|calculate_month_span }} * 200px)">
+                    <div>
+                      <div class="start">{{ movement.start_date }}</div>
+                      <div class="end">{{ movement.end_date }}</div>
+                    </div>
+                    <div class="area">{{ movement.well.name }}</div>
+                  </div>
+                {% endfor %}
               </div>
             </div>
-          {% endif %}
-          <div class="project">
-            <div class="project-info">
-              {{ rig.engineering_name }}
-              <br /> {% if rig.field_type %}
-                {{ rig.field_type }}
-              {% endif %}
-            </div>
-            <div class="name-placeholder"></div>
-            <div class="name">{{ rig.name }}</div>
-            <div class="movements">
-              {% for movement in rig.movementg_set.all %}
-                <div class="movement" style="left: calc({{ movement|calculate_start_month_index:2024 }} * 200px); width: calc({{ movement|calculate_month_span }} * 200px)">
-                  <div>
-                    <div class="start">{{ movement.start_date }}</div>
-                    <div class="end">{{ movement.end_date }}</div>
-                  </div>
-                  <div class="area">{{ movement.well.name }}</div>
-                </div>
-              {% endfor %}
-            </div>
-          </div>
-        {% endfor %}
+          {% endfor %}
+        </div>
       </div>
     </div>
+    <script>
+      function scrollToDiv(divId) {
+        var element = document.getElementById(divId)
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' })
+        }
+      }
+    </script>
   </body>
 </html>
