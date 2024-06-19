@@ -1,25 +1,15 @@
+{% load static %}
+{% load custom_filters %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    {% load static %}
     <title>Calendar</title>
   </head>
+
   <body>
     <style>
-      .month {
-        color: blue;
-        display: grid;
-        grid-template-columns: repeat(12, 1fr);
-      }
-      
-      .project {
-        display: block;
-        background-color: blue;
-        color: white;
-      }
-      
       * {
         padding: 0;
         margin: 0;
@@ -32,6 +22,7 @@
         font-size: 16px;
         background-color: #f5f5f5;
         color: #000000c9;
+        height: 300vh;
       }
       
       .container {
@@ -42,113 +33,256 @@
         border-radius: 10px;
         box-shadow: 0px 0px 20px 3px rgba(0, 0, 0, 0.1);
         overflow-x: auto;
-      }
-      
-      .container h2 {
-        font-size: 30px;
-        font-weight: 800;
-        padding: 15px 0;
-        background-color: #00a3e0;
-        color: #f5f5f5;
-      }
-      
-      .rig-row {
-        min-width: 100%;
-      }
-      
-      .calendar-row {
-        display: flex;
-      }
-      
-      .rig-row_months {
-        display: flex;
-        font-weight: 800;
-        border-bottom: 1px solid #00000024;
-      }
-      
-      .rig-row_months div {
-        width: 8.33%;
-        border-right: 1px solid #00000024;
-        padding: 10px;
-        background-color: #eeecec;
-      }
-      
-      .rig-row_months div:last-child {
-        border: none;
-      }
-      
-      .rig-data {
-        font-size: 12px;
         position: relative;
       }
       
-      .rig-block {
-        padding: 3px 10px;
+      .timeline {
         display: flex;
         flex-direction: column;
-        border: 1px solid #00000024;
-        border-bottom: 1px solid #00000024;
-        background-color: #00a3e0;
-        color: white;
-        position: absolute;
       }
       
-      .rig-block .rig-dates {
-        margin: 5px 0;
+      .timeline.header {
         display: flex;
-        justify-content: space-between;
+        flex-direction: row;
+        color: #fff;
       }
       
-      .rig-block .rig-name {
-        margin-bottom: 10px;
+      .timeline.year {
+        display: flex;
+        flex-direction: column;
+        background-color: #38a4e2;
+        position: relative;
+      }
+      
+      .timeline.year::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 2px;
+        height: 100%;
+        background-color: #cccbcb;
+      }
+      
+      .timeline.year:last-child::after {
+        display: none;
+      }
+      
+      .timeline.year > div:first-child {
+        font-size: 30px;
+        font-weight: 800;
+        padding: 10px;
+      }
+      
+      .timeline.year > div:not(:first-child) {
+        display: flex;
+        flex-direction: row;
+      }
+      
+      .timeline .title {
+        display: flex;
+        font-weight: 800;
+        color: #000000c9;
+        background-color: #fff;
+        justify-content: center;
+        align-items: center;
+        padding: 0 15px;
+        width: 300px;
+      }
+      
+      .timeline.year > div:not(:first-child) .month {
+        border-right: 1px solid #00000024;
+        width: 200px;
+        padding: 10px 30px;
+        font-weight: 800;
+        color: #000000c9;
+        background-color: #eeecec;
+      }
+      
+      .timeline.rows {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        gap: 10px;
+      }
+      
+      .timeline .project {
+        display: flex;
+        flex-direction: row;
+        height: 100px;
+      }
+      
+      .timeline .project .name {
+        align-self: flex-start;
+        background-color: #57ffff;
+        min-width: 80px;
+        min-height: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        z-index: 2;
+        left: 308px;
+        transition-duration: 0.3s;
+      }
+      
+      .timeline .project .movements {
+        display: flex;
+        flex-direction: row;
+        position: relative;
+      }
+      
+      .timeline .project .movement {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        color: #fff;
+        background-color: #38a4e2;
+        justify-content: center;
+        padding: 0 15px;
+        height: 100px;
+      }
+      
+      .timeline.rows .now {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 2px;
+        background-color: red;
+        z-index: 2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition-duration: 0.3s;
+      }
+      
+      .timeline.rows .now .border-effect {
+        width: 22px;
+        height: 100%;
+        position: absolute;
+        left: -10px;
+        border: 10px solid transparent;
+        transition: border-color 0.3s;
+        pointer-events: none;
+      }
+      
+      .timeline.rows .now .date {
+        min-width: 150px;
+        min-height: 75px;
+        background-color: #848484;
+        border-radius: 12px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        font-weight: 700;
+        font-size: 20px;
+        opacity: 0;
+        transition-duration: 0.3s;
+      }
+      
+      .timeline.rows .now:hover .border-effect {
+        border-color: #000;
+      }
+      
+      .timeline.rows .now:hover .date {
+        opacity: 1;
+      }
+      
+      .timeline .project .movement .area {
+        align-self: center;
+        font-weight: 800;
+      }
+      
+      .project .project-info {
+        width: 300px;
+        background-color: #777777;
+        color: #fff;
+        font-weight: 800;
+        font-size: 30px;
+        position: fixed;
+        height: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 2;
+      }
+      
+      .project .name-placeholder {
+        width: 300px;
+      }
+      
+      .project .project-info:hover + .name {
+        opacity: 0;
+      }
+      
+      .timeline .project .movement > div {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
       }
     </style>
 
     <div class="container">
-      <div class="calendar-row">
-        <div>
-          <h2 style="height: 75px;"></h2>
-          <div class="rig-row_months" style="padding: 10px;">Project</div>
-          {% for rig in rigs %}
-            <div style="height: 68px; background-color: aqua; display: flex; justify-content: center; align-items: center;">{{ rig.name }}</div>
-          {% endfor %}
-        </div>
-        <div>
-          <div class="calendar-row">
-            {% for year in years %}
-              <div class="rig-row">
-                <h2>{{ year }}</h2>
-                <div class="rig-row_months">
-                  {% for month in months %}
-                    <div>{{ month }}</div>
-                  {% endfor %}
-                </div>
-              </div>
-            {% endfor %}
-          </div>
-          {% for rig in rigs %}
-            <div class="rig-data">
-              {% for movement in movements %}
-                {% if movement.rig == rig %}
-                  {% if movement.start_date.year in years %}
-                    <div class="rig-block" style="left: calc({{ movement.start_month_index }} * 8.33%); width: calc({{ movement.month_span }}%);">
-                    <div class="rig-dates">
-                        <span>{{ movement.start_date|date:'M d, Y' }}</span>
-                        <span>{{ movement.end_date|date:'M d, Y' }}</span>
-                      </div>
-                      <div class="rig-name">
-                        <h4>{{ movement.well.name }}</h4>
-                      </div>
-                    </div>
-                  {% endif %}
+      <div class="timeline">
+        <div class="timeline header">
+          {% for year in years %}
+            <div class="timeline year">
+              <div>{{ year }}</div>
+              <div>
+                {% if forloop.first %}
+                  <div class="title">Project</div>
                 {% endif %}
-              {% endfor %}
+                <div class="month">January</div>
+                <div class="month">February</div>
+                <div class="month">March</div>
+                <div class="month">April</div>
+                <div class="month">May</div>
+                <div class="month">June</div>
+                <div class="month">July</div>
+                <div class="month">August</div>
+                <div class="month">September</div>
+                <div class="month">October</div>
+                <div class="month">November</div>
+                <div class="month">December</div>
+              </div>
             </div>
           {% endfor %}
         </div>
       </div>
+      <div class="timeline rows">
+        {% for rig in riggs %}
+          {% if forloop.first %}
+            <div class="now" style="left: {{ earliest_start_date|get_current_span }}px;">
+              <div class="date">
+                {% now 'Y-n-d' %}
+              </div>
+            </div>
+          {% endif %}
+          <div class="project">
+            <div class="project-info">
+              {{ rig.engineering_name }}
+              <br /> {% if rig.field_type %}
+                {{ rig.field_type }}
+              {% endif %}
+            </div>
+            <div class="name-placeholder"></div>
+            <div class="name">{{ rig.name }}</div>
+            <div class="movements">
+              {% for movement in rig.movementg_set.all %}
+                <div class="movement" style="left: calc({{ movement|calculate_start_month_index:2024 }} * 200px); width: calc({{ movement|calculate_month_span }} * 200px)">
+                  <div>
+                    <div class="start">{{ movement.start_date }}</div>
+                    <div class="end">{{ movement.end_date }}</div>
+                  </div>
+                  <div class="area">{{ movement.well.name }}</div>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
     </div>
-
-    <script src="{% static 'my_app/my_script.js' %}"></script>
   </body>
 </html>
