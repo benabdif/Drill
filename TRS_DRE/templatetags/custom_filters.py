@@ -1,5 +1,5 @@
 from django import template
-from datetime import datetime
+from datetime import datetime, date
 
 register = template.Library()
 
@@ -13,6 +13,11 @@ def calculate_month_span(movement):
         + 1
     )
 
+@register.filter
+def is_past(end_date):
+    if end_date and end_date < date.today():
+        return True
+    return False
 
 @register.filter
 def get_current_span(start_date):
