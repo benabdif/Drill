@@ -48,6 +48,7 @@ class Movementg(models.Model):
     well = models.ForeignKey(Wellg, on_delete=models.CASCADE)
     start_date = models.DateField()
     end_date = models.DateField()
+    is_cleaned_up = models.BooleanField(default=False)
 
     def __str__(self):
         # return f"{self.rig.name} from {self.start_date} to {self.end_date}"

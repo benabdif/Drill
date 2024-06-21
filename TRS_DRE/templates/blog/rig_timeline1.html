@@ -102,7 +102,7 @@
       .timeline.rows {
         display: flex;
         flex-direction: column;
-        
+      
         position: relative;
         gap: 10px;
       }
@@ -204,6 +204,16 @@
         opacity: 0;
       }
       
+      .project .movements .done {
+        border-top: 15px solid #ffd900;
+        border-bottom: 15px solid #ffd900;
+      }
+      
+      .project .movements .clean-up {
+        border-top: 15px solid #00ce00;
+        border-bottom: 15px solid #00ce00;
+      }
+      
       .project .movements {
         display: flex;
         flex-direction: row;
@@ -297,7 +307,7 @@
               <div class="name-placeholder"></div>
               <div class="movements">
                 {% for movement in rig.movementg_set.all %}
-                  <div class="movement" style="left: calc({{ movement|calculate_start_month_index:2024 }} * 200px); width: calc({{ movement|calculate_month_span }} * 200px)">
+                  <div class="movement {% if movement.is_cleaned_up %}clean-up{% elif movement.end_date|is_past %}done{% endif %}" style="left: calc({{ movement|calculate_start_month_index:2024 }} * 200px); width: calc({{ movement|calculate_month_span }} * 200px)">
                     <div>
                       <div class="start">{{ movement.start_date }}</div>
                       <div class="end">{{ movement.end_date }}</div>
