@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
 from django.shortcuts import render
-from .models import Rigg, Movementg
+from .models import Rigg, Movementg, Wellg
 from datetime import datetime
 from django.db import connection
 from django.db.models import Min, Max
@@ -265,20 +265,23 @@ from .models import Rigg, Movementg
 # #######
 
 
-def get_month_span(start_date, end_date):
-    """Calculate the number of months between two dates, inclusive."""
-    start_month = start_date.month
-    end_month = end_date.month
+# def get_month_span(start_date, end_date):
+#     """Calculate the number of months between two dates, inclusive."""
+#     start_month = start_date.month
+#     end_month = end_date.month
 
-    year_span = end_date.year - start_date.year
-    month_span = end_month - start_month + 1 + (year_span * 12)
-    print(month_span)
-
-    return month_span
+#     year_span = end_date.year - start_date.year
+#     month_span = end_month - start_month + 1 + (year_span * 12)
+#     return month_span
 
 
 def rig_timeline1(request):
+    
     riggs = Rigg.objects.prefetch_related("movementg_set").all()
+    RIGG1 = Rigg.objects.all()
+    RIGG2 = Wellg .objects.all()
+    field_type_choices = Rigg.FIELD_TYPE_CHOICES    
+    
     if riggs:
         earliest_start_date = Movementg.objects.aggregate(Min("start_date"))[
             "start_date__min"
@@ -290,10 +293,26 @@ def rig_timeline1(request):
             "riggs": riggs,
             "years": years,
             'earliest_start_date': earliest_start_date,
+            'field_type_choices' : field_type_choices
         }
         return render(request, "blog/rig_timeline1.html", context or {})
 
     return render(request, "blog/rig_timeline1.html")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     # movements = Movementg.objects.all().order_by('start_date')
     # movement_spans = []
