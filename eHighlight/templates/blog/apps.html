@@ -1,0 +1,464 @@
+{% extends 'blog/base_Apps_page.html' %}
+
+{% load static %}
+
+{% block content %}
+<style>
+    body {
+        background: url("{% static 'imageee.png' %}") no-repeat center center fixed;
+        background-size: cover;
+        font-family: 'Arial', sans-serif;
+        color: #333;
+    }
+
+    .card-container {
+        display: flex;
+        flex-wrap: wrap;
+        /* justify-content: center; */
+        gap: 10px;
+        padding: 10px;
+    }
+
+    .card {
+        background-color: white;
+        border-radius: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 10px;
+        text-align: center;
+        width: 23%;
+        min-width: 250px;
+        position: relative;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border-bottom: 20px solid #8aba24;
+        cursor: pointer;
+    }
+
+    .card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-icon {
+        width: 60px;
+        height: 60px;
+        transition: transform 0.3s ease;
+    }
+
+    .card-icon:hover {
+        transform: rotate(360deg);
+    }
+
+    .card-title {
+        font-size: 1.4em;
+        margin: 10px 0;
+        transition: color 0.3s ease;
+    }
+
+    .card-title:hover {
+        color: #2a9d8f;
+    }
+
+    .dropdown-btn {
+        font-size: 0.8em;
+        color: #010101;
+        /* background-color: #21867a; */
+        border: 1px solid rgb(167, 164, 164); /* Updated border color to red */
+        border-radius: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
+        margin: 10px 0;
+        transition: background-color 0.3s ease;
+    }
+
+    .dropdown-btn:hover {
+        background-color: #00a3e0;
+    }
+
+    .feature-list {
+        
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s ease-out, opacity 0.5s ease-out;
+        opacity: 0;
+        text-align: left;
+        border-top: 1px solid #ddd;
+        padding-top: 10px;
+        margin-top: 10px;
+    }
+
+    .feature-list.show {
+        max-height: 300px;
+        opacity: 1;
+    }
+
+    .feature-list li {
+        margin: 5px 0;
+    }
+
+    .feature-list a {
+        color: #21867a;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .feature-list a:hover {
+        color: #1b6b63;
+    }
+   
+    body {
+        background: url("{% static 'imageee.png' %}") no-repeat center center fixed;
+        background-size: cover;
+        font-family: 'Arial', sans-serif;
+        color: #333;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .card-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 20px;
+    }
+
+    .card {
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        text-align: center;
+        flex: 1 1 calc(25% - 40px); /* Adjust the width to fit four cards in a row */
+        min-width: 250px;
+        max-width: 300px;
+        margin: 20px auto;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        /* border: 2px solid #8aba24; Added border */
+        cursor: pointer;
+    }
+
+    .card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-icon {
+        width: 60px;
+        height: 60px;
+        transition: transform 0.3s ease;
+    }
+
+    .card-icon:hover {
+        transform: rotate(360deg);
+    }
+
+    .card-title-link {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .card-title {
+        font-size: 1.4em;
+        margin: 10px 0;
+        transition: color 0.3s ease;
+    }
+
+    .card-title:hover {
+        color: #2a9d8f;
+    }
+
+    .dropdown-btn {
+        font-size: 1em;
+        color: #a16a6a;
+        border: 1px solid rgb(180, 174, 174); /* Updated border color to red */
+        border-radius: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
+        margin: 10px 0;
+        transition: background-color 0.3s ease;
+    }
+
+    .dropdown-btn:hover {
+        background-color: #f0f0f0; /* Slight hover effect for better visibility */
+    }
+
+    .feature-list {
+        list-style: none;
+        text-align: center;
+        padding: 0;
+        margin: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s ease-out, opacity 0.5s ease-out;
+        opacity: 0;
+        text-align: left;
+        border-top: 1px solid #ddd;
+        padding-top: 10px;
+        margin-top: 10px;
+    }
+
+    .feature-list.show {
+        max-height: 300px;
+        opacity: 1;
+        text-align: center;
+    }
+
+    .feature-list li {
+        margin: 5px 0;
+    }
+
+    .feature-list a {
+        color: #21867a;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .feature-list a:hover {
+        color: #1b6b63;
+    }
+
+    @media (max-width: 768px) {
+        .card {
+            flex: 1 1 calc(50% - 40px); /* Adjust the width to fit two cards in a row on smaller screens */
+        }
+    }
+
+    @media (max-width: 480px) {
+        .card {
+            flex: 1 1 100%; /* Stack the cards on top of each other on very small screens */
+            max-width: none;
+        }
+    }
+
+    .InButtom {
+        background-color: #00a3e0;
+    }
+
+    .navbara{
+    position:relative;
+    bottom: 0;
+    width: 100%;
+    background-color: #8aba24;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-around;
+    border-radius: 20px;
+}
+
+.navbara a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+    transition: color 0.3s ease;
+
+}
+
+.navbara a:hover {
+    background-color: #ddd;
+    color: black;
+    transition: color 0.3s ease;
+
+}
+
+/* advistisment bar  */
+
+
+.marquee-container {
+    width: 100%;
+    overflow: hidden;
+    background-color: #f0f0f0;
+    white-space: nowrap;
+}
+
+.marquee {
+    display: inline-block;
+    padding-left: 100%;
+    animation: marquee 30s linear infinite;
+}
+
+.marquee span {
+    display: inline-block;
+    padding-right: 100%;
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+
+    
+
+
+  
+</style>
+
+<!-- 
+This what I have to change it Fadhel
+
+daily report  spichataske - ehilgjht -WIH - logistic - 
+            logistice - nvagator - Infographics - Template 
+             - related application will be in the bouttom  -->
+<body>
+
+
+    <div class="marquee-container">
+        <div class="marquee">
+            <span>This is an infinite marquee animation using pure CSS. </span>
+            <span>This from me fahdel</span>
+        </div>
+    </div>
+    <div class="card-container">
+        <div class="card">
+            <img src="{% static 'data-analytics.png' %}" class="card-icon" alt="Logo">
+            <p class="card-title">Daily Report</p>
+            <div class="dropdown-btn">More</div>
+            <ul class="feature-list">
+                <li>To Do Tasks</li>
+                <li>Earthwork Activities</li>
+                <li>Site Review</li>
+                <li>Waste Management</li>
+                <li>Well Change Request</li>
+                <li>HSE</li>
+                <li>Announcements</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <img src="{% static 'COM.png' %}" class="card-icon" alt="Logo">
+            <p class="card-title">WIH</p>
+            <div class="dropdown-btn">More</div>
+            <ul class="feature-list">
+                <li><a href="#https://www.google.com" target="_blank">KPI'S & Target</a></li>
+                <li><a href="#" target="_blank"> Projects & Numbers</a></li>
+                <li><a href="#" target="_blank">Market Share</a></li>
+                <li><a href="#" target="_blank">Waste Manifest</a></li>
+                <li><a href="#" target="_blank">Water Consumption</a></li>
+                <li><a href="#" target="_blank">LUP Status</a></li>
+                <li><a href="#" target="_blank">Contractor Dashboard</a></li>
+                <li><a href="#" target="_blank">Asset Management</a></li>
+                <li><a href="#" target="_blank">Field Distribution</a></li>
+                <li><a href="#" target="_blank">Employees Distribution</a></li>
+                <li><a href="#" target="_blank">Location Maps</a></li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <img src="{% static 'application_1.png' %}" class="card-icon" alt="Logo">
+            <p class="card-title">Infographics</p>
+            <div class="dropdown-btn">More</div>
+            <ul class="feature-list">
+                <li>Your Company?</li>
+                <li>Policies Insights</li>
+                <li>Structure & Responsibilities</li>
+                <li>Heavy Equipment</li>
+                <li>Earth Work Activities</li>
+                <li>WS Contractor (A/B/C/D)</li>
+                <li>Site Review</li>
+                <li>Pre-Workover Meeting</li>
+                <li>Construction Request</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <img src="{% static 'highlighter.png' %}" class="card-icon" alt="Logo">
+            <a href="{% url 'eHighlight_Record_list' %}" class="card-title-link">
+                <p class="card-title">Highlight</p>
+            </a>
+            <div class="dropdown-btn">More</div>
+            <ul class="feature-list">
+                <li>Feature 1</li>
+                <li>Feature 2</li>
+                <li>Feature 3</li>
+            </ul>
+        </div>
+        
+
+        <div class="card">
+            <img src="{% static 'remove-location.png' %}" class="card-icon" alt="Logo">
+            <p class="card-title">References</p>
+            <div class="dropdown-btn">More</div>
+            <ul class="feature-list">
+                <li>WS Manual</li>
+                <li>B-62</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <img src="{% static 'oil-well.png' %}" class="card-icon" alt="Logo">
+            <p class="card-title">Templates</p>
+            <div class="dropdown-btn">More</div>
+            <ul class="feature-list">
+                <li>WS Manual</li>
+                <li>B-62</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <img src="{% static 'remove-location.png' %}" class="card-icon" alt="Logo">
+            <p class="card-title">Related Applications</p>
+            <div class="dropdown-btn">More</div>
+            <ul class="feature-list">
+                <li>WS Sharek Website</li>
+                <li>Drilleye</li>
+                <li>DILIP</li>
+                <li>WAP</li>
+                <li>Locked Potential</li>
+                <li>E-learning</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <img src="{% static 'bar-chart.png' %}" class="card-icon" alt="Logo">
+            <p class="card-title">Logistics</p>
+            <div class="dropdown-btn">More</div>
+            <ul class="feature-list">
+                <li>Work Permit</li>
+                <li>Access</li>
+                <li>Coming Soon</li>
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div class="navbara">
+        <a href="#home">Access Required</a>
+        <a href="#services">Contact US</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+    </div>
+    
+    <script src="{% static 'script.js' %}"></script>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const dropdownBtns = document.querySelectorAll(".dropdown-btn");
+        dropdownBtns.forEach(function(dropdownBtn) {
+            dropdownBtn.addEventListener("click", function() {
+                const featureList = this.nextElementSibling;
+                featureList.classList.toggle("show");
+                this.textContent = featureList.classList.contains("show") ? "-" : "+";
+            });
+        });
+    });
+</script>
+
+
+{% endblock %}

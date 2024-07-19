@@ -1,0 +1,12 @@
+{% extends 'blog/base_generic.html' %}
+
+{% block content %}
+  <h1>Delete eHighlight Record</h1>
+  {% comment %} <p>Are you sure you want to delete "{{ object.week }}"?</p> {% endcomment %}
+  <p>Are you sure you want to delete?</p>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit">Confirm</button>
+  </form>
+  <a href="{% url 'eHighlight_Record_list' %}">Back to list</a>
+{% endblock %}

@@ -25,25 +25,6 @@ def project_timeline(request):
     
     return render(request, 'blog/timeline.html', {'projects': projects})
 
-# ********This code Activeted********** 
-
-
-# def rig_schedule(request):
-#     rigs = Project.objects.all()
-#     months = ['January', 'February', 'March', 'April', 'May', 'June', 
-#               'July', 'August', 'September', 'October', 'November', 'December'
-#               ]
-#     rig_data = []
-
-#     for rig in rigs:
-#         start_month = rig.start_date.month
-#         end_month = rig.end_date.month
-#         month_active = [0]*12  # 12 months, initialized to 0
-#         for i in range(start_month - 1, end_month):
-#             month_active[i] = 1  # Set active months to 1
-#         rig_data.append((rig, month_active))
-
-#     return render(request, 'blog/home3.html', {'rig_data': rig_data, 'months': months})
 
 # fadhel
 def rig_schedule(request):

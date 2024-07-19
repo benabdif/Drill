@@ -1,36 +1,16 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+# from django.http import HttpResponse
 from django.template import loader
-from django.shortcuts import render
+from datetime import timedelta
 from .models import Rigg, Movementg, Wellg
 from datetime import datetime
 from django.db import connection
 from django.db.models import Min, Max
 
-# from .models import Rig
 
 
-def members(request):
-    template = loader.get_template("blog/home.html")
-    return HttpResponse(template.render())
 
 
-# def rig_list(request):
-#     rigs = Rig.objects.all()  # Get all rigs, including their related engineers
-#     return render(request, 'blog/rig_list.html', {'rigs': rigs})
-
-
-# views.py
-
-
-# def rig_timeline1(request):
-#     rigs = Rigg.objects.all()
-#     movements = Movementg.objects.all()
-#     months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-#     return render(request, 'blog/rig_timeline1.html', {'rigs': rigs, 'movements': movements, "months":months})
-
-
-# views.py
 
 
 def get_projects_with_month_diff():
@@ -78,201 +58,9 @@ def project_list(request):
     )
 
 
-# def get_month_span(start_date, end_date):
-#     start_month = start_date.month
-#     end_month = end_date.month
-#     year_span = end_date.year - start_date.year
-#     month_span = end_month - start_month + 1 + (year_span * 12)
-#     return month_span
-
-# def rig_timeline1(request):
-#     rigs = Rigg.objects.all()
-#     movements = Movementg.objects.all()
-#     months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-
-#     movement_spans = []
-#     for movement in movements:
-#         month_span = get_month_span(movement.start_date, movement.end_date)
-#         movement_spans.append({
-#             'rig': movement.rig,
-#             'well': movement.well,
-#             'start_date': movement.start_date,
-#             'end_date': movement.end_date,
-#             'month_span': month_span,
-#             'start_month': movement.start_date.month
-#         })
-
-#     for x in movement_spans:
-#         print(x)
-
-#     return render(request, 'blog/rig_timeline1.html', {'rigs': rigs, 'movements': movement_spans, 'months': months})
-
-from django.shortcuts import render
-from .models import Rigg, Movementg
-from datetime import datetime
 
 
-from django.shortcuts import render
-from .models import Rigg, Movementg
 
-# def get_month_span(start_date, end_date):
-#     """Calculate the number of months between two dates, inclusive."""
-#     start_month = start_date.month
-#     end_month = end_date.month
-#     year_span = end_date.year - start_date.year
-#     month_span = end_month - start_month + 1 + (year_span * 12)
-#     return month_span
-
-# def rig_timeline1(request):
-#     rigs = Rigg.objects.all()
-#     movements = Movementg.objects.all()
-
-#     # Define the list of months for display
-#     months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-
-#     # Define a range of years you want to cover
-#     years = list(range(2024, 2031))  # Adjust the range as necessary
-
-#     # Prepare the data for rendering
-#     movement_spans = []
-#     for movement in movements:
-#         month_span = get_month_span(movement.start_date, movement.end_date)
-#         movement_spans.append({
-#             'rig': movement.rig,
-#             'well': movement.well,
-#             'start_date': movement.start_date,
-#             'end_date': movement.end_date,
-#             'month_span': month_span,
-#             'start_month': movement.start_date.month,
-#             'start_year': movement.start_date.year,
-#             'end_year': movement.end_date.year
-#         })
-#         print(month_span)
-#         zipped_data = zip(rigs, movements)
-
-
-#     context = {
-#         'rigs': rigs,
-#         'movements': movement_spans,
-#         'months': months,
-#         'years': years,
-#         'zipped_data': zipped_data
-#     }
-#     return render(request, 'blog/rig_timeline1.html', context)
-
-
-# from here
-
-# from django.shortcuts import render
-# from .models import Rigg, Movementg
-# from datetime import date
-
-# def get_month_span(start_date, end_date):
-#     """Calculate the number of months between two dates, inclusive."""
-#     start_month = start_date.month
-#     end_month = end_date.month
-#     year_span = end_date.year - start_date.year
-#     month_span = end_month - start_month + 1 + (year_span * 12)
-#     return month_span
-
-# def rig_timeline1(request):
-#     rigs = Rigg.objects.all()
-#     movements = Movementg.objects.all()
-
-#     # Define the list of months for display
-#     months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December", ]
-
-#     # Define a range of years you want to cover
-#     years = list(range(2024, 2025))  # Adjust the range as necessary
-
-#     # Prepare the data for rendering
-#     movement_spans = []
-#     for movement in movements:
-#         month_span = get_month_span(movement.start_date, movement.end_date)
-#         movement_spans.append({
-#             'rig': movement.rig,
-#             'well': movement.well,
-#             'start_date': movement.start_date,
-#             'end_date': movement.end_date,
-#             'month_span': month_span,
-#             'start_month': movement.start_date.month,
-#             'start_year': movement.start_date.year,
-#             'end_year': movement.end_date.year
-#         })
-
-#     context = {
-#         'rigs': rigs,
-#         'movements': movement_spans,
-#         'months': months,
-#         'years': years
-#     }
-#     return render(request, 'blog/rig_timeline1.html', context)
-
-
-###### here ##########
-
-# from django.shortcuts import render
-# from .models import Rigg, Movementg
-# from datetime import date
-
-# def get_month_span(start_date, end_date):
-#     """Calculate the number of months between two dates, inclusive."""
-#     start_month = start_date.month
-#     end_month = end_date.month
-#     year_span = end_date.year - start_date.year
-#     month_span = end_month - start_month + 1 + (year_span * 12)
-#     print(month_span)
-#     return month_span
-
-# def rig_timeline1(request):
-#     rigs = Rigg.objects.all()
-#     movements = Movementg.objects.all().order_by('start_date')
-
-#     # Define the list of months for display
-#     months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-
-#     # Define a range of years you want to cover
-#     years = list(range(2024, 2027))  # Adjust the range as necessary
-
-#     # Prepare the data for rendering
-#     movement_spans = []
-#     for movement in movements:
-#         month_span = get_month_span(movement.start_date, movement.end_date)
-#         movement_spans.append({
-#             'rig': movement.rig,
-#             'well': movement.well,
-#             'start_date': movement.start_date,
-#             'end_date': movement.end_date,
-#             'month_span': month_span,
-#             'start_month': movement.start_date.month,
-#             'start_year': movement.start_date.year,
-#             'end_year': movement.end_date.year
-#         })
-#         print("=" * 33)
-#         print(month_span)
-#         for year in years:
-#             print(year)
-
-#     context = {
-#         'rigs': rigs,
-#         'movements': movement_spans,
-#         'months': months,
-#         'years': years
-#     }
-
-
-#     return render(request, 'blog/rig_timeline1.html', context)
-# #######
-
-
-# def get_month_span(start_date, end_date):
-#     """Calculate the number of months between two dates, inclusive."""
-#     start_month = start_date.month
-#     end_month = end_date.month
-
-#     year_span = end_date.year - start_date.year
-#     month_span = end_month - start_month + 1 + (year_span * 12)
-#     return month_span
 
 
 def rig_timeline1(request):
@@ -288,140 +76,19 @@ def rig_timeline1(request):
         ]
         latest_end_date = Movementg.objects.aggregate(Max("end_date"))["end_date__max"]
         years = list(range(earliest_start_date.year, latest_end_date.year + 1))
+        total_products = riggs.count()
 
         context = {
             "riggs": riggs,
             "years": years,
             'earliest_start_date': earliest_start_date,
-            'field_type_choices' : field_type_choices
+            'field_type_choices' : field_type_choices,
+            'total_products':total_products
         }
         return render(request, "blog/rig_timeline1.html", context or {})
 
     return render(request, "blog/rig_timeline1.html")
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    # movements = Movementg.objects.all().order_by('start_date')
-    # movement_spans = []
-    # for movement in movements:
-    #     month_span = get_month_span(movement.start_date, movement.end_date)
-    #     start_month_index = (movement.start_date.year - years[0]) * 12 + (movement.start_date.month - 1)
-    #     movement_spans.append({
-    #         'rig': movement.rig,
-    #         'well': movement.well,
-    #         'start_date': movement.start_date,
-    #         'end_date': movement.end_date,
-    #         'month_span': month_span * 8.33,  # Width in percentage
-    #         'start_month_index': start_month_index,  # Position in the calendar
-    #     })
-
-
-# def rig_timeline1(request):
-#     rigs = Rigg.objects.all()
-#     movements = Movementg.objects.all().order_by('start_date')
-#     # print(movements)
-#     # Define the list of months for display
-#     months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-
-#     # Define a range of years you want to cover
-#     years = list(range(2024, 2027))  # Adjust the range as necessary
-
-#     # Prepare the data for rendering
-#     movement_spans = []
-
-#     for movement in movements:
-#         print(movement.start_date)
-#         month_span = get_month_span(movement.start_date, movement.end_date)
-#         movement_spans.append({
-#             'rig': movement.rig,
-#             'well': movement.well,
-#             'start_date': movement.start_date,
-#             'end_date': movement.end_date,
-#             'month_span': month_span * 8.33,
-#             'start_month': movement.start_date.month,
-#             'start_year': movement.start_date.year,
-#             'end_year': movement.end_date.year
-#         })
-#     projects = Project.objects.raw('SELECT id FROM "TRS_DRE2_project"')
-
-#     context = {
-#         'rigs': rigs,
-#         'movements': movement_spans,
-#         'months': months,
-#         'years': years,
-#         'projects': projects
-#     }
-
-#     return render(request, 'blog/rig_timeline1.html', context)
-
-
-# def create_rig_info(request):
-#     # Logic to create rig information
-#     return render(request, 'blog/create_rig_info.html')
-
-# def view_rig_info(request):
-#     # Logic to view all rig information
-#     return render(request, 'blog/view_rig_info.html')
-
-
-# views.py
-
-
-#  movement_new = []
-#     for rig in rigs:
-#         rig_movements = movements.filter(rig=rig).order_by('start_date')
-#         for movement in rig_movements:
-#             movement_year = movement.start_date.year
-#             if movement_year in years:
-#                 movement_month = movement.start_date.month
-#                 month_name = months[movement_month - 1]
-#                 print(f"Rig: {rig}, Start Date: {movement.start_date}, Year: {movement_year}, Month: {month_name}")
-#                 month_span = get_month_span(movement.start_date, movement.end_date)
-#                 movement_new.append({
-#                     'rig': movement.rig,
-#                     'well': movement.well,
-#                     'start_date': movement.start_date,
-#                     'end_date': movement.end_date,
-#                     'month_span': month_span,
-#                     'start_month': movement.start_date.month,
-#                     'start_year': movement.start_date.year,
-#                     'end_year': movement.end_date.year
-#                 })
-#         else:
-#             movement_new.append({
-#                 'rig': movement.rig,
-#                 'well': 'None',
-#                 'start_date': 'None',
-#                 'end_date': 'None',
-#                 'month_span': 'None',
-#                 'start_month': 'None',
-#                 'start_year': 'None',
-#                 'end_year': 'None'
-#             })
-# for movement_n  in movement_new:
-#     print(movement_n['well'])
-
-# context = {
-#     'rigs': rigs,
-#     'movements': movement_new,
-#     'months': months,
-#     'years': years
-# }
-
-# return render(request, 'blog/rig_timeline1.html', context)
 
 
 def create_rig_info(request):
@@ -434,8 +101,6 @@ def view_rig_info(request):
     return render(request, "blog/view_rig_info.html")
 
 
-from django.shortcuts import render
-from datetime import timedelta
 
 
 def your_view(request):

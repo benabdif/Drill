@@ -6,8 +6,16 @@ from django.contrib import admin
 # admin.site.register(Engineer)
 
 
-from .models import Rigg, Wellg, Movementg
+from .models import Rigg, Wellg, Movementg, Units, Contractor, Engineering
 
 admin.site.register(Rigg)
 admin.site.register(Wellg)
 admin.site.register(Movementg)
+admin.site.register(Units)
+admin.site.register(Contractor)
+admin.site.register(Engineering)
+
+
+
+
+ 

@@ -4,7 +4,7 @@ from . import views
 
 
 urlpatterns = [
-    path('', views.members, name='members'),
+    # path('', views.members, name='members'),
     # path('rigs/', views.rig_list, name='rig-list'),
     path('timeline1/', views.rig_timeline1, name='rig_timeline'),
     path('projects/', views.project_list, name='project_list'),
@@ -13,9 +13,5 @@ urlpatterns = [
     
 
 
-    # path('raw-sql/', views.raw_sql_query_view, name='raw_sql_query_view'),
-    # path('custom-sql/', views.custom_sql_query_view, name='custom_sql_query_view'),
-    
-    
 
 ]

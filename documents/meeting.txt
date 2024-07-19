@@ -1,0 +1,18 @@
+I have meeting with Amer, Mustafa & Assif Aqeel. 
+
+
+First meeting Assif Aqeel: we takeing about SAP and How we can do integrate with SAP.
+They said, they can do interface view for us if we need. 
+if we need full controle to create like app and do data we have to request to own server. that will gave us more control create date and table using SQL lunguages to minplate date. 
+one of the opint we taking about is Excel sheet and how it is hard to use it to analyis data. 
+
+he menintion there is other department who do the samile thinks we can get advance of him "SEAWATER INJECTION OPERATIONS DEPT / TECH SUPPORT UNIT" we can get Bin Duhaish, Basl O. phone number +966 13 577-1999 Department EPT / TECHIL SUPPORT UNIT 
+
+
+ Secnd Meeting Amer, Mustafa:
+We duscused  about Two main topic 1- Oracle problem why it is not work with us. As data analysis we have to realy on query to analysis date insted of Excel sheet. 
+
+2-  We have to get given more powers to provide support to enable us to develop and update internally, as it is an urgent necessity to keep pace with the department’s rapid developments, and most of it is continuous development that cannot tolerate rapid updates.
+
+Concluusion: I will send email to Mustafa Amer to asked explain why oracle not work and he will forwored the eamil to his depart ment how can contacting us to fix this problem. 
+2- send eamil to explain our our isue and we mention our example to get sport from Pertrolum Engingerring and developernt COP

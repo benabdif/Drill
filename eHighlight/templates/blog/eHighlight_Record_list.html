@@ -1,0 +1,544 @@
+{% extends 'blog/base_generic.html' %}
+{% load static %}
+
+{% block content %}
+<h1 style="
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+  padding-bottom: 3%;
+  color: #00a3e0;
+  font-size: 2.5em;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  margin-top: 2%;
+">
+  eHighlight Records
+</h1>
+<style>
+    .filter-input {
+      /* width: 40%; */
+      padding: 5px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+  
+    .filter-input:hover, .filter-input:focus {
+      border-color: #00a3e0;
+      box-shadow: 0 0 8px rgba(0, 163, 224, 0.3);
+    }
+  
+    .download-btn {
+      padding: 6px 20px;
+      font-size: 16px;
+      background-color: #00a3e0;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      text-align: center;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+  
+    .download-btn:hover {
+      background-color: #007ba7;
+      box-shadow: 0 0 8px rgba(0, 163, 224, 0.3);
+    }
+  
+    .table-container {
+      max-height: 400px; /* Adjust the height as needed */
+      overflow-y: auto;
+      border: 1px solid #ddd;
+      min-height: 400px; /* Ensure minimum height to prevent shrinking */
+      position: relative;
+    }
+  
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed; /* Fixed table layout */
+    }
+  
+    th, td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  
+    th {
+      background-color: #f2f2f2;
+      position: sticky; /* Make the header sticky */
+      top: 0; /* Position it at the top */
+      z-index: 10; /* Ensure it stays above table rows */
+    }
+  
+    th:nth-child(1), td:nth-child(1) { width: 3%; }
+    th:nth-child(2), td:nth-child(2) { width: 10%; }
+    th:nth-child(3), td:nth-child(3) { width: 5%; }
+    th:nth-child(4), td:nth-child(4) { width: 10%; }
+    th:nth-child(5), td:nth-child(5) { width: 10%; }
+    th:nth-child(6), td:nth-child(6) { width: 15%; }
+    th:nth-child(7), td:nth-child(7) { width: 15%; }
+    th:nth-child(8), td:nth-child(8) { width: 10%; }
+    th:nth-child(9), td:nth-child(9) { width: 10%; }
+    th:nth-child(10), td:nth-child(10) { width: 12%; }
+  
+    .card {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin: 10px;
+      padding: 10px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      flex: 1;
+    }
+  
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+  
+    .card-title {
+      font-size: 1.5em;
+      margin-bottom: 10px;
+      color: #00a3e0;
+    }
+  
+    .card-content {
+      font-size: 1em;
+      color: #333;
+      
+    }
+  
+    .cards-container {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      gap: 10px;
+     
+      
+  
+    }
+  
+    .card {
+      background-color: #f2f2f2;
+    }
+  
+    @media (max-width: 768px) {
+      .card {
+          flex: 1 1 100%;
+      }
+  
+      .cards-container {
+          flex-wrap: wrap;
+      }
+    }
+
+
+/* This is for filter */
+
+    .filter-By_date {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .filter-By_date input[type="date"] {
+            /* padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px; */
+
+            padding: 5px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .filter-By_date button {
+            padding: 6px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #00a3e0;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            
+        }
+
+        .filter-By_date button:hover {
+            background-color: #0056b3;
+            
+        }
+
+        .card {
+          /* border-top: 15px solid #84bd00;  */
+          /* border-bottom: 15px solid #84bd00; */
+          /* border-left: 15px solid #0056b3; */
+          border-right: 15px solid #0056b3;
+        }
+        .more-link {
+          color: #ffffff;  /* Text color */
+          text-decoration: none;  /* No underline */
+          padding: 8px 12px;  /* Adjusted padding for better appearance */
+          background-color: #0056b3;  /* Background color */
+          border-radius: 8px;  /* Rounded corners */
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  /* Subtle shadow for depth */
+          transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;  /* Smooth transitions */
+          display: inline-block;  /* Ensures proper padding and hover effect */
+      }
+
+      .more-link:hover {
+          text-decoration: none;
+          color: #0056b3;  /* Text color on hover */
+          background-color: #ffffff;  /* Background color on hover */
+          box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);  /* Slightly larger shadow on hover */
+          transform: translateY(-2px);  /* Slight upward movement on hover */
+      }
+
+      .highlight-count {
+        font-family: 'Poppins', sans-serif;
+        text-align: center;
+        color: #00a3e0;
+        font-size: 2.5em;
+        font-weight: bold;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
+        margin-bottom: 20px;
+        padding: 10px;
+        background-color: #f2f2f2;
+        border: 2px solid #00a3e0;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      
+
+  </style>
+
+<!-- Add an input field for filtering and a button to download records as an Excel file -->
+<div class="but" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+    <div class="filter-By_date">
+        <input type="text" id="filterInput" placeholder="Type to filter records..." class="filter-input">        
+    </div>
+    
+    <div class="filter-By_date">
+        <div class="">
+            <input type="date" id="startDate" placeholder="Start Date">
+            <input type="date" id="endDate" placeholder="End Date">
+            <button id="filterButton">Filter</button>
+        </div>
+    </div>
+    <div class="filter-By_date">
+        <a href="{% url 'download_records_excel' %}" class="btn btn-primary download-btn">Download as Excel</a>
+
+
+    </div>
+
+</div>
+<!-- Cards Section -->
+ <div class="card-all">
+    <div class="cards-container">
+        <!-- <div class="card">
+            <div class="card-title" style="font-size: 16px;">Total Cost Saving</div>
+            <div class="card-content" style="text-align: center; font-size: 25px; color: #00a3e0;"><span style="font-size: 18px;">SR</span> {{ average_cost }}</div>
+        </div> -->
+    
+    
+        <div class="card">
+            <div class="hed" style="display: flex; justify-content: space-between;">
+                <div class="card-title" style="font-size: 16px;">SACU 1</div>
+                <!-- <img src="{% static 'q.png' %}" alt="Logo" style="height: 30px;"> -->
+    
+            </div>
+            <div class="card-content" style="text-align: center; font-size: 25px; color: #00a3e0;">
+                <span style="font-size: 18px;"></span> {{ sacu_1_count }}
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="hed" style="display: flex; justify-content: space-between;">
+                <div class="card-title" style="font-size: 16px;">SACU 2</div>
+                <img src="{% static 'q.png' %}" alt="Logo" style="height: 40px;">
+            </div>
+    
+            <div class="card-content" style="text-align: center; font-size: 25px; color: #00a3e0;">
+                <span style="font-size: 18px;"></span> {{ sacu_2_count }}
+            </div>
+    
+            <!-- <div class="card-title" style="font-size: 16px;">Cost Saving Q-1</div> -->
+            <!-- <div class="card-content" style="text-align: center; font-size: 25px; color: #00a3e0;"><span style="font-size: 18px;">SR</span> {{ average_cost }}</div> -->
+        </div>
+    
+        <div class="card">
+            <div class="hed" style="display: flex; justify-content: space-between;">
+                <div class="card-title" style="font-size: 14px;">SACU 3</div>
+                <img src="{% static 'q.png' %}" alt="Logo" style="height: 40px;">
+            </div>
+    
+            <div class="card-content" style="text-align: center; font-size: 25px; color: #00a3e0;">
+                <span style="font-size: 18px;"></span> {{ sacu_3_count }}
+            </div>
+    
+            <!-- <div class="card-title" style="font-size: 16px;">Cost Saving Q-1</div> -->
+            <!-- <div class="card-content" style="text-align: center; font-size: 25px; color: #00a3e0;"><span style="font-size: 18px;">SR</span> {{ average_cost }}</div> -->
+        </div>
+    
+        <div class="card">
+            <div class="hed" style="display: flex; justify-content: space-between;">
+                <div class="card-title" style="font-size: 14px;">HSE Group</div>
+                <img src="{% static 'q.png' %}" alt="Logo" style="height: 40px;">
+            </div>
+    
+            <div class="card-content" style="text-align: center; font-size: 25px; color: #00a3e0;">
+                <span style="font-size: 18px;"></span> {{ HSE_Group }}
+            </div>
+    
+            <!-- <div class="card-title" style="font-size: 16px;">Cost Saving Q-1</div> -->
+            <!-- <div class="card-content" style="text-align: center; font-size: 25px; color: #00a3e0;"><span style="font-size: 18px;">SR</span> {{ average_cost }}</div> -->
+        </div>
+       
+        <!-- <div class="card">
+            <div class="card-title" style="font-size: 16px;">Cost Saving Q-2</div>
+            <div class="card-content" style="text-align: center; font-size: 25px; color: #00a3e0;"><span style="font-size: 18px;">SR</span> {{ average_cost }}</div>
+        </div>
+        <div class="card">
+            <div class="card-title" style="font-size: 16px;">Cost Saving Q-3</div>
+            <div class="card-content" style="text-align: center; font-size: 25px; color: #00a3e0;"><span style="font-size: 18px;">SR</span> {{ average_cost }}</div>
+        </div>
+        <div class="card">
+            <div class="card-title" style="font-size: 16px;">Cost Saving Q-4</div>
+            <div class="card-content" style="text-align: center; font-size: 25px; color: #00a3e0;"><span style="font-size: 18px;">SR</span>5,000,200</div>
+        </div>
+         -->
+    </div>
+    <div class="cards-container py-4">
+        <div class="card">
+            <div class="hed" style="display: flex; justify-content: space-between;">
+                <div class="card-title" style="font-size: 16px;">Surveyor Group</div>
+            </div>
+            <div class="card-content" style="text-align: center; font-size: 25px; color: #00a3e0;">
+                <span style="font-size: 18px;"></span> {{ Surveyor_Group }}
+            </div>
+        </div>
+        
+        
+        <div class="card">
+            <div class="hed" style="display: flex; justify-content: space-between;">
+                <div class="card-title" style="font-size: 14px;">Waste Management Group</div>
+                <img src="{% static 'q.png' %}" alt="Logo" style="height: 40px;">
+            </div>
+    
+            <div class="card-content" style="text-align: center; font-size: 25px; color: #00a3e0;">
+                <span style="font-size: 18px;"></span> {{ Waste_Management_Group }}
+            </div>
+        </div>
+    
+        <div class="card">
+            <div class="hed" style="display: flex; justify-content: space-between;">
+                <div class="card-title" style="font-size: 14px;">Engineering Support</div>
+                <img src="{% static 'q.png' %}" alt="Logo" style="height: 40px;">
+            </div>
+    
+            <div class="card-content" style="text-align: center; font-size: 25px; color: #00a3e0;">
+              <span style="font-size: 18px;"></span> {{ Engineering_Support }}
+
+            </div>
+        </div>
+    
+        
+        <!-- <div class="card">
+            <div class="hed" style="display: flex; justify-content: space-between;">
+                <div class="card-title" style="font-size: 14px;">Cost Saving Q-4</div>
+                <img src="{% static 'q.png' %}" alt="Logo" style="height: 40px;">
+            </div>
+    
+            <div class="card-content" style="text-align: center; font-size: 25px; color: #00a3e0;">
+                <span style="font-size: 18px;"></span> {{ average_cost }}
+            </div>
+        </div> -->
+        <div class="card">
+          <div class="hed" style="display: flex; justify-content: space-between;">
+              <div class="card-title" style="font-size: 14px;">Dispatcher Group</div>
+              <img src="{% static 'q.png' %}" alt="Logo" style="height: 40px;">
+          </div>
+  
+          <div class="card-content" style="text-align: center; font-size: 25px; color: #00a3e0;">
+              <span style="font-size: 18px;"></span> {{ Dispatcher_Group }}
+          </div>
+  
+          <!-- <div class="card-title" style="font-size: 16px;">Cost Saving Q-1</div> -->
+          <!-- <div class="card-content" style="text-align: center; font-size: 25px; color: #00a3e0;"><span style="font-size: 18px;">SR</span> {{ average_cost }}</div> -->
+      </div>
+    </div>
+    
+
+ </div>
+
+
+
+<div class="container" style="font-size: 12px;">
+    <div class="row">
+        <div class="col-12">
+            <div class="row">
+                <div class="table-container">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th scope="col" style="width: 4%;">#</th>
+                          <th scope="col">Date</th>
+                          <th scope="col">Week</th>
+                          <th scope="col">Cost</th>
+                          <th scope="col">Unit</th>
+                          <th scope="col">Highlight Type</th>
+                          <th scope="col">Wellsite Activity</th>
+                          <th scope="col">Date of time</th>
+                          <th scope="col">Document</th>
+                          <th scope="col">Image</th>
+                          <th scope="col">Details</th>
+                        </tr>
+                      </thead>
+                      <tbody id="recordsTable">
+                        {% for record in records %}
+                        <tr style="font-size: 14px;">
+                          <th scope="row">{{ forloop.counter }}</th>
+                          <td>{{ record.date }}</td>
+                          <td>{{ record.week }}</td>
+                          <td>{{ record.Cost }}</td>
+                          <td>{{ record.unit }}</td>
+                          <td>{{ record.highlight_type }}</td>
+                          <td>{{ record.wellsite_activity }}</td>
+                          {% comment %} <td>{{ record.user_date }}</td> {% endcomment %}
+                          {% comment %} test {% endcomment %}
+                          
+
+
+                          <td>
+                            {% if record.document %}
+                            <a href="{{ record.document.url }}">Download</a>
+                            {% else %}
+                            <!-- No Document -->
+                            {% endif %}
+                          </td>
+                          <td>
+                            {% if record.image %}
+                            <img src="{{ record.image.url }}" alt="Image" style="max-width: 100px; max-height: 100px;">
+                            {% else %}
+                            <!-- No Image -->
+                            {% endif %}
+                          </td>
+                          <td><a href="{% url 'eHighlight_Record_detail' record.pk %}" class="more-link">more</a></td>
+
+                          {% comment %} <td><a href="{% url 'eHighlight_Record_detail' record.pk %}" class="more">more</a></td> {% endcomment %}
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="py-4">
+  <h1 class="highlight-count">Count of Highlights: {{ all_records_count }}</h1>
+</div>
+<h2>Monthly Record Counts</h2>
+<ul>
+    {% comment %} {% for month, count in monthly_counts.items %}
+        <li>{{ month }}: {{ count }}</li>
+    {% endfor %} {% endcomment %}
+
+    {% comment %} {{ monthly_counts }} {% endcomment %}
+</ul>
+
+
+<div class="chart-container" style="width: 80%; margin: auto; padding: 20px;">
+  <canvas id="highlightsChart"></canvas>
+</div>
+
+<script>
+  // JavaScript function to filter table rows
+  document.getElementById('filterInput').addEventListener('keyup', function() {
+    var filter = this.value.toLowerCase();
+    var rows = document.getElementById('recordsTable').getElementsByTagName('tr');
+
+    for (var i = 0; i < rows.length; i++) {
+      var cells = rows[i].getElementsByTagName('td');
+      var match = false;
+      for (var j = 0; j < cells.length; j++) {
+        if (cells[j].innerText.toLowerCase().includes(filter)) {
+          match = true;
+          break;
+        }
+      }
+      if (match) {
+        rows[i].style.display = '';
+      } else {
+        rows[i].style.display = 'none';
+      }
+    }
+  });
+
+  document.getElementById('filterButton').addEventListener('click', function() {
+    var startDate = new Date(document.getElementById('startDate').value);
+    var endDate = new Date(document.getElementById('endDate').value);
+    var rows = document.getElementById('recordsTable').getElementsByTagName('tr');
+    var monthlyCounts = new Array(12).fill(0); // Array to store counts for each month
+
+    for (var i = 0; i < rows.length; i++) {
+      var cells = rows[i].getElementsByTagName('td');
+      var dateCell = cells[0].innerText; // Assuming the date is in the first column
+      var rowDate = new Date(dateCell);
+
+      if (rowDate >= startDate && rowDate <= endDate) {
+        rows[i].style.display = '';
+        monthlyCounts[rowDate.getMonth()]++; // Increment the count for the corresponding month
+      } else {
+        rows[i].style.display = 'none';
+      }
+    }
+
+    // Update the chart with the new data
+    highlightsChart.data.datasets[0].data = monthlyCounts;
+    highlightsChart.update();
+  });
+
+  // Initial chart data (sample data)
+  const monthlyData = {
+    labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+    datasets: [{
+      label: "Highlight Counts",
+      data: [{{ monthly_counts.January }},{{ monthly_counts.February }},{{ monthly_counts.March }},{{ monthly_counts.April }},{{ monthly_counts.May }},{{ monthly_counts.June }},{{ monthly_counts.July }},{{ monthly_counts.August }},{{ monthly_counts.September }},{{ monthly_counts.October }}, {{monthly_counts.November}},{{ monthly_counts.December }}], // Initialize with zeroes
+      backgroundColor: "rgba(0, 163, 224, 0.2)",
+      borderColor: "#00a3e0",
+      borderWidth: 2
+    }]
+  };
+
+  const ctx = document.getElementById('highlightsChart').getContext('2d');
+  const highlightsChart = new Chart(ctx, {
+    type: 'line', // You can change this to 'bar', 'pie', etc.
+    data: monthlyData,
+    options: {
+      responsive: true,
+      scales: {
+        x: {
+          beginAtZero: true
+        },
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
+
+{% comment %} <a href="{% url 'eHighlight_Record_new' %}">Add new record</a> {% endcomment %}
+{% endblock %}

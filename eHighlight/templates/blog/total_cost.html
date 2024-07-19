@@ -1,0 +1,262 @@
+{% extends 'blog/base_generic.html' %}
+{% block content %}
+<div class='row py-1 w-2' style="background-color: aqua;">
+    <div class="col-4">
+        <div class="row">
+            <div class="col-6">
+                <div class="col-4">
+                    <p>p</p>
+                </div>
+            </div>
+            <div class="col-6">1</div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+
+<!-- mycode -->
+
+{% extends 'blog/base_Apps_page.html' %}
+
+{% load static %}
+
+{% block content %}
+<style>
+
+body {
+        background: url("{% static 'imageee.png' %}") no-repeat center center fixed;
+
+        background-size: cover;
+    }
+
+
+    .card {
+        border-radius: 15px; /* Adjust the value as needed */
+        /* background: linear-gradient(to right, #8aba24, #47af7f, #14a6c4, #00a3df); Adjust the colors as needed */
+
+        background-color: #00a3e0; /*Set the background color to red */
+        text-align: center;
+        font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: white; 
+        transition: transform 0.3s, box-shadow 0.10s;
+        /* border-top: 15px solid #84bd00;  */
+        border-bottom: 15px solid #8e949b;  /****** here for the to change color *******/
+        border-left: none;
+        /* border-right: none; */
+        /* border-right: 15px solid #0056b3; */
+
+    
+    }
+
+
+    .card:hover {
+        background-color: #8aba24; /* Change background color on hover */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
+        transform: scale(1.05); /* Slightly enlarge the card on hover */
+        transition: all 0.3s ease-in-out; /* Smooth transition for the hover effect */
+        color: rgb(0, 0, 0);
+        font-weight: bold;
+        /* border-top: 15px solid #00a3e0;  */
+        /* border-bottom: 15px solid #00a3e0; */
+        border-left: none;
+        /* border-right: none; */
+        /* border-right: 80px solid #0056b3; */
+        border-bottom: 100px solid #8e949b;  /* here to change color*/
+        text-decoration: 'Hello';
+
+        
+    }
+    .title {
+    position: relative;
+    padding: 2%;
+    text-align: center;
+    border-radius: 20px;
+    height: 90px;
+    font-size: 2.5em; /* Adjust the size as needed */
+    color: transparent;
+    background: linear-gradient(to right, #8aba24, #47af7f, #14a6c4, #00a3df);
+    -webkit-background-clip: text;
+    z-index: 1;
+}
+
+.title::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #6d6f6c3f; /* Different background color for the box */
+    border-radius: 20px;
+    z-index: -1;
+}
+
+    .card-custom {
+        background-color: #f8f9fa; /* Customize this color as needed */
+        position: relative;
+        padding: 5px 15px;
+    }
+    .card-custom::before, .card-custom::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 2px; /* Customize the height of the lines as needed */
+        background-color: #000; /* Customize the color of the lines as needed */
+    }
+    .card-custom::before {
+        top: 0;
+    }
+    .card-custom::after {
+        bottom: 0;
+    }
+
+.card {
+    position: relative; /* Needed for the ::after pseudo-element */
+    transition: all 0.3s ease-in-out; /* Smooth transition for all properties */
+    overflow: hidden; /* To ensure the ::after element does not affect layout */
+}
+
+.card:hover {
+    background-color: #8aba24; /* Change background color on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
+    transform: scale(1.05); /* Slightly enlarge the card on hover */
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    border-left: none;
+    /* border-right: 60px solid #0056b3; Blue area */
+    font-size: 12px;
+}
+
+.card::after {
+    /* content: "Hello"; */
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 80px; /* Match the border-right width */
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    font-size: 24px;
+    color: #855353; /* Ensure the text is visible */
+    background-color: transparent; /* Make sure the background is transparent */
+    z-index: 1; /* Ensure it is above other content */
+    
+}
+
+.card:hover::after {
+    opacity: 1; /* Set to 1 to make the text fully visible */
+}
+</style>
+<!-- <h1 class="title">WELLMANAGE</h1> -->
+
+<div class="container py-5">
+    <div class="row row-cols-4 g-3">
+        <div class="col">
+            <div class="p-3 card" style="display: flex; justify-content: start; align-items: center;">
+                <img src="{% static 'application_1.png' %}" alt="Logo" style="width: 60px; height: auto;">
+
+                <a href="{% url 'eHighlight_Record_list' %}" style="text-decoration: none; color: inherit; font-size: 1.2em; display: flex; align-items: center;">
+                    <!-- <p>Highlight</p> -->
+                    <p>Daily Report</p>
+
+                    <!-- <img src="{% static 'report.png' %}" alt="Logo" style="width: 50px; height: auto; margin-left: 10px;"> -->
+                </a>
+            </div>
+        </div>
+        <!-- navigate -->
+        
+        
+        <div class="col">
+            <div class="p-3 card" style="display: flex; justify-content: start; align-items: center;">
+                <img src="{% static 'dashboard_3.png' %}" alt="Logo" style="width: 60px; height: auto; margin-left: 10px;">
+
+                <a href="{% url 'eHighlight_Record_list' %}" style="text-decoration: none; color: inherit; font-size: 1.2em; display: flex; align-items: center;">
+                    <p>WIH</p>
+                    <!-- <img src="{% static 'bar-chart.png' %}" alt="Logo" style="width: 50px; height: auto; margin-left: 10px;"> -->
+                </a>
+            </div>
+        </div>
+        <div class="col">
+            <div class="p-3 card" style="display: flex; justify-content: start; align-items: center;">
+                <img src="{% static 'data-analytics.png' %}" alt="Logo" style="width: 60px; height: auto; margin-left: 10px;">
+
+                <a href="{% url 'eHighlight_Record_list' %}" style="text-decoration: none; color: inherit; font-size: 1.2em; display: flex; align-items: center;">
+                    <p>Templet</p>
+                    <!-- <img src="{% static 'bar-chart.png' %}" alt="Logo" style="width: 50px; height: auto; margin-left: 10px;"> -->
+                </a>
+            </div>
+        </div>
+        <div class="col">
+            <div class="p-3 card" style="display: flex; justify-content: start; align-items: center;">
+                <img src="{% static 'data-analytics.png' %}" alt="Logo" style="width: 60px; height: auto; margin-left: 10px;">
+
+                <a href="{% url 'eHighlight_Record_list' %}" style="text-decoration: none; color: inherit; font-size: 1.2em; display: flex; align-items: center;">
+                    <p>Referebces</p>
+                    <!-- <img src="{% static 'bar-chart.png' %}" alt="Logo" style="width: 50px; height: auto; margin-left: 10px;"> -->
+                </a>
+            </div>
+        </div> 
+    </div>
+
+    <div class="row row-cols-4 g-3 py-5"> 
+        <div class="col">
+            <div class="p-3 card" style="display: flex; justify-content: start; align-items: center;">
+                <img src="{% static 'COM.png' %}" alt="Logo" style="text-align: center; width: 50px; height: auto; margin-left: 10px;">
+                <a href="{% url 'eHighlight_Record_list' %}" style="text-decoration: none; color: inherit; font-size: 1.2em; display: flex; align-items: center;">
+                    <p>Logistics</p>
+                    <!-- <img src="{% static 'customer-service.png' %}" alt="Logo" style="width: 50px; height: auto; margin-left: 10px;"> -->
+                    <!-- <img src="{% static 'COM.png' %}" alt="Logo" style="width: 50px; height: auto; margin-left: 10px;"> -->
+                    <!-- <img src="{% static 'remove-location.png' %}" alt="Logo" style="width: 50px; height: auto; margin-left: 10px;"> --> 
+                </a>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="p-3 card" style="display: flex; justify-content: start; align-items: center;">
+                <img src="{% static 'highlighter.png' %}" alt="Logo" style="text-align: center; width: 50px; height: auto; margin-left: 10px;">
+                <a href="{% url 'eHighlight_Record_list' %}" style="text-decoration: none; color: inherit; font-size: 1.2em; display: flex; align-items: center;">
+                    <p>Highlight</p>
+                    <!-- <img src="{% static 'customer-service.png' %}" alt="Logo" style="width: 50px; height: auto; margin-left: 10px;"> -->
+                    <!-- <img src="{% static 'COM.png' %}" alt="Logo" style="width: 50px; height: auto; margin-left: 10px;"> -->
+                    <!-- <img src="{% static 'remove-location.png' %}" alt="Logo" style="width: 50px; height: auto; margin-left: 10px;"> --> 
+                </a>
+            </div>
+        </div>
+        
+        <div class="col">
+            <div class="p-3 card" style="display: flex; justify-content: start; align-items: center;">
+                <img src="{% static 'remove-location.png' %}" alt="Logo" style="width: 50px; height: auto; margin-left: 10px;">
+                <a href="{% url 'eHighlight_Record_list' %}" style="text-decoration: none; color: inherit; font-size: 1.2em; display: flex; align-items: center;">
+                    <p><span style="color: #8aba24;"></span>Navigator</p>
+                    <!-- <img  src="{% static 'navigate.png' %}" alt="Logo" style="width: 50px; height: auto; margin-left: 10px;"> -->
+                    <!-- <img src="{% static 'remove-location.png' %}" alt="Logo" style="width: 50px; height: auto; margin-left: 10px;"> -->
+                </a>
+            </div>
+        </div>
+        <div class="col">
+            <div class="p-3 card" style="display: flex; justify-content: start; align-items: center;">
+                <img src="{% static 'remove-location.png' %}" alt="Logo" style="width: 50px; height: auto; margin-left: 10px;">
+                <a href="{% url 'eHighlight_Record_list' %}" style="text-decoration: none; color: inherit; font-size: 1.2em; display: flex; align-items: center;">
+                    <p>Related App</p>
+                    <!-- <img  src="{% static 'navigate.png' %}" alt="Logo" style="width: 50px; height: auto; margin-left: 10px;"> -->
+                    <!-- <img src="{% static 'remove-location.png' %}" alt="Logo" style="width: 50px; height: auto; margin-left: 10px;"> -->
+                </a>
+            </div>
+        </div>
+    </div>
+   
+
+<div class="inof-2">
+
+</div>
+
+
+
+
+{% endblock %}
