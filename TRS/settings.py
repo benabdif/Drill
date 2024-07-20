@@ -33,7 +33,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-  
+  "daphne",
+  "channels",
+  "chat",
     "TRS_DRE2",
     "TRS_DRE",
     "django.contrib.admin",
@@ -86,6 +88,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "TRS.wsgi.application"
+ASGI_APPLICATION = "TRS.asgi.application"
 
 
 # Database
@@ -161,3 +164,9 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 MEDIA_ROOT = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    }
+}
