@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'bootstrap5',
     'crispy_forms',
     'django_filters',
-  
+    'ToDoList',
     'crispy_bootstrap5',
 
     

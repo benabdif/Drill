@@ -399,9 +399,9 @@
                           <th scope="col">Unit</th>
                           <th scope="col">Highlight Type</th>
                           <th scope="col">Wellsite Activity</th>
-                          <th scope="col">Date of time</th>
                           <th scope="col">Document</th>
-                          <th scope="col">Image</th>
+                          {% comment %} <th scope="col">Document</th> {% endcomment %}
+                          {% comment %} <th scope="col">Image</th> {% endcomment %}
                           <th scope="col">Details</th>
                         </tr>
                       </thead>
@@ -411,6 +411,7 @@
                           <th scope="row">{{ forloop.counter }}</th>
                           <td>{{ record.date }}</td>
                           <td>{{ record.week }}</td>
+                          
                           <td>{{ record.Cost }}</td>
                           <td>{{ record.unit }}</td>
                           <td>{{ record.highlight_type }}</td>
@@ -424,16 +425,17 @@
                             {% if record.document %}
                             <a href="{{ record.document.url }}">Download</a>
                             {% else %}
-                            <!-- No Document -->
+                              No Document
                             {% endif %}
                           </td>
-                          <td>
+                          {% comment %} <td>
                             {% if record.image %}
                             <img src="{{ record.image.url }}" alt="Image" style="max-width: 100px; max-height: 100px;">
                             {% else %}
-                            <!-- No Image -->
+                            No Image
                             {% endif %}
-                          </td>
+                          </td> {% endcomment %}
+                          {% comment %} <td><a href="{% url 'eHighlight_Record_detail' record.pk %}" class=""></a></td> {% endcomment %}
                           <td><a href="{% url 'eHighlight_Record_detail' record.pk %}" class="more-link">more</a></td>
 
                           {% comment %} <td><a href="{% url 'eHighlight_Record_detail' record.pk %}" class="more">more</a></td> {% endcomment %}
@@ -524,7 +526,7 @@
 
   const ctx = document.getElementById('highlightsChart').getContext('2d');
   const highlightsChart = new Chart(ctx, {
-    type: 'line', // You can change this to 'bar', 'pie', etc.
+    type: 'line', // You can change this to 'bar', 'pie', etc., line
     data: monthlyData,
     options: {
       responsive: true,

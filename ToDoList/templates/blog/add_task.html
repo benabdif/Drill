@@ -1,0 +1,17 @@
+{% extends 'blog/mainpage.html' %}
+{% load static %}
+
+{% block content %}
+
+<body>
+    <div class="container">
+        <h1>Add Task</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Add Task</button>
+        </form>
+        <a href="{% url 'dashboard' %}">Back to Dashboard</a>
+    </div>
+</body>
+{% endblock %}

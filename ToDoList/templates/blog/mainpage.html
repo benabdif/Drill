@@ -8,27 +8,22 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://www.gstatic.com/charts/loader.js"></script>
     <link rel="stylesheet" href="{% static 'css/cssc.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
     {% block extra_head %}
     <!-- Extra head content can be inserted by extending templates -->
     {% endblock %}
 </head>
 
-<style>
-    
-    .margin-right-20 {
-        margin-right: 20px;
-    }
-    
-    
-    
-</style>
 
 <body>
-    <header class="" style="background: linear-gradient(to right, #047adb, #84bd00)">
+        
+    <!-- <header style="background: radial-gradient(circle, #047adb, #7bbb0e);"> -->
+    <header style="background: linear-gradient(to right, #047adb, #7bbb0e);">
         <div class="container-fluid">
             <nav class="navbar navbar-expand-lg navbar-light">
                 <a class="navbar-brand" href="{% url 'eHighlight_Record_list' %}" style="width: 15%;">
+                    <!-- <img src="{% static 'SAWS.png' %}" alt="Logo" style="height: 50px;"> -->
                     <img src="{% static 'Picture1.png' %}" alt="Logo" style="height: 40px;">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -37,38 +32,34 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav mr-auto" style="font-family: 'Poppins', sans-serif;">
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="{% url 'eHighlight_Record_list' %}"></a>
+                            <a class="nav-link text-white" href="{% url 'All_apps' %}"></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="{% url 'eHighlight_Record_new' %}"></a>
+                            <!-- <a class="nav-link text-white" href="{% url 'eHighlight_Record_new' %}">New Highlight</a> -->
                         </li>
-                        {% comment %} <li class="nav-item" style="background-color: #00a3e0; border-radius: 5px;">
-                            <a class="nav-link text-white" href="{% url 'All_apps' %}" style="text-decoration: none;">
-                                All Apps
-                            </a>
-                        </li> {% endcomment %}
                     </ul>
-                    
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a class="btn btn-primary margin-right-20" style="background-color: #00a3e0; border: none;" href="{% url 'All_apps' %}">All Apps</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="btn btn-primary" style="background-color: #00a3e0; border: none;" href="{% url 'eHighlight_Record_list' %}">Highlight List</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-user"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#"><i class="fas fa-cog"></i> Profile Settings</a>
+                                <a class="dropdown-item" href="#"><i class="fas fa-user"></i> Account</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                            </div>
                         </li>
                     </ul>
-                    
-                    
                 </div>
-                
             </nav>
-            
         </div>
     </header>
     
-    <main class="container my-4">
+    <main class="">
         {% block content %}
-        <!-- Page-specific content will be inserted here -->
+        Page-specific content will be inserted here
+         <p>{{ fadhel }}</p>
         {% endblock %}
     </main>
     
