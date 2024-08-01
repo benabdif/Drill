@@ -28,7 +28,8 @@
             <nav class="navbar navbar-expand-lg navbar-light">
                 <a class="navbar-brand" href="{% url 'eHighlight_Record_list' %}" style="width: 15%;">
                     <!-- <img src="{% static 'SAWS.png' %}" alt="Logo" style="height: 50px;"> -->
-                    <img src="{% static 'Picture1.png' %}" alt="Logo" style="height: 40px;">
+                    {% comment %} <img src="{% static 'Picture1.png' %}" alt="Logo" style="height: 40px;"> {% endcomment %}
+                    <img src="{% static 'MANGMENT.png' %}" alt="Logo" style="height: 25px;">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -37,7 +38,7 @@
                     <ul class="navbar-nav mr-auto" style="font-family: 'Poppins', sans-serif;">
                         <li class="nav-item">
                             <!-- <a class="nav-link text-white" href="{% url 'eHighlight_Record_list' %}">Home</a> -->
-                        </li>
+                        </li2
                         <li class="nav-item">
                             <!-- <a class="nav-link text-white" href="{% url 'eHighlight_Record_new' %}">New Highlight</a> -->
                         </li>
@@ -51,7 +52,9 @@
                                 <a class="dropdown-item" href="#"><i class="fas fa-cog"></i> Profile Settings</a>
                                 <a class="dropdown-item" href="#"><i class="fas fa-user"></i> Account</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                                <a class="dropdown-item" href="{% url 'logout' %}">
+                                    <i class="fas fa-sign-out-alt"></i> Logout</a>
+                                {% comment %} <a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt"></i>Logout</a> {% endcomment %}
                             </div>
                         </li>
                     </ul>

@@ -9,11 +9,7 @@ class Employee(models.Model):
     phone = models.CharField(max_length=15)
     
 
-# class Employee_For_HR(models.Model):
-#     name = models.CharField(max_length=200)
-#     position = models.CharField(max_length=100)
-#     status = models.CharField(max_length=100)
-#     phone = models.CharField(max_length=15)
+
 
 class Task(models.Model):
     title = models.CharField(max_length=200)
@@ -32,3 +28,40 @@ class GroupWorkshop(models.Model):
     tasks = models.ManyToManyField(Task)
     def __str__(self):
         return self.name
+    
+
+
+class WellSiteConstruction(models.Model):
+    name = models.CharField(max_length=255)
+    location = models.CharField(max_length=255)
+    start_date = models.DateField()
+    end_date = models.DateField(null=True, blank=True)
+    managers = models.ManyToManyField('Manager', related_name='construction_sites')
+
+    def __str__(self):
+        return self.name
+
+class Manager(models.Model):
+    user = models.OneToOneField(User,  on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.user.first_name} {self.user.last_name}"
+
+
+
+class Supervisor(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    construction_unit = models.ForeignKey(WellSiteConstruction, on_delete=models.CASCADE, related_name='supervisors')
+    Manager = models.ForeignKey(Manager, on_delete=models.CASCADE, related_name='supervisors')
+
+    def __str__(self):
+        return f"{self.user.first_name} {self.user.last_name}"
+
+class Employee_2(models.Model):
+    user = models.OneToOneField(User,  on_delete=models.CASCADE)
+    supervisor = models.ForeignKey(Supervisor, on_delete=models.CASCADE, related_name='employees')
+    
+
+
+    def __str__(self):
+        return f"{self.user.first_name} {self.user.last_name}"

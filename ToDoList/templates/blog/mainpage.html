@@ -17,14 +17,16 @@
 
 
 <body>
-        
+      
+    
     <!-- <header style="background: radial-gradient(circle, #047adb, #7bbb0e);"> -->
-    <header style="background: linear-gradient(to right, #047adb, #7bbb0e);">
+    <header style="background: linear-gradient(to right, #047adb, #7bbb0e)">
         <div class="container-fluid">
             <nav class="navbar navbar-expand-lg navbar-light">
                 <a class="navbar-brand" href="{% url 'eHighlight_Record_list' %}" style="width: 15%;">
                     <!-- <img src="{% static 'SAWS.png' %}" alt="Logo" style="height: 50px;"> -->
-                    <img src="{% static 'Picture1.png' %}" alt="Logo" style="height: 40px;">
+                    {% comment %} <img src="{% static 'Picture1.png' %}" alt="Logo" style="height: 40px;">  {% endcomment %}
+                    <img src="{% static 'MANGMENT.png' %}" alt="Logo" style="height: 25px;"> 
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -54,12 +56,12 @@
                 </div>
             </nav>
         </div>
+      
     </header>
     
     <main class="">
         {% block content %}
-        Page-specific content will be inserted here
-         <p>{{ fadhel }}</p>
+       
         {% endblock %}
     </main>
     

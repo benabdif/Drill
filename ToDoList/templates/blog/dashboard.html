@@ -390,7 +390,7 @@
     }
     @media (min-width: 600px) {
       .card-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
       }
     }
     @media (min-width: 1200px) {
@@ -509,6 +509,7 @@
    /* Create task */
 .popup-form {
     display: none;
+    
     position: fixed;
     z-index: 1000;
     left: 0;
@@ -517,13 +518,14 @@
     height: 100%;
     background-color: rgba(0, 0, 0, 0.7); /* Darker background for better focus */
     overflow: auto;
+    
 }
-
+/* This is about the information on the box */
 .form-content {
     background-color: #ddddec;
     margin: 10% auto; /* Lower the top margin for better placement */
     padding: 30px; /* Increased padding for better spacing */
-    border-radius: 15px; /* Softer corners */
+    border-radius: 5px; /* Softer corners */
     border: #c0c3bc;
     width: 60%;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Added shadow for depth */
@@ -590,92 +592,114 @@
     background-color: #282a7a; /* Even darker shade for active state */
 }
 
+
+select {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10"><path fill="%23333" d="M0 0l5 5 5-5z"/></svg>') no-repeat right 10px center;
+        background-size: 10px;
+    }
+
+#task-priority, #task-status, #assigned-team{
+  width: 50%;
+  padding: 1%;
+  border-radius: 5px;
+  border: 10px;
+  background-color: rgb(255, 255, 255);
+
+
+}
+
+
+/* time line */
+
+.timeline-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+  }
+
+  .timeline-labels {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 5px;
+  }
+
+  .timeline-label {
+    font-size: 12px;
+  }
+
+  .start-label {
+    text-align: left;
+  }
+
+  .end-label {
+    text-align: right;
+  }
+
+  .timeline {
+    width: 100%;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    overflow: hidden;
+    height: 10px;
+    position: relative;
+  }
+
+  .progress {
+    background-color: #4caf50;
+    height: 100%;
+  }
+
+  .card-footer a {
+    text-decoration: none;
+    color: #007bff;
+  }
+
+  .card-footer a:hover {
+    text-decoration: underline;
+  }
+
 </style>
-
 <header class="header">
-    <div class="header-content responsive-wrapper">
-        <div class="header-logo">
-            <a href="#">
-                <div></div>
-            </a>
-        </div>
-        <div class="header-navigation">
-            <nav class="header-navigation-links">
-                <a href="{% url 'All_apps' %}">All Aps</a>
-                <a href="#">Dashboard</a>
-                <a href="{% url 'eHighlight_Record_list' %}">E-highlight</a>
-                <a href="#">Special Tasks</a>
-                <a href="#">Reporting</a>
-                <a href="#">Users</a>
-            </nav>
-            <div class="header-navigation-actions">
-                <div class="sp">
-                    <a href="#" class="button" id="add-task-button">
-                        <i class="ph-plus-bold"></i>
-                        <span>Add New Task</span>
-                    </a>
-                    <a href="#" class="button" id="create-group-button">
-                        <i class="ph-plus-bold"></i>
-                        <span>Create Group</span>
-                    </a>
-                </div>
+  <div class="header-content responsive-wrapper">
+      <div class="header-logo">
+          <a href="#">
+              <div></div>
+          </a>
+      </div>
+      <div class="header-navigation">
+          <nav class="header-navigation-links">
+              <a href="{% url 'All_apps' %}">All Aps</a>
+              <a href="#">Dashboard</a>
+              <a href="{% url 'eHighlight_Record_list' %}">E-highlight</a>
+              <a href="#">Special Tasks</a>
+              <a href="#">Reporting</a>
+              <a href="#">Users</a>
+          </nav>
+          <div class="header-navigation-actions">
+              <div class="sp">
+               
+                 <a href="{% url 'createTaske' %}" class="button" id="add-task-button">
+                      <i class="ph-plus-bold"></i>
+                      <span>Add New Task</span>
+                  </a>
 
-                <div id="popup-form" class="popup-form">
-                    <div class="form-content">
-                        <span class="close">&times;</span>
-                        <form id="task-form">
-                            <h5>New Taske:</h1>
+               
+              </div>
 
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label for="task-name">Task Name:</label>
-                                    <input type="text" id="task-name" name="task-name" required><br>
-                                
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="group-members">Group Members:</label>
-                                    <input type="text" id="group-members" name="group-members" required><br>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label for="start-date">Start Date:</label>
-                                    <input type="date" id="start-date" name="start-date" required><br>
-                                    
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="end-date">End Date:</label>
-                                    <input type="date" id="end-date" name="end-date" required><br>
-                                    
-                                </div>
-                            </div>
-                            
-                        
-                            <label for="task-desc">Description:</label>
-                            <textarea id="task-desc" name="task-desc" required></textarea><br>
-                            
-                            <label for="group-leader">Group Leader:</label>
-                            <input type="text" id="group-leader" name="group-leader" required><br>
-                            
-                            
-                         
-                           
-                            <label for="expectations">Expectations:</label>
-                            <textarea id="expectations" name="expectations" required></textarea><br>
-                            
-                            <input type="submit" value="Submit">
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <a href="#" class="button">
-            <i class="ph-list-bold"></i>
-            <span>Menu</span>
-        </a>
-    </div>
+             
+          </div>
+      </div>
+      <a href="#" class="button">
+          <i class="ph-list-bold"></i>
+          <span>Menu</span>
+      </a>
+  </div>
 </header>
-
 <main class="main">
     <div class="responsive-wrapper">
         <div class="content-header">
@@ -698,69 +722,45 @@
                 </div>
             </div>
         </div>
-        <div class="content" style="background-color: #ddddec;">
-            <div class="content-panel">
-                <div class="vertical-tabs">
-                    <a href="{% url 'All_apps' %}" class="active">View all</a>
-                    <a href="#">Create Group</a>
-                    <a href="#">Communication</a>
-                    <a href="#">Productivity</a>
-                    <a href="#">Browser tools</a>
-                    <a href="#">Marketplace</a>
+
+
+        <div class="card-grid">
+					<article class="card">
+						<div class="card-header">
+							<div>
+								<span><img src="https://assets.codepen.io/285131/zeplin.svg" /></span>
+								<h3>Create Website</h3>
+							</div>
+							<label class="toggle">
+								<input type="checkbox" checked>
+								<span></span>
+							</label>
+						</div>
+						<div class="card-body">
+							<p>Memebers: Fadhel, Ali, Mohammed</p>
+              <p>Start date: 02/03/2020</p>
+              <p>End date: 02/07/2020</p>
+              <div class="timeline-container">
+                <div class="timeline-labels">
+                  <span class="timeline-label start-label">Start Project</span>
+                  <span class="timeline-label end-label">End Project</span>
                 </div>
-            </div>
-            <div class="content-main">
-                <div class="card-grid">
-                    <article class="card">
-                        <div class="card-header">
-                            <div>
-                                <span><img src="https://assets.codepen.io/285131/zeplin.svg" /></span>
-                                <h5>Task Fadhel Group</h5>
-                            </div>
-                            <label class="toggle">
-                                <input type="checkbox" checked>
-                                <span></span>
-                            </label>
-                        </div>
-                        <div class="card-body">
-                            <p>Collaboration between designers and developers.</p>
-                        </div>
-                        <div class="card-footer">
-                            <a href="#">View integration</a>
-                        </div>
-                    </article>
+                <div class="timeline">
+                  <div class="progress" style="width: 50%;"></div> <!-- Adjust width based on progress -->
                 </div>
-            </div>
+              </div>
+						</div>
+						<div class="card-footer">
+							<a href="#">View integration</a>
+						</div>
+					</article>
+        </div>
+       
+            
         </div>
     </div>
 </main>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var popupForm = document.getElementById('popup-form');
-        var addTaskButton = document.getElementById('add-task-button');
-        var createGroupButton = document.getElementById('create-group-button');
-        var closeButton = document.querySelector('.close');
-
-        addTaskButton.onclick = function() {
-            popupForm.style.display = 'block';
-        }
-
-        createGroupButton.onclick = function() {
-            popupForm.style.display = 'block';
-        }
-
-        closeButton.onclick = function() {
-            popupForm.style.display = 'none';
-        }
-
-        window.onclick = function(event) {
-            if (event.target == popupForm) {
-                popupForm.style.display = 'none';
-            }
-        }
-    });
-</script>
 <script src='https://unpkg.com/phosphor-icons'></script>
 <script src="{% static 'path/to/your/script.js' %}"></script>
 

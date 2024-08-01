@@ -12,3 +12,7 @@ class GroupWorkshopForm(forms.ModelForm):
     class Meta:
         model = GroupWorkshop
         fields = ['name', 'members', 'tasks']
+
+
+
+

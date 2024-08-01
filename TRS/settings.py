@@ -82,6 +82,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                
             ],
         },
     },
@@ -89,6 +90,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "TRS.wsgi.application"
 ASGI_APPLICATION = "TRS.asgi.application"
+
+LOGIN_URL = '/admin/login/'
+
 
 
 # Database
@@ -99,7 +103,7 @@ DATABASES = {
         # "ENGINE": "django.db.backends.sqlite3",
         # "NAME": BASE_DIR / "db.sqlite3",
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'Drill-info',
+        'NAME': "drill-test",# 'Drill-info',
         'USER' : 'postgres',
         'PASSWORD' : 'Ff123456',
         'HOST' : 'localhost',
