@@ -27,4 +27,5 @@ urlpatterns = [
     path('', include('TRS_DRE2.urls')),
     path('', include('eHighlight.urls')),
     path('', include('ToDoList.urls')),
+    path('', include('accounts.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

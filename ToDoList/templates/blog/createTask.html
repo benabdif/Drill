@@ -585,7 +585,7 @@
 
         <div class="tab-content mt-3">
             <div class="tab-pane fade show active" id="individual-task">
-                <form method="post" enctype="multipart/form-data">
+                <form method="post" action="{% url "myaddTask" %}" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="form-row">
                         <div class="form-group col-md-6">

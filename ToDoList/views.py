@@ -78,3 +78,8 @@ def createTask2(request):
 
 
 
+def myaddTask(request):
+    
+    print(request.POST.get('title'))
+
+

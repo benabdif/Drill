@@ -10,5 +10,7 @@ urlpatterns = [
     path('add_group_workshop/', views.add_group_workshop, name='add_group_workshop'),
     path('main/', views.main_page, name='main'),
     path('createTaske/', views.createTask, name='createTaske'),
+    path('myaddTask/', views.myaddTask, name='myaddTask'),
+  
     
 ]

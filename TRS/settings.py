@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'django_filters',
     'ToDoList',
     'crispy_bootstrap5',
+    'accounts',
 
     
 
@@ -92,6 +93,8 @@ WSGI_APPLICATION = "TRS.wsgi.application"
 ASGI_APPLICATION = "TRS.asgi.application"
 
 LOGIN_URL = '/admin/login/'
+
+
 
 
 
