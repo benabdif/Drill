@@ -33,7 +33,7 @@
         <div class="container-fluid">
             <nav class="navbar navbar-expand-lg navbar-light">
                 <a class="navbar-brand" href="{% url 'eHighlight_Record_list' %}" style="width: 15%;">
-                    <img src="{% static 'Picture1.png' %}" alt="Logo" style="height: 40px;">
+                    <img src="{% static 'MANGMENT.png' %}" alt="Logo" style="height: 25px;">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -46,32 +46,28 @@
                         <li class="nav-item">
                             <a class="nav-link text-white" href="{% url 'eHighlight_Record_new' %}"></a>
                         </li>
-                        {% comment %} <li class="nav-item" style="background-color: #00a3e0; border-radius: 5px;">
-                            <a class="nav-link text-white" href="{% url 'All_apps' %}" style="text-decoration: none;">
-                                All Apps
-                            </a>
-                        </li> {% endcomment %}
                     </ul>
                     
-                    <ul class="navbar-nav ml-auto">
+                    {% comment %} <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
                             <a class="btn btn-primary margin-right-20" style="background-color: #00a3e0; border: none;" href="{% url 'All_apps' %}">All Apps</a>
                         </li>
                         <li class="nav-item">
                             <a class="btn btn-primary" style="background-color: #00a3e0; border: none;" href="{% url 'eHighlight_Record_new' %}">New Highlight</a>
                         </li>
-                    </ul>
-                    
-                    
+                    </ul>  {% endcomment %}
                 </div>
-                
             </nav>
-            
         </div>
+        
     </header>
     
+    
     <main class="container my-4">
+
+    
         {% block content %}
+
         <!-- Page-specific content will be inserted here -->
         {% endblock %}
     </main>

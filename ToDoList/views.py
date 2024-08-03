@@ -14,7 +14,7 @@ def dashboard(request):
         tasks = Task.objects.filter(assigned_to=request.user.employee)
     return render(request, 'blog/dashboard.html', {'tasks': tasks})
 
-@login_required
+# @login_required
 def add_task(request):
     if request.method == 'POST':
         form = TaskForm(request.POST)
@@ -28,7 +28,7 @@ def add_task(request):
         form = TaskForm()
     return render(request, 'blog/add_task.html', {'form': form})
 
-@login_required
+# @login_required
 def add_group_workshop(request):
     if request.method == 'POST':
         form = GroupWorkshopForm(request.POST)

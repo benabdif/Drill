@@ -199,3 +199,8 @@ def test(request):
     }
     return HttpResponse(template.render(context, request))
 
+
+
+def mytest(request):
+
+    return render(request, 'blog/test.html')

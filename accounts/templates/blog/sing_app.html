@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .card {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border: none;
+        }
+        .card-header {
+            background-color: #f7f7f7;
+            border-bottom: 1px solid #e6e6e6;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .container {
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title text-center">Sign Up</h2>
+                    </div>
+                    <div class="card-body">
+                        <form method="post">
+                            {% csrf_token %}
+                            {{ form.non_field_errors }}
+
+                            <div class="form-group">
+                                <label for="{{ form.username.id_for_label }}">Username:</label>
+                                <input type="text" class="form-control" name="{{ form.username.html_name }}" id="{{ form.username.id_for_label }}" value="{{ form.username.value }}" required>
+                                <small class="form-text text-danger">{{ form.username.errors }}</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="{{ form.password1.id_for_label }}">Password:</label>
+                                <input type="password" class="form-control" name="{{ form.password1.html_name }}" id="{{ form.password1.id_for_label }}" required>
+                                <small class="form-text text-danger">{{ form.password1.errors }}</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="{{ form.password2.id_for_label }}">Confirm Password:</label>
+                                <input type="password" class="form-control" name="{{ form.password2.html_name }}" id="{{ form.password2.id_for_label }}" required>
+                                <small class="form-text text-danger">{{ form.password2.errors }}</small>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

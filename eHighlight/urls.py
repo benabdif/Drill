@@ -45,6 +45,7 @@ urlpatterns = [
     path('download_records_excel/', download_records_excel, name='download_records_excel'),
     path('total-cost/', views.total_cost_view, name='total_cost'),
     path('apps/', views.All_Apps, name='All_apps'),
+    path('mytest/', views.mytest, name='mytest'),
 
 
     
