@@ -127,6 +127,14 @@
                         const msgElement = document.createElement('div');
                         msgElement.className = `message ${msg.sender === '{{ request.user.username }}' ? 'sent' : 'received'}`;
                         msgElement.setAttribute("data-id", msg.id)
+                        msgElement.addEventListener('contextmenu', function (event) {
+                            event.preventDefault();
+                            const contextMenu = document.getElementById('contextMenu');
+                            contextMenu.style.top = `${event.pageY}px`;
+                            contextMenu.style.left = `${event.pageX}px`;
+                            contextMenu.style.display = 'block';
+                            editingMessageId = msgElement.getAttribute('data-id');
+                        });
                         msgElement.innerHTML = `
                         <p class="username">${msg.sender}</p>
                         <p class="message-content">${msg.content}</p>
@@ -188,7 +196,14 @@
                 const msgElement = document.createElement('div');
                 msgElement.className = `message ${msg.sender === '{{ request.user.username }}'  ? 'sent' : 'received'}`;
                 msgElement.setAttribute("data-id", msg.id)
-                
+                msgElement.addEventListener('contextmenu', function (event) {
+                    event.preventDefault();
+                    const contextMenu = document.getElementById('contextMenu');
+                    contextMenu.style.top = `${event.pageY}px`;
+                    contextMenu.style.left = `${event.pageX}px`;
+                    contextMenu.style.display = 'block';
+                    editingMessageId = msgElement.getAttribute('data-id');
+                });
                 msgElement.innerHTML = `
                 <p class="username">${msg.sender}</p>
                 <p class="message-content">${msg.content}</p>
