@@ -1,4 +1,4 @@
-{% extends 'blog/base_Apps_page.html' %}
+{% extends 'blog/mainpage.html' %}
 
 {% block title %}
   Chat Page
@@ -79,7 +79,7 @@
   </style>
 {% endblock %}
 
-{% block main %}
+{% block content %}
   <div class="chat-container">
     <div class="chat-sidebar">
       {% for group in groups %}

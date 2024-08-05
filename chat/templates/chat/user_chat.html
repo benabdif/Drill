@@ -6,6 +6,7 @@
         <div id="messagesContainer" class="chat-body">
             {% for msg in page_obj|slice:"::-1" %}
             <div data-id="{{msg.id}}" class="message {% if msg.sender == request.user %}sent{% else %}received{% endif %}" {% if forloop.last %}id="last"{% endif %}>
+                <p class="username">{{msg.sender.username}}</p>
                 <p class="message-content">{{ msg.content }}</p>
                 <div class="timestamp" data-timestamp="{{ msg.timestamp.isoformat }}">{{ msg.timestamp|date:"Y-m-d H:i" }}</div>
                 {% if msg.is_updated %}
@@ -127,6 +128,7 @@
                         msgElement.className = `message ${msg.sender === '{{ request.user.username }}' ? 'sent' : 'received'}`;
                         msgElement.setAttribute("data-id", msg.id)
                         msgElement.innerHTML = `
+                        <p class="username">${msg.sender}</p>
                         <p class="message-content">${msg.content}</p>
                         <div class="timestamp" data-timestamp="${msg.timestamp}">${formatDate(msg.timestamp)}</div>
                         ${msg.is_updated ? '<div class="edited">Edited</div>' : ''}
@@ -186,7 +188,9 @@
                 const msgElement = document.createElement('div');
                 msgElement.className = `message ${msg.sender === '{{ request.user.username }}'  ? 'sent' : 'received'}`;
                 msgElement.setAttribute("data-id", msg.id)
+                
                 msgElement.innerHTML = `
+                <p class="username">${msg.sender}</p>
                 <p class="message-content">${msg.content}</p>
                 <div class="timestamp" data-timestamp="${msg.timestamp}">${formatDate(msg.timestamp)}</div>
                 ${msg.is_updated ? '<div class="edited">Edited</div>' : ''}
@@ -248,6 +252,11 @@
     </script>
 
     <style>
+        .username {
+            color: gray;
+            font-size: 12px;
+            border-bottom: black 1px solid;
+        }
         .chat-header {
             background-color: #007bff;
             color: #fff;
