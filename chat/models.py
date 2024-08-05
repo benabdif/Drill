@@ -37,7 +37,7 @@ def validate_file_size(value):
 
 
 class Group(models.Model):
-    id = models.UUIDField(
+    id = models.CharField(
         primary_key=True,
         default=ulid.ULID,
         editable=False,
@@ -65,7 +65,7 @@ class Group(models.Model):
 
 
 class Message(models.Model):
-    id = models.UUIDField(
+    id = models.CharField(
         primary_key=True,
         default=ulid.ULID,
         editable=False,
@@ -108,7 +108,7 @@ class Message(models.Model):
 
 
 class MessageAttachment(models.Model):
-    id = models.UUIDField(
+    id = models.CharField(
         primary_key=True,
         default=ulid.ULID,
         editable=False,

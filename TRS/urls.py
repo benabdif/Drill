@@ -28,4 +28,5 @@ urlpatterns = [
     path('', include('eHighlight.urls')),
     path('', include('ToDoList.urls')),
     path('', include('accounts.urls')),
+    path('', include('chat.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

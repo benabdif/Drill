@@ -26,16 +26,15 @@ SECRET_KEY = "django-insecure-ch55)2h!m^^+9y++dxt#leq%5n2w9zls#5!fw9d242wx6s#*)1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
 
 INSTALLED_APPS = [
-  "daphne",
-  "channels",
-  "chat",
+    "daphne",
+    "channels",
+    "chat",
     "TRS_DRE2",
     "TRS_DRE",
     "django.contrib.admin",
@@ -46,15 +45,12 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django.contrib.humanize",
     "eHighlight",
-    'bootstrap5',
-    'crispy_forms',
-    'django_filters',
-    'ToDoList',
-    'crispy_bootstrap5',
-    'accounts',
-
-    
-
+    "bootstrap5",
+    "crispy_forms",
+    "django_filters",
+    "ToDoList",
+    "crispy_bootstrap5",
+    "accounts",
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
@@ -83,7 +79,6 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-                
             ],
         },
     },
@@ -92,10 +87,7 @@ TEMPLATES = [
 WSGI_APPLICATION = "TRS.wsgi.application"
 ASGI_APPLICATION = "TRS.asgi.application"
 
-LOGIN_URL = '/admin/login/'
-
-
-
+LOGIN_URL = "/login_app/"
 
 
 # Database
@@ -105,12 +97,12 @@ DATABASES = {
     "default": {
         # "ENGINE": "django.db.backends.sqlite3",
         # "NAME": BASE_DIR / "db.sqlite3",
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': "drill-test",# 'Drill-info',
-        'USER' : 'postgres',
-        'PASSWORD' : 'Ff123456',
-        'HOST' : 'localhost',
-        'PORT' : '5432'
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "drill-test",  # 'Drill-info',
+        "USER": "postgres",
+        "PASSWORD": "Ff123456",
+        "HOST": "localhost",
+        "PORT": "5433",
     }
 }
 
@@ -153,13 +145,12 @@ USE_TZ = True
 # STATIC_ROOT = BASE_DIR / "static"
 
 
-
 STATICFILES_DIRS = [
-    BASE_DIR / 'static',
+    BASE_DIR / "static",
 ]
 
 
-STATIC_URL = 'static/'
+STATIC_URL = "static/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -167,13 +158,8 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
+MEDIA_ROOT = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
-MEDIA_ROOT = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-
-CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "channels.layers.InMemoryChannelLayer"
-    }
-}
+CHANNEL_LAYERS = {"default": {"BACKEND": "channels.layers.InMemoryChannelLayer"}}

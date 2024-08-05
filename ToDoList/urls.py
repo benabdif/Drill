@@ -11,6 +11,4 @@ urlpatterns = [
     path('main/', views.main_page, name='main'),
     path('createTaske/', views.createTask, name='createTaske'),
     path('myaddTask/', views.myaddTask, name='myaddTask'),
-  
-    
 ]

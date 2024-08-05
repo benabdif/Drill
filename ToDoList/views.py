@@ -50,22 +50,28 @@ def main_page(request):
 
 
 def createTask(request):
-    supervisor = get_object_or_404(Supervisor, user=request.user)
+    supervisor = Supervisor.objects.filter(user=request.user)
+    manager = Manager.objects.filter(user=request.user)
+
+    if not (supervisor or manager):
+        return render(request, "blog/employee.html")
+    
     context = {
-        "supervisor": supervisor
-    }
-
-    return render(request, 'blog/createTask.html', context)
-
-
-
-def createTask1(request):
-    manager = get_object_or_404(Manager, user=request.user)
-    context = {
+        "supervisor": supervisor,
         "manager": manager
     }
 
     return render(request, 'blog/createTask.html', context)
+
+
+
+# def createTask1(request):
+    
+#     context = {
+#         "manager": manager
+#     }
+
+#     return render(request, 'blog/createTask.html', context)
 
 
 def createTask2(request):

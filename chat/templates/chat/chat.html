@@ -1,0 +1,93 @@
+{% extends 'blog/base_Apps_page.html' %}
+
+{% block title %}
+  Chat Page
+{% endblock %}
+
+{% block extra_head %}
+  <style>
+    .chat-container {
+      display: flex;
+      height: calc(100vh - 70px);
+      border: 1px solid #ddd;
+    }
+    .chat-sidebar {
+      width: 25%;
+      border-right: 1px solid #ddd;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding-top: 16px;
+      align-items: center;
+    }
+    .chat-main {
+      width: 75%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .chat-header {
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+      background-color: #f8f9fa;
+    }
+    .chat-body {
+      flex: 1;
+      padding: 10px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .chat-footer {
+      padding: 10px;
+      border-top: 1px solid #ddd;
+      background-color: #f8f9fa;
+    }
+    .chat-footer input {
+      width: calc(100% - 50px);
+      margin-right: 10px;
+    }
+    .user-list-item {
+      width: 96%;
+      padding: 15px;
+      background-color: #eee;
+      cursor: pointer;
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+    .user-list-item:hover {
+      background-color: #ddd;
+      text-decoration: none;
+    }
+    .message {
+      padding: 8px;
+      border-radius: 10px;
+      max-width: 60%;
+    }
+    .message.sent {
+      background-color: #d1ecf1;
+      align-self: flex-end;
+    }
+    .message.received {
+      background-color: #e2e3e5;
+      align-self: flex-start;
+    }
+  </style>
+{% endblock %}
+
+{% block main %}
+  <div class="chat-container">
+    <div class="chat-sidebar">
+      {% for group in groups %}
+        <a href="{% url 'chat_group' group.id %}" class="user-list-item">{{ group.name }}</a>
+      {% endfor %}
+    </div>
+    {% block main_chat %}
+
+    {% endblock %}
+  </div>
+{% endblock %}
