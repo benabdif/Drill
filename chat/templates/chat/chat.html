@@ -12,7 +12,7 @@
       border: 1px solid #ddd;
     }
     .chat-sidebar {
-      width: 25%;
+      width: 18%;
       border-right: 1px solid #ddd;
       overflow-y: auto;
       display: flex;
@@ -57,11 +57,36 @@
       border-radius: 15px;
       display: flex;
       align-items: center;
+      justify-content: space-between;
       text-decoration: none;
+      position: relative;
     }
     .user-list-item:hover {
       background-color: #ddd;
       text-decoration: none;
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f1f1f1;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      padding: 12px 16px;
+      z-index: 1;
+      left: 100%;
+      translate: -100%;
+      top: 60px;
+      min-width: 300px;
+    }
+    .dropdown-content a {
+      text-decoration: none;
+      color: black;
+      display: block;
+    }
+    .dropdown-content a:hover {
+      background-color: #ddd;
+    }
+    .show {
+      display: block;
     }
     .message {
       padding: 8px;
@@ -76,6 +101,10 @@
       background-color: #e2e3e5;
       align-self: flex-start;
     }
+    .arrow {
+      font-size: 30px;
+      cursor: pointer;
+    }
   </style>
 {% endblock %}
 
@@ -83,11 +112,40 @@
   <div class="chat-container">
     <div class="chat-sidebar">
       {% for group in groups %}
-        <a href="{% url 'chat_group' group.id %}" class="user-list-item">{{ group.name }}</a>
+        <div class="user-list-item">
+          <a href="{% url 'chat_group' group.id %}" class="group-link">{{ group.name }}</a>
+          <span class="arrow">&#9662;</span>
+          <div class="dropdown-content">
+            {% for member in group.members.all %}
+              <a href="#">{{ member.username }}</a>
+            {% endfor %}
+          </div>
+        </div>
       {% endfor %}
     </div>
     {% block main_chat %}
-
     {% endblock %}
   </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      document.querySelectorAll('.arrow').forEach(arrow => {
+        arrow.addEventListener('click', function (event) {
+          event.preventDefault();
+          const dropdown = this.nextElementSibling;
+          dropdown.classList.toggle('show');
+        });
+      });
+
+      window.onclick = function (event) {
+        if (!event.target.matches('.arrow')) {
+          document.querySelectorAll('.dropdown-content').forEach(dropdown => {
+            if (dropdown.classList.contains('show')) {
+              dropdown.classList.remove('show');
+            }
+          });
+        }
+      };
+    });
+  </script>
 {% endblock %}
