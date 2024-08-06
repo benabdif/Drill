@@ -8,7 +8,6 @@
   {% endblock chat_header %}
 {% block main_chat %}
     <div class="chat-main">
-        <div class="chat-header">{{group.name}}</div>
         <div id="messagesContainer" class="chat-body">
             {% for msg in page_obj|slice:"::-1" %}
             <div data-id="{{msg.id}}" class="message {% if msg.sender == request.user %}sent{% else %}received{% endif %}" {% if forloop.last %}id="last"{% endif %}>
@@ -162,16 +161,6 @@
                 loadMoreMessages();
             }
         });
-
-        function isElementInViewport(el) {
-            const rect = el.getBoundingClientRect();
-            return (
-                rect.top >= 0 &&
-                rect.left >= 0 &&
-                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-            );
-        }
 
         function checkAndSendReadReceipts() {
             const messages = document.querySelectorAll('.message.received');
