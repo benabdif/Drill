@@ -6,31 +6,48 @@
 
 {% block extra_head %}
   <style>
+    body {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
     .chat-container {
       display: flex;
       height: calc(100vh - 150px);
       border: 1px solid #ddd;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     }
     .chat-sidebar {
-      width: 18%;
+      width: 300px;
       border-right: 1px solid #ddd;
       overflow-y: auto;
+      padding-top: 16px;
       display: flex;
       flex-direction: column;
-      gap: 8px;
-      padding-top: 16px;
-      align-items: center;
+      background-color: #f5f5f5;
+      position: relative;
     }
     .chat-main {
-      width: 100%;
+      flex-grow: 1;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+    }
+    .chat-header, .chat-footer {
+      padding: 10px;
+      background-color: #f8f9fa;
     }
     .chat-header {
-      padding: 10px;
-      border-bottom: 1px solid #ddd;
-      background-color: #f8f9fa;
+      font-size: 1.2em;
+      font-weight: bold;
+      background-color: #007bff;
+      color: white;
+      text-align: center;
+    }
+    .chat-footer {
+      display: flex;
+      align-items: center;
+      border-top: 1px solid #b0a2a2;
     }
     .chat-body {
       flex: 1;
@@ -39,59 +56,73 @@
       display: flex;
       flex-direction: column;
       gap: 10px;
-    }
-    .chat-footer {
-      padding: 10px;
-      border-top: 1px solid #ddd;
-      background-color: #f8f9fa;
+      background-color: #ffffff;
     }
     .chat-footer input {
-      width: calc(100% - 50px);
+      flex-grow: 1;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
       margin-right: 10px;
     }
-    .user-list-item {
-      width: 96%;
-      padding: 15px;
-      background-color: #eee;
+    .chat-footer button {
+      padding: 10px 15px;
+      border: none;
+      background-color: #007bff;
+      color: white;
+      border-radius: 5px;
       cursor: pointer;
-      border-radius: 15px;
+    }
+    .chat-footer button:hover {
+      background-color: #0056b3;
+    }
+    .user-list-item {
+      padding: 10px;
+      background-color: #ffffff;
+      cursor: pointer;
+      border-radius: 8px;
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
       text-decoration: none;
+      transition: background-color 0.3s;
+      margin: 0 10px 10px 10px;
       position: relative;
     }
     .user-list-item:hover {
-      background-color: #ddd;
-      text-decoration: none;
+      background-color: #e9ecef;
     }
     .dropdown-content {
       display: none;
       position: absolute;
-      background-color: #f1f1f1;
-      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      background-color: #ffffff;
+      box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
       padding: 12px 16px;
       z-index: 1;
-      left: 100%;
-      translate: -100%;
-      top: 60px;
-      min-width: 300px;
+      left: 0;
+      top: 100%;
+      min-width: 200px;
+      border-radius: 8px;
     }
     .dropdown-content a {
       text-decoration: none;
-      color: black;
+      color: #333;
       display: block;
+      padding: 8px;
+      border-radius: 4px;
+      transition: background-color 0.3s;
     }
     .dropdown-content a:hover {
-      background-color: #ddd;
+      background-color: #f1f1f1;
     }
     .show {
       display: block;
     }
     .message {
-      padding: 8px;
+      padding: 10px;
       border-radius: 10px;
       max-width: 60%;
+      word-wrap: break-word;
     }
     .message.sent {
       background-color: #d1ecf1;
@@ -102,8 +133,12 @@
       align-self: flex-start;
     }
     .arrow {
-      font-size: 30px;
+      font-size: 24px;
       cursor: pointer;
+      transition: transform 0.3s;
+    }
+    .arrow.rotate {
+      transform: rotate(180deg);
     }
   </style>
 {% endblock %}
@@ -123,8 +158,19 @@
         </div>
       {% endfor %}
     </div>
-    {% block main_chat %}
-    {% endblock %}
+    <div class="chat-main">
+      <div class="chat-header">
+        Chat Room
+      </div>
+      <div class="chat-body">
+        {% block main_chat %}
+        {% endblock %}
+      </div>
+      {% comment %} <div class="chat-footer">
+        <input type="text" placeholder="Type a message">
+        <button>Send</button>
+      </div> {% endcomment %}
+    </div>
   </div>
 
   <script>
@@ -134,6 +180,7 @@
           event.preventDefault();
           const dropdown = this.nextElementSibling;
           dropdown.classList.toggle('show');
+          this.classList.toggle('rotate');
         });
       });
 
@@ -143,6 +190,9 @@
             if (dropdown.classList.contains('show')) {
               dropdown.classList.remove('show');
             }
+          });
+          document.querySelectorAll('.arrow').forEach(arrow => {
+            arrow.classList.remove('rotate');
           });
         }
       };
