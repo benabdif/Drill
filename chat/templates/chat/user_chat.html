@@ -1,5 +1,11 @@
 {% extends 'chat/chat.html' %}
 
+{% block chat_header %}
+
+<div class="chat-header">
+    {{ group.name }}
+  </div>
+  {% endblock chat_header %}
 {% block main_chat %}
     <div class="chat-main">
         {% comment %} <div class="chat-header">{{group.name}}</div> {% endcomment %}
