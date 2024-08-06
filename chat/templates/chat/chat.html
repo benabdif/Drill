@@ -159,17 +159,12 @@
       {% endfor %}
     </div>
     <div class="chat-main">
-      <div class="chat-header">
-        Chat Room
-      </div>
+      {% block chat_header %}
+      {% endblock chat_header %}
       <div class="chat-body">
         {% block main_chat %}
         {% endblock %}
       </div>
-      {% comment %} <div class="chat-footer">
-        <input type="text" placeholder="Type a message">
-        <button>Send</button>
-      </div> {% endcomment %}
     </div>
   </div>
 
