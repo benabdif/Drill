@@ -2,7 +2,7 @@
 
 {% block main_chat %}
     <div class="chat-main">
-        <div class="chat-header">{{group.name}}</div>
+        {% comment %} <div class="chat-header">{{group.name}}</div> {% endcomment %}
         <div id="messagesContainer" class="chat-body">
             {% for msg in page_obj|slice:"::-1" %}
             <div data-id="{{msg.id}}" class="message {% if msg.sender == request.user %}sent{% else %}received{% endif %}" {% if forloop.last %}id="last"{% endif %}>
