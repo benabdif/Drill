@@ -14,7 +14,12 @@ def dashboard(request):
         tasks = Task.objects.filter(assigned_to=request.user.employee)
     return render(request, 'blog/dashboard.html', {'tasks': tasks})
 
-# @login_required
+
+
+
+from django.shortcuts import render, redirect
+from .forms import TaskForm
+
 def add_task(request):
     if request.method == 'POST':
         form = TaskForm(request.POST)
@@ -22,11 +27,56 @@ def add_task(request):
             task = form.save(commit=False)
             task.assigned_by = request.user
             task.save()
-            form.save_m2m()
+            form.save_m2m()  # Only needed if there are many-to-many fields
             return redirect('dashboard')
     else:
         form = TaskForm()
     return render(request, 'blog/add_task.html', {'form': form})
+
+
+
+# @login_required
+# def add_task(request):
+#     if request.method == 'POST':
+#         form = TaskForm(request.POST)
+#         if form.is_valid():
+#             task = form.save(commit=False)
+#             task.assigned_by = request.user
+#             task.save()
+#             form.save_m2m()
+#             return redirect('dashboard')
+#     else:
+#         form = TaskForm()
+#     return render(request, 'blog/add_task.html', {'form': form})
+
+
+# from django.shortcuts import render, redirect
+# from .forms import TaskForm
+
+# def create_task_To(request):
+#     if request.method == 'POST':
+#         form = TaskForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('success')  # Redirect to a success page or another view
+#     else:
+#         form = TaskForm()
+#     return render(request, 'create_task.html', {'form': form})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # @login_required
 def add_group_workshop(request):
@@ -47,12 +97,10 @@ def main_page(request):
     return render(request, 'blog/mainpage.html', context)
 
 
-
-
 def createTask(request):
-    supervisor = Supervisor.objects.filter(user=request.user)
-    manager = Manager.objects.filter(user=request.user)
-
+    supervisor = Supervisor.objects.filter(user=request.user).first()
+    manager = Manager.objects.filter(user=request.user).first()
+    
     if not (supervisor or manager):
         return render(request, "blog/employee.html")
     
@@ -65,14 +113,6 @@ def createTask(request):
 
 
 
-# def createTask1(request):
-    
-#     context = {
-#         "manager": manager
-#     }
-
-#     return render(request, 'blog/createTask.html', context)
-
 
 def createTask2(request):
     employee_2 = get_object_or_404(Employee_2, user=request.user)
@@ -84,8 +124,8 @@ def createTask2(request):
 
 
 
-def myaddTask(request):
+# def myaddTask(request):
     
-    print(request.POST.get('title'))
+#     print(request.POST.get('title'))
 
 
