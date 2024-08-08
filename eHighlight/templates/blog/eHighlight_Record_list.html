@@ -1,4 +1,5 @@
-{% extends 'blog/base_generic.html' %}
+{% extends 'blog/mainpage.html' %}
+
 {% load static %}
 
 {% block content %}
@@ -7,6 +8,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 <style>
   @import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@100;200;300;400;500;600;700;800;900&display=swap");
+  
   :root {
     --c-text-primary: #282a32;
     --c-text-secondary: #686b87;
@@ -91,11 +93,8 @@
   th:nth-child(9), td:nth-child(9) { width: 10%; }
   th:nth-child(10), td:nth-child(10) { width: 12%; }
 
-
-
-   
   .card {
-    position: relative; /* Add this to position the pseudo-element */
+    position: relative;
     background-color: #f2f2f2;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -103,7 +102,7 @@
     padding: 10px;
     transition: transform 0.3s, box-shadow 0.3s;
     flex: 1;
-    overflow: hidden; /* To hide the overflow of the pseudo-element */
+    overflow: hidden;
   }
 
   .card::before {
@@ -112,8 +111,8 @@
     top: 0;
     left: 0;
     height: 100%;
-    width: 8px; /* Width of the gradient border */
-    background: linear-gradient(to bottom, #047adb, #7bbb0e); /* Your gradient colors */
+    width: 8px;
+    background: linear-gradient(to bottom, #047adb, #7bbb0e);
     border-top-left-radius: 8px;
     border-bottom-left-radius: 8px;
   }
@@ -122,24 +121,6 @@
     transform: translateY(-10px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
-
-
-/*   
-  .card {
-    background-color: #f2f2f2;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin: 10px;
-    padding: 10px;
-    transition: transform 0.3s, box-shadow 0.3s;
-    flex: 1;
-  }
-
-  .card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  } */
 
   .card-title {
     font-size: 1.5em;
@@ -206,577 +187,530 @@
     transform: translateY(-2px);
   }
 
-
-  {% comment %}  {% endcomment %}
-
-  @import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@100;200;300;400;500;600;700;800;900&display=swap");
-  :root {
-      --c-text-primary: #282a32;
-      --c-text-secondary: #686b87;
-      --c-text-action: #404089;
-      --c-accent-primary: #434ce8;
-      --c-border-primary: #eff1f6;
-      --c-background-primary: #ffffff;
-      --c-background-secondary: #fdfcff;
-      --c-background-tertiary: #ecf3fe;
-      --c-background-quaternary: #e9ecf4;
-  }
-
   body {
-      line-height: 1.5;
-      min-height: 100vh;
-      font-family: "Be Vietnam Pro", sans-serif;
-      background-color: var(--c-background-secondary);
-      color: var(--c-text-primary);
+    line-height: 1.5;
+    min-height: 100vh;
+    font-family: "Be Vietnam Pro", sans-serif;
+    background-color: var(--c-background-secondary);
+    color: var(--c-text-primary);
   }
 
   img {
-      display: block;
-      max-width: 100%;
+    display: block;
+    max-width: 100%;
   }
 
   :focus {
-      outline: 0;
+    outline: 0;
   }
 
   .responsive-wrapper {
-      width: 90%;
-      max-width: 1280px;
-      margin-left: auto;
-      margin-right: auto;
+    width: 90%;
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .header {
-      display: flex;
-      align-items: center;
-      height: 80px;
-      border-bottom: 1px solid var(--c-border-primary);
-      background-color: var(--c-background-primary);
+    display: flex;
+    align-items: center;
+    height: 80px;
+    border-bottom: 1px solid var(--c-border-primary);
+    background-color: var(--c-background-primary);
   }
 
   .header-content {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 
   .header-logo a {
-      display: flex;
-      align-items: center;
+    display: flex;
+    align-items: center;
   }
 
   .header-logo a div {
-      position: relative;
+    position: relative;
   }
 
   .header-logo a div:after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      right: 0;
-      height: 50%;
-      border-bottom-left-radius: 8px;
-      border-bottom-right-radius: 8px;
-      background-color: rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(4px);
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 50%;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(4px);
   }
 
   .header-navigation {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-grow: 1;
   }
 
   .header-navigation-links a {
-      text-decoration: none;
-      color: var(--c-text-action);
-      font-weight: 500;
-      transition: 0.15s ease;
+    text-decoration: none;
+    color: var(--c-text-action);
+    font-weight: 500;
+    transition: 0.15s ease;
   }
 
   .header-navigation-links a + * {
-      margin-left: 1.5rem;
+    margin-left: 1.5rem;
   }
 
   .header-navigation-links a:hover,
   .header-navigation-links a:focus {
-      color: var(--c-accent-primary);
+    color: var(--c-accent-primary);
   }
 
   .header-navigation-actions .button {
-      margin-left: 1rem;
+    margin-left: 1rem;
   }
 
   .button,
   .icon-button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 8px;
-      transition: 0.15s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    transition: 0.15s ease;
   }
 
   .button {
-      padding: 0 1em;
-      height: 40px;
-      border: 2px solid var(--c-border-primary);
-      color: var(--c-text-action);
-      background-color: var(--c-background-primary);
-      font-size: 0.875rem;
-      text-decoration: none;
+    padding: 0 1em;
+    height: 40px;
+    border: 2px solid var(--c-border-primary);
+    color: var(--c-text-action);
+    background-color: var(--c-background-primary);
+    font-size: 0.875rem;
+    text-decoration: none;
   }
 
   .button i {
-      margin-right: 0.5rem;
-      font-size: 1.25em;
+    margin-right: 0.5rem;
+    font-size: 1.25em;
   }
 
   .button span {
-      font-weight: 500;
+    font-weight: 500;
   }
 
   .button:hover,
   .button:focus {
-      border-color: var(--c-accent-primary);
-      color: var(--c-accent-primary);
+    border-color: var(--c-accent-primary);
+    color: var (--c-accent-primary);
   }
 
   .icon-button {
-      width: 40px;
-      height: 40px;
-      color: var(--c-text-action);
+    width: 40px;
+    height: 40px;
+    color: var(--c-text-action);
   }
 
   .icon-button i {
-      font-size: 1.25em;
+    font-size: 1.25em;
   }
 
   .icon-button:focus,
   .icon-button:hover {
-      background-color: var(--c-background-tertiary);
-      color: var(--c-accent-primary);
+    background-color: var(--c-background-tertiary);
+    color: var(--c-accent-primary);
   }
 
   .avatar {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      overflow: hidden;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    overflow: hidden;
   }
 
   .main-header {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
   }
 
   .main-header h1 {
-      font-size: 1.75rem;
-      font-weight: 600;
-      line-height: 1.25;
+    font-size: 1.75rem;
+    font-weight: 600;
+    line-height: 1.25;
   }
 
   .search {
-      position: relative;
-      max-width: 340px;
+    position: relative;
+    max-width: 340px;
   }
 
   .search input {
-      padding: 0 1em 0 36px;
-      height: 40px;
-      border-radius: 8px;
-      border: 2px solid var(--c-border-primary);
-      color: var(--c-text-action);
-      width: 100%;
-      line-height: 1;
+    padding: 0 1em 0 36px;
+    height: 40px;
+    border-radius: 8px;
+    border: 2px solid var(--c-border-primary);
+    color: var(--c-text-action);
+    width: 100%;
+    line-height: 1;
   }
 
   .search input::placeholder {
-      color: var(--c-text-action);
+    color: var(--c-text-action);
   }
 
   .search input:focus,
   .search input:hover {
-      border-color: var(--c-accent-primary);
+    border-color: var(--c-accent-primary);
   }
 
   .search button {
-      border: 0;
-      background-color: transparent;
-      position: absolute;
-      left: 12px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 1.25em;
-      color: var(--c-text-action);
-      padding: 0;
-      height: 40px;
+    border: 0;
+    background-color: transparent;
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.25em;
+    color: var(--c-text-action);
+    padding: 0;
+    height: 40px;
   }
 
   .horizontal-tabs {
-      margin-top: 1.5rem;
-      display: flex;
-      align-items: center;
-      overflow-x: auto;
+    margin-top: 1.5rem;
+    display: flex;
+    align-items: center;
+    overflow-x: auto;
   }
 
   .horizontal-tabs a {
-      flex-shrink: 0;
-      align-items: center;
-      height: 48px;
-      padding: 0 0.25rem;
-      font-weight: 500;
-      color: inherit;
-      border-bottom: 3px solid transparent;
-      text-decoration: none;
-      transition: 0.15s ease;
+    flex-shrink: 0;
+    align-items: center;
+    height: 48px;
+    padding: 0 0.25rem;
+    font-weight: 500;
+    color: inherit;
+    border-bottom: 3px solid transparent;
+    text-decoration: none;
+    transition: 0.15s ease;
   }
 
   .horizontal-tabs a:hover,
   .horizontal-tabs a:focus,
   .horizontal-tabs a.active {
-      color: var(--c-accent-primary);
-      border-bottom-color: var(--c-accent-primary);
+    color: var(--c-accent-primary);
+    border-bottom-color: var(--c-accent-primary);
   }
 
   .horizontal-tabs a + * {
-      margin-left: 1rem;
+    margin-left: 1rem;
   }
 
   .content-header {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      padding-top: 3rem;
-      margin-top: -1px;
-      border-top: 1px solid var(--c-border-primary);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 3rem;
+    margin-top: -1px;
+    border-top: 1px solid var(--c-border-primary);
   }
 
   .content-header-intro h2 {
-      font-size: 1.25rem;
-      font-weight: 600;
+    font-size: 1.25rem;
+    font-weight: 600;
   }
 
   .content-header-intro p {
-      color: var(--c-text-secondary);
-      margin-top: 0.25rem;
-      font-size: 0.875rem;
-      margin-bottom: 1rem;
+    color: var(--c-text-secondary);
+    margin-top: 0.25rem;
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
   }
 
   .content {
-      border-top: 1px solid var(--c-border-primary);
-      margin-top: 2rem;
-      display: flex;
-      align-items: flex-start;
+    border-top: 1px solid var(--c-border-primary);
+    margin-top: 2rem;
+    display: flex;
+    align-items: flex-start;
   }
 
   .content-panel {
-      max-width: 280px;
-      width: 25%;
-      padding: 2rem 1rem 2rem 0;
-      margin-right: 3rem;
+    max-width: 280px;
+    width: 25%;
+    padding: 2rem 1rem 2rem 0;
+    margin-right: 3rem;
   }
 
   .vertical-tabs {
-      flex-direction: column;
+    flex-direction: column;
   }
 
   .vertical-tabs a {
-      padding: 0.75em 1em;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 500;
-      color: var(--c-text-action);
-      transition: 0.15s ease;
+    padding: 0.75em 1em;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    color: var(--c-text-action);
+    transition: 0.15s ease;
   }
 
   .vertical-tabs a:hover,
   .vertical-tabs a:focus,
   .vertical-tabs a.active {
-      background-color: var(--c-background-tertiary);
-      color: var(--c-accent-primary);
+    background-color: var(--c-background-tertiary);
+    color: var(--c-accent-primary);
   }
 
   .vertical-tabs a + * {
-      margin-top: 0.25rem;
+    margin-top: 0.25rem;
   }
 
   .content-main {
-      padding-top: 2rem;
-      padding-bottom: 6rem;
-      flex-grow: 1;
+    padding-top: 2rem;
+    padding-bottom: 6rem;
+    flex-grow: 1;
   }
 
   .card-grid {
-      display: grid;
-      grid-template-columns: repeat(1, 1fr);
-      column-gap: 1.5rem;
-      row-gap: 1.5rem;
-  }
-
-  .card {
-      background-color: var(--c-background-primary);
-      box-shadow: 0 3px 3px rgba(0, 0, 0, 0.05), 0 5px 15px rgba(0, 0, 0, 0.05);
-      border-radius: 8px;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    column-gap: 1.5rem;
+    row-gap: 1.5rem;
   }
 
   .card-header {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      padding: 1.5rem 1.25rem 1rem 1.25rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 1.5rem 1.25rem 1rem 1.25rem;
   }
 
   .card-header div {
-      display: flex;
-      align-items: center;
+    display: flex;
+    align-items: center;
   }
 
   .card-header div span {
-      width: 40px;
-      height: 40px;
-      border-radius: 8px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .card-header div span img {
-      max-height: 100%;
+    max-height: 100%;
   }
 
   .card-header div h3 {
-      margin-left: 0.75rem;
-      font-weight: 500;
+    margin-left: 0.75rem;
+    font-weight: 500;
   }
 
   .toggle span {
-      display: block;
-      width: 40px;
-      height: 24px;
-      border-radius: 99em;
-      background-color: var(--c-background-quaternary);
-      box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.05);
-      position: relative;
-      transition: 0.15s ease;
+    display: block;
+    width: 40px;
+    height: 24px;
+    border-radius: 99em;
+    background-color: var(--c-background-quaternary);
+    box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.05);
+    position: relative;
+    transition: 0.15s ease;
   }
 
   .toggle span:before {
-      content: "";
-      position: absolute;
-      left: 3px;
-      top: 3px;
-      height: 18px;
-      width: 18px;
-      background-color: var(--c-background-primary);
-      border-radius: 50%;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
-      transition: 0.15s ease;
+    content: "";
+    position: absolute;
+    left: 3px;
+    top: 3px;
+    height: 18px;
+    width: 18px;
+    background-color: var(--c-background-primary);
+    border-radius: 50%;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+    transition: 0.15s ease;
   }
 
   .toggle input {
-      clip: rect(0 0 0 0);
-      clip-path: inset(50%);
-      height: 1px;
-      overflow: hidden;
-      position: absolute;
-      white-space: nowrap;
-      width: 1px;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
   }
 
   .toggle input:checked + span {
-      background-color: var(--c-accent-primary);
+    background-color: var(--c-accent-primary);
   }
 
   .toggle input:checked + span:before {
-      transform: translateX(calc(100% - 2px));
+    transform: translateX(calc(100% - 2px));
   }
 
   .toggle input:focus + span {
-      box-shadow: 0 0 0 4px var(--c-background-tertiary);
+    box-shadow: 0 0 0 4px var(--c-background-tertiary);
   }
 
   .card-body {
-      padding: 1rem 1.25rem;
-      font-size: 0.875rem;
+    padding: 1rem 1.25rem;
+    font-size: 0.875rem;
   }
 
   .card-footer {
-      margin-top: auto;
-      padding: 1rem 1.25rem;
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      border-top: 1px solid var(--c-border-primary);
+    margin-top: auto;
+    padding: 1rem 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    border-top: 1px solid var(--c-border-primary);
   }
 
   .card-footer a {
-      color: var(--c-text-action);
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 0.875rem;
+    color: var(--c-text-action);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.875rem;
   }
 
   html::-webkit-scrollbar {
-      width: 12px;
+    width: 12px;
   }
 
   html::-webkit-scrollbar-thumb {
-      background-color: var(--c-text-primary);
-      border: 4px solid var(--c-background-primary);
-      border-radius: 99em;
+    background-color: var(--c-text-primary);
+    border: 4px solid var(--c-background-primary);
+    border-radius: 99em;
   }
 
   .popup-form {
-      display: none;
-      position: fixed;
-      z-index: 1000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.7);
-      overflow: auto;
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    overflow: auto;
   }
 
   .form-content {
-      background-color: #ddddec;
-      margin: 10% auto;
-      padding: 30px;
-      border-radius: 5px;
-      width: 60%;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-      position: relative;
+    background-color: #ddddec;
+    margin: 10% auto;
+    padding: 30px;
+    border-radius: 5px;
+    width: 60%;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    position: relative;
   }
 
   .close {
-      position: absolute;
-      top: 10px;
-      right: 15px;
-      color: #aaa;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: #aaa;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
   }
 
   .close:hover,
   .close:focus {
-      color: #333;
-      text-decoration: none;
+    color: #333;
+    text-decoration: none;
   }
 
   .form-content label {
-      display: block;
-      margin-top: 15px;
-      color: #333;
+    display: block;
+    margin-top: 15px;
+    color: #333;
   }
 
   .form-content input[type="text"],
   .form-content input[type="date"],
   .form-content textarea {
-      width: calc(100% - 22px);
-      padding: 7px;
-      margin-top: 5px;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      box-sizing: border-box;
-      font-size: 16px;
-      font-family: Arial, sans-serif;
+    width: calc(100% - 22px);
+    padding: 7px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
   }
 
   .form-content textarea {
-      resize: vertical;
+    resize: vertical;
   }
 
   .form-content input[type="submit"] {
-      background-color: #434ce8;
-      color: #fff;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 16px;
-      margin-top: 20px;
-      transition: background-color 0.3s;
+    background-color: #434ce8;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+    transition: background-color 0.3s;
   }
 
   .form-content input[type="submit"]:hover {
-      background-color: #333cad;
+    background-color: #333cad;
   }
 
   .form-content input[type="submit"]:active {
-      background-color: #282a7a;
+    background-color: #282a7a;
   }
 
   select {
-      appearance: none;
-      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10"><path fill="%23333" d="M0 0l5 5 5-5z"/></svg>') no-repeat right 10px center;
-      background-size: 10px;
+    appearance: none;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10"><path fill="%23333" d="M0 0l5 5 5-5z"/></svg>') no-repeat right 10px center;
+    background-size: 10px;
   }
 
   #task-priority,
   #task-status,
   #assigned-team {
-      width: 50%;
-      padding: 1%;
-      border-radius: 5px;
-      border: 10px;
-      background-color: #fff;
+    width: 50%;
+    padding: 1%;
+    border-radius: 5px;
+    border: 10px;
+    background-color: #fff;
   }
 
   .tab-content {
-      padding-left: 10%;
-      padding-right: 10%;
+    padding-left: 10%;
+    padding-right: 10%;
   }
 
   .form-control {
-      width: 100%;
-      background-color: wheat;
+    width: 100%;
+    background-color: wheat;
   }
 </style>
-<div class="hhh">
-  <div class="header-content responsive-wrapper">
-    <div class="header-logo">
-        <a href="#">
-            <div></div>
-        </a>
-    </div>
-    <div class="header-navigation">
-      <nav class="header-navigation-links">
-          <a href="{% url 'All_apps' %}">All Apps</a>
-          <a href="#">Dashboard</a>
-          <a href="{% url 'eHighlight_Record_list' %}">E-highlight</a>
-          <a href="{% url 'dashboard' %}">Special Tasks</a>
-          <a href="#">Reporting</a>
-          <a href="#">Users</a>
-      </nav>
-      
-      <div class="header-navigation-actions">
-          <a href="{% url 'eHighlight_Record_new' %}" class="button" style="background-color: #eaeaeb;">
-              <i></i>
-              <span>New E-gihtlite</span>
-          </a>
-      </div>
 
-      {% comment %} </div>
-            <a href="{% url 'All_apps' %}" class="button">
-                <i class="ph-list-bold"></i>
-                <span>All Apps</span>
-            </a>
-      </div> {% endcomment %}
-    </div>
+
+{% comment %} 
+<div class="header-navigation-actions">
+  <div class="sp">
+    <a href="{% url 'eHighlight_Record_new' %}" class="button" id="add-task-button">
+      <i class="ph-plus-bold"></i>
+      <span>New E-Highlight</span>
+    </a>
   </div>
-<hr>
+</div> {% endcomment %}
 
- 
+
 
 <h1 style="
   font-family: 'Poppins', sans-serif;
@@ -793,232 +727,236 @@
 ">
   eHighlight Records
 </h1>
-
-
-</div>
-<div class="but" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-  <div class="filter-By_date">
-    <input type="text" id="filterInput" placeholder="Type to filter records..." class="filter-input">        
-  </div>
-  <div class="filter-By_date">
-    <input type="date" id="startDate" placeholder="Start Date">
-    <input type="date" id="endDate" placeholder="End Date">
-    <button id="filterButton">Filter</button>
-  </div>
-  <div class="filter-By_date">
-    <a href="{% url 'download_records_excel' %}" class="btn btn-primary download-btn">Download as Excel</a>
-  </div>
-</div>
-
-<div class="card-all">
-  <div class="cards-container">
-    <div class="card">
-      <div class="hed" style="display: flex; justify-content: space-between;">
-        <div class="card-title" style="font-size: 16px;">SACU 1</div>
-      </div>
-      <div class="card-content" style="text-align: center; font-size: 25px; color: #00a3e0;">
-        {{ sacu_1_count }}
-      </div>
+<div class="container">
+  <div class="but" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+    <div class="filter-By_date">
+      <input type="text" id="filterInput" placeholder="Type to filter records..." class="filter-input">        
     </div>
-    <div class="card">
-      <div class="hed" style="display: flex; justify-content: space-between;">
-        <div class="card-title" style="font-size: 16px;">SACU 2</div>
-        <img src="{% static 'q.png' %}" alt="Logo" style="height: 40px;">
-      </div>
-      <div class="card-content" style="text-align: center; font-size: 25px; color: #00a3e0;">
-        {{ sacu_2_count }}
-      </div>
+    <div class="filter-By_date">
+      <input type="date" id="startDate" placeholder="Start Date">
+      <input type="date" id="endDate" placeholder="End Date">
+      <button id="filterButton">Filter</button>
     </div>
-    <div class="card">
-      <div class="hed" style="display: flex; justify-content: space-between;">
-        <div class="card-title" style="font-size: 14px;">SACU 3</div>
-        <img src="{% static 'q.png' %}" alt="Logo" style="height: 40px;">
-      </div>
-      <div class="card-content" style="text-align: center; font-size: 25px; color: #00a3e0;">
-        {{ sacu_3_count }}
-      </div>
-    </div>
-    <div class="card">
-      <div class="hed" style="display: flex; justify-content: space-between;">
-        <div class="card-title" style="font-size: 14px;">HSE Group</div>
-        <img src="{% static 'q.png' %}" alt="Logo" style="height: 40px;">
-      </div>
-      <div class="card-content" style="text-align: center; font-size: 25px; color: #00a3e0;">
-        {{ HSE_Group }}
-      </div>
+    <div class="filter-By_date">
+      <a href="{% url 'download_records_excel' %}" class="btn btn-primary download-btn">Download as Excel</a>
     </div>
   </div>
-
-  <div class="cards-container py-4">
-    <div class="card">
-      <div class="hed" style="display: flex; justify-content: space-between;">
-        <div class="card-title" style="font-size: 16px;">Surveyor Group</div>
+  
+  <div class="card-all">
+    <div class="cards-container">
+      <div class="card">
+        <div class="hed" style="display: flex; justify-content: space-between;">
+          <div class="card-title" style="font-size: 16px;">SACU 1</div>
+        </div>
+        <div class="card-content" style="text-align: center; font-size: 25px; color: #00a3e0;">
+          {{ sacu_1_count }}
+        </div>
       </div>
-      <div class="card-content" style="text-align: center; font-size: 25px; color: #00a3e0;">
-        {{ Surveyor_Group }}
+      <div class="card">
+        <div class="hed" style="display: flex; justify-content: space-between;">
+          <div class="card-title" style="font-size: 16px;">SACU 2</div>
+          <img src="{% static 'q.png' %}" alt="Logo" style="height: 40px;">
+        </div>
+        <div class="card-content" style="text-align: center; font-size: 25px; color: #00a3e0;">
+          {{ sacu_2_count }}
+        </div>
+      </div>
+      <div class="card">
+        <div class="hed" style="display: flex; justify-content: space-between;">
+          <div class="card-title" style="font-size: 14px;">SACU 3</div>
+          <img src="{% static 'q.png' %}" alt="Logo" style="height: 40px;">
+        </div>
+        <div class="card-content" style="text-align: center; font-size: 25px; color: #00a3e0;">
+          {{ sacu_3_count }}
+        </div>
+      </div>
+      <div class="card">
+        <div class="hed" style="display: flex; justify-content: space-between;">
+          <div class="card-title" style="font-size: 14px;">HSE Group</div>
+          <img src="{% static 'q.png' %}" alt="Logo" style="height: 40px;">
+        </div>
+        <div class="card-content" style="text-align: center; font-size: 25px; color: #00a3e0;">
+          {{ HSE_Group }}
+        </div>
       </div>
     </div>
-    <div class="card">
-      <div class="hed" style="display: flex; justify-content: space-between;">
-        <div class="card-title" style="font-size: 14px;">Waste Management Group</div>
-        <img src="{% static 'q.png' %}" alt="Logo" style="height: 40px;">
+  
+    <div class="cards-container py-4">
+      <div class="card">
+        <div class="hed" style="display: flex; justify-content: space-between;">
+          <div class="card-title" style="font-size: 16px;">Surveyor Group</div>
+        </div>
+        <div class="card-content" style="text-align: center; font-size: 25px; color: #00a3e0;">
+          {{ Surveyor_Group }}
+        </div>
       </div>
-      <div class="card-content" style="text-align: center; font-size: 25px; color: #00a3e0;">
-        {{ Waste_Management_Group }}
+      <div class="card">
+        <div class="hed" style="display: flex; justify-content: space-between;">
+          <div class="card-title" style="font-size: 14px;">Waste Management Group</div>
+          <img src="{% static 'q.png' %}" alt="Logo" style="height: 40px;">
+        </div>
+        <div class="card-content" style="text-align: center; font-size: 25px; color: #00a3e0;">
+          {{ Waste_Management_Group }}
+        </div>
       </div>
-    </div>
-    <div class="card">
-      <div class="hed" style="display: flex; justify-content: space-between;">
-        <div class="card-title" style="font-size: 14px;">Engineering Support</div>
-        <img src="{% static 'q.png' %}" alt="Logo" style="height: 40px;">
+      <div class="card">
+        <div class="hed" style="display: flex; justify-content: space-between;">
+          <div class="card-title" style="font-size: 14px;">Engineering Support</div>
+          <img src="{% static 'q.png' %}" alt="Logo" style="height: 40px;">
+        </div>
+        <div class="card-content" style="text-align: center; font-size: 25px; color: #00a3e0;">
+          {{ Engineering_Support }}
+        </div>
       </div>
-      <div class="card-content" style="text-align: center; font-size: 25px; color: #00a3e0;">
-        {{ Engineering_Support }}
-      </div>
-    </div>
-    <div class="card">
-      <div class="hed" style="display: flex; justify-content: space-between;">
-        <div class="card-title" style="font-size: 14px;">Dispatcher Group</div>
-        <img src="{% static 'q.png' %}" alt="Logo" style="height: 40px;">
-      </div>
-      <div class="card-content" style="text-align: center; font-size: 25px; color: #00a3e0;">
-        {{ Dispatcher_Group }}
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="container" style="font-size: 12px;">
-  <div class="row">
-    <div class="col-12">
-      <div class="row">
-        <div class="table-container">
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col" style="width: 4%;">#</th>
-                <th scope="col">Date</th>
-                <th scope="col">Week</th>
-                <th scope="col">Cost</th>
-                <th scope="col">Unit</th>
-                <th scope="col">Highlight Type</th>
-                <th scope="col">Wellsite Activity</th>
-                <th scope="col">Document</th>
-                <th scope="col">Details</th>
-              </tr>
-            </thead>
-            <tbody id="recordsTable">
-              {% for record in records %}
-              <tr style="font-size: 14px;">
-                <th scope="row">{{ forloop.counter }}</th>
-                <td>{{ record.date }}</td>
-                <td>{{ record.week }}</td>
-                <td>{{ record.Cost }}</td>
-                <td>{{ record.unit }}</td>
-                <td>{{ record.highlight_type }}</td>
-                <td>{{ record.wellsite_activity }}</td>
-                <td>
-                  {% if record.document %}
-                  <a href="{{ record.document.url }}">Download</a>
-                  {% else %}
-                  No Document
-                  {% endif %}
-                </td>
-                <td><a href="{% url 'eHighlight_Record_detail' record.pk %}" class="more-link">more</a></td>
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
+      <div class="card">
+        <div class="hed" style="display: flex; justify-content: space-between;">
+          <div class="card-title" style="font-size: 14px;">Dispatcher Group</div>
+          <img src="{% static 'q.png' %}" alt="Logo" style="height: 40px;">
+        </div>
+        <div class="card-content" style="text-align: center; font-size: 25px; color: #00a3e0;">
+          {{ Dispatcher_Group }}
         </div>
       </div>
     </div>
   </div>
-</div>
-
-<div class="py-4">
-  <h1 class="highlight-count">Count of Highlights: {{ all_records_count }}</h1>
-</div>
-
-<h2>Monthly Record Counts</h2>
-<ul>
-  {% comment %} {% for month, count in monthly_counts.items %}
-      <li>{{ month }}: {{ count }}</li>
-  {% endfor %} {% endcomment %}
-</ul>
-
-<div class="chart-container" style="width: 80%; margin: auto; padding: 20px;">
-  <canvas id="highlightsChart"></canvas>
-</div>
-
-<script>
-  // JavaScript function to filter table rows
-  document.getElementById('filterInput').addEventListener('keyup', function() {
-    var filter = this.value.toLowerCase();
-    var rows = document.getElementById('recordsTable').getElementsByTagName('tr');
-
-    for (var i = 0; i < rows.length; i++) {
-      var cells = rows[i].getElementsByTagName('td');
-      var match = false;
-      for (var j = 0; j < cells.length; j++) {
-        if (cells[j].innerText.toLowerCase().includes(filter)) {
-          match = true;
-          break;
+  
+  <div class="container" style="font-size: 12px;">
+    <div class="row">
+      <div class="col-12">
+        <div class="row">
+          <div class="table-container">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col" style="width: 4%;">#</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Week</th>
+                  <th scope="col">Cost</th>
+                  <th scope="col">Unit</th>
+                  <th scope="col">Highlight Type</th>
+                  <th scope="col">Wellsite Activity</th>
+                  <th scope="col">Document</th>
+                  <th scope="col">Details</th>
+                </tr>
+              </thead>
+              <tbody id="recordsTable">
+                {% for record in records %}
+                <tr style="font-size: 14px;">
+                  <th scope="row">{{ forloop.counter }}</th>
+                  <td>{{ record.date }}</td>
+                  <td>{{ record.week }}</td>
+                  <td>{{ record.Cost }}</td>
+                  <td>{{ record.unit }}</td>
+                  <td>{{ record.highlight_type }}</td>
+                  <td>{{ record.wellsite_activity }}</td>
+                  <td>
+                    {% if record.document %}
+                    <a href="{{ record.document.url }}">Download</a>
+                    {% else %}
+                    No Document
+                    {% endif %}
+                  </td>
+                  <td><a href="{% url 'eHighlight_Record_detail' record.pk %}" class="more-link">more</a></td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="py-4">
+    <h1 class="highlight-count">Count of Highlights: {{ all_records_count }}</h1>
+  </div>
+  
+  <h2>Monthly Record Counts</h2>
+  
+  <div class="chart-container" style="width: 80%; margin: auto; padding: 20px;">
+    <canvas id="highlightsChart"></canvas>
+  </div>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+  
+  <script>
+    // JavaScript function to filter table rows
+    document.getElementById('filterInput').addEventListener('keyup', function() {
+      var filter = this.value.toLowerCase();
+      var rows = document.getElementById('recordsTable').getElementsByTagName('tr');
+  
+      for (var i = 0; i < rows.length; i++) {
+        var cells = rows[i].getElementsByTagName('td');
+        var match = false;
+        for (var j = 0; j < cells.length; j++) {
+          if (cells[j].innerText.toLowerCase().includes(filter)) {
+            match = true;
+            break;
+          }
+        }
+        rows[i].style.display = match ? '' : 'none';
+      }
+    });
+  
+    document.getElementById('filterButton').addEventListener('click', function() {
+      var startDate = new Date(document.getElementById('startDate').value);
+      var endDate = new Date(document.getElementById('endDate').value);
+      var rows = document.getElementById('recordsTable').getElementsByTagName('tr');
+      var monthlyCounts = new Array(12).fill(0);
+  
+      for (var i = 0; i < rows.length; i++) {
+        var cells = rows[i].getElementsByTagName('td');
+        var dateCell = cells[1].innerText; // Fix: corrected dateCell to use cells[1]
+        var rowDate = new Date(dateCell);
+  
+        if (rowDate >= startDate && rowDate <= endDate) {
+          rows[i].style.display = '';
+          monthlyCounts[rowDate.getMonth()]++;
+        } else {
+          rows[i].style.display = 'none';
         }
       }
-      rows[i].style.display = match ? '' : 'none';
-    }
-  });
-
-  document.getElementById('filterButton').addEventListener('click', function() {
-    var startDate = new Date(document.getElementById('startDate').value);
-    var endDate = new Date(document.getElementById('endDate').value);
-    var rows = document.getElementById('recordsTable').getElementsByTagName('tr');
-    var monthlyCounts = new Array(12).fill(0);
-
-    for (var i = 0; i < rows.length; i++) {
-      var cells = rows[i].getElementsByTagName('td');
-      var dateCell = cells[0].innerText;
-      var rowDate = new Date(dateCell);
-
-      if (rowDate >= startDate && rowDate <= endDate) {
-        rows[i].style.display = '';
-        monthlyCounts[rowDate.getMonth()]++;
-      } else {
-        rows[i].style.display = 'none';
-      }
-    }
-
-    highlightsChart.data.datasets[0].data = monthlyCounts;
-    highlightsChart.update();
-  });
-
-  const monthlyData = {
-    labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-    datasets: [{
-      label: "Highlight Counts",
-      data: [{{ monthly_counts.January }},{{ monthly_counts.February }},{{ monthly_counts.March }},{{ monthly_counts.April }},{{ monthly_counts.May }},{{ monthly_counts.June }},{{ monthly_counts.July }},{{ monthly_counts.August }},{{ monthly_counts.September }},{{ monthly_counts.October }}, {{monthly_counts.November}},{{ monthly_counts.December }}],
-      backgroundColor: "rgba(0, 163, 224, 0.2)",
-      borderColor: "#00a3e0",
-      borderWidth: 2
-    }]
-  };
-
-  const ctx = document.getElementById('highlightsChart').getContext('2d');
-  const highlightsChart = new Chart(ctx, {
-    type: 'line',
-    data: monthlyData,
-    options: {
-      responsive: true,
-      scales: {
-        x: {
-          beginAtZero: true
-        },
-        y: {
-          beginAtZero: true
+  
+      highlightsChart.data.datasets[0].data = monthlyCounts;
+      highlightsChart.update();
+    });
+  
+    const monthlyData = {
+      labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+      datasets: [{
+        label: "Highlight Counts",
+        data: [{{ monthly_counts.January }},{{ monthly_counts.February }},{{ monthly_counts.March }},{{ monthly_counts.April }},{{ monthly_counts.May }},{{ monthly_counts.June }},{{ monthly_counts.July }},{{ monthly_counts.August }},{{ monthly_counts.September }},{{ monthly_counts.October }},{{ monthly_counts.November }},{{ monthly_counts.December }}],
+        backgroundColor: "rgba(0, 163, 224, 0.2)",
+        borderColor: "#00a3e0",
+        borderWidth: 2
+      }]
+    };
+  
+    const ctx = document.getElementById('highlightsChart').getContext('2d');
+    const highlightsChart = new Chart(ctx, {
+      type: 'line',
+      data: monthlyData,
+      options: {
+        responsive: true,
+        scales: {
+          x: {
+            beginAtZero: true
+          },
+          y: {
+            beginAtZero: true
+          }
         }
       }
-    }
-  });
-</script>
+    });
+  </script>
+</div>
+{% endblock %}
 
+{% block header_navigation_actions %}
+<div class="sp">
+  <a href="{% url 'eHighlight_Record_new' %}" class="button" id="add-task-button">
+    <i class="ph-plus-bold"></i>
+    <span>New E-hightlight</span>
+  </a>
+</div>
 {% endblock %}
