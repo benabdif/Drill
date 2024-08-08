@@ -60,6 +60,31 @@
         }
       });
     });
+
+    const chatMainPopup = document.getElementById('chatMainPopup');
+    
+    const savedSize = JSON.parse(localStorage.getItem('chatMainPopupSize'));
+    if (savedSize) {
+      chatMainPopup.style.width = savedSize.width || '500px';
+      chatMainPopup.style.height = savedSize.height || '500px';
+    }
+  
+    const savePopupSize = () => {
+      const rect = chatMainPopup.getBoundingClientRect();
+      localStorage.setItem('chatMainPopupSize', JSON.stringify({
+        width: chatMainPopup.style.width,
+        height: chatMainPopup.style.height,
+      }));
+    };
+  
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        savePopupSize()
+      });
+    });
+    
+    const config = { attributes: true, attributeFilter: ['style'] };
+    observer.observe(chatMainPopup, config);
   });
 </script>
 
@@ -277,44 +302,44 @@ document.addEventListener("DOMContentLoaded", ()=>{
 </script>
 
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-  const chatMainPopup = document.getElementById('chatMainPopup');
-  const chatMaincloseBtn = document.getElementById('chatMainCloseBtn');
-  const chatPopup = document.getElementById('chatPopup')
-  const chatToggleButton = document.getElementById('chatToggleButton')
-  const closeBtn = document.getElementById('closeBtn')
-  const chatHeader = document.querySelector('.chat-main-popup .chat-header .title')
-  
-  document.getElementById('editMessage').addEventListener('click', function () {
-    const msgElement = document.querySelector(`.message[data-id="${editingMessageId}"]`);
-    if (msgElement) {
-        const messageContent = msgElement.querySelector('.message-content').textContent;
-        document.getElementById('messageInput').value = messageContent;
-    }
-    document.getElementById('contextMenu').style.display = 'none';
-});
-
-  chatMaincloseBtn.addEventListener('click', function () {
-    chatMainPopup.classList.add('hidden');
+  document.addEventListener('DOMContentLoaded', function () {
+    const chatMainPopup = document.getElementById('chatMainPopup');
+    const chatMaincloseBtn = document.getElementById('chatMainCloseBtn');
+    const chatPopup = document.getElementById('chatPopup')
+    const chatToggleButton = document.getElementById('chatToggleButton')
+    const closeBtn = document.getElementById('closeBtn')
+    const chatHeader = document.querySelector('.chat-main-popup .chat-header .title')
+    
+    document.getElementById('editMessage').addEventListener('click', function () {
+      const msgElement = document.querySelector(`.message[data-id="${editingMessageId}"]`);
+      if (msgElement) {
+          const messageContent = msgElement.querySelector('.message-content').textContent;
+          document.getElementById('messageInput').value = messageContent;
+      }
+      document.getElementById('contextMenu').style.display = 'none';
   });
-
-  chatHeader.addEventListener("click", (e)=>{
-    chatMainPopup.classList.toggle('minimized');
+  
+    chatMaincloseBtn.addEventListener('click', function () {
+      chatMainPopup.classList.add('hidden');
+    });
+  
+    chatHeader.addEventListener("click", (e)=>{
+      chatMainPopup.classList.toggle('minimized');
+    })
+  
+  
+  
+    chatToggleButton.addEventListener('click', function () {
+      chatPopup.classList.toggle('active')
+      chatToggleButton.style.opacity = 0
+    })
+  
+    closeBtn.addEventListener('click', function () {
+      chatPopup.classList.remove('active')
+      chatToggleButton.style.opacity = 1
+    })
   })
-
-
-
-  chatToggleButton.addEventListener('click', function () {
-    chatPopup.classList.toggle('active')
-    chatToggleButton.style.opacity = 0
-  })
-
-  closeBtn.addEventListener('click', function () {
-    chatPopup.classList.remove('active')
-    chatToggleButton.style.opacity = 1
-  })
-})
-</script>
+  </script>
 
 <style>
 
@@ -443,8 +468,8 @@ document.addEventListener('DOMContentLoaded', function () {
   position: fixed;
   bottom: 0;
   right: 20px;
-  width: 500px;
-  height: 500px;
+  min-width: 20% !important;
+  min-height: 20% !important;
   background: #fff;
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -455,12 +480,29 @@ document.addEventListener('DOMContentLoaded', function () {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  resize: none;
+  overflow: auto;
+  max-width: calc(100vw - 400px) !important;
+  max-height: calc(100vh - 40px) !important;
 }
+
 .chat-main-popup.hidden{
   opacity: 0;
 }
 .chat-main-popup.minimized{
   transform: translate(-325px, 90%);
+}
+
+.resize-handle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 15px; /* Width of the resize handle */
+  height: 15px; /* Height of the resize handle */
+  background: #007bff; /* Handle color */
+  cursor: nwse-resize; /* Resize cursor */
+  z-index: 1100; /* Ensure it is above other content */
+  border-radius: 4px; /* Rounded corners for the handle */
 }
 
 .chat-header {
@@ -562,3 +604,51 @@ document.addEventListener('DOMContentLoaded', function () {
   white-space: pre-wrap; /* Preserve whitespace and wrap text */
 }
 </style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const chatMainPopup = document.getElementById('chatMainPopup');
+    const resizeHandle = document.createElement('div');
+    resizeHandle.className = 'resize-handle';
+    chatMainPopup.appendChild(resizeHandle);
+
+    let isResizing = false;
+    let startX = 0;
+    let startY = 0;
+    let startWidth = 0;
+    let startHeight = 0;
+
+    resizeHandle.addEventListener('mousedown', function(e) {
+      e.preventDefault();
+      isResizing = true;
+      startX = e.clientX;
+      startY = e.clientY;
+      startWidth = chatMainPopup.clientWidth;
+      startHeight = chatMainPopup.clientHeight;
+      document.addEventListener('mousemove', handleMouseMove);
+      document.addEventListener('mouseup', handleMouseUp);
+    });
+
+    function handleMouseMove(e) {
+      if (!isResizing) return;
+
+      const dx = e.clientX - startX;
+      const dy = e.clientY - startY;
+
+      // Adjust width and height based on the difference from starting point
+      const newWidth = startWidth - dx;
+      const newHeight = startHeight - dy; // Inverted dy to adjust correctly
+
+      // Apply new dimensions ensuring they are not below minimum values
+      chatMainPopup.style = `
+      width: max(${newWidth}px, 20%);
+      height: max(${newHeight}px, 20%);`
+    }
+
+    function handleMouseUp() {
+      isResizing = false;
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseup', handleMouseUp);
+    }
+  });
+</script>
