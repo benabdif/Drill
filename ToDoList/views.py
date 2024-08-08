@@ -91,10 +91,8 @@ def add_group_workshop(request):
 
 
 def main_page(request):
-    context = {
-        'fadhel': 'Hello from Fadhel'
-    }
-    return render(request, 'blog/mainpage.html', context)
+    
+    return render(request, 'blog/mainpage.html')
 
 
 def createTask(request):
