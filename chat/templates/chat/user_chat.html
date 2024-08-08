@@ -37,6 +37,7 @@
     <div id="contextMenu" class="context-menu">
         <ul>
             <li id="editMessage">Edit</li>
+            <li id="deleteMessage">Delete</li>
         </ul>
     </div>
 
@@ -99,6 +100,18 @@
                 }
                 document.getElementById('contextMenu').style.display = 'none';
             });
+
+            document.getElementById('deleteMessage').addEventListener('click', function () {
+                if (editingMessageId) {
+                  socket.send(
+                    JSON.stringify({
+                      delete_message: editingMessageId
+                    })
+                  );
+                  editingMessageId = null;
+                }
+                document.getElementById('contextMenu').style.display = 'none';
+              });
         });
 
         let lastMsg = document.getElementById('last');
@@ -228,6 +241,12 @@
                     }
                 }
             }
+            else if (msg.type === 'message_deleted') {
+                const msgElement = document.querySelector(`.message[data-id="${msg.id}"]`);
+                if (msgElement) {
+                  msgElement.remove();
+                }
+              }
         };
 
         const inputField = document.querySelector('input[type="text"]');

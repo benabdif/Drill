@@ -73,6 +73,20 @@ class ChatConsumer(AsyncWebsocketConsumer):
                         "message": updated_message,
                     },
                 )
+        elif "delete_message" in text_data_json:
+            message_id = text_data_json["delete_message"]
+            deleted_message = await self.delete_message(
+                self.user.id,
+                message_id,
+            )
+            if deleted_message:
+                await self.channel_layer.group_send(
+                    self.room_group_name,
+                    {
+                        "type": "chat_message",
+                        "message": deleted_message,
+                    },
+                )
         elif "read_receipt" in text_data_json:
             # Handle read receipt
             message_id = text_data_json["read_receipt"]
@@ -138,6 +152,19 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 "type": "message_edited",
                 "is_updated": message.is_updated,
                 "updated_at": message.updated_at.isoformat(),
+            }
+        except ObjectDoesNotExist:
+            return None
+
+    @database_sync_to_async
+    def delete_message(self, sender_id, message_id):
+        try:
+            message = Message.objects.get(id=message_id, sender_id=sender_id)
+            message.is_deleted = True
+            message.save()
+            return {
+                "id": str(message.id),
+                "type": "message_deleted",
             }
         except ObjectDoesNotExist:
             return None

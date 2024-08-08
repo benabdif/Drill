@@ -38,6 +38,7 @@
 <div id="contextMenu" class="context-menu">
   <ul>
     <li id="editMessage">Edit</li>
+    <li id="deleteMessage">Delete</li>
   </ul>
 </div>
 {% endblock %}
@@ -285,6 +286,11 @@ function changeChat(groupID, groupName){
           msgElement.appendChild(editedDiv)
         }
       }
+    } else if (msg.type === 'message_deleted') {
+      const msgElement = document.querySelector(`.message[data-id="${msg.id}"]`);
+      if (msgElement) {
+        msgElement.remove();
+      }
     }
   }
 }
@@ -318,6 +324,19 @@ document.addEventListener("DOMContentLoaded", ()=>{
       }
       document.getElementById('contextMenu').style.display = 'none';
   });
+
+  document.getElementById('deleteMessage').addEventListener('click', function () {
+    if (editingMessageId) {
+      socket.send(
+        JSON.stringify({
+          delete_message: editingMessageId
+        })
+      );
+      editingMessageId = null;
+    }
+    document.getElementById('contextMenu').style.display = 'none';
+  });
+
   
     chatMaincloseBtn.addEventListener('click', function () {
       chatMainPopup.classList.add('hidden');

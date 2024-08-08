@@ -28,7 +28,7 @@ def user_chat(request, group_id):
     group = get_object_or_404(Group, id=group_id, members=request.user)
     groups = Group.objects.filter(members=request.user)
 
-    messages = group.message_set.all().order_by("-timestamp")
+    messages = group.message_set.filter(is_deleted=False).order_by("-timestamp")
 
     paginator = Paginator(messages, 25)
     page_number = request.GET.get("p", 1)
