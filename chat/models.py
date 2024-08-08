@@ -60,6 +60,21 @@ class Group(models.Model):
         editable=False,
     )
 
+    def save(self, *args, **kwargs):
+        if self.pk:
+            try:
+                existing_group = Group.objects.get(pk=self.pk)
+                if existing_group.is_dm != self.is_dm:
+                    if self.is_dm and self.members.count() > 2:
+                        raise ValidationError("A direct message group cannot have more than 2 members.")
+            except Group.DoesNotExist:
+                pass
+        else:
+            if self.is_dm and self.members.count() > 2:
+                raise ValidationError("A direct message group cannot have more than 2 members.")
+
+        super().save(*args, **kwargs)
+
     def __str__(self):
         return self.name if self.name else f"Group {self.id}"
 

@@ -6,9 +6,14 @@
     <span class="close-btn" id="closeBtn">&times;</span>
   </div>
   <div class="popup-body">
-    {% for group in user_groups %}
-      <div class="popup-group-item" data-groupID="{{group.id}}" data-groupName="{{group.name}}">{{ group.name }}</div>
-    {% endfor %}
+    <input type="text" id="groupSearch" class="form-control" placeholder="Search groups..." />
+    <div id="groupList">
+      {% for group in user_groups %}
+        <div class="popup-group-item" data-groupID="{{group.id}}" data-groupName="{{group.name}}">
+          {{ group.name }}
+        </div>
+      {% endfor %}
+    </div>
   </div>
 </div>
 <div class="chat-toggle-button" id="chatToggleButton">
@@ -17,7 +22,9 @@
 
 <div class="chat-main-popup hidden" id="chatMainPopup">
   <div class="chat-header">
-    <p class="title">Group Name</p>
+    <div class="title">
+      <p>Group Name</p>
+    </div>
     <span class="close-btn" id="chatMainCloseBtn">&times;</span>
   </div>
   <div id="messagesContainer" class="chat-body">
@@ -34,6 +41,27 @@
   </ul>
 </div>
 {% endblock %}
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('groupSearch');
+    const groupList = document.getElementById('groupList');
+    
+    searchInput.addEventListener('input', function() {
+      const searchTerm = searchInput.value.toLowerCase();
+      const groupItems = groupList.getElementsByClassName('popup-group-item');
+      
+      Array.from(groupItems).forEach(item => {
+        const groupName = item.getAttribute('data-groupName').toLowerCase();
+        if (groupName.includes(searchTerm)) {
+          item.style.display = '';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
 
 <script>
 const readMessages = new Set()
@@ -173,7 +201,7 @@ function changeChat(groupID, groupName){
   
   if (currentGrouID === groupID) return
   currentGrouID = groupID;
-  chatMainPopUp.querySelector(".chat-header .title").textContent = groupName
+  chatMainPopUp.querySelector(".chat-header .title p").textContent = groupName
   messagesContainer.innerHTML = ""
 
   page = 0
@@ -255,7 +283,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const chatPopup = document.getElementById('chatPopup')
   const chatToggleButton = document.getElementById('chatToggleButton')
   const closeBtn = document.getElementById('closeBtn')
-  const chatHeader = document.querySelector('.chat-main-popup .chat-header')
+  const chatHeader = document.querySelector('.chat-main-popup .chat-header .title')
   
   document.getElementById('editMessage').addEventListener('click', function () {
     const msgElement = document.querySelector(`.message[data-id="${editingMessageId}"]`);
@@ -279,7 +307,6 @@ document.addEventListener('DOMContentLoaded', function () {
   chatToggleButton.addEventListener('click', function () {
     chatPopup.classList.toggle('active')
     chatToggleButton.style.opacity = 0
-    chatMainPopup.classList.remove('hidden');
   })
 
   closeBtn.addEventListener('click', function () {
@@ -457,6 +484,16 @@ document.addEventListener('DOMContentLoaded', function () {
   text-align: center;
   margin: 0;
   padding: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+}
+
+.chat-header .title p{
+  margin: 0;
 }
 
 .chat-body {
