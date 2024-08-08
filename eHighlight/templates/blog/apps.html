@@ -2,7 +2,11 @@
 
 {% load static %}
 
+
 {% block content %}
+
+{% include "chat/chat_popup.html" %}
+
 <style>
     body {
         background: url("{% static 'imageee.png' %}") no-repeat center center fixed;

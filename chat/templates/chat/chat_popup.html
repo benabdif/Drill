@@ -1,0 +1,527 @@
+
+{% block chat_popup %}
+<div class="chat-popup" id="chatPopup">
+  <div class="popup-header">
+    Chat
+    <span class="close-btn" id="closeBtn">&times;</span>
+  </div>
+  <div class="popup-body">
+    {% for group in user_groups %}
+      <div class="popup-group-item" data-groupID="{{group.id}}" data-groupName="{{group.name}}">{{ group.name }}</div>
+    {% endfor %}
+  </div>
+</div>
+<div class="chat-toggle-button" id="chatToggleButton">
+  <i class="fas fa-comment-dots"></i>
+</div>
+
+<div class="chat-main-popup hidden" id="chatMainPopup">
+  <div class="chat-header">
+    <p class="title">Group Name</p>
+    <span class="close-btn" id="chatMainCloseBtn">&times;</span>
+  </div>
+  <div id="messagesContainer" class="chat-body">
+  </div>
+  <div class="chat-footer d-flex">
+    <input type="text" id="messageInput" class="form-control" placeholder="Type a message" />
+    <button id="sendMessage" class="btn btn-primary">Send</button>
+  </div>
+</div>
+
+<div id="contextMenu" class="context-menu">
+  <ul>
+    <li id="editMessage">Edit</li>
+  </ul>
+</div>
+{% endblock %}
+
+<script>
+const readMessages = new Set()
+let socket;
+let currentGrouID = null
+let editingMessageId = null
+
+function sendReadReceipt(messageId) {
+  if (socket.readyState === WebSocket.OPEN && !readMessages.has(messageId)) {
+    socket.send(
+      JSON.stringify({
+        read_receipt: messageId
+      })
+    )
+    readMessages.add(messageId)
+  }
+}
+
+function formatDate(timestamp) {
+  const date = new Date(timestamp)
+  const options = {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: true
+  }
+  return new Intl.DateTimeFormat('en-US', options).format(date)
+}
+
+let msgSendBtn = document.getElementById('sendMessage')
+msgSendBtn.disabled = false
+
+const messagesContainer = document.getElementById('messagesContainer')
+let page = 0
+let hasNext = true
+let isLoading = false
+
+const loadMoreMessages = () => {
+  if (!hasNext || isLoading) return
+
+  isLoading = true
+  const previousHeight = messagesContainer.scrollHeight
+
+  page += 1
+  const url = new URL(`${window.location.protocol}//${window.location.host}{% url 'chat_home' %}${currentGrouID}/`)
+  url.searchParams.set('p', page)
+  url.searchParams.set('json', 'true')
+
+  fetch(url)
+    .then((response) => response.json())
+    .then((data) => {
+      data.messages.forEach((msg) => {
+        const msgElement = document.createElement('div')
+        msgElement.className = `message ${msg.sender === '{{ request.user.username }}' ? 'sent' : 'received'}`
+        msgElement.setAttribute('data-id', msg.id)
+        msgElement.innerHTML = `
+        <p class="username">${msg.sender}</p>
+        <p class="message-content">${msg.content}</p>
+        <div class="timestamp" data-timestamp="${msg.timestamp}">${formatDate(msg.timestamp)}</div>
+        ${msg.is_updated ? '<div class="edited">Edited</div>' : ''}
+        ${msg.sender === '{{ request.user.username }}'  ? `<div id="${msg.id}" class="status ${msg.is_read ? 'read' : 'unread'}">${msg.is_read ? 'Read' : 'Unread'}</div>` : ""}
+        `;
+        msgElement.addEventListener('contextmenu', function (event) {
+          event.preventDefault()
+          const contextMenu = document.getElementById('contextMenu')
+          contextMenu.style.top = `${event.pageY}px`
+          contextMenu.style.left = `${event.pageX}px`
+          contextMenu.style.display = 'block'
+          editingMessageId = msgElement.getAttribute('data-id')
+        })
+        messagesContainer.prepend(msgElement)
+      })
+      hasNext = data.has_next
+      isLoading = false
+      messagesContainer.scrollTop = messagesContainer.scrollHeight - previousHeight
+      checkAndSendReadReceipts() // Check after loading new messages
+    })
+}
+
+messagesContainer.addEventListener('scroll', () => {
+  if (messagesContainer.scrollTop < 100 && !isLoading) {
+    loadMoreMessages()
+  }
+})
+
+function checkAndSendReadReceipts() {
+  const messages = document.querySelectorAll('.message.received')
+  messages.forEach((message) => {
+    const messageId = message.getAttribute('data-id')
+    if (messageId) {
+      sendReadReceipt(messageId)
+    }
+  })
+}
+
+const inputField = document.getElementById('messageInput')
+inputField.addEventListener('keypress', function (event) {
+  if (event.key === 'Enter') {
+    event.preventDefault()
+    sendMessage()
+  }
+})
+msgSendBtn.addEventListener('click', sendMessage)
+
+function sendMessage() {
+  const message = inputField.value
+  if (message.trim()) {
+    if (editingMessageId) {
+      socket.send(
+        JSON.stringify({
+          edit_message: {
+            id: editingMessageId,
+            content: message
+          }
+        })
+      )
+      editingMessageId = null // Reset after sending the edit
+    } else {
+      socket.send(
+        JSON.stringify({
+          message: message
+        })
+      )
+    }
+    inputField.value = ''
+  }
+}
+
+function changeChat(groupID, groupName){
+  const messagesContainer = document.getElementById("messagesContainer")
+  const chatMainPopUp = document.querySelector(".chat-main-popup")
+  const chatMainPopup = document.getElementById('chatMainPopup');
+  chatMainPopup.classList.remove("hidden")
+  
+  if (currentGrouID === groupID) return
+  currentGrouID = groupID;
+  chatMainPopUp.querySelector(".chat-header .title").textContent = groupName
+  messagesContainer.innerHTML = ""
+
+  page = 0
+  hasNext = true
+  loadMoreMessages()
+  const protocol = window.location.protocol === 'https:' ? 'wss://' : 'ws://'
+  socket = new WebSocket(`${protocol}${window.location.host}/ws/chat/${groupID}/`)
+  
+  socket.onclose = function () {
+    console.error('Chat socket closed unexpectedly')
+  }
+  
+  socket.onopen = function () {
+    checkAndSendReadReceipts()
+  }
+  
+  socket.onmessage = function (event) {
+    const msg = JSON.parse(event.data)
+    if (msg.type === 'chat_message') {
+      const msgElement = document.createElement('div')
+      msgElement.className = `message ${msg.sender === '{{ request.user.username }}' ? 'sent' : 'received'}`
+      msgElement.setAttribute('data-id', msg.id)
+      msgElement.addEventListener('contextmenu', function (event) {
+        event.preventDefault()
+        const contextMenu = document.getElementById('contextMenu')
+        contextMenu.style.top = `${event.pageY}px`
+        contextMenu.style.left = `${event.pageX}px`
+        contextMenu.style.display = 'block'
+        editingMessageId = msgElement.getAttribute('data-id')
+      })
+      msgElement.innerHTML = `
+      <p class="username">${msg.sender}</p>
+      <p class="message-content">${msg.content}</p>
+      <div class="timestamp" data-timestamp="${msg.timestamp}">${formatDate(msg.timestamp)}</div>
+      ${msg.is_updated ? '<div class="edited">Edited</div>' : ''}
+      ${msg.sender === '{{ request.user.username }}'  ? `<div id="${msg.id}" class="status ${msg.is_read ? 'read' : 'unread'}">${msg.is_read ? 'Read' : 'Unread'}</div>` : ""}
+      `;
+      messagesContainer.appendChild(msgElement)
+      msgElement.scrollIntoView()
+      checkAndSendReadReceipts() // Check after new message is appended
+    } else if (msg.type === 'message_read_receipt') {
+      const statusElement = document.getElementById(msg.message_id)
+      if (statusElement) {
+        statusElement.textContent = 'Read'
+        statusElement.classList.remove('unread')
+        statusElement.classList.add('read')
+      }
+    } else if (msg.type === 'message_edited') {
+      const msgElement = document.querySelector(`.message[data-id="${msg.id}"]`)
+      if (msgElement) {
+        msgElement.querySelector('.message-content').textContent = msg.content
+        if (!msgElement.querySelector('.edited')) {
+          const editedDiv = document.createElement('div')
+          editedDiv.classList.add('edited')
+          editedDiv.textContent = 'Edited'
+          msgElement.appendChild(editedDiv)
+        }
+      }
+    }
+  }
+}
+
+document.addEventListener("DOMContentLoaded", ()=>{
+  const groupsElems = document.querySelectorAll(".popup-group-item")
+  groupsElems.forEach((groupElem) => {
+    groupElem.addEventListener("click", (event)=>{
+      const groupID = event.target.getAttribute("data-groupID")
+      const groupName = event.target.getAttribute("data-groupName")
+      changeChat(groupID, groupName)
+    })
+  })
+})
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const chatMainPopup = document.getElementById('chatMainPopup');
+  const chatMaincloseBtn = document.getElementById('chatMainCloseBtn');
+  const chatPopup = document.getElementById('chatPopup')
+  const chatToggleButton = document.getElementById('chatToggleButton')
+  const closeBtn = document.getElementById('closeBtn')
+  const chatHeader = document.querySelector('.chat-main-popup .chat-header')
+  
+  document.getElementById('editMessage').addEventListener('click', function () {
+    const msgElement = document.querySelector(`.message[data-id="${editingMessageId}"]`);
+    if (msgElement) {
+        const messageContent = msgElement.querySelector('.message-content').textContent;
+        document.getElementById('messageInput').value = messageContent;
+    }
+    document.getElementById('contextMenu').style.display = 'none';
+});
+
+  chatMaincloseBtn.addEventListener('click', function () {
+    chatMainPopup.classList.add('hidden');
+  });
+
+  chatHeader.addEventListener("click", (e)=>{
+    chatMainPopup.classList.toggle('minimized');
+  })
+
+
+
+  chatToggleButton.addEventListener('click', function () {
+    chatPopup.classList.toggle('active')
+    chatToggleButton.style.opacity = 0
+    chatMainPopup.classList.remove('hidden');
+  })
+
+  closeBtn.addEventListener('click', function () {
+    chatPopup.classList.remove('active')
+    chatToggleButton.style.opacity = 1
+  })
+})
+</script>
+
+<style>
+
+.chat-popup {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 300px;
+  max-height: 500px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(100%);
+  opacity: 0;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+  z-index: 1000;
+}
+
+.chat-popup.active {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.popup-header {
+  background: #047adb;
+  color: #fff;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  position: relative;
+  cursor: pointer;
+}
+
+.popup-header .close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 18px;
+}
+
+.popup-body {
+  padding: 15px;
+  height: calc(100% - 50px);
+  overflow-y: auto;
+}
+
+.popup-group-item {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.popup-group-item:hover {
+  background: #f1f1f1;
+}
+
+.chat-toggle-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  background: #047adb;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  transition: background 0.3s ease;
+}
+
+.chat-toggle-button:hover {
+  background: #035aa6;
+}
+
+.chat-toggle-button i {
+  font-size: 24px;
+}
+.context-menu {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+.context-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 5px 0;
+}
+
+.context-menu ul li {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.context-menu ul li:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.username {
+  color: gray;
+  font-size: 12px;
+  border-bottom: black 1px solid;
+}
+.edit-btn {
+  font-size: 12px;
+  color: #007bff;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-top: 5px;
+}
+
+.chat-main-popup {
+  position: fixed;
+  bottom: 0;
+  right: 20px;
+  width: 500px;
+  height: 500px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: translateX(-325px);
+  transition: transform 0.4s ease, opacity 0.4s ease;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.chat-main-popup.hidden{
+  opacity: 0;
+}
+.chat-main-popup.minimized{
+  transform: translate(-325px, 90%);
+}
+
+.chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #007bff;
+  border-bottom: 1px solid #ddd;
+  padding: 10px;
+}
+.chat-header span{
+  height: 100%;
+  align-self: flex-end;
+  color: #fff;
+  font-size: 30px;
+  font-weight: bolder;
+}
+.chat-header .title {
+  color: #fff;
+  font-size: 20px;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+.chat-body {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  background: #f8f9fa;
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.message {
+  margin-bottom: 15px;
+  padding: 10px;
+  margin: 0 10px;
+  border-radius: 10px;
+  max-width: 70%;
+  position: relative;
+}
+
+.message.sent {
+  background-color: #d1ecf1;
+  align-self: flex-end;
+}
+
+.message.received {
+  background-color: #fff3cd;
+  align-self: flex-start;
+}
+
+.message p {
+  margin: 0;
+}
+
+.message .timestamp {
+  font-size: 12px;
+  color: #6c757d;
+  text-align: right;
+  margin-top: 5px;
+}
+
+.message .status {
+  font-size: 12px;
+}
+
+.message .status.read {
+  color: #28a745;
+}
+
+.message .status.unread {
+  color: #dc3545;
+}
+
+.message .edited {
+  font-size: 12px;
+  color: #6c757d;
+  text-align: right;
+  margin-top: 5px;
+  font-style: italic;
+}
+
+.message-content {
+  word-wrap: break-word; /* Break long words onto the next line */
+  overflow-wrap: break-word; /* Ensure words break appropriately */
+  white-space: pre-wrap; /* Preserve whitespace and wrap text */
+}
+</style>
