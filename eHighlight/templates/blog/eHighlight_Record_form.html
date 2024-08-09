@@ -1,5 +1,4 @@
-{% extends 'blog/base_record.html' %}
-
+{% extends 'blog/mainpage.html' %}
 {% block content %}
 {% load crispy_forms_tags %}
 {% load bootstrap5 %}
@@ -125,4 +124,12 @@
     <div class="col-md-2"></div>
 </div>
 
+{% endblock %}
+{% block header_navigation_actions %}
+<div class="sp">
+  <a href="{% url 'eHighlight_Record_list' %}" class="button" id="add-task-button">
+    <i class="ph-plus-bold"></i>
+    <span>Go back</span>
+  </a>
+</div>
 {% endblock %}

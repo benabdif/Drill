@@ -7,16 +7,14 @@ class Employee(models.Model):
     position = models.CharField(max_length=100)
     status = models.CharField(max_length=100)
     phone = models.CharField(max_length=15)
-    
-
 
 
 class Task(models.Model):
-    title = models.CharField(max_length=200)
-    description = models.TextField()
-    assigned_to = models.ForeignKey(Employee, on_delete=models.CASCADE)
-    assigned_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='assigned_tasks')
-    due_date = models.DateTimeField()
+    title = models.CharField(max_length=200,blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
+    assigned_to = models.ForeignKey(Employee, on_delete=models.CASCADE,blank=True, null=True)
+    assigned_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='assigned_tasks',blank=True, null=True)
+    due_date = models.DateTimeField(blank=True, null=True)
     completed = models.BooleanField(default=False)
     notes = models.TextField(blank=True, null=True)
     def __str__(self):

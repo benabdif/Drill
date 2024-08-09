@@ -1,8 +1,14 @@
 {% extends 'chat/chat.html' %}
 
+{% block chat_header %}
+
+<div class="chat-header">
+    {{ group.name }}
+  </div>
+  {% endblock chat_header %}
 {% block main_chat %}
     <div class="chat-main">
-        <div class="chat-header">username</div>
+        <div class="chat-header">{{group.name}}</div>
         <div id="messagesContainer" class="chat-body">
             {% for msg in page_obj|slice:"::-1" %}
             <div data-id="{{msg.id}}" class="message {% if msg.sender == request.user %}sent{% else %}received{% endif %}" {% if forloop.last %}id="last"{% endif %}>
@@ -31,6 +37,7 @@
     <div id="contextMenu" class="context-menu">
         <ul>
             <li id="editMessage">Edit</li>
+            <li id="deleteMessage">Delete</li>
         </ul>
     </div>
 
@@ -93,6 +100,18 @@
                 }
                 document.getElementById('contextMenu').style.display = 'none';
             });
+
+            document.getElementById('deleteMessage').addEventListener('click', function () {
+                if (editingMessageId) {
+                  socket.send(
+                    JSON.stringify({
+                      delete_message: editingMessageId
+                    })
+                  );
+                  editingMessageId = null;
+                }
+                document.getElementById('contextMenu').style.display = 'none';
+              });
         });
 
         let lastMsg = document.getElementById('last');
@@ -146,16 +165,6 @@
                 loadMoreMessages();
             }
         });
-
-        function isElementInViewport(el) {
-            const rect = el.getBoundingClientRect();
-            return (
-                rect.top >= 0 &&
-                rect.left >= 0 &&
-                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-            );
-        }
 
         function checkAndSendReadReceipts() {
             const messages = document.querySelectorAll('.message.received');
@@ -214,6 +223,12 @@
                     }
                 }
             }
+            else if (msg.type === 'message_deleted') {
+                const msgElement = document.querySelector(`.message[data-id="${msg.id}"]`);
+                if (msgElement) {
+                  msgElement.remove();
+                }
+              }
         };
 
         const inputField = document.querySelector('input[type="text"]');

@@ -1,8 +1,11 @@
 {% extends 'blog/base_Apps_page.html' %}
-
 {% load static %}
 
+
 {% block content %}
+
+{% include "chat/chat_popup.html" %}
+
 <style>
     body {
         background: url("{% static 'imageee.png' %}") no-repeat center center fixed;
@@ -33,9 +36,9 @@
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         padding: 20px;
         text-align: center;
-        flex: 1 1 calc(25% - 40px); /* Adjust the width to fit four cards in a row */
-        min-width: 250px;
-        max-width: 300px;
+        flex: 1 1 calc(20% - 40px); /* Adjust the width to fit more cards in a row */
+        min-width: 200px; /* Reduced min-width */
+        max-width: 250px; /* Reduced max-width */
         margin: 20px auto;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
         cursor: pointer;
@@ -56,13 +59,11 @@
     .card:hover {
         transform: scale(1.05);
         box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
-        /* background: linear-gradient(to right, #047adb, #7bbb0e); */
-
     }
 
     .card-icon {
-        width: 60px;
-        height: 60px;
+        width: 50px;
+        height: 50px;
         transition: transform 0.3s ease;
     }
 
@@ -217,7 +218,6 @@
             <div class="dropdown-btn">More</div>
             <ul class="feature-list">
                 <li><a href="{% url 'dashboard' %}">To Do Tasks test</a></li>
-                <!-- <li><a href="https://www.google.com" target="_blank">KPI'S & Target</a></li> -->
                 <li>Earthwork Activities</li>
                 <li>Description</li>
                 <li>Site Review</li>
@@ -236,7 +236,7 @@
         </div>
         <div class="card">
             <img src="{% static 'highlighter.png' %}" class="card-icon" alt="Logo">
-            <a href="{% url 'eHighlight_Record_list' %}" class="card-title-link">
+            <a href="{% url 'eHighlight_Record_list' %}" class="card-title-link" style="text-decoration: none;">
                 <p class="card-title">E-Highlight</p>
             </a>
             <div class="dropdown-btn">More</div>
@@ -248,8 +248,8 @@
         </div>
 
         <div class="card">
-            <img src="{% static 'highlighter.png' %}" class="card-icon" alt="Logo">
-            <a href="{% url 'eHighlight_Record_list' %}" class="card-title-link">
+            <img src="{% static 'advertisement.png' %}" class="card-icon" alt="Logo">
+            <a href="{% url 'eHighlight_Record_list' %}" class="card-title-link" style="text-decoration: none;">
                 <p class="card-title">Announcements</p>
             </a>
             <div class="dropdown-btn">More</div>
@@ -293,6 +293,15 @@
                 <li>References</li>
             </ul>
         </div>
+
+        <div class="card">
+            <img src="{% static 'hierarchy.png' %}" class="card-icon" alt="Logo">
+            <a href="{% url 'mytest' %}" class="card-title-link" style="text-decoration: none;">
+                <p class="card-title">Organiz Chart</p>
+            </a>
+            <div class="dropdown-btn">More</div>
+        </div>
+
         <div class="card">
             <img src="{% static 'bar-chart.png' %}" class="card-icon" alt="Logo">
             <p class="card-title">Logistics</p>
@@ -303,16 +312,20 @@
                 <li>Coming Soon</li>
             </ul>
         </div>
+        <div class="card">
+            
+            <img src="{% static 'chat.png' %}" class="card-icon" alt="Logo">
+            <a href="{% url 'mytest' %}" class="card-title-link" style="text-decoration: none;">
+                <p class="card-title">Chat App</p>
+            </a>
+            <div class="dropdown-btn">More</div>
+            
+        </div>
 
         <div class="card">
             <img src="{% static 'bar-chart.png' %}" class="card-icon" alt="Logo">
             <p class="card-title">Navigator</p>
-            <div class="dropdown-btn"><a href="#">More</a></div>
-            <!-- <ul class="feature-list">
-                <li>Work Permit</li>
-                <li>Access</li>
-                <li>Coming Soon</li>
-            </ul> -->
+            <div class="dropdown-btn">More</div>
         </div>
     </div>
 
@@ -322,6 +335,8 @@
         <a href="#about">Related Applications</a>
         <a href="#contact">Time Date</a>
     </div>
+
+    
     
     <script src="{% static 'script.js' %}"></script>
 
@@ -339,3 +354,5 @@
     </script>
 </body>
 {% endblock %}
+
+
