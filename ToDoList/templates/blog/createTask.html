@@ -7,6 +7,8 @@
 {% bootstrap_javascript %}
 
 {% block content %}
+{% include "chat/chat_popup.html" %}
+
 <style>
     @import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@100;200;300;400;500;600;700;800;900&display=swap");
     :root {
@@ -541,7 +543,7 @@
         background-color: wheat;
     }
 </style>
-
+{% comment %} 
 <header class="header">
     <div class="header-content responsive-wrapper">
         <div class="header-logo">
@@ -570,7 +572,7 @@
             <span>Menu</span>
         </a>
     </div>
-</header>
+</header> {% endcomment %}
 
 <main class="main">
     <div class="container">
@@ -594,9 +596,12 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label for="individualName">Name</label>
-                            <select class="form-control" id="individualName" name="individual_name">
+                            <select class="form-control" id="individualName" name="assigned_to">
                                 <option value="">Select your name</option>
-                                {% if supervisor %} 
+                                {% for employee in supervisor.employees.all %}
+                                        <option value="{{ employee.id }}">{{ employee.user.first_name }}</option>
+                                    {% endfor %}
+                                {% comment %} {% if supervisor %} 
                                     {% for employee in supervisor.employees.all %}
                                         <option value="{{ employee.id }}">{{ employee.user.first_name }}</option>
                                     {% endfor %}
@@ -606,36 +611,37 @@
                                     {% endfor %}
                                 {% else %}
                                     <option disabled>No options available</option>
-                                {% endif %}
+                                {% endif %} {% endcomment %}
                             </select>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="timeStart">Start Time</label>
-                            <input type="datetime-local" class="form-control" id="timeStart" name="start_time">
+                            <input type="datetime-local" class="form-control" id="timeStart" name="start_date">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="timeEnd">End Time</label>
-                            <input type="datetime-local" class="form-control" id="timeEnd" name="end_time">
+                            <input type="datetime-local" class="form-control" id="timeEnd" name="end_date">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="individualObjective">Task Objective</label>
                         <textarea class="form-control" id="individualObjective" name="objective" rows="3" placeholder="Describe the task objective"></textarea>
                     </div>
-                    <div class="form-group" style="font-size: 12px;">
+                    <div class="form-group">
                         <label for="fileUpload">Upload File</label>
                         <input type="file" class="form-control-file" id="fileUpload" name="file_upload">
                     </div>
-                    <div class="form-group" style="font-size: 12px;">
+                    <div class="form-group">
                         <label for="imageUpload">Upload Image</label>
                         <input type="file" class="form-control-file" id="imageUpload" name="image_upload" accept="image/*">
                     </div>
-                    <button type="submit" class="btn btn-primary" style="width: 40%;">Submit</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>
             
+         
             <div class="tab-pane fade" id="group-task">
                 <form method="post" action="{% url 'add_task' %}">
                     {% csrf_token %}

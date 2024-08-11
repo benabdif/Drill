@@ -7,18 +7,26 @@ class Employee(models.Model):
     position = models.CharField(max_length=100)
     status = models.CharField(max_length=100)
     phone = models.CharField(max_length=15)
+    def __str__(self):
+        return f"{self.user}"
 
 
 class Task(models.Model):
-    title = models.CharField(max_length=200,blank=True, null=True)
+    title = models.CharField(max_length=200, blank=True, null=True)
+    name = models.CharField(max_length=200, blank=True, null=True)
+    name_to = models.CharField(max_length=200, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
-    assigned_to = models.ForeignKey(Employee, on_delete=models.CASCADE,blank=True, null=True)
-    assigned_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='assigned_tasks',blank=True, null=True)
+    assigned_to = models.ForeignKey('Supervisor', on_delete=models.CASCADE, blank=True, null=True)
+    assigned_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='assigned_tasks', blank=True, null=True)
     due_date = models.DateTimeField(blank=True, null=True)
+    start_date = models.DateTimeField(blank=True, null=True)
+    end_date = models.DateTimeField(blank=True, null=True)
+    
     completed = models.BooleanField(default=False)
     notes = models.TextField(blank=True, null=True)
+    
     def __str__(self):
-        return self.title
+        return self.title or 'Unnamed Task'
     
 class GroupWorkshop(models.Model):
     name = models.CharField(max_length=200)
@@ -58,6 +66,10 @@ class Supervisor(models.Model):
 class Employee_2(models.Model):
     user = models.OneToOneField(User,  on_delete=models.CASCADE)
     supervisor = models.ForeignKey(Supervisor, on_delete=models.CASCADE, related_name='employees')
+
+    def __str__(self):
+        return f"{self.user}"
+
     
 
 
