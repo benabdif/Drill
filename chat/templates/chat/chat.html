@@ -3,7 +3,8 @@
 {% block title %}
   Chat Page
 {% endblock %}
-{% block chat_popup %}{% endblock chat_popup %}
+{% block chat_popup %}
+{% endblock %}
 {% block extra_head %}
   <style>
     body {
@@ -14,16 +15,12 @@
     }
     .chat-container {
       display: flex;
-      height: calc(100vh - 70px);
+      height: calc(100vh - 150px);
       border: 1px solid #ddd;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     }
     .chat-sidebar {
-<<<<<<< HEAD
-      width: 25%;
-=======
       width: 300px;
->>>>>>> 93050e76af6867dc96e46a58f657d20c8544ed56
       border-right: 1px solid #ddd;
       overflow-y: auto;
       padding-top: 16px;
@@ -33,15 +30,12 @@
       position: relative;
     }
     .chat-main {
-<<<<<<< HEAD
-      width: 75%;
-=======
       flex-grow: 1;
->>>>>>> 93050e76af6867dc96e46a58f657d20c8544ed56
       display: flex;
       flex-direction: column;
     }
-    .chat-header, .chat-footer {
+    .chat-header,
+    .chat-footer {
       padding: 10px;
       background-color: #f8f9fa;
     }
@@ -84,34 +78,32 @@
     .chat-footer button:hover {
       background-color: #0056b3;
     }
+    .user-list-item img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+    }
     .user-list-item {
       padding: 10px;
       background-color: #ffffff;
       cursor: pointer;
       border-radius: 8px;
       display: flex;
-<<<<<<< HEAD
-      align-items: center;
-      text-decoration: none;
-=======
       justify-content: space-between;
       align-items: center;
       text-decoration: none;
       transition: background-color 0.3s;
       margin: 0 10px 10px 10px;
       position: relative;
->>>>>>> 93050e76af6867dc96e46a58f657d20c8544ed56
     }
     .user-list-item:hover {
       background-color: #e9ecef;
     }
-<<<<<<< HEAD
-=======
     .dropdown-content {
       display: none;
       position: absolute;
       background-color: #ffffff;
-      box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
+      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
       padding: 12px 16px;
       z-index: 1;
       left: 0;
@@ -119,21 +111,9 @@
       min-width: 200px;
       border-radius: 8px;
     }
-    .dropdown-content a {
-      text-decoration: none;
-      color: #333;
-      display: block;
-      padding: 8px;
-      border-radius: 4px;
-      transition: background-color 0.3s;
-    }
-    .dropdown-content a:hover {
-      background-color: #f1f1f1;
-    }
     .show {
       display: block;
     }
->>>>>>> 93050e76af6867dc96e46a58f657d20c8544ed56
     .message {
       padding: 10px;
       border-radius: 10px;
@@ -148,8 +128,6 @@
       background-color: #e2e3e5;
       align-self: flex-start;
     }
-<<<<<<< HEAD
-=======
     .arrow {
       font-size: 24px;
       cursor: pointer;
@@ -158,28 +136,53 @@
     .arrow.rotate {
       transform: rotate(180deg);
     }
->>>>>>> 93050e76af6867dc96e46a58f657d20c8544ed56
+    .group-member-item img{
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+    .group-member-item{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      text-decoration: none;
+      color: #333;
+      padding: 8px;
+      border-radius: 4px;
+      transition: background-color 0.3s;
+    }
+    .group-member-item:hover{
+      background-color: #f1f1f1;
+    }
   </style>
 {% endblock %}
 
 {% block content %}
   <div class="chat-container">
     <div class="chat-sidebar">
-      {% for group in groups %}
-        <a href="{% url 'chat_group' group.id %}" class="user-list-item">{{ group.name }}</a>
+      {% for group in user_groups %}
+        <div class="user-list-item">
+          <img src="{{ group.picture.url }}" alt="" />
+          <a href="{% url 'chat_group' group.id %}" class="group-link">{{ group.name }}</a>
+          <span class="arrow">&#9662;</span>
+          <div class="dropdown-content">
+            {% for member in group.members.all %}
+              <div class="group-member-item">
+                <img src="{{ member.userprofile.picture.url }}" alt="" />
+                <a href="#">{{ member.username }}</a>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
       {% endfor %}
     </div>
-<<<<<<< HEAD
-    {% block main_chat %}
-
-    {% endblock %}
-  </div>
-=======
     <div class="chat-main">
       {% block chat_header %}
-      {% endblock chat_header %}
+
+      {% endblock %}
       <div class="chat-body">
         {% block main_chat %}
+
         {% endblock %}
       </div>
     </div>
@@ -187,28 +190,27 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
-      document.querySelectorAll('.arrow').forEach(arrow => {
+      document.querySelectorAll('.arrow').forEach((arrow) => {
         arrow.addEventListener('click', function (event) {
-          event.preventDefault();
-          const dropdown = this.nextElementSibling;
-          dropdown.classList.toggle('show');
-          this.classList.toggle('rotate');
-        });
-      });
-
+          event.preventDefault()
+          const dropdown = this.nextElementSibling
+          dropdown.classList.toggle('show')
+          this.classList.toggle('rotate')
+        })
+      })
+    
       window.onclick = function (event) {
         if (!event.target.matches('.arrow')) {
-          document.querySelectorAll('.dropdown-content').forEach(dropdown => {
+          document.querySelectorAll('.dropdown-content').forEach((dropdown) => {
             if (dropdown.classList.contains('show')) {
-              dropdown.classList.remove('show');
+              dropdown.classList.remove('show')
             }
-          });
-          document.querySelectorAll('.arrow').forEach(arrow => {
-            arrow.classList.remove('rotate');
-          });
+          })
+          document.querySelectorAll('.arrow').forEach((arrow) => {
+            arrow.classList.remove('rotate')
+          })
         }
-      };
-    });
+      }
+    })
   </script>
->>>>>>> 93050e76af6867dc96e46a58f657d20c8544ed56
 {% endblock %}

@@ -26,8 +26,6 @@ def chat_home(request):
 @login_required
 def user_chat(request, group_id):
     group = get_object_or_404(Group, id=group_id, members=request.user)
-    groups = Group.objects.filter(members=request.user)
-
     messages = group.message_set.filter(is_deleted=False).order_by("-timestamp")
 
     paginator = Paginator(messages, 25)
@@ -40,6 +38,7 @@ def user_chat(request, group_id):
         messages_data = [
             {
                 "sender": msg.sender.username,
+                "profile": msg.sender.userprofile.picture.url,
                 "content": msg.content,
                 "id": msg.id,
                 "timestamp": msg.timestamp.isoformat(),
@@ -60,6 +59,5 @@ def user_chat(request, group_id):
         {
             "page_obj": page_obj,
             "group": group,
-            "groups": groups,
         },
     )
