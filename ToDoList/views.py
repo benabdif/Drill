@@ -30,18 +30,29 @@ def dashboard1(request):
 from django.shortcuts import render, redirect
 from .forms import TaskForm
 
+# def add_task(request):
+#     if request.method == 'POST':
+#         form = TaskForm(request.POST)
+#         if form.is_valid():
+#             task = form.save(commit=False)
+#             task.assigned_by = request.user
+#             task.save()
+#             form.save_m2m()  # Only needed if there are many-to-many fields
+#             return redirect('dashboard')
+#     else:
+#         form = TaskForm()
+#     return render(request, 'blog/add_task.html', {'form': form})
+
 def add_task(request):
     if request.method == 'POST':
         form = TaskForm(request.POST)
         if form.is_valid():
-            task = form.save(commit=False)
-            task.assigned_by = request.user
-            task.save()
-            form.save_m2m()  # Only needed if there are many-to-many fields
+            form.save()
             return redirect('dashboard')
     else:
         form = TaskForm()
     return render(request, 'blog/add_task.html', {'form': form})
+
 
 
 
@@ -104,19 +115,6 @@ def main_page(request):
     
     return render(request, 'blog/mainpage.html')
 
-
-def add_task(request):
-    if request.method == 'POST':
-        form = TaskForm(request.POST)
-        if form.is_valid():
-            task = form.save(commit=False)
-            task.assigned_by = request.user
-            task.save()
-            form.save_m2m()  # Only needed if there are many-to-many fields
-            return redirect('dashboard')
-    else:
-        form = TaskForm()
-    return render(request, 'blog/createTask.html', {'form': form})
 
 def createTask(request):
     supervisor = Supervisor.objects.filter(user=request.user).first()

@@ -10,7 +10,10 @@
     <div id="groupList">
       {% for group in user_groups %}
         <div class="popup-group-item" data-groupID="{{group.id}}" data-groupName="{{group.name}}">
+          <img src="{{group.picture.url}}" style="object-fit: cover;" alt="Group Pic">
+          <div>
           {{ group.name }}
+        </div>
         </div>
       {% endfor %}
     </div>
@@ -408,11 +411,22 @@ document.addEventListener("DOMContentLoaded", ()=>{
   overflow-y: auto;
 }
 
+.popup-group-item img{
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+.popup-group-item div{
+  font-size: large;
+}
 .popup-group-item {
   padding: 10px;
   border-bottom: 1px solid #ddd;
   cursor: pointer;
   transition: background 0.3s;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .popup-group-item:hover {
