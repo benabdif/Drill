@@ -131,6 +131,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
             "content": message.content,
             "is_read": message.is_read,
             "sender": message.sender.username,
+            "profile": message.sender.userprofile.picture.url,
             "timestamp": message.timestamp.isoformat(),
             "id": str(message.id),
             "type": "chat_message"
@@ -147,6 +148,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 "content": message.content,
                 "is_read": message.is_read,
                 "sender": message.sender.username,
+                "profile": message.sender.userprofile.picture.url,
                 "timestamp": message.timestamp.isoformat(),
                 "id": str(message.id),
                 "type": "message_edited",

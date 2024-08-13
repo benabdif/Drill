@@ -42,6 +42,7 @@ class Group(models.Model):
         default=ulid.ULID,
         editable=False,
     )
+    picture = models.ImageField(upload_to='groups/images', max_length=255, default="4e1a0bd5-b77c-453f-87f3-0a7d6f5cf246.webp")
     name = models.CharField(
         max_length=255,
         blank=True,
