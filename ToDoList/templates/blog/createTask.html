@@ -596,22 +596,24 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label for="individualName">Name</label>
-                            <select class="form-control" id="individualName" name="assigned_to">
+                            <select class="form-control" id="individualName" name="name">
                                 <option value="">Select your name</option>
                                 {% for employee in supervisor.employees.all %}
-                                        <option value="{{ employee.id }}">{{ employee.user.first_name }}</option>
-                                    {% endfor %}
+                                    {% if supervisor %} 
+                                        <option value="{{ employee.user.first_name }}">{{ employee.user.first_name }}</option>
+                                    {% elif manager %}
+                                        {% for supervisor in manager.supervisors.all %}
+                                            <option value="{{ supervisor.user.first_name }}">{{ supervisor.user.first_name }}</option>
+                                        {% endfor %}
+                                    {% else %}
+                                        <option disabled>No options available</option>
+                                    {% endif %} 
+                                {% endfor %}
+
                                 {% comment %} {% if supervisor %} 
                                     {% for employee in supervisor.employees.all %}
                                         <option value="{{ employee.id }}">{{ employee.user.first_name }}</option>
-                                    {% endfor %}
-                                {% elif manager %}
-                                    {% for supervisor in manager.supervisors.all %}
-                                        <option value="{{ supervisor.id }}">{{ supervisor.user.first_name }}</option>
-                                    {% endfor %}
-                                {% else %}
-                                    <option disabled>No options available</option>
-                                {% endif %} {% endcomment %}
+                                    {% endfor %} {% endcomment %}
                             </select>
                         </div>
                     </div>

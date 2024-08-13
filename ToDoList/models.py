@@ -1,42 +1,56 @@
 from django.db import models
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.contenttypes.fields import GenericForeignKey
 
-class Employee(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    position = models.CharField(max_length=100)
-    status = models.CharField(max_length=100)
-    phone = models.CharField(max_length=15)
+
+
+class Employee_2(models.Model):
+    user = models.OneToOneField(User,  on_delete=models.CASCADE)
+    supervisor = models.ForeignKey("Supervisor", on_delete=models.CASCADE, related_name='employees')
+
     def __str__(self):
-        return f"{self.user}"
+        return f"{self.user.first_name} {self.user.last_name}"
 
+
+from django.db import models
+from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.auth.models import User
 
 class Task(models.Model):
     title = models.CharField(max_length=200, blank=True, null=True)
     name = models.CharField(max_length=200, blank=True, null=True)
-    name_to = models.CharField(max_length=200, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    assigned_to = models.ForeignKey('Supervisor', on_delete=models.CASCADE, blank=True, null=True)
-    assigned_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='assigned_tasks', blank=True, null=True)
-    due_date = models.DateTimeField(blank=True, null=True)
-    start_date = models.DateTimeField(blank=True, null=True)
-    end_date = models.DateTimeField(blank=True, null=True)
-    
-    completed = models.BooleanField(default=False)
-    notes = models.TextField(blank=True, null=True)
-    
+    # name_to = models.CharField(max_length=200, blank=True, null=True)
+    # description = models.TextField(blank=True, null=True)
+
+    # # content_type and object_id should not be nullable if you require them for a valid task
+    # content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+    # object_id = models.PositiveIntegerField()
+    # assigned_to = GenericForeignKey('content_type', 'object_id')
+
+    # # Allowing assigned_by to be optional
+    # assigned_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='assigned_tasks', blank=True, null=True)
+    # due_date = models.DateTimeField(blank=True, null=True)
+    # start_date = models.DateTimeField(blank=True, null=True)
+    # end_date = models.DateTimeField(blank=True, null=True)
+    # completed = models.BooleanField(default=False)
+    # notes = models.TextField(blank=True, null=True)
+
     def __str__(self):
-        return self.title or 'Unnamed Task'
+        # Improve __str__ to handle the case where both title and name are None
+        return self.name or 'Unnamed Task'
+
     
 class GroupWorkshop(models.Model):
     name = models.CharField(max_length=200)
-    members = models.ManyToManyField(Employee)
+    members = models.ManyToManyField(Employee_2)
     tasks = models.ManyToManyField(Task)
     def __str__(self):
         return self.name
     
-
-
 class WellSiteConstruction(models.Model):
     name = models.CharField(max_length=255)
     location = models.CharField(max_length=255)
@@ -62,16 +76,34 @@ class Supervisor(models.Model):
 
     def __str__(self):
         return f"{self.user.first_name} {self.user.last_name}"
-
-class Employee_2(models.Model):
-    user = models.OneToOneField(User,  on_delete=models.CASCADE)
-    supervisor = models.ForeignKey(Supervisor, on_delete=models.CASCADE, related_name='employees')
-
-    def __str__(self):
-        return f"{self.user}"
+    
 
     
 
+# class Employee_2(models.Model):
+#     user = models.OneToOneField(User,  on_delete=models.CASCADE)
+#     supervisor = models.ForeignKey(Supervisor, on_delete=models.CASCADE, related_name='employees')
 
-    def __str__(self):
-        return f"{self.user.first_name} {self.user.last_name}"
+#     def __str__(self):
+#         return f"{self.user.first_name} {self.user.last_name}"
+
+
+
+# from django.db import models
+# from django.contrib.auth.models import User
+
+# class Manager(models.Model):
+#     user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+#     def __str__(self):
+#         return f"{self.user.first_name} {self.user.last_name}"
+
+
+
+# class superv(models.Model):
+#     user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+#     def __str__(self):
+#         return f"{self.user.first_name} {self.user.last_name}"
+
+

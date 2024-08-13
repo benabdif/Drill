@@ -1,6 +1,6 @@
 # tasks/views.py
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Task, GroupWorkshop, Employee, Manager, Supervisor, Employee_2
+from .models import Task, GroupWorkshop, Employee_2, Manager, Supervisor, Employee_2
 from django.contrib.auth.decorators import login_required
 from .forms import TaskForm, GroupWorkshopForm
 
@@ -13,16 +13,6 @@ def dashboard(request):
     else:
         tasks = Task.objects.filter(assigned_to=request.user.employee)
     return render(request, 'blog/dashboard.html', {'tasks': tasks})
-
-
-
-
-
-def dashboard1(request):
-    tasks = Task.objects.all()  # Fetch all tasks
-    return render(request, 'blog/dashboard.html', {'tasks': tasks})
-
-
 
 
 
@@ -42,50 +32,6 @@ def add_task(request):
     else:
         form = TaskForm()
     return render(request, 'blog/add_task.html', {'form': form})
-
-
-
-# @login_required
-# def add_task(request):
-#     if request.method == 'POST':
-#         form = TaskForm(request.POST)
-#         if form.is_valid():
-#             task = form.save(commit=False)
-#             task.assigned_by = request.user
-#             task.save()
-#             form.save_m2m()
-#             return redirect('dashboard')
-#     else:
-#         form = TaskForm()
-#     return render(request, 'blog/add_task.html', {'form': form})
-
-
-# from django.shortcuts import render, redirect
-# from .forms import TaskForm
-
-# def create_task_To(request):
-#     if request.method == 'POST':
-#         form = TaskForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('success')  # Redirect to a success page or another view
-#     else:
-#         form = TaskForm()
-#     return render(request, 'create_task.html', {'form': form})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 # @login_required
@@ -143,10 +89,5 @@ def createTask2(request):
   
     return render(request, 'blog/createTask.html', context)
 
-
-
-# def myaddTask(request):
-    
-#     print(request.POST.get('title'))
 
 

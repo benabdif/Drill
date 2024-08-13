@@ -710,7 +710,8 @@ select {
                               <span class="timeline-label start-label">{{ task.start_date }}</span>
                               <span class="timeline-label end-label">{{ task.end_date }}</span>
                           </div>
-                          <p>Asing to: {{ task.assigned_to.user.username }}</p>
+                          <p>Asing to: {{ task.name }}</p>
+                        
                           
                           <div class="timeline">
                               {% if task.completed %}
