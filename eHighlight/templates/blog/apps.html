@@ -1,9 +1,6 @@
 {% extends 'blog/base_Apps_page.html' %}
 {% load static %}
-
-
 {% block content %}
-
 {% include "chat/chat_popup.html" %}
 
 <style>
@@ -218,6 +215,7 @@
             <div class="dropdown-btn">More</div>
             <ul class="feature-list">
                 <li><a href="{% url 'dashboard' %}">To Do Tasks test</a></li>
+                <li><a href="{% url 'rig_timeline' %}">Daily Report</a></li> 
                 <li>Earthwork Activities</li>
                 <li>Description</li>
                 <li>Site Review</li>

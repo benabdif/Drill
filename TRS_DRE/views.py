@@ -66,8 +66,6 @@ def project_list(request):
 def rig_timeline1(request):
     
     riggs = Rigg.objects.prefetch_related("movementg_set").all()
-    RIGG1 = Rigg.objects.all()
-    RIGG2 = Wellg .objects.all()
     field_type_choices = Rigg.FIELD_TYPE_CHOICES    
     
     if riggs:
@@ -144,3 +142,24 @@ def your_view(request):
         "movements": movements,
     }
     return render(request, "your_template.html", context)
+
+
+from django.shortcuts import get_object_or_404, redirect
+from django.http import JsonResponse
+from .models import Movementg
+
+def save_note(request):
+    if request.method == 'POST':
+        movement_id = request.POST.get('movement_id')
+        note_text = request.POST.get('note')
+        print(note_text)
+        # Fetch the Movementg instance
+        movement = get_object_or_404(Movementg, id=movement_id)
+
+        # Update the note
+        movement.note = note_text
+        movement.save()
+
+        return JsonResponse({'status': 'success', 'message': 'Note saved successfully!'})
+    else:
+        return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=400)

@@ -587,6 +587,7 @@
 
         <div class="tab-content mt-3">
             <div class="tab-pane fade show active" id="individual-task">
+                <!-- This is the form 1 to add group -->
                 <form method="post" action="{% url 'add_task' %}" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="form-row">
@@ -596,54 +597,37 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label for="individualName">Name</label>
-                            <select class="form-control" id="individualName" name="name">
+                            <select class="form-control" id="individualName" name="assigned_to">
                                 <option value="">Select your name</option>
-<<<<<<< HEAD
-                                {% for employee in supervisor.employees.all %}
-                                    {% if supervisor %} 
-                                        <option value="{{ employee.user.first_name }}">{{ employee.user.first_name }}</option>
-                                    {% elif manager %}
-                                        {% for supervisor in manager.supervisors.all %}
-                                            <option value="{{ supervisor.user.first_name }}">{{ supervisor.user.first_name }}</option>
-                                        {% endfor %}
-                                    {% else %}
-                                        <option disabled>No options available</option>
-                                    {% endif %} 
-                                {% endfor %}
-
-                                {% comment %} {% if supervisor %} 
+                            
+                                {% if supervisor %}
                                     {% for employee in supervisor.employees.all %}
-                                        <option value="{{ employee.id }}">{{ employee.user.first_name }}</option>
-                                    {% endfor %} {% endcomment %}
-=======
-                                {% if supervisor %} 
-                                    {% for employee in supervisor.employees.all %}
-                                        <option value="{{ employee.id }}">{{ employee.user.username }}</option>
+                                        <option value="{{ employee.user.id }}">{{ employee.user.first_name }}</option>
                                     {% endfor %}
                                 {% elif manager %}
                                     {% for supervisor in manager.supervisors.all %}
-                                        <option value="{{ supervisor.id }}">{{ supervisor.user.first_name }}</option>
+                                        <option value="{{ supervisor.user.id }}">{{ supervisor.user.first_name }}</option>
                                     {% endfor %}
                                 {% else %}
                                     <option disabled>No options available</option>
                                 {% endif %}
->>>>>>> 5351f0a02930dcef7e245c13f358358ab8cccb8d
                             </select>
+                            
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="timeStart">Start Time</label>
-                            <input type="datetime-local" class="form-control" id="timeStart" name="start_date">
+                            <input type="date" class="form-control" id="timeStart" name="start_date">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="timeEnd">End Time</label>
-                            <input type="datetime-local" class="form-control" id="timeEnd" name="end_date">
+                            <input type="date" class="form-control" id="timeEnd" name="end_date">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="individualObjective">Task Objective</label>
-                        <textarea class="form-control" id="individualObjective" name="objective" rows="3" placeholder="Describe the task objective"></textarea>
+                        <textarea class="form-control" id="individualObjective" name="description" rows="3" placeholder="Describe the task objective"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="fileUpload">Upload File</label>
@@ -653,16 +637,70 @@
                         <label for="imageUpload">Upload Image</label>
                         <input type="file" class="form-control-file" id="imageUpload" name="image_upload" accept="image/*">
                     </div>
+
+                    
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>
-            
          
             <div class="tab-pane fade" id="group-task">
-                
+                <!-- This is the form 2 to add group -->
                 <form method="post" action="{% url 'add_task' %}">
                     {% csrf_token %}
-                    {{form.as_p}}
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <button type="button" class="btn btn-secondary mb-3" onclick="addMember()">Add Member</button>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="groupTitle">Title</label>
+                            <input type="text" class="form-control" id="groupTitle" name="title" placeholder="Enter task title">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="groupName">Group Name</label>
+                            <select class="form-control" id="groupName" name="group_name">
+                                {% if supervisor %}
+                                    {% for employee in supervisor.employees.all %}
+                                        <option value="{{ employee.id }}">{{ employee.user.first_name }}</option>
+                                    {% endfor %}
+                                {% elif manager %}
+                                    {% for supervisor in manager.supervisors.all %}
+                                        <option value="{{ supervisor.id }}">{{ supervisor.user.first_name }}</option>
+                                    {% endfor %}
+                                {% else %}
+                                    <option disabled>No options available</option>
+                                {% endif %}
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="groupLeader">Group Leader</label>
+                            <select class="form-control" id="groupLeader" name="group_leader">
+                                <option value="">Select group leader</option>
+                                <option value="john">John</option>
+                                <option value="jane">Jane</option>
+                                <option value="alice">Alice</option>
+                                <option value="bob">Bob</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row" id="additionalMembers"></div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="groupObjective">Group Objective</label>
+                            <textarea class="form-control" id="groupObjective" name="objective" rows="3" placeholder="Describe the group task objective" style="width: 200%;"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="groupTimeStart">Start Time</label>
+                            <input type="datetime-local" class="form-control" id="groupTimeStart" name="start_time">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="groupTimeEnd">End Time</label>
+                            <input type="datetime-local" class="form-control" id="groupTimeEnd" name="end_time">
+                        </div>
+                    </div>
                     <button type="submit" class="btn btn-primary" style="width: 40%;">Submit</button>
                 </form>
             </div>

@@ -10,6 +10,8 @@ urlpatterns = [
     path('projects/', views.project_list, name='project_list'),
     path('create_rig_info/', views.create_rig_info, name='create_rig_info'),
     path('view_rig_info/', views.view_rig_info, name='view_rig_info'),
+    path('save-note/', views.save_note, name='save_note'),
+
     
 
 
