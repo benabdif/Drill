@@ -5,8 +5,20 @@ from django.contrib import admin
 # admin.site.register(Rig)
 # admin.site.register(Engineer)
 
-
-from .models import Rigg, Wellg, Movementg, Units, Contractor, Engineering
+from .models import (
+    Rigg,
+    Wellg,
+    Movementg,
+    Units,
+    Contractor,
+    Engineering,
+    Well_Construction_Info,
+    Construction_Departmeent,
+    Pre_Construction,
+    Cellar,
+    HDPE_Installation,
+    
+    )
 
 admin.site.register(Rigg)
 admin.site.register(Wellg)
@@ -14,7 +26,11 @@ admin.site.register(Movementg)
 admin.site.register(Units)
 admin.site.register(Contractor)
 admin.site.register(Engineering)
-
+admin.site.register(Well_Construction_Info)
+admin.site.register(Construction_Departmeent)
+admin.site.register(Pre_Construction)
+admin.site.register(Cellar)
+admin.site.register(HDPE_Installation)
 
 
 
