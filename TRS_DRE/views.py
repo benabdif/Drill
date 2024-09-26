@@ -182,7 +182,7 @@ def getMyinfo_JAX(request, pk):
     )
 
 
-# This is the function that get all the information
+# Well Construction (1)
 def get_Well_Construction_Info(request, pk):
     construction_info = get_object_or_404(Well_Construction_Info, pk=pk)
     
@@ -204,7 +204,7 @@ def get_Well_Construction_Info(request, pk):
             "well_construction_GOSP_WIP_Department": construction_info.well_construction_GOSP_WIP_Department,
         }
     )
-
+# Rig Construction (2)
 def get_Rig_Construction_Info(request, pk):
     Rig_construction_info = get_object_or_404(Rigg, pk=pk)
     
@@ -226,6 +226,30 @@ def get_Rig_Construction_Info(request, pk):
 
         }
     )
+    
+def get_Location_Map():
+    pass
+
+
+def get_Pre_Construction_Info(request, pk):
+    Pre_Construction_Info = get_object_or_404(Pre_Construction, pk=pk)
+
+    return JsonResponse(
+        {
+            "Approval_Status": Pre_Construction_Info.Approval_Status,
+            "Approval_Date": Pre_Construction_Info.Approval_Date,
+            "CONDTR_REQ": Pre_Construction_Info.CONDTR_REQ,
+            "Approved_Lay_out": Pre_Construction_Info.Approved_Lay_out,
+            "Date_Approved_Lay_out": Pre_Construction_Info.Date_Approved_Lay_out,
+            "R_Completio_Date": Pre_Construction_Info.R_Completio_Date,
+
+        }
+    )
+
+
+
+# def get_Construction_info(request, pk):
+#     Construction_info = get_object_or_404()
     
 
 
@@ -252,17 +276,3 @@ def save_note(request):
 
 ######
 
-
-def mytest_o(request):
-    # Get all Pre_Construction objects
-    Pre_Con = Pre_Construction.objects.all()
-
-    # Extract the Approval_Status field from each object
-    approval_status_list = Pre_Con.values_list("Approval_Status", flat=True)
-
-    # Pass the list of approval statuses to the template
-    context = {
-        "Approval_Status": approval_status_list,
-    }
-
-    return render(request, "blog/test_o.html", context)

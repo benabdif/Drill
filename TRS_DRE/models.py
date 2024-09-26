@@ -32,6 +32,7 @@ class Well_Construction_Info(models.Model):
 class Construction_Departmeent(models.Model):
     CONSTR_REQ = models.IntegerField(null=True, blank=True) # we havr to thank about this if this should be 
     REQ_Start_Date = models.DateField(null=True, blank=True)
+    
     REQ_End_Date = models.DateField(null=True, blank=True)
     CONSTR_KPI = models.IntegerField(null=True, blank=True)
     CONSTR_Skid_ROAD_DIST = models.IntegerField(null=True, blank=True)

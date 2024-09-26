@@ -19,18 +19,7 @@ urlpatterns = [
     # new
     path('get-pre-construction-data/', views.get_pre_construction_data, name='get_pre_construction_data'),
     path("get-well-construction-info/<int:pk>/", views.get_Well_Construction_Info, name="get-well-construction-info"),
-
     path("get_Rig_Construction_Info/<int:pk>/", views.get_Rig_Construction_Info, name="get_Rig_Construction_Info"),
-   
-   
-   
-   
-    path('test_o/', views.mytest_o, name='mytest_o')
-
-
-
-
-    
-
+    path("get_Pre_Construction_Info/<int:pk>/", views.get_Pre_Construction_Info, name="get_Pre_Construction_Info"),
     
 ]

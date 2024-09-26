@@ -658,7 +658,7 @@
                       <div class="area">
                         {% comment %} <a href="{% url 'rig_timeline' movement.well.pk %}">{{ movement.well.name }} fadhel</a> {% endcomment %}
 
-                        <a onclick="render_data({{movement.Well_Construction_Infotion.pk}}); render_data1('{{ movement.rig.pk }}');" href="#" class="well-link">{{ movement.well.name }}</a>
+                        <a onclick="render_data({{movement.Well_Construction_Infotion.pk}}); render_data1('{{ movement.rig.pk }}'); render_data2('{{ movement.Pre_Construction.pk }}');" class="well-link">{{ movement.Well_Construction_Infotion.well_construction_name }}</a>
 
                       </div>
 
@@ -978,13 +978,13 @@
                 <div class="col-md-6">
                   <div class="d-flex align-items-center">
                     <label for="approval-status" class="form-label me-3" style="width: 300px;">Approval Status:</label>
-                    <input type="text" class="form-control" style="background-color: #f5deb3;" id="approval-status" placeholder="Enter Approval Status" />
+                    <input type="text" class="form-control" style="background-color: #f5deb3;" id="Approval_Status" placeholder="Enter Approval Status" />
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="d-flex align-items-center">
                     <label for="approval-date" class="form-label me-3" style="width: 300px;">Approval Date:</label>
-                    <input type="text" class="form-control" style="background-color: #f5deb3;" id="approval-date" placeholder="Enter Approval Date" />
+                    <input type="text" class="form-control" style="background-color: #f5deb3;" id="Approval_Date"/>
                   </div>
                 </div>
               </div>
@@ -993,13 +993,13 @@
                 <div class="col-md-6">
                   <div class="d-flex align-items-center">
                     <label for="construction-requirement" class="form-label me-3" style="width: 300px;">Construction Requirement:</label>
-                    <input type="text" class="form-control" style="background-color: #f5deb3;" id="construction-requirement" placeholder="Enter Construction Requirement" />
+                    <input type="text" class="form-control" style="background-color: #f5deb3;" id="CONDTR_REQ" />
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="d-flex align-items-center">
                     <label for="completion-date" class="form-label me-3" style="width: 300px;">R. Completion Date:</label>
-                    <input type="text" class="form-control" style="background-color: #f5deb3;" id="completion-date" placeholder="Enter Completion Date" />
+                    <input type="text" class="form-control" style="background-color: #f5deb3;" id="R_Completio_Date"/>
                   </div>
                 </div>
               </div>
@@ -1008,13 +1008,13 @@
                 <div class="col-md-6">
                   <div class="d-flex align-items-center">
                     <label for="approved-layout" class="form-label me-3" style="width: 300px;">Approved Layout:</label>
-                    <input type="text" class="form-control" style="background-color: #f5deb3;" id="approved-layout" placeholder="Enter Approved Layout" />
+                    <input type="text" class="form-control" style="background-color: #f5deb3;" id="Approved_Lay_out"/>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="d-flex align-items-center">
                     <label for="layout-date" class="form-label me-3" style="width: 300px;">Date:</label>
-                    <input type="text" class="form-control" style="background-color: #f5deb3;" id="layout-date" placeholder="Enter Date" />
+                    <input type="text" class="form-control" style="background-color: #f5deb3;" id="Date_Approved_Lay_out"/>
                   </div>
                 </div>
               </div>
@@ -1462,6 +1462,26 @@
           })
       }
       <!--(2)-->
+
+      <!--(3)-->
+      function render_data2(id) {
+    const url = `/get_Pre_Construction_Info/${id}/`; // Adjust the URL structure if needed
+
+    fetch(url)
+        .then((response) => response.json())
+        .then((data) => {
+            document.getElementById("Approval_Status").value = data.Approval_Status;
+            document.getElementById("Approval_Date").value = data.Approval_Date;
+            document.getElementById("CONDTR_REQ").value = data.CONDTR_REQ;
+            document.getElementById("Approved_Lay_out").value = data.Approved_Lay_out;
+            document.getElementById("Date_Approved_Lay_out").value = data.Date_Approved_Lay_out;
+            document.getElementById("R_Completio_Date").value = data.R_Completion_Date;
+        })
+        .catch((error) => {
+            console.error('Error fetching Pre-Construction info:', error);
+        });
+}
+
 
 
     </script>
