@@ -658,7 +658,7 @@
                       <div class="area">
                         {% comment %} <a href="{% url 'rig_timeline' movement.well.pk %}">{{ movement.well.name }} fadhel</a> {% endcomment %}
 
-                        <a onclick="render_data('{{movement.Well_Construction_Infotion.pk}}'); render_data1('{{ movement.rig.pk }}'); render_data2('{{ movement.Pre_Construction.pk }}'); render_data3('{{ movement.Construction_Departmeent.pk }}');  render_data4('{{ movement.Cellar.pk }}'); render_data5('{{ movement.HDPE_Installation.pk }}');  " class="well-link">{{ movement.Well_Construction_Infotion.well_construction_name }}</a>
+                        <a onclick="render_data('{{movement.Well_Construction_Infotion.pk}}'); render_data1('{{ movement.rig.pk }}'); render_data2('{{ movement.Pre_Construction.pk }}'); render_data3('{{ movement.Construction_Departmeent.pk }}');  render_data4('{{ movement.Cellar.pk }}'); render_data5('{{ movement.HDPE_Installation.pk }}'); render_data6('{{ movement.Rig_Move.pk }}');" class="well-link">{{ movement.Well_Construction_Infotion.well_construction_name }}</a>
 
                       </div>
 
@@ -759,592 +759,653 @@
             </div>
           </div>
           <!-- Individual Task Tab Content -->
-          <div class="tab-pane fade show active" id="individual-task" role="tabpanel" aria-labelledby="individual-task-tab">
+          <div class="tab-pane fade show active" id="individual-task" role="tabpanel" aria-labelledby="individual-task-tab" style="font-size: 14px;">
             <form>
-              <div class="row mb-3">
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="well-name" class="form-label me-3" style="width: 250px;">Well Name:</label>
-                  <input type="text" style="background-color: #f5deb3; width: calc(100% - 260px);" class="form-control" id="well-name"/>
+                <!-- Well Name, Drillsite Name, and Objective -->
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        <label for="well-name" class="form-label" style="font-weight: bold; width: 150px;">Well Name:</label>
+                        <input type="text" class="form-control" id="well-name" placeholder="Enter Well Name" style="background-color: #fff0db;" />
+                    </div>
+                    <div class="col-md-4">
+                        <label for="Drillsite_Name" class="form-label" style="font-weight: bold; width: 150px;">Drillsite Name:</label>
+                        <input type="text" class="form-control" id="Drillsite_Name" placeholder="Enter Drillsite Name" style="background-color: #fff0db;" />
+                    </div>
+                    <div class="col-md-4">
+                        <label for="objective" class="form-label" style="font-weight: bold; width: 150px;">Objective:</label>
+                        <input type="text" class="form-control" id="objective" placeholder="Enter Objective" style="background-color: #fff0db;" />
+                    </div>
                 </div>
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="rig-name" class="form-label me-3" style="width: 250px;">Drillsite Name:</label>
-                  <input type="text" style="background-color: #f5deb3; width: calc(100% - 260px);" class="form-control" id="Drillsite_Name"/>
+        
+                <!-- Fluid Type, BI, and Charge Account -->
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        <label for="fluid_Type_choices" class="form-label" style="font-weight: bold; width: 150px;">Fluid Type:</label>
+                        <input type="text" class="form-control" id="fluid_Type_choices" placeholder="Enter Fluid Type" style="background-color: #fff0db;" />
+                    </div>
+                    <div class="col-md-4">
+                        <label for="BI" class="form-label" style="font-weight: bold; width: 150px;">BI:</label>
+                        <input type="text" class="form-control" id="BI" placeholder="Enter BI" style="background-color: #fff0db;" />
+                    </div>
+                    <div class="col-md-4">
+                        <label for="Charge_Account" class="form-label" style="font-weight: bold; width: 150px;">Charge Account:</label>
+                        <input type="text" class="form-control" id="Charge_Account" placeholder="Enter Charge Account" style="background-color: #fff0db;" />
+                    </div>
                 </div>
-              </div>
-              <div class="row mb-3">
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="objective" class="form-label me-3" style="width: 250px;">Objective:</label>
-                  <input type="text" style="background-color: #f5deb3; width: calc(100% - 260px);" class="form-control" id="objective"/>
+        
+                <!-- Spud Date, Released Date, and Reference Number -->
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        <label for="Spud_date" class="form-label" style="font-weight: bold; width: 150px;">Spud Date:</label>
+                        <input type="text" class="form-control" id="Spud_date" placeholder="Enter Spud Date" style="background-color: #fff0db;" />
+                    </div>
+                    <div class="col-md-4">
+                        <label for="Released_date" class="form-label" style="font-weight: bold; width: 150px;">Released Date:</label>
+                        <input type="text" class="form-control" id="Released_date" placeholder="Enter Released Date" style="background-color: #fff0db;" />
+                    </div>
+                    <div class="col-md-4">
+                        <label for="Reference_Number" class="form-label" style="font-weight: bold; width: 250px;">Reference Number (RAC):</label>
+                        <input type="text" class="form-control" id="Reference_Number" placeholder="Enter Reference Number" style="background-color: #fff0db;" />
+                    </div>
                 </div>
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="fluid-type" class="form-label me-3" style="width: 250px;">Fluid Type:</label>
-                  <input type="text" style="background-color: #f5deb3; width: calc(100% - 260px);" class="form-control" id="fluid_Type_choices"/>
+        
+                <!-- Direct Distance, D&WO Engineer, and Engineering Department -->
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        <label for="well_construction_Direct_distance_DH" class="form-label" style="font-weight: bold; width: 150px;">Direct Distance DH:</label>
+                        <input type="text" class="form-control" id="well_construction_Direct_distance_DH" placeholder="Enter Direct Distance DH" style="background-color: #fff0db;" />
+                    </div>
+                    <div class="col-md-4">
+                        <label for="well_construction_DWO_Engineer" class="form-label" style="font-weight: bold; width: 150px;">D&WO Engineer:</label>
+                        <input type="text" class="form-control" id="well_construction_DWO_Engineer" placeholder="Enter Engineer Name" style="background-color: #fff0db;" />
+                    </div>
+                    <div class="col-md-4">
+                        <label for="Engineering_department" class="form-label" style="font-weight: bold; width: 250px;">Engineering Department:</label>
+                        <input type="text" class="form-control" id="Engineering_department" placeholder="Enter Department Name" style="background-color: #fff0db;" />
+                    </div>
                 </div>
-              </div>
-              <div class="row mb-3">
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="bi" class="form-label me-3" style="width: 250px;">BI:</label>
-                  <input type="text" style="background-color: #f5deb3; width: calc(100% - 260px);" class="form-control" id="BI" />
+        
+                <!-- Producing Engineer, GOSP/WIP/Department -->
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        <label for="well_construction_Producing_Engineer" class="form-label" style="font-weight: bold; width: 150px;">Producing Engineer:</label>
+                        <input type="text" class="form-control" id="well_construction_Producing_Engineer" placeholder="Enter Producing Engineer Name" style="background-color: #fff0db;" />
+                    </div>
+                    <div class="col-md-4">
+                        <label for="well_construction_GOSP_WIP_Department" class="form-label" style="font-weight: bold; width: 150px;">GOSP/WIP/Department:</label>
+                        <input type="text" class="form-control" id="well_construction_GOSP_WIP_Department" placeholder="Enter Department Name" style="background-color: #fff0db;" />
+                    </div>
                 </div>
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="charge-account" class="form-label me-3" style="width: 250px;">Charge Account:</label>
-                  <input type="text" style="background-color: #f5deb3; width: calc(100% - 260px);" class="form-control" id="Charge_Account"/>
-                </div>
-              </div>
-              <div class="row mb-3">
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="spud-date" class="form-label me-3" style="width: 250px;">Spud Date:</label>
-                  <input type="text" style="background-color: #f5deb3; width: calc(100% - 260px);" class="form-control" id="Spud_date" />
-                </div>
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="released-date" class="form-label me-3" style="width: 250px;">Released Date:</label>
-                  <input type="text" style="background-color: #f5deb3; width: calc(100% - 260px);" class="form-control" id="Released_date"/>
-                </div>
-              </div>
-              <div class="row mb-3">
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="reference-number" class="form-label me-3" style="width: 250px;">Reference Number (RAC):</label>
-                  <input type="text" style="background-color: #f5deb3; width: calc(100% - 260px);" class="form-control" id="Reference_Number"/>
-                </div>
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="direct-distance" class="form-label me-3" style="width: 250px;">Direct Distance DH:</label>
-                  <input type="text" style="background-color: #f5deb3; width: calc(100% - 260px);" class="form-control" id="well_construction_Direct_distance_DH"/>
-                </div>
-              </div>
-              <div class="row mb-3">
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="dwo-engineer" class="form-label me-3" style="width: 250px;">D&WO Engineer:</label>
-                  <input type="text" style="background-color: #f5deb3; width: calc(100% - 260px);" class="form-control" id="well_construction_DWO_Engineer"/>
-                </div>
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="engineering-department" class="form-label me-3" style="width: 250px;">Engineering Department:</label>
-                  <input type="text" style="background-color: #f5deb3; width: calc(100% - 260px);" class="form-control" id="Engineering_department"/>
-                </div>
-              </div>
-              <div class="row mb-3">
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="producing-engineer" class="form-label me-3" style="width: 250px;">Producing Engineer:</label>
-                  <input type="text" style="background-color: #f5deb3; width: calc(100% - 260px);" class="form-control" id="well_construction_Producing_Engineer"/>
-                </div>
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="gosp-department" class="form-label me-3" style="width: 250px;">GOSP/WIP/Department:</label>
-                  <input type="text" style="background-color: #f5deb3; width: calc(100% - 260px);" class="form-control" id="well_construction_GOSP_WIP_Department"/>
-                </div>
-              </div>
             </form>
-          </div>
+        </div>
+        
+        
 
           <!-- Group Task Tab Rig info -->
-          <div class="tab-pane fade" id="group-task" role="tabpanel" aria-labelledby="group-task-tab">
+          <div class="tab-pane fade" id="group-task" role="tabpanel" aria-labelledby="group-task-tab" style="font-size: 14px;">
             <form>
-              <div class="row mb-3">
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="well-name-group" class="form-label me-3" style="width: 250px;">Rig Name:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="Rig_name"/>
+                <!-- Rig Name and Rig Type -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="Rig_name" class="form-label" style="font-weight: bold; width: 250px;">Rig Name:</label>
+                        <input type="text" class="form-control" id="Rig_name" placeholder="Enter Rig Name" style="background-color: #fff0db;" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="Rig_Type" class="form-label" style="font-weight: bold; width: 250px;">Rig Type:</label>
+                        <input type="text" class="form-control" id="Rig_Type" placeholder="Enter Rig Type" style="background-color: #fff0db;" />
+                    </div>
                 </div>
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="rig-name-group" class="form-label me-3" style="width: 250px;">Rig Type:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="Rig_Type"/>
+        
+                <!-- Operation Department and Operation Manager -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="Operation_Department" class="form-label" style="font-weight: bold; width: 250px;">Operation Department:</label>
+                        <input type="text" class="form-control" id="Operation_Department" placeholder="Enter Department Name" style="background-color: #fff0db;" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="Operation_Manager" class="form-label" style="font-weight: bold; width: 250px;">Operation Manager:</label>
+                        <input type="text" class="form-control" id="Operation_Manager" placeholder="Enter Manager Name" style="background-color: #fff0db;" />
+                    </div>
                 </div>
-              </div>
-              <div class="row mb-3">
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="well-name-group" class="form-label me-3" style="width: 250px;">Operation Department:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="Operation_Department"/>
+        
+                <!-- Permanent Construction CC and Last Update -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="Permanent_Construction_Cc" class="form-label" style="font-weight: bold; width: 250px;">Permanent Construction CC:</label>
+                        <input type="text" class="form-control" id="Permanent_Construction_Cc" placeholder="Enter Construction CC" style="background-color: #fff0db;" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="Last_Update_Permanent_Construction_Cc" class="form-label" style="font-weight: bold; width: 250px;">Last Update on:</label>
+                        <input type="text" class="form-control" id="Last_Update_Permanent_Construction_Cc" placeholder="Enter Last Update Date" style="background-color: #fff0db;" />
+                    </div>
                 </div>
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="rig-name-group" class="form-label me-3" style="width: 250px;">Operation Manager:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="Operation_Manager"/>
+        
+                <!-- Permanent HDPE Contractor and Last Update -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="Permanent_HDPE_Contractor" class="form-label" style="font-weight: bold; width: 250px;">Permanent HDPE Contractor:</label>
+                        <input type="text" class="form-control" id="Permanent_HDPE_Contractor" placeholder="Enter Contractor Name" style="background-color: #fff0db;" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="Last_Update_Permanent_HDPE_Contractor" class="form-label" style="font-weight: bold; width: 250px;">Last Update on:</label>
+                        <input type="text" class="form-control" id="Last_Update_Permanent_HDPE_Contractor" placeholder="Enter Last Update Date" style="background-color: #fff0db;" />
+                    </div>
                 </div>
-              </div>
-              <div class="row mb-3">
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="well-name-group" class="form-label me-3" style="width: 250px;">Permanent Construction Cc:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="Permanent_Construction_Cc"/>
+        
+                <!-- Permanent Soil Test Contractor and Last Update -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="Permanent_Soil_Test_Contractor" class="form-label" style="font-weight: bold; width: 250px;">Permanent Soil Test Contractor:</label>
+                        <input type="text" class="form-control" id="Permanent_Soil_Test_Contractor" placeholder="Enter Contractor Name" style="background-color: #fff0db;" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="Last_Update_Permanent_Soil_Test_Contractor" class="form-label" style="font-weight: bold; width: 250px;">Last Update on:</label>
+                        <input type="text" class="form-control" id="Last_Update_Permanent_Soil_Test_Contractor" placeholder="Enter Last Update Date" style="background-color: #fff0db;" />
+                    </div>
                 </div>
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="rig-name-group" class="form-label me-3" style="width: 250px;">Last Update on:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="Last_Update_Permanent_Construction_Cc"/>
+        
+                <!-- Current Assigned Unit and WS Engineer -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="Current_Assigned_Unit" class="form-label" style="font-weight: bold; width: 250px;">Current Assigned Unit:</label>
+                        <input type="text" class="form-control" id="Current_Assigned_Unit" placeholder="Enter Unit Details" style="background-color: #fff0db;" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="Current_Assigned_WS_Engineer" class="form-label" style="font-weight: bold; width: 250px;">Current Assigned WS Engineer:</label>
+                        <input type="text" class="form-control" id="Current_Assigned_WS_Engineer" placeholder="Enter Engineer Name" style="background-color: #fff0db;" />
+                    </div>
                 </div>
-              </div>
-              <div class="row mb-3">
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="well-name-group" class="form-label me-3" style="width: 250px;">Permanent HDPE Contractor:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="Permanent_HDPE_Contractor"/>
-                </div>
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="rig-name-group" class="form-label me-3" style="width: 250px;">Last Update on:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="Last_Update_Permanent_HDPE_Contractor"/>
-                </div>
-              </div>
-
-              <div class="row mb-3">
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="well-name-group" class="form-label me-3" style="width: 250px;">Permanent Soil Test Contractor:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="Permanent_Soil_Test_Contractor"/>
-                </div>
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="rig-name-group" class="form-label me-3" style="width: 250px;">Last Update on:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="Last_Update_Permanent_Soil_Test_Contractor"/>
-                </div>
-              </div>
-
-              <div class="row mb-3">
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="well-name-group" class="form-label me-3" style="width: 250px;">Current Assigned Unit:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="Current_Assigned_Unit"/>
-                </div>
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="rig-name-group" class="form-label me-3" style="width: 250px;">Current Assigned WS Engineer:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="Current_Assigned_WS_Engineer"/>
-                </div>
-              </div>
             </form>
-          </div>
+        </div>
+        
 
           <!-- Location Map Tab Content -->
-          <div class="tab-pane fade" id="group-task1" role="tabpanel" aria-labelledby="group-task-tab">
+          <div class="tab-pane fade" id="group-task1" role="tabpanel" aria-labelledby="group-task-tab" style="font-size: 14px;">
             <form>
-              <div class="row mb-3">
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="well-name-group" class="form-label me-3" style="width: 250px;">Location Map :</label>
-                  <input type="text" class="form-control flex-grow-1" id="well-name-group" placeholder="QQQ" />
+                <!-- Location Map and Rig Name -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="well-name-group" class="form-label" style="font-weight: bold; width: 250px;">Location Map:</label>
+                        <input type="text" class="form-control" id="well-name-group" placeholder="Enter Location Map Details" style="background-color: #fff0db;" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="rig-name-group" class="form-label" style="font-weight: bold; width: 150px;">Rig Name:</label>
+                        <input type="text" class="form-control" id="rig-name-group" placeholder="Enter Rig Name" style="background-color: #fff0db;" />
+                    </div>
                 </div>
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="rig-name-group" class="form-label me-3" style="width: 150px;">Rig Name:</label>
-                  <input type="text" class="form-control flex-grow-1" id="rig-name-group" placeholder="44rr" />
-                </div>
-              </div>
             </form>
-          </div>
-
-          <!-- Pre-Construction -->
-          {% comment %} <div class="tab-pane fade" id="group-task2" role="tabpanel" aria-labelledby="group-task-tab">
-            <form>
-              <div class="row mb-3">
-                <div class="col-md-6">
-                  <div class="d-flex align-items-center">
-                    <label for="approval-status" class="form-label me-3" style="width: 300px;">Approval Status:</label>
-                    <input type="text" class="form-control" style="background-color: #f5deb3;" id="approval-status" placeholder="Enter Approval Status" />
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="d-flex align-items-center">
-                    <label for="approval-date" class="form-label me-3" style="width: 300px;">Approval Date:</label>
-                    <input type="text" class="form-control" style="background-color: #f5deb3;" id="approval-date" placeholder="Enter Approval Date" />
-                  </div>
-                </div>
-              </div>
-
-              <div class="row mb-3">
-                <div class="col-md-6">
-                  <div class="d-flex align-items-center">
-                    <label for="construction-requirement" class="form-label me-3" style="width: 300px;">Construction Requirement:</label>
-                    <input type="text" class="form-control" style="background-color: #f5deb3;" id="construction-requirement" placeholder="Enter Construction Requirement" />
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="d-flex align-items-center">
-                    <label for="completion-date" class="form-label me-3" style="width: 300px;">R. Completion Date:</label>
-                    <input type="text" class="form-control" style="background-color: #f5deb3;" id="completion-date" placeholder="Enter Completion Date" />
-                  </div>
-                </div>
-              </div>
-
-              <div class="row mb-3">
-                <div class="col-md-6">
-                  <div class="d-flex align-items-center">
-                    <label for="approved-layout" class="form-label me-3" style="width: 300px;">Approved Layout:</label>
-                    <input type="text" class="form-control" style="background-color: #f5deb3;" id="approved-layout" placeholder="Enter Approved Layout" />
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="d-flex align-items-center">
-                    <label for="layout-date" class="form-label me-3" style="width: 300px;">Date:</label>
-                    <input type="text" class="form-control" style="background-color: #f5deb3;" id="layout-date" placeholder="Enter Date" />
-                  </div>
-                </div>
-              </div>
-            </form>
-          </div> {% endcomment %}
-
+        </div>
+        
           <!-- Well Link -->
           <a href="#" class="well-link" data-id="{{ movement.well.pk }}">{{ movement.well.name }}</a>
 
           <!-- The form inside the #group-task2 div -->
-          <div class="tab-pane fade" id="group-task2" role="tabpanel" aria-labelledby="group-task-tab">
+          <div class="tab-pane fade" id="group-task2" role="tabpanel" aria-labelledby="group-task-tab" style="font-size: 14px;">
             <form>
-              <div class="row mb-3">
-                <div class="col-md-6">
-                  <div class="d-flex align-items-center">
-                    <label for="approval-status" class="form-label me-3" style="width: 300px;">Approval Status:</label>
-                    <input type="text" class="form-control" style="background-color: #f5deb3;" id="Approval_Status" placeholder="Enter Approval Status" />
-                  </div>
+                <!-- Approval Status and Date -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-center">
+                            <label for="Approval_Status" class="form-label" style="font-weight: bold; width: 300px;">Approval Status:</label>
+                            <input type="text" class="form-control" style="background-color: #fff0db;" id="Approval_Status" placeholder="Enter Approval Status" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-center">
+                            <label for="Approval_Date" class="form-label" style="font-weight: bold; width: 300px;">Approval Date:</label>
+                            <input type="text" class="form-control" style="background-color: #fff0db;" id="Approval_Date" placeholder="Enter Approval Date" />
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-6">
-                  <div class="d-flex align-items-center">
-                    <label for="approval-date" class="form-label me-3" style="width: 300px;">Approval Date:</label>
-                    <input type="text" class="form-control" style="background-color: #f5deb3;" id="Approval_Date"/>
-                  </div>
+        
+                <!-- Construction Requirement and Completion Date -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-center">
+                            <label for="CONDTR_REQ" class="form-label" style="font-weight: bold; width: 300px;">Construction Requirement:</label>
+                            <input type="text" class="form-control" style="background-color: #fff0db;" id="CONDTR_REQ" placeholder="Enter Construction Requirement" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-center">
+                            <label for="R_Completio_Date" class="form-label" style="font-weight: bold; width: 300px;">R. Completion Date:</label>
+                            <input type="text" class="form-control" style="background-color: #fff0db;" id="R_Completio_Date" placeholder="Enter Completion Date" />
+                        </div>
+                    </div>
                 </div>
-              </div>
-
-              <div class="row mb-3">
-                <div class="col-md-6">
-                  <div class="d-flex align-items-center">
-                    <label for="construction-requirement" class="form-label me-3" style="width: 300px;">Construction Requirement:</label>
-                    <input type="text" class="form-control" style="background-color: #f5deb3;" id="CONDTR_REQ" />
-                  </div>
+        
+                <!-- Approved Layout and Date -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-center">
+                            <label for="Approved_Lay_out" class="form-label" style="font-weight: bold; width: 300px;">Approved Layout:</label>
+                            <input type="text" class="form-control" style="background-color: #fff0db;" id="Approved_Lay_out" placeholder="Enter Approved Layout Details" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-center">
+                            <label for="Date_Approved_Lay_out" class="form-label" style="font-weight: bold; width: 300px;">Date:</label>
+                            <input type="text" class="form-control" style="background-color: #fff0db;" id="Date_Approved_Lay_out" placeholder="Enter Date" />
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-6">
-                  <div class="d-flex align-items-center">
-                    <label for="completion-date" class="form-label me-3" style="width: 300px;">R. Completion Date:</label>
-                    <input type="text" class="form-control" style="background-color: #f5deb3;" id="R_Completio_Date"/>
-                  </div>
-                </div>
-              </div>
-
-              <div class="row mb-3">
-                <div class="col-md-6">
-                  <div class="d-flex align-items-center">
-                    <label for="approved-layout" class="form-label me-3" style="width: 300px;">Approved Layout:</label>
-                    <input type="text" class="form-control" style="background-color: #f5deb3;" id="Approved_Lay_out"/>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="d-flex align-items-center">
-                    <label for="layout-date" class="form-label me-3" style="width: 300px;">Date:</label>
-                    <input type="text" class="form-control" style="background-color: #f5deb3;" id="Date_Approved_Lay_out"/>
-                  </div>
-                </div>
-              </div>
             </form>
-          </div>
+        </div>
+        
           {% comment %}here the new code we have{% endcomment %}
 
           <!-- Construction Table -->
-          <div class="tab-pane fade" id="group-task3" role="tabpanel" aria-labelledby="group-task-tab">
+          <div class="tab-pane fade" id="group-task3" role="tabpanel" aria-labelledby="group-task-tab" style="font-size: 14px;">
             <form>
-              <!-- I am here I will work on it after the breake -->
-              <div class="row mb-3">
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="well-name-group" class="form-label me-3" style="width: 250px;">Construction Request:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="CONSTR_REQ"/>
+                <!-- Construction Request and Request Date -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="CONSTR_REQ" class="form-label" style="font-weight: bold;">Construction Request:</label>
+                        <input type="text" class="form-control" id="CONSTR_REQ" placeholder="Enter Construction Request" style="background-color: #fff0db;" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="REQ_Start_Date" class="form-label" style="font-weight: bold;">Request Date:</label>
+                        <input type="text" class="form-control" id="REQ_Start_Date" placeholder="Enter Request Start Date" style="background-color: #fff0db;" />
+                    </div>
                 </div>
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="rig-name-group" class="form-label me-3" style="width: 250px;">Request Date:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="REQ_Start_Date" placeholder="44rr" />
+        
+                <!-- Request Status and Construction Contractor -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="REQ_Status" class="form-label" style="font-weight: bold;">Request Status:</label>
+                        <input type="text" class="form-control" id="REQ_Status" placeholder="Enter Request Status" style="background-color: #fff0db;" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="CONSTR_Contractor" class="form-label" style="font-weight: bold;">Construction Contractor:</label>
+                        <input type="text" class="form-control" id="CONSTR_Contractor" placeholder="Enter Contractor Name" style="background-color: #fff0db;" />
+                    </div>
                 </div>
-              </div>
-              <div class="row mb-3">
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="well-name-group" class="form-label me-3" style="width: 250px;">Request Status:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="REQ_Status" placeholder="QQQ" />
+        
+                <!-- Construction KPI and KOM -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="CONSTR_KPI" class="form-label" style="font-weight: bold;">Construction KPI:</label>
+                        <input type="text" class="form-control" id="CONSTR_KPI" placeholder="Enter KPI" style="background-color: #fff0db;" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="CONSTR_KOM" class="form-label" style="font-weight: bold;">Construction KOM:</label>
+                        <input type="text" class="form-control" id="CONSTR_KOM" placeholder="Enter KOM Details" style="background-color: #fff0db;" />
+                    </div>
                 </div>
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="rig-name-group" class="form-label me-3" style="width: 250px;">Construction Contractor:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="CONSTR_Contractor" placeholder="44rr" />
+        
+                <!-- Conducted By and Construction Status -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="Conducted_by_KOM" class="form-label" style="font-weight: bold;">Conducted By:</label>
+                        <input type="text" class="form-control" id="Conducted_by_KOM" placeholder="Enter Name of Person Conducting KOM" style="background-color: #fff0db;" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="Construction_Status" class="form-label" style="font-weight: bold;">Construction Status:</label>
+                        <input type="text" class="form-control" id="Construction_Status" placeholder="Enter Construction Status" style="background-color: #fff0db;" />
+                    </div>
                 </div>
-              </div>
-              <div class="row mb-3">
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="well-name-group" class="form-label me-3" style="width: 250px;">Construction KPI:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="CONSTR_KPI" placeholder="QQQ" />
+        
+                <!-- Constructed Skid Road Distance and Final Survey -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="CONSTR_Skid_ROAD_DIST" class="form-label" style="font-weight: bold;">Constructed Skid Road Distance:</label>
+                        <input type="text" class="form-control" id="CONSTR_Skid_ROAD_DIST" placeholder="Enter Distance" style="background-color: #fff0db;" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="Final_Survey" class="form-label" style="font-weight: bold;">Final Survey:</label>
+                        <input type="text" class="form-control" id="Final_Survey" placeholder="Enter Final Survey Details" style="background-color: #fff0db;" />
+                    </div>
                 </div>
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="rig-name-group" class="form-label me-3" style="width: 250px;">Construction KOM:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="CONSTR_KOM" placeholder="44rr" />
+        
+                <!-- Conducted By and Unit -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="Conducted_by_Final_Survey" class="form-label" style="font-weight: bold;">Conducted By:</label>
+                        <input type="text" class="form-control" id="Conducted_by_Final_Survey" placeholder="Enter Name of Person Conducting Survey" style="background-color: #fff0db;" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="Unit" class="form-label" style="font-weight: bold;">Unit:</label>
+                        <input type="text" class="form-control" id="Unit" placeholder="Enter Unit" style="background-color: #fff0db;" />
+                    </div>
                 </div>
-              </div>
-              <div class="row mb-3">
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="well-name-group" class="form-label me-3" style="width: 250px;">Conducted By:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="Conducted_by_KOM" placeholder="QQQ" />
+        
+                <!-- Post Construction Turn-over and Date -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="Post_CONSTR_Rurn_OVER" class="form-label" style="font-weight: bold;">Post Construction Turn-over:</label>
+                        <input type="text" class="form-control" id="Post_CONSTR_Rurn_OVER" placeholder="Enter Turn-over Details" style="background-color: #fff0db;" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="REQ_End_Date" class="form-label" style="font-weight: bold;">Date:</label>
+                        <input type="text" class="form-control" id="REQ_End_Date" placeholder="Enter End Date" style="background-color: #fff0db;" />
+                    </div>
                 </div>
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="rig-name-group" class="form-label me-3" style="width: 250px;">Construction Status:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="Construction_Status" placeholder="44rr" />
+        
+                <!-- Quantities Details and Project Team Details -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="Quanatities_Detities" class="form-label" style="font-weight: bold;">Quantities Details:</label>
+                        <input type="text" class="form-control" id="Quanatities_Detities" placeholder="Enter Quantities Details" style="background-color: #fff0db;" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="Project_team_Details" class="form-label" style="font-weight: bold;">Project Team Details:</label>
+                        <input type="text" class="form-control" id="Project_team_Details" placeholder="Enter Team Details" style="background-color: #fff0db;" />
+                    </div>
                 </div>
-              </div>
-
-              <div class="row mb-3">
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="well-name-group" class="form-label me-3" style="width: 250px;">Constructed Skid Road Distance:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="CONSTR_Skid_ROAD_DIST" placeholder="QQQ" />
+        
+                <!-- Remarks and Criticality -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="Remark_and_Hold" class="form-label" style="font-weight: bold;">Remarks for 0% and Hold:</label>
+                        <input type="text" class="form-control" id="Remark_and_Hold" placeholder="Enter Remarks" style="background-color: #fff0db;" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="Criticality" class="form-label" style="font-weight: bold;">Criticality:</label>
+                        <input type="text" class="form-control" id="Criticality" placeholder="Enter Criticality Level" style="background-color: #fff0db;" />
+                    </div>
                 </div>
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="rig-name-group" class="form-label me-3" style="width: 250px;">Final Survey:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="Final_Survey" placeholder="44rr" />
-                </div>
-              </div>
-
-              <div class="row mb-3">
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="well-name-group" class="form-label me-3" style="width: 250px;">Conducted By:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="Conducted_by_Final_Survey" placeholder="QQQ" />
-                </div>
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="rig-name-group" class="form-label me-3" style="width: 250px;">Unit:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="Unit" placeholder="44rr" />
-                </div>
-              </div>
-              <div class="row mb-3">
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="well-name-group" class="form-label me-3" style="width: 250px;">Post Construction Turn-over:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="Post_CONSTR_Rurn_OVER" placeholder="QQQ" />
-                </div>
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="rig-name-group" class="form-label me-3" style="width: 250px;">Date:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="REQ_End_Date" placeholder="44rr" />
-                </div>
-              </div>
-              <div class="row mb-3">
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="well-name-group" class="form-label me-3" style="width: 250px;">Quantities Details:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="Quanatities_Detities" placeholder="QQQ" />
-                </div>
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="rig-name-group" class="form-label me-3" style="width: 250px;">Project team Details:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="Project_team_Details" placeholder="44rr" />
-                </div>
-              </div>
-              <div class="row mb-3">
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="well-name-group" class="form-label me-3" style="width: 250px;">Remarks for 0% and Hold:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="Remark_and_Hold" placeholder="QQQ" />
-                </div>
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="rig-name-group" class="form-label me-3" style="width: 250px;">Criticality:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="Criticality" placeholder="44rr" />
-                </div>
-              </div>
             </form>
-          </div>
+        </div>
+        
 
-          <div class="tab-pane fade" id="group-task4" role="tabpanel" aria-labelledby="group-task-tab">
+          <div class="tab-pane fade" id="group-task4" role="tabpanel" aria-labelledby="group-task-tab" style="font-size: 14px;">
             <form>
-              <!-- I am here I will work on it after the breake -->
-              <div class="row mb-3">
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="well-name-group" class="form-label me-3" style="width: 250px;">Cellar Installation:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="Cellar_Installation" placeholder="QQQ" />
+                <!-- Cellar Installation and Soil Test Request Section -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="Cellar_Installation" class="form-label" style="font-weight: bold;">Cellar Installation:</label>
+                        <input type="text" class="form-control" id="Cellar_Installation" placeholder="Enter Installation Details" style="background-color: #fff0db;" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="Soil_Test_Request" class="form-label" style="font-weight: bold;">Soil Test Request:</label>
+                        <input type="text" class="form-control" id="Soil_Test_Request" placeholder="Enter Soil Test Request" style="background-color: #fff0db;" />
+                    </div>
                 </div>
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="rig-name-group" class="form-label me-3" style="width: 250px;">Soil Test Request:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="Soil_Test_Request" placeholder="44rr" />
+        
+                <!-- Request Date and Status Section -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="REQ_Date" class="form-label" style="font-weight: bold;">Request Date:</label>
+                        <input type="text" class="form-control" id="REQ_Date" placeholder="Enter Request Date" style="background-color: #fff0db;" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="Cellar_REQ_Status" class="form-label" style="font-weight: bold;">Request Status:</label>
+                        <input type="text" class="form-control" id="Cellar_REQ_Status" placeholder="Enter Request Status" style="background-color: #fff0db;" />
+                    </div>
                 </div>
-              </div>
-              <div class="row mb-3">
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="well-name-group" class="form-label me-3" style="width: 250px;">Request Date:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="REQ_Date" placeholder="QQQ" />
+        
+                <!-- Soil Test Contractor and Conducted By Section -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="Soil_Test_Contractor" class="form-label" style="font-weight: bold;">Soil Test Contractor:</label>
+                        <input type="text" class="form-control" id="Soil_Test_Contractor" placeholder="Enter Contractor Name" style="background-color: #fff0db;" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="Conducted_by" class="form-label" style="font-weight: bold;">Conducted By:</label>
+                        <input type="text" class="form-control" id="Conducted_by" placeholder="Enter Name of Person Conducting" style="background-color: #fff0db;" />
+                    </div>
                 </div>
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="rig-name-group" class="form-label me-3" style="width: 250px;">Request Status:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="Cellar_REQ_Status" placeholder="44rr" />
-                </div>
-              </div>
-              <div class="row mb-3">
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="well-name-group" class="form-label me-3" style="width: 250px;">Soil Test Contractor:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="Soil_Test_Contractor" placeholder="QQQ" />
-                </div>
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="rig-name-group" class="form-label me-3" style="width: 250px;">Conducted By:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="Conducted_by" placeholder="44rr" />
-                </div>
-              </div>
             </form>
-          </div>
+        </div>
+        
           <!-- HDPE Installation -->
-          <div class="tab-pane fade" id="group-task5" role="tabpanel" aria-labelledby="group-task-tab">
+          <div class="tab-pane fade" id="group-task5" role="tabpanel" aria-labelledby="group-task-tab" style="font-size: 14px;">
             <form>
-              <!-- I am here I will work on it after the breake -->
-              <div class="row mb-3">
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="well-name-group" class="form-label me-3" style="width: 250px;">Lining Installation:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="Lining_Installation" placeholder="QQQ" /> 
+                <!-- Lining Installation Section -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="Lining_Installation" class="form-label" style="font-weight: bold;">Lining Installation:</label>
+                        <input type="text" class="form-control" id="Lining_Installation" placeholder="Enter Installation Details" style="background-color: #fff0db;" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="REQ_Lining_Number" class="form-label" style="font-weight: bold;">Lining Request:</label>
+                        <input type="text" class="form-control" id="REQ_Lining_Number" placeholder="Enter Request Number" style="background-color: #fff0db;" />
+                    </div>
                 </div>
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="rig-name-group" class="form-label me-3" style="width: 250px;">Lining Request:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="REQ_Lining_Number" placeholder="44rr" />
+        
+                <!-- Request Date and Status Section -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="HDPE_REQ_Date" class="form-label" style="font-weight: bold;">Request Date:</label>
+                        <input type="text" class="form-control" id="HDPE_REQ_Date" placeholder="Enter Request Date" style="background-color: #fff0db;" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="HDPE_REQ_Status" class="form-label" style="font-weight: bold;">Request Status:</label>
+                        <input type="text" class="form-control" id="HDPE_REQ_Status" placeholder="Enter Request Status" style="background-color: #fff0db;" />
+                    </div>
                 </div>
-              </div>
-              <div class="row mb-3">
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="well-name-group" class="form-label me-3" style="width: 250px;">Request Date:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="HDPE_REQ_Date" placeholder="QQQ" />
+        
+                <!-- Installation Status and Area Section -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="Installation_Status" class="form-label" style="font-weight: bold;">Installation Status:</label>
+                        <input type="text" class="form-control" id="Installation_Status" placeholder="Enter Installation Status" style="background-color: #fff0db;" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="Total_Area_Installed" class="form-label" style="font-weight: bold;">Total Area Installed:</label>
+                        <input type="text" class="form-control" id="Total_Area_Installed" placeholder="Enter Total Area" style="background-color: #fff0db;" />
+                    </div>
                 </div>
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="rig-name-group" class="form-label me-3" style="width: 250px;">Request Status:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="HDPE_REQ_Status" placeholder="44rr" />
+        
+                <!-- Contractor and Conducted By Section -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="Lining_Contractor" class="form-label" style="font-weight: bold;">Lining Contractor:</label>
+                        <input type="text" class="form-control" id="Lining_Contractor" placeholder="Enter Contractor Name" style="background-color: #fff0db;" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="Conducted_by_info" class="form-label" style="font-weight: bold;">Conducted By:</label>
+                        <input type="text" class="form-control" id="Conducted_by_info" placeholder="Enter Conducted By Info" style="background-color: #fff0db;" />
+                    </div>
                 </div>
-              </div>
-              <div class="row mb-3">
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="well-name-group" class="form-label me-3" style="width: 250px;">Installation Status:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="Installation_Status" placeholder="QQQ" />
+        
+                <!-- Quantities Section -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="Quantities_Details" class="form-label" style="font-weight: bold;">Quantities:</label>
+                        <input type="text" class="form-control" id="Quantities_Details" placeholder="Enter Quantities Details" style="background-color: #fff0db;" />
+                    </div>
                 </div>
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="rig-name-group" class="form-label me-3" style="width: 250px;">Total Area Installed:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="Total_Area_Installed" placeholder="44rr" />
-                </div>
-              </div>
-              <div class="row mb-3">
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="well-name-group" class="form-label me-3" style="width: 250px;">Lining Contractor:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="Lining_Contractor" placeholder="QQQ" />
-                </div>
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="rig-name-group" class="form-label me-3" style="width: 250px;">Conducted By:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="Conducted_by_info" placeholder="44rr" />
-                </div>
-              </div>
-
-              <div class="row mb-3">
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="well-name-group" class="form-label me-3" style="width: 250px;">Quantities:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="Quantities_Details" placeholder="QQQ" />
-                </div>
-              </div>
             </form>
-          </div>
+        </div>
+        
 
           <!-- Rig move table -->
-          <div class="tab-pane fade" id="group-task6" role="tabpanel" aria-labelledby="group-task-tab">
+          <div class="tab-pane fade" id="group-task6" role="tabpanel" aria-labelledby="group-task-tab" style="font-size: 14px;">
             <form>
-              <!-- I am here I will work on it after the breake -->
-              <div class="row mb-3">
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="well-name-group" class="form-label me-3" style="width: 250px;">Rig Move Request:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="well-name-group" placeholder="QQQ" />
+                <!-- Rig Move Request Section -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="RIG_MOVE_REQ" class="form-label" style="font-weight: bold;">Rig Move Request:</label>
+                        <input type="text" class="form-control" id="RIG_MOVE_REQ" placeholder="Enter Rig Move Request" style="background-color: #fff0db;" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="RIG_MOVE_NAME" class="form-label" style="font-weight: bold;">Rig Name:</label>
+                        <input type="text" class="form-control" id="RIG_MOVE_NAME" placeholder="Enter Rig Name" style="background-color: #fff0db;" />
+                    </div>
                 </div>
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="rig-name-group" class="form-label me-3" style="width: 250px;">Rig Name:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="rig-name-group" placeholder="44rr" />
+        
+                <!-- From Well and Request Status Section -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="RIG_MOVE_WELL" class="form-label" style="font-weight: bold;">From Well:</label>
+                        <input type="text" class="form-control" id="RIG_MOVE_WELL" placeholder="Enter Well Name" style="background-color: #fff0db;" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="RIG_MOVE_STATUS" class="form-label" style="font-weight: bold;">Request Status:</label>
+                        <input type="text" class="form-control" id="RIG_MOVE_STATUS" placeholder="Enter Request Status" style="background-color: #fff0db;" />
+                    </div>
                 </div>
-              </div>
-              <div class="row mb-3">
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="well-name-group" class="form-label me-3" style="width: 250px;">From Well:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="well-name-group" placeholder="QQQ" />
+        
+                <!-- Rig Move Documents and Conducted By Section -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="RIG_MOVE_DOCUMENTS_LINK" class="form-label" style="font-weight: bold;">Rig Move Documents:</label>
+                        <input type="text" class="form-control" id="RIG_MOVE_DOCUMENTS_LINK" placeholder="Enter Document Link" style="background-color: #fff0db;" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="RIG_MOVE_CONDUCTED_BY" class="form-label" style="font-weight: bold;">Conducted By:</label>
+                        <input type="text" class="form-control" id="RIG_MOVE_CONDUCTED_BY" placeholder="Enter Name of Person Conducting" style="background-color: #fff0db;" />
+                    </div>
                 </div>
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="rig-name-group" class="form-label me-3" style="width: 250px;">Request Status:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="rig-name-group" placeholder="44rr" />
-                </div>
-              </div>
-              <div class="row mb-3">
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="well-name-group" class="form-label me-3" style="width: 250px;">Rig Move Documents:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="well-name-group" placeholder="QQQ" />
-                </div>
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="rig-name-group" class="form-label me-3" style="width: 250px;">Conducted By:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="rig-name-group" placeholder="44rr" />
-                </div>
-              </div>
             </form>
-          </div>
+        </div>
+        
 
           <!-- Repair Section -->
-          <div class="tab-pane fade" id="group-task7" role="tabpanel" aria-labelledby="group-task-tab">
+          <div class="tab-pane fade" id="group-task7" role="tabpanel" aria-labelledby="group-task-tab" style="font-size: 14px;">
             <form>
-              <div class="row mb-3">
-                <div class="col-md-2">
-                  <label for="repair-group" class="form-label me-3" style="width: 250px;">Required Repair:</label>
+                <!-- Repair Section -->
+                <div class="row mb-3">
+                    <div class="col-md-2">
+                        <label for="repair-group" class="form-label" style="font-weight: bold;">Required Repair:</label>
+                    </div>
+                    <div class="col-md-10 d-flex flex-wrap align-items-center">
+                        <div class="form-check me-3">
+                            <input class="form-check-input" type="checkbox" id="repair-sand-removal" />
+                            <label class="form-check-label" for="repair-sand-removal">Sand Removal</label>
+                        </div>
+                        <div class="form-check me-3">
+                            <input class="form-check-input" type="checkbox" id="repair-extension" />
+                            <label class="form-check-label" for="repair-extension">Extension</label>
+                        </div>
+                        <div class="form-check me-3">
+                            <input class="form-check-input" type="checkbox" id="repair-recompaction" />
+                            <label class="form-check-label" for="repair-recompaction">Re-Compaction</label>
+                        </div>
+                        <div class="form-check me-3">
+                            <input class="form-check-input" type="checkbox" id="repair-change-cellar" />
+                            <label class="form-check-label" for="repair-change-cellar">Change Cellar</label>
+                        </div>
+                        <div class="form-check me-3">
+                            <input class="form-check-input" type="checkbox" id="repair-modification" />
+                            <label class="form-check-label" for="repair-modification">Modification</label>
+                        </div>
+                        <div class="form-check me-3">
+                            <input class="form-check-input" type="checkbox" id="repair-complete-repair" />
+                            <label class="form-check-label" for="repair-complete-repair">Complete Repair</label>
+                        </div>
+                        <div class="form-check me-3">
+                            <input class="form-check-input" type="checkbox" id="repair-additional" />
+                            <label class="form-check-label" for="repair-additional">Additional</label>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-10 d-flex align-items-center">
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="repair-sand-removal" />
-                    <label class="form-check-label" for="repair-sand-removal">Sand Removal</label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="repair-extension" />
-                    <label class="form-check-label" for="repair-extension">Extension</label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="repair-recompaction" />
-                    <label class="form-check-label" for="repair-recompaction">Re-Compaction</label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="repair-change-cellar" />
-                    <label class="form-check-label" for="repair-change-cellar">Change Cellar</label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="repair-change-cellar-1" />
-                    <label class="form-check-label" for="repair-change-cellar-1">Modification</label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="repair-change-cellar-2" />
-                    <label class="form-check-label" for="repair-change-cellar-2">Complete repair</label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="repair-change-cellar-3" />
-                    <label class="form-check-label" for="repair-change-cellar-3">Additional</label>
-                  </div>
+        
+                <!-- Form Fields Section -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="well-name-group" class="form-label" style="font-weight: bold;">From Well:</label>
+                        <input type="text" class="form-control" id="well-name-group" placeholder="Enter Well Name" style="background-color: #fff0db;" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="request-status-group" class="form-label" style="font-weight: bold;">Request Status:</label>
+                        <input type="text" class="form-control" id="request-status-group" placeholder="Enter Request Status" style="background-color: #fff0db;" />
+                    </div>
                 </div>
-              </div>
-
-              <div class="row mb-3">
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="well-name-group" class="form-label me-3" style="width: 250px;">From Well:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="well-name-group" placeholder="QQQ" />
+        
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="rig-move-documents-group" class="form-label" style="font-weight: bold;">Rig Move Documents:</label>
+                        <input type="text" class="form-control" id="rig-move-documents-group" placeholder="Enter Document Info" style="background-color: #fff0db;" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="conducted-by-group" class="form-label" style="font-weight: bold;">Conducted By:</label>
+                        <input type="text" class="form-control" id="conducted-by-group" placeholder="Enter Name" style="background-color: #fff0db;" />
+                    </div>
                 </div>
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="request-status-group" class="form-label me-3" style="width: 250px;">Request Status:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="request-status-group" placeholder="44rr" />
+        
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="rig-move-documents-group-2" class="form-label" style="font-weight: bold;">Rig Move Documents (2):</label>
+                        <input type="text" class="form-control" id="rig-move-documents-group-2" placeholder="Enter Document Info" style="background-color: #fff0db;" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="conducted-by-group-2" class="form-label" style="font-weight: bold;">Conducted By (2):</label>
+                        <input type="text" class="form-control" id="conducted-by-group-2" placeholder="Enter Name" style="background-color: #fff0db;" />
+                    </div>
                 </div>
-              </div>
-
-              <div class="row mb-3">
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="rig-move-documents-group" class="form-label me-3" style="width: 250px;">Rig Move Documents:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="rig-move-documents-group" placeholder="QQQ" />
+        
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="rig-move-documents-group-3" class="form-label" style="font-weight: bold;">Rig Move Documents (3):</label>
+                        <input type="text" class="form-control" id="rig-move-documents-group-3" placeholder="Enter Document Info" style="background-color: #fff0db;" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="conducted-by-group-3" class="form-label" style="font-weight: bold;">Conducted By (3):</label>
+                        <input type="text" class="form-control" id="conducted-by-group-3" placeholder="Enter Name" style="background-color: #fff0db;" />
+                    </div>
                 </div>
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="conducted-by-group" class="form-label me-3" style="width: 250px;">Conducted By:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="conducted-by-group" placeholder="44rr" />
-                </div>
-              </div>
-              <div class="row mb-3">
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="rig-move-documents-group" class="form-label me-3" style="width: 250px;">Rig Move Documents:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="rig-move-documents-group" placeholder="QQQ" />
-                </div>
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="conducted-by-group" class="form-label me-3" style="width: 250px;">Conducted By:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="conducted-by-group" placeholder="44rr" />
-                </div>
-              </div>
-              <div class="row mb-3">
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="rig-move-documents-group" class="form-label me-3" style="width: 250px;">Rig Move Documents:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="rig-move-documents-group" placeholder="QQQ" />
-                </div>
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="conducted-by-group" class="form-label me-3" style="width: 250px;">Conducted By:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="conducted-by-group"/>
-                </div>
-              </div>
-              <div class="row mb-3">
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="rig-move-documents-group" class="form-label me-3" style="width: 250px;">Rig Move Documents:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="rig-move-documents-group"/>
-                </div>
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="conducted-by-group" class="form-label me-3" style="width: 250px;">Conducted By:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="conducted-by-group" placeholder="44rr" />
-                </div>
-              </div>
-              <div class="row mb-3">
-                <div class="col-md-6 d-flex align-items-center">
-                  <label for="rig-move-documents-group" class="form-label me-3" style="width: 250px;">Rig Move Documents:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="rig-move-documents-group" placeholder="QQQ" />
-                </div>
-              </div>
             </form>
-          </div>
+        </div>
+        
+
+
+          <!-- Clean-Up Section -->
+          <div class="tab-pane fade" id="group-task8" role="tabpanel" aria-labelledby="group-task-tab" style="font-size: 14px;">
+            <form>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="well-name-group" class="form-label" style="font-weight: bold;">Clean-Up Request #:</label>
+                        <input type="text" style="background-color: #fff0db;" class="form-control" id="well-name-group"/>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="request-status-group" class="form-label" style="font-weight: bold;">Pre Clean-Up Turnover:</label>
+                        <input type="text" style="background-color: #fff0db;" class="form-control" id="request-status-group"/>
+                    </div>
+                </div>
+        
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="rig-move-documents-group" class="form-label" style="font-weight: bold;">Clean-Up KPI:</label>
+                        <input type="text" style="background-color: #fff0db;" class="form-control" id="rig-move-documents-group"/>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="post-cleanup-turnover-1" class="form-label" style="font-weight: bold;">Post Clean-Up Turnover:</label>
+                        <input type="text" style="background-color: #fff0db;" class="form-control" id="post-cleanup-turnover-1"/>
+                    </div>
+                </div>
+        
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="cleanup-kpi-2" class="form-label" style="font-weight: bold;">Clean-Up KPI (2):</label>
+                        <input type="text" style="background-color: #fff0db;" class="form-control" id="cleanup-kpi-2"/>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="post-cleanup-turnover-2" class="form-label" style="font-weight: bold;">Post Clean-Up Turnover (2):</label>
+                        <input type="text" style="background-color: #fff0db;" class="form-control" id="post-cleanup-turnover-2"/>
+                    </div>
+                </div>
+        
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="cleanup-kpi-3" class="form-label" style="font-weight: bold;">Clean-Up KPI (3):</label>
+                        <input type="text" style="background-color: #fff0db;" class="form-control" id="cleanup-kpi-3"/>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="post-cleanup-turnover-3" class="form-label" style="font-weight: bold;">Post Clean-Up Turnover (3):</label>
+                        <input type="text" style="background-color: #fff0db;" class="form-control" id="post-cleanup-turnover-3"/>
+                    </div>
+                </div>
+        
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="cleanup-kpi-4" class="form-label" style="font-weight: bold;">Clean-Up KPI (4):</label>
+                        <input type="text" style="background-color: #fff0db;" class="form-control" id="cleanup-kpi-4"/>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="post-cleanup-turnover-4" class="form-label" style="font-weight: bold;">Post Clean-Up Turnover (4):</label>
+                        <input type="text" style="background-color: #fff0db;" class="form-control" id="post-cleanup-turnover-4"/>
+                    </div>
+                </div>
+        
+                <!-- You can add additional form elements here -->
+            </form>
+        </div>
+        
+
+
+
         </div>
       </div>
     </div>
@@ -1568,6 +1629,49 @@ function render_data5(id) {
         });
 }
 
+{% comment %} function render_data6(id) {
+  const url = `/Get_Rig_Move/${id}/`; // Adjust the URL structure if needed
+  
+  fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
+        document.getElementById("RIG_MOVE_REQ").value = data.RIG_MOVE_REQ;
+ 
+
+      
+    })
+    .catch((error) => {
+        console.error('Error fetching Pre-Construction info:', error);
+    });
+} {% endcomment %}
+
+function render_data6(id) {
+  const url = `/Get_Rig_Move/${id}/`;  // Ensure the URL is correct.
+  
+  fetch(url)
+    .then((response) => response.json())
+    .then((data) => {
+      // Update each input field with the fetched data
+      document.getElementById("RIG_MOVE_REQ").value = data.RIG_MOVE_REQ || '';
+      document.getElementById("RIG_MOVE_NAME").value = data.RIG_MOVE_NAME || '';
+      document.getElementById("RIG_MOVE_WELL").value = data.RIG_MOVE_WELL || '';
+      document.getElementById("RIG_MOVE_STATUS").value = data.RIG_MOVE_STATUS || '';
+      document.getElementById("RIG_MOVE_CONDUCTED_BY").value = data.RIG_MOVE_CONDUCTED_BY || '';
+      
+      // Handle file URL: if there's a file, show it
+      if (data.RIG_MOVE_DOCUMENTS) {
+        let fileLink = document.getElementById("RIG_MOVE_DOCUMENTS_LINK");
+        fileLink.href = data.RIG_MOVE_DOCUMENTS;
+        fileLink.innerText = "View Document";
+        fileLink.style.display = 'block';  // Show link if the document exists
+      } else {
+        document.getElementById("RIG_MOVE_DOCUMENTS_LINK").style.display = 'none' // Hide link if no document
+      }
+    })
+    .catch((error) => {
+      console.error('Error fetching Rig Move info:', error);
+    });
+}
 
 
     </script>

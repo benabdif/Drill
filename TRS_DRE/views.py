@@ -12,6 +12,7 @@ from .models import (
     Well_Construction_Info,
     Cellar,
     HDPE_Installation,
+    Rig_Move,
 
 )
 # from datetime import datetime
@@ -226,8 +227,6 @@ def get_Rig_Construction_Info(request, pk):
             "Last_Update_Permanent_Soil_Test_Contractor": Rig_construction_info.Last_Update_Permanent_Soil_Test_Contractor,
             "Current_Assigned_Unit": Rig_construction_info.Current_Assigned_Unit,
             "Current_Assigned_WS_Engineer": Rig_construction_info.Current_Assigned_WS_Engineer,
-
-
         }
     )
     
@@ -316,6 +315,41 @@ def get_HDPE_Installation(request, pk):
             "Quantities_Details": HDPE_Installation_Info.Quantities_Details,        
         }
     )
+
+
+# def Get_Rig_Move(request, pk):
+#     Rig_Move_Info = get_object_or_404(Rig_Move, pk=pk)
+#     return JsonResponse(
+#         {
+#             "RIG_MOVE_REQ": Rig_Move_Info.RIG_MOVE_REQ,
+#             "RIG_MOVE_NAME":Rig_Move_Info.RIG_MOVE_NAME,
+#             "RIG_MOVE_WELL":Rig_Move_Info.RIG_MOVE_WELL,
+#             "RIG_MOVE_STATUS":Rig_Move_Info.RIG_MOVE_STATUS,
+#             "RIG_MOVE_DOCUMENTS":Rig_Move_Info.RIG_MOVE_DOCUMENTS,
+#             "RIG_MOVE_CONDUCTED_BY":Rig_Move_Info.RIG_MOVE_CONDUCTED_BY,
+                    
+#         }
+#     )
+
+def Get_Rig_Move(request, pk):
+    Rig_Move_Info = get_object_or_404(Rig_Move, pk=pk)
+    
+    # Handle file field, check if file exists
+    rig_move_documents_url = Rig_Move_Info.RIG_MOVE_DOCUMENTS.url if Rig_Move_Info.RIG_MOVE_DOCUMENTS else None
+    
+    return JsonResponse(
+        {
+            "RIG_MOVE_REQ": Rig_Move_Info.RIG_MOVE_REQ,
+            "RIG_MOVE_NAME": Rig_Move_Info.RIG_MOVE_NAME,
+            "RIG_MOVE_WELL": Rig_Move_Info.RIG_MOVE_WELL,
+            "RIG_MOVE_STATUS": Rig_Move_Info.RIG_MOVE_STATUS,
+            "RIG_MOVE_DOCUMENTS": rig_move_documents_url,
+            "RIG_MOVE_CONDUCTED_BY": Rig_Move_Info.RIG_MOVE_CONDUCTED_BY,
+        }
+    )
+
+
+
 
 
 # def get_Construction_info(request, pk):
