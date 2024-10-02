@@ -10,6 +10,9 @@ from .models import (
     Construction_Departmeent,
     Pre_Construction,
     Well_Construction_Info,
+    Cellar,
+    HDPE_Installation,
+
 )
 # from datetime import datetime
 from django.db import connection
@@ -204,6 +207,7 @@ def get_Well_Construction_Info(request, pk):
             "well_construction_GOSP_WIP_Department": construction_info.well_construction_GOSP_WIP_Department,
         }
     )
+
 # Rig Construction (2)
 def get_Rig_Construction_Info(request, pk):
     Rig_construction_info = get_object_or_404(Rigg, pk=pk)
@@ -231,6 +235,7 @@ def get_Location_Map():
     pass
 
 
+
 def get_Pre_Construction_Info(request, pk):
     Pre_Construction_Info = get_object_or_404(Pre_Construction, pk=pk)
 
@@ -246,6 +251,71 @@ def get_Pre_Construction_Info(request, pk):
         }
     )
 
+
+
+def get_Construction_Department(request, pk):
+    # Correct model and function name
+    Construction_Department_Info = get_object_or_404(Construction_Departmeent, pk=pk)
+
+    return JsonResponse(
+        {
+            "CONSTR_REQ": Construction_Department_Info.CONSTR_REQ,
+            "REQ_Start_Date": Construction_Department_Info.REQ_Start_Date,
+            "REQ_Status": Construction_Department_Info.REQ_Status,
+            "CONSTR_Contractor": Construction_Department_Info.CONSTR_Contractor,
+
+            "CONSTR_KPI": Construction_Department_Info.CONSTR_KPI,
+            "CONSTR_KOM": Construction_Department_Info.CONSTR_KOM,
+            "Conducted_by_KOM": Construction_Department_Info.Conducted_by_KOM,
+            "Construction_Status": Construction_Department_Info.Construction_Status,
+
+            "CONSTR_Skid_ROAD_DIST": Construction_Department_Info.CONSTR_Skid_ROAD_DIST,
+            "Final_Survey": Construction_Department_Info.Final_Survey,
+            "Conducted_by_Final_Survey": Construction_Department_Info.Conducted_by_Final_Survey,
+            "Unit": Construction_Department_Info.Unit,
+
+            "Post_CONSTR_Rurn_OVER": Construction_Department_Info.Post_CONSTR_Rurn_OVER,  # Corrected "Rurn" to "Turn"
+            "REQ_End_Date": Construction_Department_Info.REQ_End_Date,
+            "Quanatities_Detities": Construction_Department_Info.Quanatities_Detities,  # Corrected "Quanatities_Detities"
+            "Project_team_Details": Construction_Department_Info.Project_team_Details,
+
+            "Remark_and_Hold": Construction_Department_Info.Remark_and_Hold,
+            "Criticality": Construction_Department_Info.Criticality,
+        }
+    )
+
+
+def get_Cellar(request, pk):
+    Cellar_Info = get_object_or_404(Cellar, pk=pk)
+    return JsonResponse(
+        {
+            "Cellar_Installation": Cellar_Info.Cellar_Installation,
+            "Soil_Test_Request": Cellar_Info.Soil_Test_Request,
+            "REQ_Date": Cellar_Info.REQ_Date,
+            "Cellar_REQ_Status": Cellar_Info.Cellar_REQ_Status,
+            "Soil_Test_Contractor": Cellar_Info.Soil_Test_Contractor,
+            "Conducted_by": Cellar_Info.Conducted_by,
+        }
+    )
+
+
+
+
+def get_HDPE_Installation(request, pk):
+    HDPE_Installation_Info = get_object_or_404(HDPE_Installation, pk=pk)
+    return JsonResponse(
+        {
+            "Lining_Installation": HDPE_Installation_Info.Lining_Installation,
+            "REQ_Lining_Number": HDPE_Installation_Info.REQ_Lining_Number,
+            "HDPE_REQ_Date": HDPE_Installation_Info.HDPE_REQ_Date,
+            "HDPE_REQ_Status": HDPE_Installation_Info.HDPE_REQ_Status,
+            "Installation_Status": HDPE_Installation_Info.Installation_Status,
+            "Total_Area_Installed": HDPE_Installation_Info.Total_Area_Installed,
+            "Lining_Contractor": HDPE_Installation_Info.Lining_Contractor,
+            "Conducted_by_info": HDPE_Installation_Info.Conducted_by_info,
+            "Quantities_Details": HDPE_Installation_Info.Quantities_Details,        
+        }
+    )
 
 
 # def get_Construction_info(request, pk):

@@ -658,7 +658,7 @@
                       <div class="area">
                         {% comment %} <a href="{% url 'rig_timeline' movement.well.pk %}">{{ movement.well.name }} fadhel</a> {% endcomment %}
 
-                        <a onclick="render_data({{movement.Well_Construction_Infotion.pk}}); render_data1('{{ movement.rig.pk }}'); render_data2('{{ movement.Pre_Construction.pk }}');" class="well-link">{{ movement.Well_Construction_Infotion.well_construction_name }}</a>
+                        <a onclick="render_data('{{movement.Well_Construction_Infotion.pk}}'); render_data1('{{ movement.rig.pk }}'); render_data2('{{ movement.Pre_Construction.pk }}'); render_data3('{{ movement.Construction_Departmeent.pk }}');  render_data4('{{ movement.Cellar.pk }}'); render_data5('{{ movement.HDPE_Installation.pk }}');  " class="well-link">{{ movement.Well_Construction_Infotion.well_construction_name }}</a>
 
                       </div>
 
@@ -1029,93 +1029,93 @@
               <div class="row mb-3">
                 <div class="col-md-6 d-flex align-items-center">
                   <label for="well-name-group" class="form-label me-3" style="width: 250px;">Construction Request:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="well-name-group" placeholder="QQQ" />
+                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="CONSTR_REQ"/>
                 </div>
                 <div class="col-md-6 d-flex align-items-center">
                   <label for="rig-name-group" class="form-label me-3" style="width: 250px;">Request Date:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="rig-name-group" placeholder="44rr" />
+                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="REQ_Start_Date" placeholder="44rr" />
                 </div>
               </div>
               <div class="row mb-3">
                 <div class="col-md-6 d-flex align-items-center">
                   <label for="well-name-group" class="form-label me-3" style="width: 250px;">Request Status:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="well-name-group" placeholder="QQQ" />
+                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="REQ_Status" placeholder="QQQ" />
                 </div>
                 <div class="col-md-6 d-flex align-items-center">
                   <label for="rig-name-group" class="form-label me-3" style="width: 250px;">Construction Contractor:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="rig-name-group" placeholder="44rr" />
+                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="CONSTR_Contractor" placeholder="44rr" />
                 </div>
               </div>
               <div class="row mb-3">
                 <div class="col-md-6 d-flex align-items-center">
                   <label for="well-name-group" class="form-label me-3" style="width: 250px;">Construction KPI:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="well-name-group" placeholder="QQQ" />
+                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="CONSTR_KPI" placeholder="QQQ" />
                 </div>
                 <div class="col-md-6 d-flex align-items-center">
                   <label for="rig-name-group" class="form-label me-3" style="width: 250px;">Construction KOM:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="rig-name-group" placeholder="44rr" />
+                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="CONSTR_KOM" placeholder="44rr" />
                 </div>
               </div>
               <div class="row mb-3">
                 <div class="col-md-6 d-flex align-items-center">
                   <label for="well-name-group" class="form-label me-3" style="width: 250px;">Conducted By:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="well-name-group" placeholder="QQQ" />
+                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="Conducted_by_KOM" placeholder="QQQ" />
                 </div>
                 <div class="col-md-6 d-flex align-items-center">
                   <label for="rig-name-group" class="form-label me-3" style="width: 250px;">Construction Status:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="rig-name-group" placeholder="44rr" />
+                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="Construction_Status" placeholder="44rr" />
                 </div>
               </div>
 
               <div class="row mb-3">
                 <div class="col-md-6 d-flex align-items-center">
                   <label for="well-name-group" class="form-label me-3" style="width: 250px;">Constructed Skid Road Distance:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="well-name-group" placeholder="QQQ" />
+                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="CONSTR_Skid_ROAD_DIST" placeholder="QQQ" />
                 </div>
                 <div class="col-md-6 d-flex align-items-center">
                   <label for="rig-name-group" class="form-label me-3" style="width: 250px;">Final Survey:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="rig-name-group" placeholder="44rr" />
+                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="Final_Survey" placeholder="44rr" />
                 </div>
               </div>
 
               <div class="row mb-3">
                 <div class="col-md-6 d-flex align-items-center">
                   <label for="well-name-group" class="form-label me-3" style="width: 250px;">Conducted By:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="well-name-group" placeholder="QQQ" />
+                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="Conducted_by_Final_Survey" placeholder="QQQ" />
                 </div>
                 <div class="col-md-6 d-flex align-items-center">
                   <label for="rig-name-group" class="form-label me-3" style="width: 250px;">Unit:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="rig-name-group" placeholder="44rr" />
+                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="Unit" placeholder="44rr" />
                 </div>
               </div>
               <div class="row mb-3">
                 <div class="col-md-6 d-flex align-items-center">
                   <label for="well-name-group" class="form-label me-3" style="width: 250px;">Post Construction Turn-over:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="well-name-group" placeholder="QQQ" />
+                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="Post_CONSTR_Rurn_OVER" placeholder="QQQ" />
                 </div>
                 <div class="col-md-6 d-flex align-items-center">
                   <label for="rig-name-group" class="form-label me-3" style="width: 250px;">Date:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="rig-name-group" placeholder="44rr" />
+                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="REQ_End_Date" placeholder="44rr" />
                 </div>
               </div>
               <div class="row mb-3">
                 <div class="col-md-6 d-flex align-items-center">
                   <label for="well-name-group" class="form-label me-3" style="width: 250px;">Quantities Details:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="well-name-group" placeholder="QQQ" />
+                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="Quanatities_Detities" placeholder="QQQ" />
                 </div>
                 <div class="col-md-6 d-flex align-items-center">
                   <label for="rig-name-group" class="form-label me-3" style="width: 250px;">Project team Details:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="rig-name-group" placeholder="44rr" />
+                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="Project_team_Details" placeholder="44rr" />
                 </div>
               </div>
               <div class="row mb-3">
                 <div class="col-md-6 d-flex align-items-center">
                   <label for="well-name-group" class="form-label me-3" style="width: 250px;">Remarks for 0% and Hold:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="well-name-group" placeholder="QQQ" />
+                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="Remark_and_Hold" placeholder="QQQ" />
                 </div>
                 <div class="col-md-6 d-flex align-items-center">
                   <label for="rig-name-group" class="form-label me-3" style="width: 250px;">Criticality:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="rig-name-group" placeholder="44rr" />
+                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="Criticality" placeholder="44rr" />
                 </div>
               </div>
             </form>
@@ -1127,31 +1127,31 @@
               <div class="row mb-3">
                 <div class="col-md-6 d-flex align-items-center">
                   <label for="well-name-group" class="form-label me-3" style="width: 250px;">Cellar Installation:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="well-name-group" placeholder="QQQ" />
+                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="Cellar_Installation" placeholder="QQQ" />
                 </div>
                 <div class="col-md-6 d-flex align-items-center">
                   <label for="rig-name-group" class="form-label me-3" style="width: 250px;">Soil Test Request:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="rig-name-group" placeholder="44rr" />
+                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="Soil_Test_Request" placeholder="44rr" />
                 </div>
               </div>
               <div class="row mb-3">
                 <div class="col-md-6 d-flex align-items-center">
                   <label for="well-name-group" class="form-label me-3" style="width: 250px;">Request Date:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="well-name-group" placeholder="QQQ" />
+                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="REQ_Date" placeholder="QQQ" />
                 </div>
                 <div class="col-md-6 d-flex align-items-center">
                   <label for="rig-name-group" class="form-label me-3" style="width: 250px;">Request Status:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="rig-name-group" placeholder="44rr" />
+                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="Cellar_REQ_Status" placeholder="44rr" />
                 </div>
               </div>
               <div class="row mb-3">
                 <div class="col-md-6 d-flex align-items-center">
                   <label for="well-name-group" class="form-label me-3" style="width: 250px;">Soil Test Contractor:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="well-name-group" placeholder="QQQ" />
+                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="Soil_Test_Contractor" placeholder="QQQ" />
                 </div>
                 <div class="col-md-6 d-flex align-items-center">
                   <label for="rig-name-group" class="form-label me-3" style="width: 250px;">Conducted By:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="rig-name-group" placeholder="44rr" />
+                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="Conducted_by" placeholder="44rr" />
                 </div>
               </div>
             </form>
@@ -1163,48 +1163,48 @@
               <div class="row mb-3">
                 <div class="col-md-6 d-flex align-items-center">
                   <label for="well-name-group" class="form-label me-3" style="width: 250px;">Lining Installation:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="well-name-group" placeholder="QQQ" />
+                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="Lining_Installation" placeholder="QQQ" /> 
                 </div>
                 <div class="col-md-6 d-flex align-items-center">
                   <label for="rig-name-group" class="form-label me-3" style="width: 250px;">Lining Request:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="rig-name-group" placeholder="44rr" />
+                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="REQ_Lining_Number" placeholder="44rr" />
                 </div>
               </div>
               <div class="row mb-3">
                 <div class="col-md-6 d-flex align-items-center">
                   <label for="well-name-group" class="form-label me-3" style="width: 250px;">Request Date:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="well-name-group" placeholder="QQQ" />
+                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="HDPE_REQ_Date" placeholder="QQQ" />
                 </div>
                 <div class="col-md-6 d-flex align-items-center">
                   <label for="rig-name-group" class="form-label me-3" style="width: 250px;">Request Status:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="rig-name-group" placeholder="44rr" />
+                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="HDPE_REQ_Status" placeholder="44rr" />
                 </div>
               </div>
               <div class="row mb-3">
                 <div class="col-md-6 d-flex align-items-center">
                   <label for="well-name-group" class="form-label me-3" style="width: 250px;">Installation Status:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="well-name-group" placeholder="QQQ" />
+                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="Installation_Status" placeholder="QQQ" />
                 </div>
                 <div class="col-md-6 d-flex align-items-center">
                   <label for="rig-name-group" class="form-label me-3" style="width: 250px;">Total Area Installed:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="rig-name-group" placeholder="44rr" />
+                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="Total_Area_Installed" placeholder="44rr" />
                 </div>
               </div>
               <div class="row mb-3">
                 <div class="col-md-6 d-flex align-items-center">
                   <label for="well-name-group" class="form-label me-3" style="width: 250px;">Lining Contractor:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="well-name-group" placeholder="QQQ" />
+                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="Lining_Contractor" placeholder="QQQ" />
                 </div>
                 <div class="col-md-6 d-flex align-items-center">
                   <label for="rig-name-group" class="form-label me-3" style="width: 250px;">Conducted By:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="rig-name-group" placeholder="44rr" />
+                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="Conducted_by_info" placeholder="44rr" />
                 </div>
               </div>
 
               <div class="row mb-3">
                 <div class="col-md-6 d-flex align-items-center">
                   <label for="well-name-group" class="form-label me-3" style="width: 250px;">Quantities:</label>
-                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="well-name-group" placeholder="QQQ" />
+                  <input type="text" style="background-color: #f5deb3;" class="form-control flex-grow-1" id="Quantities_Details" placeholder="QQQ" />
                 </div>
               </div>
             </form>
@@ -1435,7 +1435,7 @@
           })
       }
 
-      <!--(2)-->
+      
       function render_data1(id) {
         // Assuming your URL follows the pattern defined in the URLs
         const url = `/get_Rig_Construction_Info/${id}/` // Replace this with your correct URL structure
@@ -1461,21 +1461,107 @@
             console.error('Error fetching well construction info:', error)
           })
       }
-      <!--(2)-->
+    
 
-      <!--(3)-->
-      function render_data2(id) {
-    const url = `/get_Pre_Construction_Info/${id}/`; // Adjust the URL structure if needed
-
-    fetch(url)
-        .then((response) => response.json())
-        .then((data) => {
+    
+    function render_data2(id) {
+      const url = `/get_Pre_Construction_Info/${id}/`; // Adjust the URL structure if needed
+      
+      fetch(url)
+          .then((response) => response.json())
+          .then((data) => {
             document.getElementById("Approval_Status").value = data.Approval_Status;
             document.getElementById("Approval_Date").value = data.Approval_Date;
             document.getElementById("CONDTR_REQ").value = data.CONDTR_REQ;
             document.getElementById("Approved_Lay_out").value = data.Approved_Lay_out;
             document.getElementById("Date_Approved_Lay_out").value = data.Date_Approved_Lay_out;
             document.getElementById("R_Completio_Date").value = data.R_Completion_Date;
+        })
+        .catch((error) => {
+            console.error('Error fetching Pre-Construction info:', error);
+        });
+}
+
+
+
+
+function render_data3(id) {
+      const url = `/get_Construction_Department/${id}/`; // Adjust the URL structure if needed
+      
+      fetch(url)
+          .then((response) => response.json())
+          .then((data) => {
+            document.getElementById("CONSTR_REQ").value = data.CONSTR_REQ;
+            document.getElementById("REQ_Start_Date").value = data.REQ_Start_Date;
+            document.getElementById("REQ_Status").value = data.REQ_Status;
+            document.getElementById("CONSTR_Contractor").value = data.CONSTR_Contractor;
+
+            document.getElementById("CONSTR_KPI").value = data.CONSTR_KPI;
+            document.getElementById("CONSTR_KOM").value = data.CONSTR_KOM;
+            document.getElementById("Conducted_by_KOM").value = data.Conducted_by_KOM;
+            document.getElementById("Construction_Status").value = data.Construction_Status;
+            
+            
+            document.getElementById("CONSTR_Skid_ROAD_DIST").value = data.CONSTR_Skid_ROAD_DIST;
+            document.getElementById("Final_Survey").value = data.Final_Survey;
+            document.getElementById("Conducted_by_Final_Survey").value = data.Conducted_by_Final_Survey;
+            document.getElementById("Unit").value = data.Unit;
+           
+            document.getElementById("Post_CONSTR_Rurn_OVER").value = data.Post_CONSTR_Rurn_OVER;
+            document.getElementById("REQ_End_Date").value = data.REQ_End_Date;
+            document.getElementById("Quanatities_Detities").value = data.Quanatities_Detities;
+            document.getElementById("Project_team_Details").value = data.Project_team_Details;
+            
+            document.getElementById("Remark_and_Hold").value = data.Remark_and_Hold;
+            document.getElementById("Criticality").value = data.Criticality;
+     
+        })
+        .catch((error) => {
+            console.error('Error fetching Pre-Construction info:', error);
+        });
+}
+
+
+
+
+function render_data4(id) {
+      const url = `/get_Cellar/${id}/`; // Adjust the URL structure if needed
+      
+      fetch(url)
+          .then((response) => response.json())
+          .then((data) => {
+            document.getElementById("Cellar_Installation").value = data.Cellar_Installation;
+            document.getElementById("Soil_Test_Request").value = data.Soil_Test_Request;
+            document.getElementById("REQ_Date").value = data.REQ_Date;
+            document.getElementById("Cellar_REQ_Status").value = data.Cellar_REQ_Status;
+            document.getElementById("Soil_Test_Contractor").value = data.Soil_Test_Contractor;
+            document.getElementById("Conducted_by").value = data.Conducted_by;
+
+     
+        })
+        .catch((error) => {
+            console.error('Error fetching Pre-Construction info:', error);
+        });
+}
+
+
+function render_data5(id) {
+      const url = `/get_HDPE_Installation/${id}/`; // Adjust the URL structure if needed
+      
+      fetch(url)
+          .then((response) => response.json())
+          .then((data) => {
+            document.getElementById("Lining_Installation").value = data.Lining_Installation;
+            document.getElementById("REQ_Lining_Number").value = data.REQ_Lining_Number;
+            document.getElementById("HDPE_REQ_Date").value = data.HDPE_REQ_Date;
+            document.getElementById("HDPE_REQ_Status").value = data.HDPE_REQ_Status;
+            document.getElementById("Installation_Status").value = data.Installation_Status;
+            document.getElementById("Total_Area_Installed").value = data.Total_Area_Installed;
+            document.getElementById("Lining_Contractor").value = data.Lining_Contractor;
+            document.getElementById("Conducted_by_info").value = data.Conducted_by_info;
+            document.getElementById("Quantities_Details").value = data.Quantities_Details;
+
+          
         })
         .catch((error) => {
             console.error('Error fetching Pre-Construction info:', error);

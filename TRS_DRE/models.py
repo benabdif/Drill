@@ -27,33 +27,39 @@ class Well_Construction_Info(models.Model):
     well_construction_Direct_distance_DH = models.CharField(max_length=100, null=True, blank=True)
     well_construction_Engineering_department = models.CharField(max_length=100, null=True, blank=True)
     well_construction_GOSP_WIP_Department = models.CharField(max_length=100, unique=True, null=True) # I have to ask about that?????? to make sure 
+
+    def __str__(self):
+        return self.well_construction_name    
 # This is Construction Information (2)
 
 class Construction_Departmeent(models.Model):
     CONSTR_REQ = models.IntegerField(null=True, blank=True) # we havr to thank about this if this should be 
     REQ_Start_Date = models.DateField(null=True, blank=True)
-    
-    REQ_End_Date = models.DateField(null=True, blank=True)
-    CONSTR_KPI = models.IntegerField(null=True, blank=True)
-    CONSTR_Skid_ROAD_DIST = models.IntegerField(null=True, blank=True)
-    Post_CONSTR_Rurn_OVER = models.CharField(max_length=100, null=True, blank=True)
-    CONSTR_KOM = models.DateField(null=True, blank=True)
-    Conducted_by_KOM = models.CharField(max_length=100, null=True, blank=True)
+    REQ_Status = models.CharField(max_length=100, null=True, blank=True)
+    CONSTR_Contractor = models.CharField(max_length=100, null=True, blank=True)
 
+    CONSTR_KPI = models.IntegerField(null=True, blank=True)
+    CONSTR_KOM = models.DateField(null=True, blank=True)   
+    Conducted_by_KOM = models.CharField(max_length=100, null=True, blank=True)
+    Construction_Status = models.IntegerField(null=True, blank=True) 
+
+    CONSTR_Skid_ROAD_DIST = models.IntegerField(null=True, blank=True)
     Final_Survey = models.CharField(max_length=100, null=True, blank=True)
     Conducted_by_Final_Survey = models.CharField(max_length=100, null=True, blank=True)
+    Unit = models.CharField(max_length=100, null=True, blank=True)
+
+    Post_CONSTR_Rurn_OVER = models.CharField(max_length=100, null=True, blank=True)
+    REQ_End_Date = models.DateField(null=True, blank=True)
+    Quanatities_Detities = models.CharField(max_length=100, null=True, blank=True)
+    Project_team_Details = models.CharField(max_length=100, null=True, blank=True)
+    
     Remark_and_Hold = models.CharField(max_length=100,null=True, blank=True)
     YES_NO_CHOICES = [
         ('Yes', 'Yes'),
         ('No', 'No'),
     ]
-    Criticality = models.CharField(max_length=3,choices=YES_NO_CHOICES, default='Yes/No')
-    REQ_Status = models.CharField(max_length=100, null=True, blank=True)
-    Quanatities_Detities = models.CharField(max_length=100, null=True, blank=True)
-    CONSTR_Contractor = models.CharField(max_length=100, null=True, blank=True)
-    CONSTR_Contractor = models.CharField(max_length=100, null=True, blank=True)
-    Unit = models.CharField(max_length=100, null=True, blank=True)
-    Project_team_Details = models.CharField(max_length=100, null=True, blank=True)
+    Criticality = models.CharField(max_length=3,choices=YES_NO_CHOICES, default='Yes/No')    
+
 
 # This is the Pre_construction Table (3)
 class Pre_Construction(models.Model):
@@ -76,7 +82,7 @@ class Cellar(models.Model):
     Cellar_Installation = models.CharField(max_length=100, null=True, blank=True)
     Soil_Test_Request = models.IntegerField(null=True, blank=True)
     REQ_Date = models.DateField(null=True, blank=True)
-    REQ_Status = models.CharField(max_length=100, null=True, blank=True)
+    Cellar_REQ_Status = models.CharField(max_length=100, null=True, blank=True)
     Soil_Test_Contractor = models.CharField(max_length=100, null=True, blank=True)
     Conducted_by = models.CharField(max_length=100, null=True, blank=True)
 
@@ -84,16 +90,55 @@ class Cellar(models.Model):
 class HDPE_Installation(models.Model):
     Lining_Installation = models.CharField(max_length=100, null=True, blank=True)
     REQ_Lining_Number = models.IntegerField(null=True, blank=True)
-    REQ_Date = models.DateField(null=True, blank=True)
-    REQ_Status = models.CharField(max_length=100, null=True, blank=True)
+    HDPE_REQ_Date = models.DateField(null=True, blank=True)
+    HDPE_REQ_Status = models.CharField(max_length=100, null=True, blank=True)
 
     Installation_Status = models.CharField(max_length=100, null=True, blank=True)
     Total_Area_Installed = models.IntegerField(null=True, blank=True)
     Lining_Contractor = models.CharField(max_length=100, null=True, blank=True)
-    Conducted_by = models.CharField(max_length=100, null=True, blank=True)
+    Conducted_by_info = models.CharField(max_length=100, null=True, blank=True)
     Quantities_Details = models.CharField(max_length=10, null=True, blank=True)
 
+
+# I have to create more than one model( 1- Rig_move 2- Repair-Section 3- Clean-Up Section 4- on location Support Waste Manament 5- Change Request Track )
+
+# Rig_move
+class Rig_Move(models.Model):
+    RIG_MOVE_REQ = models.IntegerField(null=True, blank=True)
+    RIG_MOVE_NAME = models.CharField(max_length=100, null=True, blank=True)
+    RIG_MOVE_WELL = models.CharField(max_length=100, null=True, blank=True)
+    RIG_MOVE_STATUS = models.CharField(max_length=100, null=True, blank=True)
+    RIG_MOVE_DOCUMENTS = models.FileField(upload_to='rig_move_documents/', null=True, blank=True)
+    RIG_MOVE_CONDUCTED_BY = models.CharField(max_length=100, null=True, blank=True)
+
+    def __str__(self):
+        return self.RIG_MOVE_NAME
+
+
+class RepairSection(models.Model):
+    # REQ_Repair = models.CharField(max_length=100, null=True, blank=True) I will work on it next time.
+    REQ_Repair_NUMBER = models.IntegerField(null=True, blank=True)
+    REQ_Repair_Status = models.CharField(max_length=100, null=True, blank=True)
+    REQ_Repair_Date = models.DateField(null=True, blank=True)
+    Contractor_Contractor_Repair = models.CharField(null=True, blank=True)
+    Repair_Start_Date = models.CharField(null=True, blank=True)
+
+
+    Repair_Start_date = models.DateField(null=True, blank=True)
+    Repair_status = models.CharField(max_length=100, null=True, blank=True)
+    Repair_completion_Date = models.DateField(null=True, blank=True)
+    monitored_By_Repair = models.CharField(max_length=100, null=True, blank=True)
+    Quantities_Details_Repair = models.CharField(max_length=100, null=True, blank=True)
+    Project_team_Details_Repair = models.CharField(max_length=100, null=True, blank=True)
     
+    FLUID_TYPE_CHOICES = [
+        ('Yes','No')
+    ]
+    Repair_Criticality = models.CharField(max_length=10, choices=FLUID_TYPE_CHOICES, default='N/A')
+
+
+
+
 
 class Units(models.Model):
     ID = models.IntegerField(primary_key=True, null=False, blank=True)
@@ -161,30 +206,42 @@ class Movementg(models.Model):
     rig = models.ForeignKey(Rigg, on_delete=models.CASCADE)
     well = models.ForeignKey(Wellg, on_delete=models.CASCADE)
     Well_Construction_Infotion = models.ForeignKey(Well_Construction_Info, on_delete=models.CASCADE, null=True, blank=True)
-
+    Cellar = models.ForeignKey(Cellar, on_delete=models.CASCADE, null=True, blank=True)
     Units = models.ForeignKey(Units, on_delete=models.CASCADE, null=True, blank=True)
     Eng = models.ForeignKey(Engineering, on_delete=models.CASCADE, null=True, blank=True)
     note = models.TextField(null=True, blank=True)
     Contractor = models.ForeignKey(Contractor, on_delete=models.CASCADE, null=True, blank=True) 
+    Construction_Departmeent = models.ForeignKey(Construction_Departmeent, on_delete=models.CASCADE, null=True, blank=True) 
+    HDPE_Installation = models.ForeignKey(HDPE_Installation, on_delete=models.CASCADE, null=True, blank=True) 
     Pre_Construction = models.ForeignKey(Pre_Construction, on_delete=models.CASCADE, null=True, blank=True) 
     start_date = models.DateField(null=True, blank=True)
     end_date = models.DateField(null=True, blank=True)
     is_cleaned_up = models.BooleanField(default=False)
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     def __str__(self):
         # return f"{self.rig.name} from {self.start_date} to {self.end_date}"
         return f"{self.rig}"
-
-
-
-
-
-
-
-
-
-
-
 
     def clean(self):
         # Check for overlapping movements

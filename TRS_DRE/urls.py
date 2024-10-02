@@ -21,5 +21,8 @@ urlpatterns = [
     path("get-well-construction-info/<int:pk>/", views.get_Well_Construction_Info, name="get-well-construction-info"),
     path("get_Rig_Construction_Info/<int:pk>/", views.get_Rig_Construction_Info, name="get_Rig_Construction_Info"),
     path("get_Pre_Construction_Info/<int:pk>/", views.get_Pre_Construction_Info, name="get_Pre_Construction_Info"),
-    
+    path("get_Construction_Department/<int:pk>/", views.get_Construction_Department, name="get_Construction_Department"),
+    path("get_Cellar/<int:pk>/", views.get_Cellar, name="get_Cellar"),
+    path("get_HDPE_Installation/<int:pk>/", views.get_HDPE_Installation, name="get_HDPE_Installation"),
+   
 ]
