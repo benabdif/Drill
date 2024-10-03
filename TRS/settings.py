@@ -99,7 +99,7 @@ DATABASES = {
         # "ENGINE": "django.db.backends.sqlite3",
         # "NAME": BASE_DIR / "db.sqlite3",
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "drill-test",  # 'Drill-info',
+        "NAME": "test-test2",  # 'Drill-info', test-test2
         "USER": "postgres",
         "PASSWORD": "Ff123456",
         "HOST": "localhost",
