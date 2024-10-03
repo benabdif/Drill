@@ -17,6 +17,8 @@ from .models import (
     Pre_Construction,
     Cellar,
     HDPE_Installation,
+    Rig_Move,
+    RepairSection
     
     )
 
@@ -31,6 +33,8 @@ admin.site.register(Construction_Departmeent)
 admin.site.register(Pre_Construction)
 admin.site.register(Cellar)
 admin.site.register(HDPE_Installation)
+admin.site.register(Rig_Move)
+admin.site.register(RepairSection)
 
 
 

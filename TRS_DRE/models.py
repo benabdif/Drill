@@ -137,9 +137,6 @@ class RepairSection(models.Model):
     Repair_Criticality = models.CharField(max_length=10, choices=FLUID_TYPE_CHOICES, default='N/A')
 
 
-
-
-
 class Units(models.Model):
     ID = models.IntegerField(primary_key=True, null=False, blank=True)
     name_unit = models.CharField(max_length=100)
@@ -214,6 +211,7 @@ class Movementg(models.Model):
     Construction_Departmeent = models.ForeignKey(Construction_Departmeent, on_delete=models.CASCADE, null=True, blank=True) 
     HDPE_Installation = models.ForeignKey(HDPE_Installation, on_delete=models.CASCADE, null=True, blank=True) 
     Pre_Construction = models.ForeignKey(Pre_Construction, on_delete=models.CASCADE, null=True, blank=True) 
+    Rig_Move = models.ForeignKey(Rig_Move, on_delete=models.CASCADE, null=True, blank=True) 
     start_date = models.DateField(null=True, blank=True)
     end_date = models.DateField(null=True, blank=True)
     is_cleaned_up = models.BooleanField(default=False)
