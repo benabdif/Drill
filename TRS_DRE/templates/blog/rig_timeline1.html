@@ -662,7 +662,7 @@
                 <!-- Adjust the margin-top value as needed -->
                 <div class="start" style="font-size: 12px; color: #000;">
                   {{ movement.start_date|date:'M j, Y' }}
-                  <p style="margin-bottom: -30px; margin-right:100%;">{{ movement.well.progress }}%</p>
+                  <p style="margin-bottom: -30px; margin-right:100%;">{{ movement.well.progress }}%%</p>
                 </div>
 
                 <div class="end" style="font-size: 12px; color: #000;">
@@ -675,7 +675,7 @@
                 {% comment %} <div class="area">{{ movement.well.name }}</div> {% endcomment %}
 
                 <div class="area">
-                  {% comment %} <a href="{% url 'rig_timeline' movement.well.pk %}">{{ movement.well.name }} fadhel</a>
+                  {% comment %} <a href="{% url 'rig_timeline' movement.well.pk %}">{{ movement.well.name }}</a>
                   {% endcomment %}
 
                   <a onclick="render_data('{{ movement.Well_Construction_Infotion.pk }}'); render_data1('{{ movement.rig.pk }}'); render_data2('{{ movement.Pre_Construction.pk }}'); render_data3('{{ movement.Construction_Departmeent.pk }}');  render_data4('{{ movement.Cellar.pk }}'); render_data5('{{ movement.HDPE_Installation.pk }}'); render_data6('{{ movement.Rig_Move.pk }}');"
@@ -779,993 +779,1057 @@
           <a class="nav-link" id="group-task-tab" data-bs-toggle="tab" href="#group-task11" role="tab"
             aria-controls="group-task" aria-selected="false" style="font-size: 14px;">Change Request Track</a>
         </li>
-        <!--   <li class="nav-item">
-                <a class="home" href="{% url 'dashboard' %}">Homefadhl</a>
-            </li>               -->
       </ul>
 
+
       <!-- Tab Content -->
-      <div class="tab-content mt-3 gradient-border">
-        <!-- here is the search bar -->
-        <div class="row mb-5">
-          <div class="col-md-3 ms-auto">
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="Search..." aria-label="Search"
-                aria-describedby="search-button" />
-              <button class="btn btn-outline-secondary" type="button" id="search-button">Search</button>
+      <div class="row">
+        <div class="col-md-2">
+          <div class="row mb-3">
+              <div class="col-md-12 py-3">
+                  <ul class="list-group" style="padding: 10px;">
+                    <div style="color: rgb(70, 65, 65); padding: 15px 0; border-radius: 10px; margin-bottom: 25px;">
+                      <h3 style="margin: 0; font-weight: bold; letter-spacing: 1px;">Rigs List</h3>
+                  </div>
+                      <li class="list-group-item" style="background-color: #fff0db; font-weight: bold; margin-bottom: 5px; border-radius: 5px;">
+                          SINO-2
+                      </li>
+                      <li class="list-group-item" style="background-color: #fff0db; font-weight: bold; margin-bottom: 5px; border-radius: 5px;">
+                          SING-65
+                      </li>
+                      <li class="list-group-item" style="background-color: #fff0db; font-weight: bold; margin-bottom: 5px; border-radius: 5px;">
+                          ABBQQ-554
+                      </li>
+                      <li class="list-group-item" style="background-color: #fff0db; font-weight: bold; margin-bottom: 5px; border-radius: 5px;">
+                          DAMM-232
+                      </li>
+                      <li class="list-group-item" style="background-color: #fff0db; font-weight: bold; margin-bottom: 5px; border-radius: 5px;">
+                          SAFANH-325
+                      </li>
+                      <li class="list-group-item" style="background-color: #fff0db; font-weight: bold; border-radius: 5px;">
+                          Rig-XYZ
+                      </li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+      
+      
+        <div class="col-md-10">
+          <div class="tab-content mt-3 gradient-border">
+
+            <!-- here is the search bar -->
+            <div class="row mb-5">
+              <div class="col-md-3 ms-auto">
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Search..." aria-label="Search"
+                    aria-describedby="search-button" />
+                  <button class="btn btn-outline-secondary" type="button" id="search-button">Search</button>
+                </div>
+              </div>
+            </div>
+
+
+            <!-- Individual Task Tab Content -->
+            <div class="tab-pane fade show active" id="individual-task" role="tabpanel"
+              aria-labelledby="individual-task-tab" style="font-size: 14px;">
+              <form>
+                <!-- Well Name, Drillsite Name, and Objective -->
+                <div class="row mb-3">
+                  <div class="col-md-4">
+                    <label for="well-name" class="form-label" style="font-weight: bold; width: 150px;">Well
+                      Name:</label>
+                    <input type="text" class="form-control" id="well-name" placeholder="Enter Well Name"
+                      style="background-color: #fff0db;" />
+
+
+                  </div>
+                  <div class="col-md-4">
+                    <label for="Drillsite_Name" class="form-label" style="font-weight: bold; width: 150px;">Drillsite
+                      Name:</label>
+                    <input type="text" class="form-control" id="Drillsite_Name" placeholder="Enter Drillsite Name"
+                      style="background-color: #fff0db;" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="objective" class="form-label"
+                      style="font-weight: bold; width: 150px;">Objective:</label>
+                    <input type="text" class="form-control" id="objective" placeholder="Enter Objective"
+                      style="background-color: #fff0db;" />
+                  </div>
+                </div>
+
+                <!-- Fluid Type, BI, and Charge Account -->
+                <div class="row mb-3">
+                  <div class="col-md-4">
+                    <label for="fluid_Type_choices" class="form-label" style="font-weight: bold; width: 150px;">Fluid
+                      Type:</label>
+                    <input type="text" class="form-control" id="fluid_Type_choices" placeholder="Enter Fluid Type"
+                      style="background-color: #fff0db;" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="BI" class="form-label" style="font-weight: bold; width: 150px;">BI:</label>
+                    <input type="text" class="form-control" id="BI" placeholder="Enter BI"
+                      style="background-color: #fff0db;" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="Charge_Account" class="form-label" style="font-weight: bold; width: 150px;">Charge
+                      Account:</label>
+                    <input type="text" class="form-control" id="Charge_Account" placeholder="Enter Charge Account"
+                      style="background-color: #fff0db;" />
+                  </div>
+                </div>
+
+                <!-- Spud Date, Released Date, and Reference Number -->
+                <div class="row mb-3">
+                  <div class="col-md-4">
+                    <label for="Spud_date" class="form-label" style="font-weight: bold; width: 150px;">Spud
+                      Date:</label>
+                    <input type="text" class="form-control" id="Spud_date" placeholder="Enter Spud Date"
+                      style="background-color: #fff0db;" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="Released_date" class="form-label" style="font-weight: bold; width: 150px;">Released
+                      Date:</label>
+                    <input type="text" class="form-control" id="Released_date" placeholder="Enter Released Date"
+                      style="background-color: #fff0db;" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="Reference_Number" class="form-label" style="font-weight: bold; width: 250px;">Reference
+                      Number (RAC):</label>
+                    <input type="text" class="form-control" id="Reference_Number" placeholder="Enter Reference Number"
+                      style="background-color: #fff0db;" />
+                  </div>
+                </div>
+
+                <!-- Direct Distance, D&WO Engineer, and Engineering Department -->
+                <div class="row mb-3">
+                  <div class="col-md-4">
+                    <label for="well_construction_Direct_distance_DH" class="form-label"
+                      style="font-weight: bold; width: 150px;">Direct Distance DH:</label>
+                    <input type="text" class="form-control" id="well_construction_Direct_distance_DH"
+                      placeholder="Enter Direct Distance DH" style="background-color: #fff0db;" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="well_construction_DWO_Engineer" class="form-label"
+                      style="font-weight: bold; width: 150px;">D&WO Engineer:</label>
+                    <input type="text" class="form-control" id="well_construction_DWO_Engineer"
+                      placeholder="Enter Engineer Name" style="background-color: #fff0db;" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="Engineering_department" class="form-label"
+                      style="font-weight: bold; width: 250px;">Engineering Department:</label>
+                    <input type="text" class="form-control" id="Engineering_department"
+                      placeholder="Enter Department Name" style="background-color: #fff0db;" />
+                  </div>
+                </div>
+
+                <!-- Producing Engineer, GOSP/WIP/Department -->
+                <div class="row mb-3">
+                  <div class="col-md-4">
+                    <label for="well_construction_Producing_Engineer" class="form-label"
+                      style="font-weight: bold; width: 150px;">Producing Engineer:</label>
+                    <input type="text" class="form-control" id="well_construction_Producing_Engineer"
+                      placeholder="Enter Producing Engineer Name" style="background-color: #fff0db;" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="well_construction_GOSP_WIP_Department" class="form-label"
+                      style="font-weight: bold; width: 150px;">GOSP/WIP/Department:</label>
+                    <input type="text" class="form-control" id="well_construction_GOSP_WIP_Department"
+                      placeholder="Enter Department Name" style="background-color: #fff0db;" />
+                  </div>
+                </div>
+              </form>
+            </div>
+
+            <!-- Group Task Tab Rig info -->
+            <div class="tab-pane fade" id="group-task" role="tabpanel" aria-labelledby="group-task-tab"
+              style="font-size: 14px;">
+              <form>
+                <!-- Rig Name, Rig Type, and Operation Department -->
+                <div class="row mb-3">
+                  <div class="col-md-4">
+                    <label for="Rig_name" class="form-label" style="font-weight: bold; width: 150px;">Rig Name:</label>
+                    <input type="text" class="form-control" id="Rig_name" placeholder="Enter Rig Name"
+                      style="background-color: #fff0db;" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="Rig_Type" class="form-label" style="font-weight: bold; width: 150px;">Rig Type:</label>
+                    <input type="text" class="form-control" id="Rig_Type" placeholder="Enter Rig Type"
+                      style="background-color: #fff0db;" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="Operation_Department" class="form-label"
+                      style="font-weight: bold; width: 250px;">Operation
+                      Department:</label>
+                    <input type="text" class="form-control" id="Operation_Department"
+                      placeholder="Enter Department Name" style="background-color: #fff0db;" />
+                  </div>
+                </div>
+
+                <!-- Operation Manager, Permanent Construction CC, and Last Update -->
+                <div class="row mb-3">
+                  <div class="col-md-4">
+                    <label for="Operation_Manager" class="form-label" style="font-weight: bold; width: 150px;">Operation
+                      Manager:</label>
+                    <input type="text" class="form-control" id="Operation_Manager" placeholder="Enter Manager Name"
+                      style="background-color: #fff0db;" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="Permanent_Construction_Cc" class="form-label"
+                      style="font-weight: bold; width: 250px;">Permanent Construction CC:</label>
+                    <input type="text" class="form-control" id="Permanent_Construction_Cc"
+                      placeholder="Enter Construction CC" style="background-color: #fff0db;" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="Last_Update_Permanent_Construction_Cc" class="form-label"
+                      style="font-weight: bold; width: 150px;">Last Update on:</label>
+                    <input type="text" class="form-control" id="Last_Update_Permanent_Construction_Cc"
+                      placeholder="Enter Last Update Date" style="background-color: #fff0db;" />
+                  </div>
+                </div>
+
+                <!-- Permanent HDPE Contractor, Last Update, and Permanent Soil Test Contractor -->
+                <div class="row mb-3">
+                  <div class="col-md-4">
+                    <label for="Permanent_HDPE_Contractor" class="form-label"
+                      style="font-weight: bold; width: 250px;">Permanent HDPE Contractor:</label>
+                    <input type="text" class="form-control" id="Permanent_HDPE_Contractor"
+                      placeholder="Enter Contractor Name" style="background-color: #fff0db;" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="Last_Update_Permanent_HDPE_Contractor" class="form-label"
+                      style="font-weight: bold; width: 150px;">Last Update on:</label>
+                    <input type="text" class="form-control" id="Last_Update_Permanent_HDPE_Contractor"
+                      placeholder="Enter Last Update Date" style="background-color: #fff0db;" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="Permanent_Soil_Test_Contractor" class="form-label"
+                      style="font-weight: bold; width: 250px;">Permanent Soil Test Contractor:</label>
+                    <input type="text" class="form-control" id="Permanent_Soil_Test_Contractor"
+                      placeholder="Enter Contractor Name" style="background-color: #fff0db;" />
+                  </div>
+                </div>
+
+                <!-- Last Update for Soil Test, Current Assigned Unit, and Current Assigned WS Engineer -->
+                <div class="row mb-3">
+                  <div class="col-md-4">
+                    <label for="Last_Update_Permanent_Soil_Test_Contractor" class="form-label"
+                      style="font-weight: bold; width: 150px;">Last Update on:</label>
+                    <input type="text" class="form-control" id="Last_Update_Permanent_Soil_Test_Contractor"
+                      placeholder="Enter Last Update Date" style="background-color: #fff0db;" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="Current_Assigned_Unit" class="form-label"
+                      style="font-weight: bold; width: 250px;">Current
+                      Assigned Unit:</label>
+                    <input type="text" class="form-control" id="Current_Assigned_Unit" placeholder="Enter Unit Details"
+                      style="background-color: #fff0db;" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="Current_Assigned_WS_Engineer" class="form-label"
+                      style="font-weight: bold; width: 250px;">Current Assigned WS Engineer:</label>
+                    <input type="text" class="form-control" id="Current_Assigned_WS_Engineer"
+                      placeholder="Enter Engineer Name" style="background-color: #fff0db;" />
+                  </div>
+                </div>
+              </form>
+            </div>
+
+            <!-- Location Map Tab Content -->
+            <div class="tab-pane fade" id="group-task1" role="tabpanel" aria-labelledby="group-task-tab"
+              style="font-size: 14px;">
+              <form>
+                <!-- Location Map and Rig Name -->
+                <div class="row mb-3">
+                  <div class="col-md-6">
+                    <label for="well-name-group" class="form-label" style="font-weight: bold; width: 250px;">Location
+                      Map:</label>
+                    <input type="text" class="form-control" id="well-name-group"
+                      placeholder="Enter Location Map Details" style="background-color: #fff0db;" />
+                  </div>
+                  <div class="col-md-6">
+                    <label for="rig-name-group" class="form-label" style="font-weight: bold; width: 150px;">Rig
+                      Name:</label>
+                    <input type="text" class="form-control" id="rig-name-group" placeholder="Enter Rig Name"
+                      style="background-color: #fff0db;" />
+                  </div>
+                </div>
+              </form>
+            </div>
+
+            <!-- Well Link -->
+            <a href="#" class="well-link" data-id="{{ movement.well.pk }}">{{ movement.well.name }}</a>
+
+            <!-- The form inside the #group-task2 div -->
+            <div class="tab-pane fade" id="group-task2" role="tabpanel" aria-labelledby="group-task-tab"
+              style="font-size: 14px;">
+              <form>
+                <!-- Row 1: Approval Status, Approval Date, and Construction Requirement -->
+                <div class="row mb-3">
+                  <div class="col-md-4">
+                    <label for="Approval_Status" class="form-label" style="font-weight: bold;">Approval Status:</label>
+                    <input type="text" class="form-control" style="background-color: #fff0db;" id="Approval_Status"
+                      placeholder="Enter Approval Status" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="Approval_Date" class="form-label" style="font-weight: bold;">Approval Date:</label>
+                    <input type="text" class="form-control" style="background-color: #fff0db;" id="Approval_Date"
+                      placeholder="Enter Approval Date" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="CONDTR_REQ" class="form-label" style="font-weight: bold;">Construction
+                      Requirement:</label>
+                    <input type="text" class="form-control" style="background-color: #fff0db;" id="CONDTR_REQ"
+                      placeholder="Enter Construction Requirement" />
+                  </div>
+                </div>
+
+                <!-- Row 2: R. Completion Date, Approved Layout, and Date -->
+                <div class="row mb-3">
+                  <div class="col-md-4">
+                    <label for="R_Completio_Date" class="form-label" style="font-weight: bold;">R. Completion
+                      Date:</label>
+                    <input type="text" class="form-control" style="background-color: #fff0db;" id="R_Completio_Date"
+                      placeholder="Enter Completion Date" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="Approved_Lay_out" class="form-label" style="font-weight: bold;">Approved Layout:</label>
+                    <input type="text" class="form-control" style="background-color: #fff0db;" id="Approved_Lay_out"
+                      placeholder="Enter Approved Layout Details" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="Date_Approved_Lay_out" class="form-label" style="font-weight: bold;">Date:</label>
+                    <input type="text" class="form-control" style="background-color: #fff0db;"
+                      id="Date_Approved_Lay_out" placeholder="Enter Date" />
+                  </div>
+                </div>
+              </form>
+            </div>
+
+            {% comment %}here the new code we have{% endcomment %}
+
+            <!-- Construction Table -->
+            <div class="tab-pane fade" id="group-task3" role="tabpanel" aria-labelledby="group-task-tab"
+              style="font-size: 14px;">
+              <form>
+                <!-- Row 1: Construction Request, Request Date, Request Status -->
+                <div class="row mb-3">
+                  <div class="col-md-4">
+                    <label for="CONSTR_REQ" class="form-label" style="font-weight: bold;">Construction Request:</label>
+                    <input type="text" class="form-control" id="CONSTR_REQ" placeholder="Enter Construction Request"
+                      style="background-color: #fff0db;" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="REQ_Start_Date" class="form-label" style="font-weight: bold;">Request Date:</label>
+                    <input type="text" class="form-control" id="REQ_Start_Date" placeholder="Enter Request Start Date"
+                      style="background-color: #fff0db;" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="REQ_Status" class="form-label" style="font-weight: bold;">Request Status:</label>
+                    <input type="text" class="form-control" id="REQ_Status" placeholder="Enter Request Status"
+                      style="background-color: #fff0db;" />
+                  </div>
+                </div>
+
+                <!-- Row 2: Construction Contractor, Construction KPI, Construction KOM -->
+                <div class="row mb-3">
+                  <div class="col-md-4">
+                    <label for="CONSTR_Contractor" class="form-label" style="font-weight: bold;">Construction
+                      Contractor:</label>
+                    <input type="text" class="form-control" id="CONSTR_Contractor" placeholder="Enter Contractor Name"
+                      style="background-color: #fff0db;" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="CONSTR_KPI" class="form-label" style="font-weight: bold;">Construction KPI:</label>
+                    <input type="text" class="form-control" id="CONSTR_KPI" placeholder="Enter KPI"
+                      style="background-color: #fff0db;" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="CONSTR_KOM" class="form-label" style="font-weight: bold;">Construction KOM:</label>
+                    <input type="text" class="form-control" id="CONSTR_KOM" placeholder="Enter KOM Details"
+                      style="background-color: #fff0db;" />
+                  </div>
+                </div>
+
+                <!-- Row 3: Conducted By (KOM), Construction Status, Constructed Skid Road Distance -->
+                <div class="row mb-3">
+                  <div class="col-md-4">
+                    <label for="Conducted_by_KOM" class="form-label" style="font-weight: bold;">Conducted By
+                      (KOM):</label>
+                    <input type="text" class="form-control" id="Conducted_by_KOM"
+                      placeholder="Enter Name of Person Conducting KOM" style="background-color: #fff0db;" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="Construction_Status" class="form-label" style="font-weight: bold;">Construction
+                      Status:</label>
+                    <input type="text" class="form-control" id="Construction_Status"
+                      placeholder="Enter Construction Status" style="background-color: #fff0db;" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="CONSTR_Skid_ROAD_DIST" class="form-label" style="font-weight: bold;">Constructed Skid
+                      Road
+                      Distance:</label>
+                    <input type="text" class="form-control" id="CONSTR_Skid_ROAD_DIST" placeholder="Enter Distance"
+                      style="background-color: #fff0db;" />
+                  </div>
+                </div>
+
+                <!-- Row 4: Final Survey, Conducted By (Final Survey), Unit -->
+                <div class="row mb-3">
+                  <div class="col-md-4">
+                    <label for="Final_Survey" class="form-label" style="font-weight: bold;">Final Survey:</label>
+                    <input type="text" class="form-control" id="Final_Survey" placeholder="Enter Final Survey Details"
+                      style="background-color: #fff0db;" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="Conducted_by_Final_Survey" class="form-label" style="font-weight: bold;">Conducted By
+                      (Final
+                      Survey):</label>
+                    <input type="text" class="form-control" id="Conducted_by_Final_Survey"
+                      placeholder="Enter Name of Person Conducting Survey" style="background-color: #fff0db;" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="Unit" class="form-label" style="font-weight: bold;">Unit:</label>
+                    <input type="text" class="form-control" id="Unit" placeholder="Enter Unit"
+                      style="background-color: #fff0db;" />
+                  </div>
+                </div>
+
+                <!-- Row 5: Post Construction Turn-over, Date, Quantities Details -->
+                <div class="row mb-3">
+                  <div class="col-md-4">
+                    <label for="Post_CONSTR_Rurn_OVER" class="form-label" style="font-weight: bold;">Post Construction
+                      Turn-over:</label>
+                    <input type="text" class="form-control" id="Post_CONSTR_Rurn_OVER"
+                      placeholder="Enter Turn-over Details" style="background-color: #fff0db;" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="REQ_End_Date" class="form-label" style="font-weight: bold;">Date:</label>
+                    <input type="text" class="form-control" id="REQ_End_Date" placeholder="Enter End Date"
+                      style="background-color: #fff0db;" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="Quanatities_Detities" class="form-label" style="font-weight: bold;">Quantities
+                      Details:</label>
+                    <input type="text" class="form-control" id="Quanatities_Detities"
+                      placeholder="Enter Quantities Details" style="background-color: #fff0db;" />
+                  </div>
+                </div>
+
+                <!-- Row 6: Project Team Details, Remarks, Criticality -->
+                <div class="row mb-3">
+                  <div class="col-md-4">
+                    <label for="Project_team_Details" class="form-label" style="font-weight: bold;">Project Team
+                      Details:</label>
+                    <input type="text" class="form-control" id="Project_team_Details" placeholder="Enter Team Details"
+                      style="background-color: #fff0db;" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="Remark_and_Hold" class="form-label" style="font-weight: bold;">Remarks for 0% and
+                      Hold:</label>
+                    <input type="text" class="form-control" id="Remark_and_Hold" placeholder="Enter Remarks"
+                      style="background-color: #fff0db;" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="Criticality" class="form-label" style="font-weight: bold;">Criticality:</label>
+                    <input type="text" class="form-control" id="Criticality" placeholder="Enter Criticality Level"
+                      style="background-color: #fff0db;" />
+                  </div>
+                </div>
+              </form>
+            </div>
+
+            <div class="tab-pane fade" id="group-task4" role="tabpanel" aria-labelledby="group-task-tab"
+              style="font-size: 14px;">
+              <form>
+                <!-- Row 1: Cellar Installation, Soil Test Request, Request Date -->
+                <div class="row mb-3">
+                  <div class="col-md-4">
+                    <label for="Cellar_Installation" class="form-label" style="font-weight: bold;">Cellar
+                      Installation:</label>
+                    <input type="text" class="form-control" id="Cellar_Installation"
+                      placeholder="Enter Installation Details" style="background-color: #fff0db;" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="Soil_Test_Request" class="form-label" style="font-weight: bold;">Soil Test
+                      Request:</label>
+                    <input type="text" class="form-control" id="Soil_Test_Request" placeholder="Enter Soil Test Request"
+                      style="background-color: #fff0db;" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="REQ_Date" class="form-label" style="font-weight: bold;">Request Date:</label>
+                    <input type="text" class="form-control" id="REQ_Date" placeholder="Enter Request Date"
+                      style="background-color: #fff0db;" />
+                  </div>
+                </div>
+
+                <!-- Row 2: Request Status, Soil Test Contractor, Conducted By -->
+                <div class="row mb-3">
+                  <div class="col-md-4">
+                    <label for="Cellar_REQ_Status" class="form-label" style="font-weight: bold;">Request Status:</label>
+                    <input type="text" class="form-control" id="Cellar_REQ_Status" placeholder="Enter Request Status"
+                      style="background-color: #fff0db;" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="Soil_Test_Contractor" class="form-label" style="font-weight: bold;">Soil Test
+                      Contractor:</label>
+                    <input type="text" class="form-control" id="Soil_Test_Contractor"
+                      placeholder="Enter Contractor Name" style="background-color: #fff0db;" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="Conducted_by" class="form-label" style="font-weight: bold;">Conducted By:</label>
+                    <input type="text" class="form-control" id="Conducted_by"
+                      placeholder="Enter Name of Person Conducting" style="background-color: #fff0db;" />
+                  </div>
+                </div>
+              </form>
+            </div>
+
+            <!-- HDPE Installation -->
+            <div class="tab-pane fade" id="group-task5" role="tabpanel" aria-labelledby="group-task-tab"
+              style="font-size: 14px;">
+              <form>
+                <!-- Row 1: Lining Installation, Lining Request, Request Date -->
+                <div class="row mb-3">
+                  <div class="col-md-4">
+                    <label for="Lining_Installation" class="form-label" style="font-weight: bold;">Lining
+                      Installation:</label>
+                    <input type="text" class="form-control" id="Lining_Installation"
+                      placeholder="Enter Installation Details" style="background-color: #fff0db;" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="REQ_Lining_Number" class="form-label" style="font-weight: bold;">Lining Request:</label>
+                    <input type="text" class="form-control" id="REQ_Lining_Number" placeholder="Enter Request Number"
+                      style="background-color: #fff0db;" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="HDPE_REQ_Date" class="form-label" style="font-weight: bold;">Request Date:</label>
+                    <input type="text" class="form-control" id="HDPE_REQ_Date" placeholder="Enter Request Date"
+                      style="background-color: #fff0db;" />
+                  </div>
+                </div>
+
+                <!-- Row 2: Request Status, Installation Status, Total Area Installed -->
+                <div class="row mb-3">
+                  <div class="col-md-4">
+                    <label for="HDPE_REQ_Status" class="form-label" style="font-weight: bold;">Request Status:</label>
+                    <input type="text" class="form-control" id="HDPE_REQ_Status" placeholder="Enter Request Status"
+                      style="background-color: #fff0db;" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="Installation_Status" class="form-label" style="font-weight: bold;">Installation
+                      Status:</label>
+                    <input type="text" class="form-control" id="Installation_Status"
+                      placeholder="Enter Installation Status" style="background-color: #fff0db;" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="Total_Area_Installed" class="form-label" style="font-weight: bold;">Total Area
+                      Installed:</label>
+                    <input type="text" class="form-control" id="Total_Area_Installed" placeholder="Enter Total Area"
+                      style="background-color: #fff0db;" />
+                  </div>
+                </div>
+
+                <!-- Row 3: Lining Contractor, Conducted By, Quantities -->
+                <div class="row mb-3">
+                  <div class="col-md-4">
+                    <label for="Lining_Contractor" class="form-label" style="font-weight: bold;">Lining
+                      Contractor:</label>
+                    <input type="text" class="form-control" id="Lining_Contractor" placeholder="Enter Contractor Name"
+                      style="background-color: #fff0db;" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="Conducted_by_info" class="form-label" style="font-weight: bold;">Conducted By:</label>
+                    <input type="text" class="form-control" id="Conducted_by_info" placeholder="Enter Conducted By Info"
+                      style="background-color: #fff0db;" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="Quantities_Details" class="form-label" style="font-weight: bold;">Quantities:</label>
+                    <input type="text" class="form-control" id="Quantities_Details"
+                      placeholder="Enter Quantities Details" style="background-color: #fff0db;" />
+                  </div>
+                </div>
+              </form>
+            </div>
+
+            <!-- Rig move table -->
+            <div class="tab-pane fade" id="group-task6" role="tabpanel" aria-labelledby="group-task-tab"
+              style="font-size: 14px;">
+              <form>
+                <!-- Row 1: Rig Move Request, Rig Name, From Well -->
+                <div class="row mb-3">
+                  <div class="col-md-4">
+                    <label for="RIG_MOVE_REQ" class="form-label" style="font-weight: bold;">Rig Move Request:</label>
+                    <input type="text" class="form-control" id="RIG_MOVE_REQ" placeholder="Enter Rig Move Request"
+                      style="background-color: #fff0db;" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="RIG_MOVE_NAME" class="form-label" style="font-weight: bold;">Rig Name:</label>
+                    <input type="text" class="form-control" id="RIG_MOVE_NAME" placeholder="Enter Rig Name"
+                      style="background-color: #fff0db;" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="RIG_MOVE_WELL" class="form-label" style="font-weight: bold;">From Well:</label>
+                    <input type="text" class="form-control" id="RIG_MOVE_WELL" placeholder="Enter Well Name"
+                      style="background-color: #fff0db;" />
+                  </div>
+                </div>
+
+                <!-- Row 2: Request Status, Rig Move Documents, Conducted By -->
+                <div class="row mb-3">
+                  <div class="col-md-4">
+                    <label for="RIG_MOVE_STATUS" class="form-label" style="font-weight: bold;">Request Status:</label>
+                    <input type="text" class="form-control" id="RIG_MOVE_STATUS" placeholder="Enter Request Status"
+                      style="background-color: #fff0db;" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="RIG_MOVE_DOCUMENTS_LINK" class="form-label" style="font-weight: bold;">Rig Move
+                      Documents:</label>
+                    <input type="text" class="form-control" id="RIG_MOVE_DOCUMENTS_LINK"
+                      placeholder="Enter Document Link" style="background-color: #fff0db;" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="RIG_MOVE_CONDUCTED_BY" class="form-label" style="font-weight: bold;">Conducted
+                      By:</label>
+                    <input type="text" class="form-control" id="RIG_MOVE_CONDUCTED_BY"
+                      placeholder="Enter Name of Person Conducting" style="background-color: #fff0db;" />
+                  </div>
+                </div>
+              </form>
+            </div>
+
+            <!-- Repair Section -->
+            <div class="tab-pane fade" id="group-task7" role="tabpanel" aria-labelledby="group-task-tab"
+              style="font-size: 14px;">
+              <form>
+                <!-- Repair Section -->
+                <div class="row mb-3">
+                  <div class="col-md-3">
+                    <label for="repair-group" class="form-label" style="font-weight: bold;">Required Repair:</label>
+                  </div>
+                  <div class="col-md-9 d-flex flex-wrap align-items-center">
+                    <div class="form-check me-3">
+                      <input class="form-check-input" type="checkbox" id="repair-sand-removal" />
+                      <label class="form-check-label" for="repair-sand-removal">Sand Removal</label>
+                    </div>
+                    <div class="form-check me-3">
+                      <input class="form-check-input" type="checkbox" id="repair-extension" />
+                      <label class="form-check-label" for="repair-extension">Extension</label>
+                    </div>
+                    <div class="form-check me-3">
+                      <input class="form-check-input" type="checkbox" id="repair-recompaction" />
+                      <label class="form-check-label" for="repair-recompaction">Re-Compaction</label>
+                    </div>
+                    <div class="form-check me-3">
+                      <input class="form-check-input" type="checkbox" id="repair-change-cellar" />
+                      <label class="form-check-label" for="repair-change-cellar">Change Cellar</label>
+                    </div>
+                    <div class="form-check me-3">
+                      <input class="form-check-input" type="checkbox" id="repair-modification" />
+                      <label class="form-check-label" for="repair-modification">Modification</label>
+                    </div>
+                    <div class="form-check me-3">
+                      <input class="form-check-input" type="checkbox" id="repair-complete-repair" />
+                      <label class="form-check-label" for="repair-complete-repair">Complete Repair</label>
+                    </div>
+                    <div class="form-check me-3">
+                      <input class="form-check-input" type="checkbox" id="repair-additional" />
+                      <label class="form-check-label" for="repair-additional">Additional</label>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Row 1: From Well, Request Status, Rig Move Documents -->
+                <div class="row mb-3">
+                  <div class="col-md-4">
+                    <label for="well-name-group" class="form-label" style="font-weight: bold;">Repair Request
+                      Number:</label>
+                    <input type="text" class="form-control" id="well-name-group" placeholder="Enter Well Name"
+                      style="background-color: #fff0db;" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="request-status-group" class="form-label" style="font-weight: bold;">Request
+                      Status:</label>
+                    <input type="text" class="form-control" id="request-status-group" placeholder="Enter Request Status"
+                      style="background-color: #fff0db;" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="rig-move-documents-group" class="form-label" style="font-weight: bold;">Request
+                      Date:</label>
+                    <input type="text" class="form-control" id="rig-move-documents-group"
+                      placeholder="Enter Document Info" style="background-color: #fff0db;" />
+                  </div>
+                </div>
+
+                <!-- Row 2: Conducted By, Rig Move Documents (2), Conducted By (2) -->
+                <div class="row mb-3">
+                  <div class="col-md-4">
+                    <label for="conducted-by-group" class="form-label" style="font-weight: bold;">Construction
+                      Contractor:</label>
+                    <input type="text" class="form-control" id="conducted-by-group" placeholder="Enter Name"
+                      style="background-color: #fff0db;" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="rig-move-documents-group-2" class="form-label" style="font-weight: bold;">Repair Start
+                      Date:</label>
+                    <input type="text" class="form-control" id="rig-move-documents-group-2"
+                      placeholder="Enter Document Info" style="background-color: #fff0db;" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="conducted-by-group-2" class="form-label" style="font-weight: bold;">Repair
+                      Status:</label>
+                    <input type="text" class="form-control" id="conducted-by-group-2" placeholder="Enter Name"
+                      style="background-color: #fff0db;" />
+                  </div>
+                </div>
+
+                <!-- Row 3: Rig Move Documents (3), Conducted By (3) -->
+                <div class="row mb-3">
+                  <div class="col-md-4">
+                    <label for="rig-move-documents-group-3" class="form-label" style="font-weight: bold;">Repair
+                      Completion
+                      Date:</label>
+                    <input type="text" class="form-control" id="rig-move-documents-group-3"
+                      placeholder="Enter Document Info" style="background-color: #fff0db;" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="conducted-by-group-3" class="form-label" style="font-weight: bold;">Monitored
+                      By:</label>
+                    <input type="text" class="form-control" id="conducted-by-group-3" placeholder="Enter Name"
+                      style="background-color: #fff0db;" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="conducted-by-group-3" class="form-label" style="font-weight: bold;">Quantities
+                      Details:</label>
+                    <input type="text" class="form-control" id="conducted-by-group-3" placeholder="Enter Name"
+                      style="background-color: #fff0db;" />
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-md-4">
+                    <label for="rig-move-documents-group-3" class="form-label" style="font-weight: bold;">Project Team
+                      Details:</label>
+                    <input type="text" class="form-control" id="rig-move-documents-group-3"
+                      placeholder="Enter Document Info" style="background-color: #fff0db;" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="conducted-by-group-3" class="form-label" style="font-weight: bold;">Criticality:</label>
+                    <input type="text" class="form-control" id="conducted-by-group-3" placeholder="Enter Name"
+                      style="background-color: #fff0db;" />
+                  </div>
+                </div>
+              </form>
+            </div>
+
+            <!-- Clean-Up Section -->
+            <div class="tab-pane fade" id="group-task8" role="tabpanel" aria-labelledby="group-task-tab"
+              style="font-size: 14px;">
+              <form>
+                <!-- Row 1: Clean-Up Request Number, Request Date, Request Status -->
+                <div class="row mb-3">
+                  <div class="col-md-4">
+                    <label for="clean-up-request-number" class="form-label" style="font-weight: bold;">Clean-Up Request
+                      Number:</label>
+                    <input type="text" style="background-color: #fff0db;" class="form-control"
+                      id="clean-up-request-number" placeholder="Enter Clean-Up Request Number" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="request-date" class="form-label" style="font-weight: bold;">Request Date:</label>
+                    <input type="text" style="background-color: #fff0db;" class="form-control" id="request-date"
+                      placeholder="Enter Request Date" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="request-status" class="form-label" style="font-weight: bold;">Request Status:</label>
+                    <input type="text" style="background-color: #fff0db;" class="form-control" id="request-status"
+                      placeholder="Enter Request Status" />
+                  </div>
+                </div>
+
+                <!-- Row 2: Construction Contractor, Clean-Up KPI, Clean-Up Start Date -->
+                <div class="row mb-3">
+                  <div class="col-md-4">
+                    <label for="construction-contractor" class="form-label" style="font-weight: bold;">Construction
+                      Contractor:</label>
+                    <input type="text" style="background-color: #fff0db;" class="form-control"
+                      id="construction-contractor" placeholder="Enter Contractor Name" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="cleanup-kpi" class="form-label" style="font-weight: bold;">Clean-Up KPI:</label>
+                    <input type="text" style="background-color: #fff0db;" class="form-control" id="cleanup-kpi"
+                      placeholder="Enter Clean-Up KPI" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="cleanup-start-date" class="form-label" style="font-weight: bold;">Clean-Up Start
+                      Date:</label>
+                    <input type="text" style="background-color: #fff0db;" class="form-control" id="cleanup-start-date"
+                      placeholder="Enter Start Date" />
+                  </div>
+                </div>
+
+                <!-- Row 3: Clean-Up Start Status, Clean-Up Completion Date, Post Clean-Up Turnover -->
+                <div class="row mb-3">
+                  <div class="col-md-4">
+                    <label for="cleanup-start-status" class="form-label" style="font-weight: bold;">Clean-Up Start
+                      Status:</label>
+                    <input type="text" style="background-color: #fff0db;" class="form-control" id="cleanup-start-status"
+                      placeholder="Enter Start Status" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="cleanup-completion-date" class="form-label" style="font-weight: bold;">Clean-Up
+                      Completion
+                      Date:</label>
+                    <input type="text" style="background-color: #fff0db;" class="form-control"
+                      id="cleanup-completion-date" placeholder="Enter Completion Date" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="post-cleanup-turnover" class="form-label" style="font-weight: bold;">Post Clean-Up
+                      Turnover:</label>
+                    <input type="text" style="background-color: #fff0db;" class="form-control"
+                      id="post-cleanup-turnover" placeholder="Enter Post Clean-Up Turnover" />
+                  </div>
+                </div>
+
+                <!-- Row 4: Monitored By -->
+                <div class="row mb-3">
+                  <div class="col-md-4">
+                    <label for="monitored-by" class="form-label" style="font-weight: bold;">Monitored By:</label>
+                    <input type="text" style="background-color: #fff0db;" class="form-control" id="monitored-by"
+                      placeholder="Enter Monitored By" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="quantities-details" class="form-label" style="font-weight: bold;">Quantities
+                      Details:</label>
+                    <input type="text" style="background-color: #fff0db;" class="form-control" id="quantities-details"
+                      placeholder="Enter Quantities Details" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="project-team-details" class="form-label" style="font-weight: bold;">Project Team
+                      Details:</label>
+                    <input type="text" style="background-color: #fff0db;" class="form-control" id="project-team-details"
+                      placeholder="Enter Project Team Details" />
+                  </div>
+                </div>
+                <!-- Row 5: -->
+                <div class="row mb-3">
+                  <div class="col-md-4">
+                    <label for="monitored-by" class="form-label" style="font-weight: bold;">Pre-Clean-Up
+                      Turnover:</label>
+                    <input type="text" style="background-color: #fff0db;" class="form-control" id="monitored-by"
+                      placeholder="Enter Pre-Clean-Up Turnover" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="quantities-details" class="form-label" style="font-weight: bold;">Criticality:</label>
+                    <input type="text" style="background-color: #fff0db;" class="form-control" id="quantities-details"
+                      placeholder="Enter Criticality" />
+                  </div>
+
+                </div>
+              </form>
+            </div>
+
+
+            <div class="tab-pane fade" id="group-task9" role="tabpanel" aria-labelledby="group-task-tab"
+              style="font-size: 14px;">
+              <form>
+                <!-- Row 1: Clean-Up Request Number, Request Date, Request Status -->
+                <div class="row mb-3">
+                  <div class="col-md-4">
+                    <label for="clean-up-request-number" class="form-label" style="font-weight: bold;">Request
+                      Number:</label>
+                    <input type="text" style="background-color: #fff0db;" class="form-control"
+                      id="clean-up-request-number" placeholder="Enter Request Number" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="request-date" class="form-label" style="font-weight: bold;">Request Date:</label>
+                    <input type="text" style="background-color: #fff0db;" class="form-control" id="request-date"
+                      placeholder="Enter Request Date" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="request-status" class="form-label" style="font-weight: bold;">Request Status:</label>
+                    <input type="text" style="background-color: #fff0db;" class="form-control" id="request-status"
+                      placeholder="Enter Request Date" />
+                  </div>
+                </div>
+
+                <!-- Row 2: Construction Contractor, Clean-Up KPI, Clean-Up Start Date -->
+                <div class="row mb-3">
+                  <div class="col-md-4">
+                    <label for="construction-contractor" class="form-label"
+                      style="font-weight: bold;">Contractor:</label>
+                    <input type="text" style="background-color: #fff0db;" class="form-control"
+                      id="construction-contractor" placeholder="Enter Request Status" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="cleanup-kpi" class="form-label" style="font-weight: bold;">Dispatch By:</label>
+                    <input type="text" style="background-color: #fff0db;" class="form-control" id="cleanup-kpi"
+                      placeholder="Enter Dispatch By" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="cleanup-start-date" class="form-label" style="font-weight: bold;">Remark:</label>
+                    <input type="text" style="background-color: #fff0db;" class="form-control" id="cleanup-start-date"
+                      placeholder="Enter Remark" />
+                  </div>
+                </div>
+              </form>
+            </div>
+
+            <div class="tab-pane fade" id="group-task10" role="tabpanel" aria-labelledby="group-task-tab"
+              style="font-size: 14px;">
+              <form>
+                <!-- Row 1: Clean-Up Request Number, Request Date, Request Status -->
+                <div class="row mb-3">
+                  <div class="col-md-4">
+                    <label for="clean-up-request-number" class="form-label" style="font-weight: bold;">Request
+                      Number:</label>
+                    <input type="text" style="background-color: #fff0db;" class="form-control"
+                      id="clean-up-request-number" placeholder="Enter Request Number" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="request-date" class="form-label" style="font-weight: bold;">Request Date:</label>
+                    <input type="text" style="background-color: #fff0db;" class="form-control" id="request-date"
+                      placeholder="Enter Request Date" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="request-status" class="form-label" style="font-weight: bold;">Request Status:</label>
+                    <input type="text" style="background-color: #fff0db;" class="form-control" id="request-status"
+                      placeholder="Enter Request Date" />
+                  </div>
+                </div>
+
+                <!-- Row 2: Construction Contractor, Clean-Up KPI, Clean-Up Start Date -->
+                <div class="row mb-3">
+                  <div class="col-md-4">
+                    <label for="construction-contractor" class="form-label"
+                      style="font-weight: bold;">Contractor:</label>
+                    <input type="text" style="background-color: #fff0db;" class="form-control"
+                      id="construction-contractor" placeholder="Enter Request Status" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="cleanup-kpi" class="form-label" style="font-weight: bold;">Dispatch By:</label>
+                    <input type="text" style="background-color: #fff0db;" class="form-control" id="cleanup-kpi"
+                      placeholder="Enter Dispatch By" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="cleanup-start-date" class="form-label" style="font-weight: bold;">Remark:</label>
+                    <input type="text" style="background-color: #fff0db;" class="form-control" id="cleanup-start-date"
+                      placeholder="Enter Remark" />
+                  </div>
+                </div>
+              </form>
+            </div>
+
+
+
+            <!-- Change Request Track -->
+            <div class="tab-pane fade" id="group-task11" role="tabpanel" aria-labelledby="group-task-tab"
+              style="font-size: 14px;">
+              <form>
+                <!-- Row 1: Request Number, Request Date, Request Status, Construction Contractor -->
+                <div class="row mb-3">
+                  <div class="col-md-3">
+                    <label for="clean-up-request-number" class="form-label" style="font-weight: bold;">Change Request
+                      Number:</label>
+                    <input type="text" style="background-color: #fff0db;" class="form-control"
+                      id="clean-up-request-number" placeholder="Enter Request Number" />
+                  </div>
+                  <div class="col-md-3">
+                    <label for="request-date" class="form-label" style="font-weight: bold;">Date:</label>
+                    <input type="text" style="background-color: #fff0db;" class="form-control" id="request-date"
+                      placeholder="Enter Request Date" />
+                  </div>
+                  <div class="col-md-3">
+                    <label for="request-status" class="form-label" style="font-weight: bold;">Justification:</label>
+                    <input type="text" style="background-color: #fff0db;" class="form-control" id="request-status"
+                      placeholder="Enter Request Status" />
+                  </div>
+                  <div class="col-md-3">
+                    <label for="construction-contractor" class="form-label" style="font-weight: bold;">Status:</label>
+                    <input type="text" style="background-color: #fff0db;" class="form-control"
+                      id="construction-contractor" placeholder="Enter Contractor Name" />
+                  </div>
+                </div>
+
+                <!-- Row 2: Dispatch By, Remark -->
+                <div class="row mb-3">
+                  <div class="col-md-3">
+                    <label for="clean-up-request-number" class="form-label" style="font-weight: bold;">Change Request
+                      Number:</label>
+                    <input type="text" style="background-color: #fff0db;" class="form-control"
+                      id="clean-up-request-number" placeholder="Enter Request Number" />
+                  </div>
+                  <div class="col-md-3">
+                    <label for="request-date" class="form-label" style="font-weight: bold;">Date:</label>
+                    <input type="text" style="background-color: #fff0db;" class="form-control" id="request-date"
+                      placeholder="Enter Request Date" />
+                  </div>
+                  <div class="col-md-3">
+                    <label for="request-status" class="form-label" style="font-weight: bold;">Justification:</label>
+                    <input type="text" style="background-color: #fff0db;" class="form-control" id="request-status"
+                      placeholder="Enter Request Status" />
+                  </div>
+                  <div class="col-md-3">
+                    <label for="construction-contractor" class="form-label" style="font-weight: bold;">Status:</label>
+                    <input type="text" style="background-color: #fff0db;" class="form-control"
+                      id="construction-contractor" placeholder="Enter Contractor Name" />
+                  </div>
+                </div>
+                <!-- Row 2: Dispatch By, Remark -->
+                <div class="row mb-3">
+                  <div class="col-md-3">
+                    <label for="clean-up-request-number" class="form-label" style="font-weight: bold;">Change Request
+                      Number:</label>
+                    <input type="text" style="background-color: #fff0db;" class="form-control"
+                      id="clean-up-request-number" placeholder="Enter Request Number" />
+                  </div>
+                  <div class="col-md-3">
+                    <label for="request-date" class="form-label" style="font-weight: bold;">Date:</label>
+                    <input type="text" style="background-color: #fff0db;" class="form-control" id="request-date"
+                      placeholder="Enter Request Date" />
+                  </div>
+                  <div class="col-md-3">
+                    <label for="request-status" class="form-label" style="font-weight: bold;">Justification:</label>
+                    <input type="text" style="background-color: #fff0db;" class="form-control" id="request-status"
+                      placeholder="Enter Request Status" />
+                  </div>
+                  <div class="col-md-3">
+                    <label for="construction-contractor" class="form-label" style="font-weight: bold;">Status:</label>
+                    <input type="text" style="background-color: #fff0db;" class="form-control"
+                      id="construction-contractor" placeholder="Enter Contractor Name" />
+                  </div>
+                </div>
+                <!-- Row 2: Dispatch By, Remark -->
+                <div class="row mb-3">
+                  <div class="col-md-3">
+                    <label for="clean-up-request-number" class="form-label" style="font-weight: bold;">Change Request
+                      Number:</label>
+                    <input type="text" style="background-color: #fff0db;" class="form-control"
+                      id="clean-up-request-number" placeholder="Enter Request Number" />
+                  </div>
+                  <div class="col-md-3">
+                    <label for="request-date" class="form-label" style="font-weight: bold;">Date:</label>
+                    <input type="text" style="background-color: #fff0db;" class="form-control" id="request-date"
+                      placeholder="Enter Request Date" />
+                  </div>
+                  <div class="col-md-3">
+                    <label for="request-status" class="form-label" style="font-weight: bold;">Justification:</label>
+                    <input type="text" style="background-color: #fff0db;" class="form-control" id="request-status"
+                      placeholder="Enter Request Status" />
+                  </div>
+                  <div class="col-md-3">
+                    <label for="construction-contractor" class="form-label" style="font-weight: bold;">Status:</label>
+                    <input type="text" style="background-color: #fff0db;" class="form-control"
+                      id="construction-contractor" placeholder="Enter Contractor Name" />
+                  </div>
+                </div>
+              </form>
             </div>
           </div>
-        </div>
-        <!-- Individual Task Tab Content -->
-        <div class="tab-pane fade show active" id="individual-task" role="tabpanel"
-          aria-labelledby="individual-task-tab" style="font-size: 14px;">
-          <form>
-            <!-- Well Name, Drillsite Name, and Objective -->
-            <div class="row mb-3">
-              <div class="col-md-4">
-                <label for="well-name" class="form-label" style="font-weight: bold; width: 150px;">Well Name:</label>
-                <input type="text" class="form-control" id="well-name" placeholder="Enter Well Name"
-                  style="background-color: #fff0db;" />
-              </div>
-              <div class="col-md-4">
-                <label for="Drillsite_Name" class="form-label" style="font-weight: bold; width: 150px;">Drillsite
-                  Name:</label>
-                <input type="text" class="form-control" id="Drillsite_Name" placeholder="Enter Drillsite Name"
-                  style="background-color: #fff0db;" />
-              </div>
-              <div class="col-md-4">
-                <label for="objective" class="form-label" style="font-weight: bold; width: 150px;">Objective:</label>
-                <input type="text" class="form-control" id="objective" placeholder="Enter Objective"
-                  style="background-color: #fff0db;" />
-              </div>
-            </div>
 
-            <!-- Fluid Type, BI, and Charge Account -->
-            <div class="row mb-3">
-              <div class="col-md-4">
-                <label for="fluid_Type_choices" class="form-label" style="font-weight: bold; width: 150px;">Fluid
-                  Type:</label>
-                <input type="text" class="form-control" id="fluid_Type_choices" placeholder="Enter Fluid Type"
-                  style="background-color: #fff0db;" />
-              </div>
-              <div class="col-md-4">
-                <label for="BI" class="form-label" style="font-weight: bold; width: 150px;">BI:</label>
-                <input type="text" class="form-control" id="BI" placeholder="Enter BI"
-                  style="background-color: #fff0db;" />
-              </div>
-              <div class="col-md-4">
-                <label for="Charge_Account" class="form-label" style="font-weight: bold; width: 150px;">Charge
-                  Account:</label>
-                <input type="text" class="form-control" id="Charge_Account" placeholder="Enter Charge Account"
-                  style="background-color: #fff0db;" />
-              </div>
-            </div>
-
-            <!-- Spud Date, Released Date, and Reference Number -->
-            <div class="row mb-3">
-              <div class="col-md-4">
-                <label for="Spud_date" class="form-label" style="font-weight: bold; width: 150px;">Spud Date:</label>
-                <input type="text" class="form-control" id="Spud_date" placeholder="Enter Spud Date"
-                  style="background-color: #fff0db;" />
-              </div>
-              <div class="col-md-4">
-                <label for="Released_date" class="form-label" style="font-weight: bold; width: 150px;">Released
-                  Date:</label>
-                <input type="text" class="form-control" id="Released_date" placeholder="Enter Released Date"
-                  style="background-color: #fff0db;" />
-              </div>
-              <div class="col-md-4">
-                <label for="Reference_Number" class="form-label" style="font-weight: bold; width: 250px;">Reference
-                  Number (RAC):</label>
-                <input type="text" class="form-control" id="Reference_Number" placeholder="Enter Reference Number"
-                  style="background-color: #fff0db;" />
-              </div>
-            </div>
-
-            <!-- Direct Distance, D&WO Engineer, and Engineering Department -->
-            <div class="row mb-3">
-              <div class="col-md-4">
-                <label for="well_construction_Direct_distance_DH" class="form-label"
-                  style="font-weight: bold; width: 150px;">Direct Distance DH:</label>
-                <input type="text" class="form-control" id="well_construction_Direct_distance_DH"
-                  placeholder="Enter Direct Distance DH" style="background-color: #fff0db;" />
-              </div>
-              <div class="col-md-4">
-                <label for="well_construction_DWO_Engineer" class="form-label"
-                  style="font-weight: bold; width: 150px;">D&WO Engineer:</label>
-                <input type="text" class="form-control" id="well_construction_DWO_Engineer"
-                  placeholder="Enter Engineer Name" style="background-color: #fff0db;" />
-              </div>
-              <div class="col-md-4">
-                <label for="Engineering_department" class="form-label"
-                  style="font-weight: bold; width: 250px;">Engineering Department:</label>
-                <input type="text" class="form-control" id="Engineering_department" placeholder="Enter Department Name"
-                  style="background-color: #fff0db;" />
-              </div>
-            </div>
-
-            <!-- Producing Engineer, GOSP/WIP/Department -->
-            <div class="row mb-3">
-              <div class="col-md-4">
-                <label for="well_construction_Producing_Engineer" class="form-label"
-                  style="font-weight: bold; width: 150px;">Producing Engineer:</label>
-                <input type="text" class="form-control" id="well_construction_Producing_Engineer"
-                  placeholder="Enter Producing Engineer Name" style="background-color: #fff0db;" />
-              </div>
-              <div class="col-md-4">
-                <label for="well_construction_GOSP_WIP_Department" class="form-label"
-                  style="font-weight: bold; width: 150px;">GOSP/WIP/Department:</label>
-                <input type="text" class="form-control" id="well_construction_GOSP_WIP_Department"
-                  placeholder="Enter Department Name" style="background-color: #fff0db;" />
-              </div>
-            </div>
-          </form>
         </div>
 
-        <!-- Group Task Tab Rig info -->
-        <div class="tab-pane fade" id="group-task" role="tabpanel" aria-labelledby="group-task-tab"
-          style="font-size: 14px;">
-          <form>
-            <!-- Rig Name, Rig Type, and Operation Department -->
-            <div class="row mb-3">
-              <div class="col-md-4">
-                <label for="Rig_name" class="form-label" style="font-weight: bold; width: 150px;">Rig Name:</label>
-                <input type="text" class="form-control" id="Rig_name" placeholder="Enter Rig Name"
-                  style="background-color: #fff0db;" />
-              </div>
-              <div class="col-md-4">
-                <label for="Rig_Type" class="form-label" style="font-weight: bold; width: 150px;">Rig Type:</label>
-                <input type="text" class="form-control" id="Rig_Type" placeholder="Enter Rig Type"
-                  style="background-color: #fff0db;" />
-              </div>
-              <div class="col-md-4">
-                <label for="Operation_Department" class="form-label" style="font-weight: bold; width: 250px;">Operation
-                  Department:</label>
-                <input type="text" class="form-control" id="Operation_Department" placeholder="Enter Department Name"
-                  style="background-color: #fff0db;" />
-              </div>
-            </div>
-
-            <!-- Operation Manager, Permanent Construction CC, and Last Update -->
-            <div class="row mb-3">
-              <div class="col-md-4">
-                <label for="Operation_Manager" class="form-label" style="font-weight: bold; width: 150px;">Operation
-                  Manager:</label>
-                <input type="text" class="form-control" id="Operation_Manager" placeholder="Enter Manager Name"
-                  style="background-color: #fff0db;" />
-              </div>
-              <div class="col-md-4">
-                <label for="Permanent_Construction_Cc" class="form-label"
-                  style="font-weight: bold; width: 250px;">Permanent Construction CC:</label>
-                <input type="text" class="form-control" id="Permanent_Construction_Cc"
-                  placeholder="Enter Construction CC" style="background-color: #fff0db;" />
-              </div>
-              <div class="col-md-4">
-                <label for="Last_Update_Permanent_Construction_Cc" class="form-label"
-                  style="font-weight: bold; width: 150px;">Last Update on:</label>
-                <input type="text" class="form-control" id="Last_Update_Permanent_Construction_Cc"
-                  placeholder="Enter Last Update Date" style="background-color: #fff0db;" />
-              </div>
-            </div>
-
-            <!-- Permanent HDPE Contractor, Last Update, and Permanent Soil Test Contractor -->
-            <div class="row mb-3">
-              <div class="col-md-4">
-                <label for="Permanent_HDPE_Contractor" class="form-label"
-                  style="font-weight: bold; width: 250px;">Permanent HDPE Contractor:</label>
-                <input type="text" class="form-control" id="Permanent_HDPE_Contractor"
-                  placeholder="Enter Contractor Name" style="background-color: #fff0db;" />
-              </div>
-              <div class="col-md-4">
-                <label for="Last_Update_Permanent_HDPE_Contractor" class="form-label"
-                  style="font-weight: bold; width: 150px;">Last Update on:</label>
-                <input type="text" class="form-control" id="Last_Update_Permanent_HDPE_Contractor"
-                  placeholder="Enter Last Update Date" style="background-color: #fff0db;" />
-              </div>
-              <div class="col-md-4">
-                <label for="Permanent_Soil_Test_Contractor" class="form-label"
-                  style="font-weight: bold; width: 250px;">Permanent Soil Test Contractor:</label>
-                <input type="text" class="form-control" id="Permanent_Soil_Test_Contractor"
-                  placeholder="Enter Contractor Name" style="background-color: #fff0db;" />
-              </div>
-            </div>
-
-            <!-- Last Update for Soil Test, Current Assigned Unit, and Current Assigned WS Engineer -->
-            <div class="row mb-3">
-              <div class="col-md-4">
-                <label for="Last_Update_Permanent_Soil_Test_Contractor" class="form-label"
-                  style="font-weight: bold; width: 150px;">Last Update on:</label>
-                <input type="text" class="form-control" id="Last_Update_Permanent_Soil_Test_Contractor"
-                  placeholder="Enter Last Update Date" style="background-color: #fff0db;" />
-              </div>
-              <div class="col-md-4">
-                <label for="Current_Assigned_Unit" class="form-label" style="font-weight: bold; width: 250px;">Current
-                  Assigned Unit:</label>
-                <input type="text" class="form-control" id="Current_Assigned_Unit" placeholder="Enter Unit Details"
-                  style="background-color: #fff0db;" />
-              </div>
-              <div class="col-md-4">
-                <label for="Current_Assigned_WS_Engineer" class="form-label"
-                  style="font-weight: bold; width: 250px;">Current Assigned WS Engineer:</label>
-                <input type="text" class="form-control" id="Current_Assigned_WS_Engineer"
-                  placeholder="Enter Engineer Name" style="background-color: #fff0db;" />
-              </div>
-            </div>
-          </form>
-        </div>
-
-        <!-- Location Map Tab Content -->
-        <div class="tab-pane fade" id="group-task1" role="tabpanel" aria-labelledby="group-task-tab"
-          style="font-size: 14px;">
-          <form>
-            <!-- Location Map and Rig Name -->
-            <div class="row mb-3">
-              <div class="col-md-6">
-                <label for="well-name-group" class="form-label" style="font-weight: bold; width: 250px;">Location
-                  Map:</label>
-                <input type="text" class="form-control" id="well-name-group" placeholder="Enter Location Map Details"
-                  style="background-color: #fff0db;" />
-              </div>
-              <div class="col-md-6">
-                <label for="rig-name-group" class="form-label" style="font-weight: bold; width: 150px;">Rig
-                  Name:</label>
-                <input type="text" class="form-control" id="rig-name-group" placeholder="Enter Rig Name"
-                  style="background-color: #fff0db;" />
-              </div>
-            </div>
-          </form>
-        </div>
-
-        <!-- Well Link -->
-        <a href="#" class="well-link" data-id="{{ movement.well.pk }}">{{ movement.well.name }}</a>
-
-        <!-- The form inside the #group-task2 div -->
-        <div class="tab-pane fade" id="group-task2" role="tabpanel" aria-labelledby="group-task-tab"
-          style="font-size: 14px;">
-          <form>
-            <!-- Row 1: Approval Status, Approval Date, and Construction Requirement -->
-            <div class="row mb-3">
-              <div class="col-md-4">
-                <label for="Approval_Status" class="form-label" style="font-weight: bold;">Approval Status:</label>
-                <input type="text" class="form-control" style="background-color: #fff0db;" id="Approval_Status"
-                  placeholder="Enter Approval Status" />
-              </div>
-              <div class="col-md-4">
-                <label for="Approval_Date" class="form-label" style="font-weight: bold;">Approval Date:</label>
-                <input type="text" class="form-control" style="background-color: #fff0db;" id="Approval_Date"
-                  placeholder="Enter Approval Date" />
-              </div>
-              <div class="col-md-4">
-                <label for="CONDTR_REQ" class="form-label" style="font-weight: bold;">Construction Requirement:</label>
-                <input type="text" class="form-control" style="background-color: #fff0db;" id="CONDTR_REQ"
-                  placeholder="Enter Construction Requirement" />
-              </div>
-            </div>
-
-            <!-- Row 2: R. Completion Date, Approved Layout, and Date -->
-            <div class="row mb-3">
-              <div class="col-md-4">
-                <label for="R_Completio_Date" class="form-label" style="font-weight: bold;">R. Completion Date:</label>
-                <input type="text" class="form-control" style="background-color: #fff0db;" id="R_Completio_Date"
-                  placeholder="Enter Completion Date" />
-              </div>
-              <div class="col-md-4">
-                <label for="Approved_Lay_out" class="form-label" style="font-weight: bold;">Approved Layout:</label>
-                <input type="text" class="form-control" style="background-color: #fff0db;" id="Approved_Lay_out"
-                  placeholder="Enter Approved Layout Details" />
-              </div>
-              <div class="col-md-4">
-                <label for="Date_Approved_Lay_out" class="form-label" style="font-weight: bold;">Date:</label>
-                <input type="text" class="form-control" style="background-color: #fff0db;" id="Date_Approved_Lay_out"
-                  placeholder="Enter Date" />
-              </div>
-            </div>
-          </form>
-        </div>
-
-        {% comment %}here the new code we have{% endcomment %}
-
-        <!-- Construction Table -->
-        <div class="tab-pane fade" id="group-task3" role="tabpanel" aria-labelledby="group-task-tab"
-          style="font-size: 14px;">
-          <form>
-            <!-- Row 1: Construction Request, Request Date, Request Status -->
-            <div class="row mb-3">
-              <div class="col-md-4">
-                <label for="CONSTR_REQ" class="form-label" style="font-weight: bold;">Construction Request:</label>
-                <input type="text" class="form-control" id="CONSTR_REQ" placeholder="Enter Construction Request"
-                  style="background-color: #fff0db;" />
-              </div>
-              <div class="col-md-4">
-                <label for="REQ_Start_Date" class="form-label" style="font-weight: bold;">Request Date:</label>
-                <input type="text" class="form-control" id="REQ_Start_Date" placeholder="Enter Request Start Date"
-                  style="background-color: #fff0db;" />
-              </div>
-              <div class="col-md-4">
-                <label for="REQ_Status" class="form-label" style="font-weight: bold;">Request Status:</label>
-                <input type="text" class="form-control" id="REQ_Status" placeholder="Enter Request Status"
-                  style="background-color: #fff0db;" />
-              </div>
-            </div>
-
-            <!-- Row 2: Construction Contractor, Construction KPI, Construction KOM -->
-            <div class="row mb-3">
-              <div class="col-md-4">
-                <label for="CONSTR_Contractor" class="form-label" style="font-weight: bold;">Construction
-                  Contractor:</label>
-                <input type="text" class="form-control" id="CONSTR_Contractor" placeholder="Enter Contractor Name"
-                  style="background-color: #fff0db;" />
-              </div>
-              <div class="col-md-4">
-                <label for="CONSTR_KPI" class="form-label" style="font-weight: bold;">Construction KPI:</label>
-                <input type="text" class="form-control" id="CONSTR_KPI" placeholder="Enter KPI"
-                  style="background-color: #fff0db;" />
-              </div>
-              <div class="col-md-4">
-                <label for="CONSTR_KOM" class="form-label" style="font-weight: bold;">Construction KOM:</label>
-                <input type="text" class="form-control" id="CONSTR_KOM" placeholder="Enter KOM Details"
-                  style="background-color: #fff0db;" />
-              </div>
-            </div>
-
-            <!-- Row 3: Conducted By (KOM), Construction Status, Constructed Skid Road Distance -->
-            <div class="row mb-3">
-              <div class="col-md-4">
-                <label for="Conducted_by_KOM" class="form-label" style="font-weight: bold;">Conducted By (KOM):</label>
-                <input type="text" class="form-control" id="Conducted_by_KOM"
-                  placeholder="Enter Name of Person Conducting KOM" style="background-color: #fff0db;" />
-              </div>
-              <div class="col-md-4">
-                <label for="Construction_Status" class="form-label" style="font-weight: bold;">Construction
-                  Status:</label>
-                <input type="text" class="form-control" id="Construction_Status" placeholder="Enter Construction Status"
-                  style="background-color: #fff0db;" />
-              </div>
-              <div class="col-md-4">
-                <label for="CONSTR_Skid_ROAD_DIST" class="form-label" style="font-weight: bold;">Constructed Skid Road
-                  Distance:</label>
-                <input type="text" class="form-control" id="CONSTR_Skid_ROAD_DIST" placeholder="Enter Distance"
-                  style="background-color: #fff0db;" />
-              </div>
-            </div>
-
-            <!-- Row 4: Final Survey, Conducted By (Final Survey), Unit -->
-            <div class="row mb-3">
-              <div class="col-md-4">
-                <label for="Final_Survey" class="form-label" style="font-weight: bold;">Final Survey:</label>
-                <input type="text" class="form-control" id="Final_Survey" placeholder="Enter Final Survey Details"
-                  style="background-color: #fff0db;" />
-              </div>
-              <div class="col-md-4">
-                <label for="Conducted_by_Final_Survey" class="form-label" style="font-weight: bold;">Conducted By (Final
-                  Survey):</label>
-                <input type="text" class="form-control" id="Conducted_by_Final_Survey"
-                  placeholder="Enter Name of Person Conducting Survey" style="background-color: #fff0db;" />
-              </div>
-              <div class="col-md-4">
-                <label for="Unit" class="form-label" style="font-weight: bold;">Unit:</label>
-                <input type="text" class="form-control" id="Unit" placeholder="Enter Unit"
-                  style="background-color: #fff0db;" />
-              </div>
-            </div>
-
-            <!-- Row 5: Post Construction Turn-over, Date, Quantities Details -->
-            <div class="row mb-3">
-              <div class="col-md-4">
-                <label for="Post_CONSTR_Rurn_OVER" class="form-label" style="font-weight: bold;">Post Construction
-                  Turn-over:</label>
-                <input type="text" class="form-control" id="Post_CONSTR_Rurn_OVER" placeholder="Enter Turn-over Details"
-                  style="background-color: #fff0db;" />
-              </div>
-              <div class="col-md-4">
-                <label for="REQ_End_Date" class="form-label" style="font-weight: bold;">Date:</label>
-                <input type="text" class="form-control" id="REQ_End_Date" placeholder="Enter End Date"
-                  style="background-color: #fff0db;" />
-              </div>
-              <div class="col-md-4">
-                <label for="Quanatities_Detities" class="form-label" style="font-weight: bold;">Quantities
-                  Details:</label>
-                <input type="text" class="form-control" id="Quanatities_Detities" placeholder="Enter Quantities Details"
-                  style="background-color: #fff0db;" />
-              </div>
-            </div>
-
-            <!-- Row 6: Project Team Details, Remarks, Criticality -->
-            <div class="row mb-3">
-              <div class="col-md-4">
-                <label for="Project_team_Details" class="form-label" style="font-weight: bold;">Project Team
-                  Details:</label>
-                <input type="text" class="form-control" id="Project_team_Details" placeholder="Enter Team Details"
-                  style="background-color: #fff0db;" />
-              </div>
-              <div class="col-md-4">
-                <label for="Remark_and_Hold" class="form-label" style="font-weight: bold;">Remarks for 0% and
-                  Hold:</label>
-                <input type="text" class="form-control" id="Remark_and_Hold" placeholder="Enter Remarks"
-                  style="background-color: #fff0db;" />
-              </div>
-              <div class="col-md-4">
-                <label for="Criticality" class="form-label" style="font-weight: bold;">Criticality:</label>
-                <input type="text" class="form-control" id="Criticality" placeholder="Enter Criticality Level"
-                  style="background-color: #fff0db;" />
-              </div>
-            </div>
-          </form>
-        </div>
-
-        <div class="tab-pane fade" id="group-task4" role="tabpanel" aria-labelledby="group-task-tab"
-          style="font-size: 14px;">
-          <form>
-            <!-- Row 1: Cellar Installation, Soil Test Request, Request Date -->
-            <div class="row mb-3">
-              <div class="col-md-4">
-                <label for="Cellar_Installation" class="form-label" style="font-weight: bold;">Cellar
-                  Installation:</label>
-                <input type="text" class="form-control" id="Cellar_Installation"
-                  placeholder="Enter Installation Details" style="background-color: #fff0db;" />
-              </div>
-              <div class="col-md-4">
-                <label for="Soil_Test_Request" class="form-label" style="font-weight: bold;">Soil Test Request:</label>
-                <input type="text" class="form-control" id="Soil_Test_Request" placeholder="Enter Soil Test Request"
-                  style="background-color: #fff0db;" />
-              </div>
-              <div class="col-md-4">
-                <label for="REQ_Date" class="form-label" style="font-weight: bold;">Request Date:</label>
-                <input type="text" class="form-control" id="REQ_Date" placeholder="Enter Request Date"
-                  style="background-color: #fff0db;" />
-              </div>
-            </div>
-
-            <!-- Row 2: Request Status, Soil Test Contractor, Conducted By -->
-            <div class="row mb-3">
-              <div class="col-md-4">
-                <label for="Cellar_REQ_Status" class="form-label" style="font-weight: bold;">Request Status:</label>
-                <input type="text" class="form-control" id="Cellar_REQ_Status" placeholder="Enter Request Status"
-                  style="background-color: #fff0db;" />
-              </div>
-              <div class="col-md-4">
-                <label for="Soil_Test_Contractor" class="form-label" style="font-weight: bold;">Soil Test
-                  Contractor:</label>
-                <input type="text" class="form-control" id="Soil_Test_Contractor" placeholder="Enter Contractor Name"
-                  style="background-color: #fff0db;" />
-              </div>
-              <div class="col-md-4">
-                <label for="Conducted_by" class="form-label" style="font-weight: bold;">Conducted By:</label>
-                <input type="text" class="form-control" id="Conducted_by" placeholder="Enter Name of Person Conducting"
-                  style="background-color: #fff0db;" />
-              </div>
-            </div>
-          </form>
-        </div>
-
-        <!-- HDPE Installation -->
-        <div class="tab-pane fade" id="group-task5" role="tabpanel" aria-labelledby="group-task-tab"
-          style="font-size: 14px;">
-          <form>
-            <!-- Row 1: Lining Installation, Lining Request, Request Date -->
-            <div class="row mb-3">
-              <div class="col-md-4">
-                <label for="Lining_Installation" class="form-label" style="font-weight: bold;">Lining
-                  Installation:</label>
-                <input type="text" class="form-control" id="Lining_Installation"
-                  placeholder="Enter Installation Details" style="background-color: #fff0db;" />
-              </div>
-              <div class="col-md-4">
-                <label for="REQ_Lining_Number" class="form-label" style="font-weight: bold;">Lining Request:</label>
-                <input type="text" class="form-control" id="REQ_Lining_Number" placeholder="Enter Request Number"
-                  style="background-color: #fff0db;" />
-              </div>
-              <div class="col-md-4">
-                <label for="HDPE_REQ_Date" class="form-label" style="font-weight: bold;">Request Date:</label>
-                <input type="text" class="form-control" id="HDPE_REQ_Date" placeholder="Enter Request Date"
-                  style="background-color: #fff0db;" />
-              </div>
-            </div>
-
-            <!-- Row 2: Request Status, Installation Status, Total Area Installed -->
-            <div class="row mb-3">
-              <div class="col-md-4">
-                <label for="HDPE_REQ_Status" class="form-label" style="font-weight: bold;">Request Status:</label>
-                <input type="text" class="form-control" id="HDPE_REQ_Status" placeholder="Enter Request Status"
-                  style="background-color: #fff0db;" />
-              </div>
-              <div class="col-md-4">
-                <label for="Installation_Status" class="form-label" style="font-weight: bold;">Installation
-                  Status:</label>
-                <input type="text" class="form-control" id="Installation_Status" placeholder="Enter Installation Status"
-                  style="background-color: #fff0db;" />
-              </div>
-              <div class="col-md-4">
-                <label for="Total_Area_Installed" class="form-label" style="font-weight: bold;">Total Area
-                  Installed:</label>
-                <input type="text" class="form-control" id="Total_Area_Installed" placeholder="Enter Total Area"
-                  style="background-color: #fff0db;" />
-              </div>
-            </div>
-
-            <!-- Row 3: Lining Contractor, Conducted By, Quantities -->
-            <div class="row mb-3">
-              <div class="col-md-4">
-                <label for="Lining_Contractor" class="form-label" style="font-weight: bold;">Lining Contractor:</label>
-                <input type="text" class="form-control" id="Lining_Contractor" placeholder="Enter Contractor Name"
-                  style="background-color: #fff0db;" />
-              </div>
-              <div class="col-md-4">
-                <label for="Conducted_by_info" class="form-label" style="font-weight: bold;">Conducted By:</label>
-                <input type="text" class="form-control" id="Conducted_by_info" placeholder="Enter Conducted By Info"
-                  style="background-color: #fff0db;" />
-              </div>
-              <div class="col-md-4">
-                <label for="Quantities_Details" class="form-label" style="font-weight: bold;">Quantities:</label>
-                <input type="text" class="form-control" id="Quantities_Details" placeholder="Enter Quantities Details"
-                  style="background-color: #fff0db;" />
-              </div>
-            </div>
-          </form>
-        </div>
-
-        <!-- Rig move table -->
-        <div class="tab-pane fade" id="group-task6" role="tabpanel" aria-labelledby="group-task-tab"
-          style="font-size: 14px;">
-          <form>
-            <!-- Row 1: Rig Move Request, Rig Name, From Well -->
-            <div class="row mb-3">
-              <div class="col-md-4">
-                <label for="RIG_MOVE_REQ" class="form-label" style="font-weight: bold;">Rig Move Request:</label>
-                <input type="text" class="form-control" id="RIG_MOVE_REQ" placeholder="Enter Rig Move Request"
-                  style="background-color: #fff0db;" />
-              </div>
-              <div class="col-md-4">
-                <label for="RIG_MOVE_NAME" class="form-label" style="font-weight: bold;">Rig Name:</label>
-                <input type="text" class="form-control" id="RIG_MOVE_NAME" placeholder="Enter Rig Name"
-                  style="background-color: #fff0db;" />
-              </div>
-              <div class="col-md-4">
-                <label for="RIG_MOVE_WELL" class="form-label" style="font-weight: bold;">From Well:</label>
-                <input type="text" class="form-control" id="RIG_MOVE_WELL" placeholder="Enter Well Name"
-                  style="background-color: #fff0db;" />
-              </div>
-            </div>
-
-            <!-- Row 2: Request Status, Rig Move Documents, Conducted By -->
-            <div class="row mb-3">
-              <div class="col-md-4">
-                <label for="RIG_MOVE_STATUS" class="form-label" style="font-weight: bold;">Request Status:</label>
-                <input type="text" class="form-control" id="RIG_MOVE_STATUS" placeholder="Enter Request Status"
-                  style="background-color: #fff0db;" />
-              </div>
-              <div class="col-md-4">
-                <label for="RIG_MOVE_DOCUMENTS_LINK" class="form-label" style="font-weight: bold;">Rig Move
-                  Documents:</label>
-                <input type="text" class="form-control" id="RIG_MOVE_DOCUMENTS_LINK" placeholder="Enter Document Link"
-                  style="background-color: #fff0db;" />
-              </div>
-              <div class="col-md-4">
-                <label for="RIG_MOVE_CONDUCTED_BY" class="form-label" style="font-weight: bold;">Conducted By:</label>
-                <input type="text" class="form-control" id="RIG_MOVE_CONDUCTED_BY"
-                  placeholder="Enter Name of Person Conducting" style="background-color: #fff0db;" />
-              </div>
-            </div>
-          </form>
-        </div>
-
-        <!-- Repair Section -->
-        <div class="tab-pane fade" id="group-task7" role="tabpanel" aria-labelledby="group-task-tab"
-          style="font-size: 14px;">
-          <form>
-            <!-- Repair Section -->
-            <div class="row mb-3">
-              <div class="col-md-3">
-                <label for="repair-group" class="form-label" style="font-weight: bold;">Required Repair:</label>
-              </div>
-              <div class="col-md-9 d-flex flex-wrap align-items-center">
-                <div class="form-check me-3">
-                  <input class="form-check-input" type="checkbox" id="repair-sand-removal" />
-                  <label class="form-check-label" for="repair-sand-removal">Sand Removal</label>
-                </div>
-                <div class="form-check me-3">
-                  <input class="form-check-input" type="checkbox" id="repair-extension" />
-                  <label class="form-check-label" for="repair-extension">Extension</label>
-                </div>
-                <div class="form-check me-3">
-                  <input class="form-check-input" type="checkbox" id="repair-recompaction" />
-                  <label class="form-check-label" for="repair-recompaction">Re-Compaction</label>
-                </div>
-                <div class="form-check me-3">
-                  <input class="form-check-input" type="checkbox" id="repair-change-cellar" />
-                  <label class="form-check-label" for="repair-change-cellar">Change Cellar</label>
-                </div>
-                <div class="form-check me-3">
-                  <input class="form-check-input" type="checkbox" id="repair-modification" />
-                  <label class="form-check-label" for="repair-modification">Modification</label>
-                </div>
-                <div class="form-check me-3">
-                  <input class="form-check-input" type="checkbox" id="repair-complete-repair" />
-                  <label class="form-check-label" for="repair-complete-repair">Complete Repair</label>
-                </div>
-                <div class="form-check me-3">
-                  <input class="form-check-input" type="checkbox" id="repair-additional" />
-                  <label class="form-check-label" for="repair-additional">Additional</label>
-                </div>
-              </div>
-            </div>
-
-            <!-- Row 1: From Well, Request Status, Rig Move Documents -->
-            <div class="row mb-3">
-              <div class="col-md-4">
-                <label for="well-name-group" class="form-label" style="font-weight: bold;">Repair Request
-                  Number:</label>
-                <input type="text" class="form-control" id="well-name-group" placeholder="Enter Well Name"
-                  style="background-color: #fff0db;" />
-              </div>
-              <div class="col-md-4">
-                <label for="request-status-group" class="form-label" style="font-weight: bold;">Request Status:</label>
-                <input type="text" class="form-control" id="request-status-group" placeholder="Enter Request Status"
-                  style="background-color: #fff0db;" />
-              </div>
-              <div class="col-md-4">
-                <label for="rig-move-documents-group" class="form-label" style="font-weight: bold;">Request
-                  Date:</label>
-                <input type="text" class="form-control" id="rig-move-documents-group" placeholder="Enter Document Info"
-                  style="background-color: #fff0db;" />
-              </div>
-            </div>
-
-            <!-- Row 2: Conducted By, Rig Move Documents (2), Conducted By (2) -->
-            <div class="row mb-3">
-              <div class="col-md-4">
-                <label for="conducted-by-group" class="form-label" style="font-weight: bold;">Construction
-                  Contractor:</label>
-                <input type="text" class="form-control" id="conducted-by-group" placeholder="Enter Name"
-                  style="background-color: #fff0db;" />
-              </div>
-              <div class="col-md-4">
-                <label for="rig-move-documents-group-2" class="form-label" style="font-weight: bold;">Repair Start
-                  Date:</label>
-                <input type="text" class="form-control" id="rig-move-documents-group-2"
-                  placeholder="Enter Document Info" style="background-color: #fff0db;" />
-              </div>
-              <div class="col-md-4">
-                <label for="conducted-by-group-2" class="form-label" style="font-weight: bold;">Repair Status:</label>
-                <input type="text" class="form-control" id="conducted-by-group-2" placeholder="Enter Name"
-                  style="background-color: #fff0db;" />
-              </div>
-            </div>
-
-            <!-- Row 3: Rig Move Documents (3), Conducted By (3) -->
-            <div class="row mb-3">
-              <div class="col-md-4">
-                <label for="rig-move-documents-group-3" class="form-label" style="font-weight: bold;">Repair Completion
-                  Date:</label>
-                <input type="text" class="form-control" id="rig-move-documents-group-3"
-                  placeholder="Enter Document Info" style="background-color: #fff0db;" />
-              </div>
-              <div class="col-md-4">
-                <label for="conducted-by-group-3" class="form-label" style="font-weight: bold;">Monitored By:</label>
-                <input type="text" class="form-control" id="conducted-by-group-3" placeholder="Enter Name"
-                  style="background-color: #fff0db;" />
-              </div>
-              <div class="col-md-4">
-                <label for="conducted-by-group-3" class="form-label" style="font-weight: bold;">Quantities
-                  Details:</label>
-                <input type="text" class="form-control" id="conducted-by-group-3" placeholder="Enter Name"
-                  style="background-color: #fff0db;" />
-              </div>
-            </div>
-            <div class="row mb-3">
-              <div class="col-md-4">
-                <label for="rig-move-documents-group-3" class="form-label" style="font-weight: bold;">Project Team
-                  Details:</label>
-                <input type="text" class="form-control" id="rig-move-documents-group-3"
-                  placeholder="Enter Document Info" style="background-color: #fff0db;" />
-              </div>
-              <div class="col-md-4">
-                <label for="conducted-by-group-3" class="form-label" style="font-weight: bold;">Criticality:</label>
-                <input type="text" class="form-control" id="conducted-by-group-3" placeholder="Enter Name"
-                  style="background-color: #fff0db;" />
-              </div>
-            </div>
-          </form>
-        </div>
-
-        <!-- Clean-Up Section -->
-        <div class="tab-pane fade" id="group-task8" role="tabpanel" aria-labelledby="group-task-tab"
-          style="font-size: 14px;">
-          <form>
-            <!-- Row 1: Clean-Up Request Number, Request Date, Request Status -->
-            <div class="row mb-3">
-              <div class="col-md-4">
-                <label for="clean-up-request-number" class="form-label" style="font-weight: bold;">Clean-Up Request
-                  Number:</label>
-                <input type="text" style="background-color: #fff0db;" class="form-control" id="clean-up-request-number"
-                  placeholder="Enter Clean-Up Request Number" />
-              </div>
-              <div class="col-md-4">
-                <label for="request-date" class="form-label" style="font-weight: bold;">Request Date:</label>
-                <input type="text" style="background-color: #fff0db;" class="form-control" id="request-date"
-                  placeholder="Enter Request Date" />
-              </div>
-              <div class="col-md-4">
-                <label for="request-status" class="form-label" style="font-weight: bold;">Request Status:</label>
-                <input type="text" style="background-color: #fff0db;" class="form-control" id="request-status"
-                  placeholder="Enter Request Status" />
-              </div>
-            </div>
-
-            <!-- Row 2: Construction Contractor, Clean-Up KPI, Clean-Up Start Date -->
-            <div class="row mb-3">
-              <div class="col-md-4">
-                <label for="construction-contractor" class="form-label" style="font-weight: bold;">Construction
-                  Contractor:</label>
-                <input type="text" style="background-color: #fff0db;" class="form-control" id="construction-contractor"
-                  placeholder="Enter Contractor Name" />
-              </div>
-              <div class="col-md-4">
-                <label for="cleanup-kpi" class="form-label" style="font-weight: bold;">Clean-Up KPI:</label>
-                <input type="text" style="background-color: #fff0db;" class="form-control" id="cleanup-kpi"
-                  placeholder="Enter Clean-Up KPI" />
-              </div>
-              <div class="col-md-4">
-                <label for="cleanup-start-date" class="form-label" style="font-weight: bold;">Clean-Up Start
-                  Date:</label>
-                <input type="text" style="background-color: #fff0db;" class="form-control" id="cleanup-start-date"
-                  placeholder="Enter Start Date" />
-              </div>
-            </div>
-
-            <!-- Row 3: Clean-Up Start Status, Clean-Up Completion Date, Post Clean-Up Turnover -->
-            <div class="row mb-3">
-              <div class="col-md-4">
-                <label for="cleanup-start-status" class="form-label" style="font-weight: bold;">Clean-Up Start
-                  Status:</label>
-                <input type="text" style="background-color: #fff0db;" class="form-control" id="cleanup-start-status"
-                  placeholder="Enter Start Status" />
-              </div>
-              <div class="col-md-4">
-                <label for="cleanup-completion-date" class="form-label" style="font-weight: bold;">Clean-Up Completion
-                  Date:</label>
-                <input type="text" style="background-color: #fff0db;" class="form-control" id="cleanup-completion-date"
-                  placeholder="Enter Completion Date" />
-              </div>
-              <div class="col-md-4">
-                <label for="post-cleanup-turnover" class="form-label" style="font-weight: bold;">Post Clean-Up
-                  Turnover:</label>
-                <input type="text" style="background-color: #fff0db;" class="form-control" id="post-cleanup-turnover"
-                  placeholder="Enter Post Clean-Up Turnover" />
-              </div>
-            </div>
-
-            <!-- Row 4: Monitored By -->
-            <div class="row mb-3">
-              <div class="col-md-4">
-                <label for="monitored-by" class="form-label" style="font-weight: bold;">Monitored By:</label>
-                <input type="text" style="background-color: #fff0db;" class="form-control" id="monitored-by"
-                  placeholder="Enter Monitored By" />
-              </div>
-              <div class="col-md-4">
-                <label for="quantities-details" class="form-label" style="font-weight: bold;">Quantities
-                  Details:</label>
-                <input type="text" style="background-color: #fff0db;" class="form-control" id="quantities-details"
-                  placeholder="Enter Quantities Details" />
-              </div>
-              <div class="col-md-4">
-                <label for="project-team-details" class="form-label" style="font-weight: bold;">Project Team
-                  Details:</label>
-                <input type="text" style="background-color: #fff0db;" class="form-control" id="project-team-details"
-                  placeholder="Enter Project Team Details" />
-              </div>
-            </div>
-            <!-- Row 5: -->
-            <div class="row mb-3">
-              <div class="col-md-4">
-                <label for="monitored-by" class="form-label" style="font-weight: bold;">Pre-Clean-Up Turnover:</label>
-                <input type="text" style="background-color: #fff0db;" class="form-control" id="monitored-by"
-                  placeholder="Enter Pre-Clean-Up Turnover" />
-              </div>
-              <div class="col-md-4">
-                <label for="quantities-details" class="form-label" style="font-weight: bold;">Criticality:</label>
-                <input type="text" style="background-color: #fff0db;" class="form-control" id="quantities-details"
-                  placeholder="Enter Criticality" />
-              </div>
-
-            </div>
-          </form>
-        </div>
-
-
-        <div class="tab-pane fade" id="group-task9" role="tabpanel" aria-labelledby="group-task-tab"
-          style="font-size: 14px;">
-          <form>
-            <!-- Row 1: Clean-Up Request Number, Request Date, Request Status -->
-            <div class="row mb-3">
-              <div class="col-md-4">
-                <label for="clean-up-request-number" class="form-label" style="font-weight: bold;">Request
-                  Number:</label>
-                <input type="text" style="background-color: #fff0db;" class="form-control" id="clean-up-request-number"
-                  placeholder="Enter Request Number" />
-              </div>
-              <div class="col-md-4">
-                <label for="request-date" class="form-label" style="font-weight: bold;">Request Date:</label>
-                <input type="text" style="background-color: #fff0db;" class="form-control" id="request-date"
-                  placeholder="Enter Request Date" />
-              </div>
-              <div class="col-md-4">
-                <label for="request-status" class="form-label" style="font-weight: bold;">Request Status:</label>
-                <input type="text" style="background-color: #fff0db;" class="form-control" id="request-status"
-                  placeholder="Enter Request Date" />
-              </div>
-            </div>
-
-            <!-- Row 2: Construction Contractor, Clean-Up KPI, Clean-Up Start Date -->
-            <div class="row mb-3">
-              <div class="col-md-4">
-                <label for="construction-contractor" class="form-label" style="font-weight: bold;">Contractor:</label>
-                <input type="text" style="background-color: #fff0db;" class="form-control" id="construction-contractor"
-                  placeholder="Enter Request Status" />
-              </div>
-              <div class="col-md-4">
-                <label for="cleanup-kpi" class="form-label" style="font-weight: bold;">Dispatch By:</label>
-                <input type="text" style="background-color: #fff0db;" class="form-control" id="cleanup-kpi"
-                  placeholder="Enter Dispatch By" />
-              </div>
-              <div class="col-md-4">
-                <label for="cleanup-start-date" class="form-label" style="font-weight: bold;">Remark:</label>
-                <input type="text" style="background-color: #fff0db;" class="form-control" id="cleanup-start-date"
-                  placeholder="Enter Remark" />
-              </div>
-            </div>
-          </form>
-        </div>
-
-        <div class="tab-pane fade" id="group-task10" role="tabpanel" aria-labelledby="group-task-tab"
-          style="font-size: 14px;">
-          <form>
-            <!-- Row 1: Clean-Up Request Number, Request Date, Request Status -->
-            <div class="row mb-3">
-              <div class="col-md-4">
-                <label for="clean-up-request-number" class="form-label" style="font-weight: bold;">Request
-                  Number:</label>
-                <input type="text" style="background-color: #fff0db;" class="form-control" id="clean-up-request-number"
-                  placeholder="Enter Request Number" />
-              </div>
-              <div class="col-md-4">
-                <label for="request-date" class="form-label" style="font-weight: bold;">Request Date:</label>
-                <input type="text" style="background-color: #fff0db;" class="form-control" id="request-date"
-                  placeholder="Enter Request Date" />
-              </div>
-              <div class="col-md-4">
-                <label for="request-status" class="form-label" style="font-weight: bold;">Request Status:</label>
-                <input type="text" style="background-color: #fff0db;" class="form-control" id="request-status"
-                  placeholder="Enter Request Date" />
-              </div>
-            </div>
-
-            <!-- Row 2: Construction Contractor, Clean-Up KPI, Clean-Up Start Date -->
-            <div class="row mb-3">
-              <div class="col-md-4">
-                <label for="construction-contractor" class="form-label" style="font-weight: bold;">Contractor:</label>
-                <input type="text" style="background-color: #fff0db;" class="form-control" id="construction-contractor"
-                  placeholder="Enter Request Status" />
-              </div>
-              <div class="col-md-4">
-                <label for="cleanup-kpi" class="form-label" style="font-weight: bold;">Dispatch By:</label>
-                <input type="text" style="background-color: #fff0db;" class="form-control" id="cleanup-kpi"
-                  placeholder="Enter Dispatch By" />
-              </div>
-              <div class="col-md-4">
-                <label for="cleanup-start-date" class="form-label" style="font-weight: bold;">Remark:</label>
-                <input type="text" style="background-color: #fff0db;" class="form-control" id="cleanup-start-date"
-                  placeholder="Enter Remark" />
-              </div>
-            </div>
-          </form>
-        </div>
-
-
-
-        <!-- Change Request Track -->
-        <div class="tab-pane fade" id="group-task11" role="tabpanel" aria-labelledby="group-task-tab"style="font-size: 14px;">
-          <form>
-            <!-- Row 1: Request Number, Request Date, Request Status, Construction Contractor -->
-            <div class="row mb-3">
-              <div class="col-md-3">
-                <label for="clean-up-request-number" class="form-label" style="font-weight: bold;">Change Request
-                  Number:</label>
-                <input type="text" style="background-color: #fff0db;" class="form-control" id="clean-up-request-number"
-                  placeholder="Enter Request Number" />
-              </div>
-              <div class="col-md-3">
-                <label for="request-date" class="form-label" style="font-weight: bold;">Date:</label>
-                <input type="text" style="background-color: #fff0db;" class="form-control" id="request-date"
-                  placeholder="Enter Request Date" />
-              </div>
-              <div class="col-md-3">
-                <label for="request-status" class="form-label" style="font-weight: bold;">Justification:</label>
-                <input type="text" style="background-color: #fff0db;" class="form-control" id="request-status"
-                  placeholder="Enter Request Status" />
-              </div>
-              <div class="col-md-3">
-                <label for="construction-contractor" class="form-label" style="font-weight: bold;">Status:</label>
-                <input type="text" style="background-color: #fff0db;" class="form-control" id="construction-contractor"
-                  placeholder="Enter Contractor Name" />
-              </div>
-            </div>
-
-            <!-- Row 2: Dispatch By, Remark -->
-            <div class="row mb-3">
-              <div class="col-md-3">
-                <label for="clean-up-request-number" class="form-label" style="font-weight: bold;">Change Request
-                  Number:</label>
-                <input type="text" style="background-color: #fff0db;" class="form-control" id="clean-up-request-number"
-                  placeholder="Enter Request Number" />
-              </div>
-              <div class="col-md-3">
-                <label for="request-date" class="form-label" style="font-weight: bold;">Date:</label>
-                <input type="text" style="background-color: #fff0db;" class="form-control" id="request-date"
-                  placeholder="Enter Request Date" />
-              </div>
-              <div class="col-md-3">
-                <label for="request-status" class="form-label" style="font-weight: bold;">Justification:</label>
-                <input type="text" style="background-color: #fff0db;" class="form-control" id="request-status"
-                  placeholder="Enter Request Status" />
-              </div>
-              <div class="col-md-3">
-                <label for="construction-contractor" class="form-label" style="font-weight: bold;">Status:</label>
-                <input type="text" style="background-color: #fff0db;" class="form-control" id="construction-contractor"
-                  placeholder="Enter Contractor Name" />
-              </div>
-            </div>
-            <!-- Row 2: Dispatch By, Remark -->
-            <div class="row mb-3">
-              <div class="col-md-3">
-                <label for="clean-up-request-number" class="form-label" style="font-weight: bold;">Change Request
-                  Number:</label>
-                <input type="text" style="background-color: #fff0db;" class="form-control" id="clean-up-request-number"
-                  placeholder="Enter Request Number" />
-              </div>
-              <div class="col-md-3">
-                <label for="request-date" class="form-label" style="font-weight: bold;">Date:</label>
-                <input type="text" style="background-color: #fff0db;" class="form-control" id="request-date"
-                  placeholder="Enter Request Date" />
-              </div>
-              <div class="col-md-3">
-                <label for="request-status" class="form-label" style="font-weight: bold;">Justification:</label>
-                <input type="text" style="background-color: #fff0db;" class="form-control" id="request-status"
-                  placeholder="Enter Request Status" />
-              </div>
-              <div class="col-md-3">
-                <label for="construction-contractor" class="form-label" style="font-weight: bold;">Status:</label>
-                <input type="text" style="background-color: #fff0db;" class="form-control" id="construction-contractor"
-                  placeholder="Enter Contractor Name" />
-              </div>
-            </div>
-            <!-- Row 2: Dispatch By, Remark -->
-            <div class="row mb-3">
-              <div class="col-md-3">
-                <label for="clean-up-request-number" class="form-label" style="font-weight: bold;">Change Request
-                  Number:</label>
-                <input type="text" style="background-color: #fff0db;" class="form-control" id="clean-up-request-number"
-                  placeholder="Enter Request Number" />
-              </div>
-              <div class="col-md-3">
-                <label for="request-date" class="form-label" style="font-weight: bold;">Date:</label>
-                <input type="text" style="background-color: #fff0db;" class="form-control" id="request-date"
-                  placeholder="Enter Request Date" />
-              </div>
-              <div class="col-md-3">
-                <label for="request-status" class="form-label" style="font-weight: bold;">Justification:</label>
-                <input type="text" style="background-color: #fff0db;" class="form-control" id="request-status"
-                  placeholder="Enter Request Status" />
-              </div>
-              <div class="col-md-3">
-                <label for="construction-contractor" class="form-label" style="font-weight: bold;">Status:</label>
-                <input type="text" style="background-color: #fff0db;" class="form-control" id="construction-contractor"
-                  placeholder="Enter Contractor Name" />
-              </div>
-            </div>
-          </form>
-        </div>
       </div>
+
+
     </div>
   </div>
 
