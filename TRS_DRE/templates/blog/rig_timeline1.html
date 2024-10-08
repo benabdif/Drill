@@ -198,7 +198,7 @@
       align-self: flex-start;
       background-color: #edd2b4;
       min-width: 150px;
-      min-height: 100px;
+      min-height: 80px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -214,7 +214,7 @@
       color: #fff;
       font-weight: 100;
       font-size: 10px;
-      height: 80px;
+      height: 100px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -678,7 +678,7 @@
                   {% comment %} <a href="{% url 'rig_timeline' movement.well.pk %}">{{ movement.well.name }}</a>
                   {% endcomment %}
 
-                  <a onclick="render_data('{{ movement.Well_Construction_Infotion.pk }}'); render_data1('{{ movement.rig.pk }}'); render_data2('{{ movement.Pre_Construction.pk }}'); render_data3('{{ movement.Construction_Departmeent.pk }}');  render_data4('{{ movement.Cellar.pk }}'); render_data5('{{ movement.HDPE_Installation.pk }}'); render_data6('{{ movement.Rig_Move.pk }}');"
+                  <a onclick="render_data('{{ movement.Well_Construction_Infotion.pk }}'); render_data1('{{ movement.rig.pk }}'); render_data2('{{ movement.Pre_Construction.pk }}'); render_data3('{{ movement.Construction_Departmeent.pk }}');  render_data4('{{ movement.Cellar.pk }}'); render_data5('{{ movement.HDPE_Installation.pk }}'); render_data6('{{ movement.Rig_Move.pk }}'); render_data7('{{ movement.RepairSection.pk }}'); render_data8('{{ movement.Clean_Up_Section.pk }}'); render_data9('{{ movement.location_Support.pk }}');"
                     class="well-link">{{ movement.Well_Construction_Infotion.well_construction_name }}</a>
                 </div>
 
@@ -1409,31 +1409,31 @@
                   </div>
                   <div class="col-md-9 d-flex flex-wrap align-items-center">
                     <div class="form-check me-3">
-                      <input class="form-check-input" type="checkbox" id="repair-sand-removal" />
+                      <input class="form-check-input" type="checkbox" id="sand_removal" />
                       <label class="form-check-label" for="repair-sand-removal">Sand Removal</label>
                     </div>
                     <div class="form-check me-3">
-                      <input class="form-check-input" type="checkbox" id="repair-extension" />
+                      <input class="form-check-input" type="checkbox" id="Extension" />
                       <label class="form-check-label" for="repair-extension">Extension</label>
                     </div>
                     <div class="form-check me-3">
-                      <input class="form-check-input" type="checkbox" id="repair-recompaction" />
+                      <input class="form-check-input" type="checkbox" id="Re_Compaction" />
                       <label class="form-check-label" for="repair-recompaction">Re-Compaction</label>
                     </div>
                     <div class="form-check me-3">
-                      <input class="form-check-input" type="checkbox" id="repair-change-cellar" />
+                      <input class="form-check-input" type="checkbox" id="Change_Cellar" />
                       <label class="form-check-label" for="repair-change-cellar">Change Cellar</label>
                     </div>
                     <div class="form-check me-3">
-                      <input class="form-check-input" type="checkbox" id="repair-modification" />
+                      <input class="form-check-input" type="checkbox" id="Modification" />
                       <label class="form-check-label" for="repair-modification">Modification</label>
                     </div>
                     <div class="form-check me-3">
-                      <input class="form-check-input" type="checkbox" id="repair-complete-repair" />
+                      <input class="form-check-input" type="checkbox" id="Complete_Repair" />
                       <label class="form-check-label" for="repair-complete-repair">Complete Repair</label>
                     </div>
                     <div class="form-check me-3">
-                      <input class="form-check-input" type="checkbox" id="repair-additional" />
+                      <input class="form-check-input" type="checkbox" id="Additional" />
                       <label class="form-check-label" for="repair-additional">Additional</label>
                     </div>
                   </div>
@@ -1442,21 +1442,21 @@
                 <!-- Row 1: From Well, Request Status, Rig Move Documents -->
                 <div class="row mb-3">
                   <div class="col-md-4">
-                    <label for="well-name-group" class="form-label" style="font-weight: bold;">Repair Request
-                      Number:</label>
-                    <input type="text" class="form-control" id="well-name-group" placeholder="Enter Well Name"
+
+                    <label for="well-name-group" class="form-label" style="font-weight: bold;">Repair Request Number:</label>
+                    <input type="text" class="form-control" id="REQ_Repair_NUMBER" placeholder="Enter Well Name"
                       style="background-color: #fff0db;" />
                   </div>
                   <div class="col-md-4">
                     <label for="request-status-group" class="form-label" style="font-weight: bold;">Request
                       Status:</label>
-                    <input type="text" class="form-control" id="request-status-group" placeholder="Enter Request Status"
+                    <input type="text" class="form-control" id="REQ_Repair_Status" placeholder="Enter Request Status"
                       style="background-color: #fff0db;" />
                   </div>
                   <div class="col-md-4">
                     <label for="rig-move-documents-group" class="form-label" style="font-weight: bold;">Request
                       Date:</label>
-                    <input type="text" class="form-control" id="rig-move-documents-group"
+                    <input type="text" class="form-control" id="REQ_Repair_Date"
                       placeholder="Enter Document Info" style="background-color: #fff0db;" />
                   </div>
                 </div>
@@ -1466,19 +1466,19 @@
                   <div class="col-md-4">
                     <label for="conducted-by-group" class="form-label" style="font-weight: bold;">Construction
                       Contractor:</label>
-                    <input type="text" class="form-control" id="conducted-by-group" placeholder="Enter Name"
+                    <input type="text" class="form-control" id="Contractor_Contractor_Repair" placeholder="Enter Name"
                       style="background-color: #fff0db;" />
                   </div>
                   <div class="col-md-4">
                     <label for="rig-move-documents-group-2" class="form-label" style="font-weight: bold;">Repair Start
                       Date:</label>
-                    <input type="text" class="form-control" id="rig-move-documents-group-2"
+                    <input type="text" class="form-control" id="Repair_Start_Date"
                       placeholder="Enter Document Info" style="background-color: #fff0db;" />
                   </div>
                   <div class="col-md-4">
                     <label for="conducted-by-group-2" class="form-label" style="font-weight: bold;">Repair
                       Status:</label>
-                    <input type="text" class="form-control" id="conducted-by-group-2" placeholder="Enter Name"
+                    <input type="text" class="form-control" id="Repair_status" placeholder="Enter Name"
                       style="background-color: #fff0db;" />
                   </div>
                 </div>
@@ -1489,19 +1489,19 @@
                     <label for="rig-move-documents-group-3" class="form-label" style="font-weight: bold;">Repair
                       Completion
                       Date:</label>
-                    <input type="text" class="form-control" id="rig-move-documents-group-3"
+                    <input type="text" class="form-control" id="Repair_completion_Date"
                       placeholder="Enter Document Info" style="background-color: #fff0db;" />
                   </div>
                   <div class="col-md-4">
                     <label for="conducted-by-group-3" class="form-label" style="font-weight: bold;">Monitored
                       By:</label>
-                    <input type="text" class="form-control" id="conducted-by-group-3" placeholder="Enter Name"
+                    <input type="text" class="form-control" id="monitored_By_Repair" placeholder="Enter Name"
                       style="background-color: #fff0db;" />
                   </div>
                   <div class="col-md-4">
                     <label for="conducted-by-group-3" class="form-label" style="font-weight: bold;">Quantities
                       Details:</label>
-                    <input type="text" class="form-control" id="conducted-by-group-3" placeholder="Enter Name"
+                    <input type="text" class="form-control" id="Quantities_Details_Repair" placeholder="Enter Name"
                       style="background-color: #fff0db;" />
                   </div>
                 </div>
@@ -1509,7 +1509,7 @@
                   <div class="col-md-4">
                     <label for="rig-move-documents-group-3" class="form-label" style="font-weight: bold;">Project Team
                       Details:</label>
-                    <input type="text" class="form-control" id="rig-move-documents-group-3"
+                    <input type="text" class="form-control" id="Project_team_Details_Repair"
                       placeholder="Enter Document Info" style="background-color: #fff0db;" />
                   </div>
                   <div class="col-md-4">
@@ -1531,16 +1531,16 @@
                     <label for="clean-up-request-number" class="form-label" style="font-weight: bold;">Clean-Up Request
                       Number:</label>
                     <input type="text" style="background-color: #fff0db;" class="form-control"
-                      id="clean-up-request-number" placeholder="Enter Clean-Up Request Number" />
+                      id="clean_up_request_Number" placeholder="Enter Clean-Up Request Number" />
                   </div>
                   <div class="col-md-4">
                     <label for="request-date" class="form-label" style="font-weight: bold;">Request Date:</label>
-                    <input type="text" style="background-color: #fff0db;" class="form-control" id="request-date"
+                    <input type="text" style="background-color: #fff0db;" class="form-control" id="clean_up_request_Date"
                       placeholder="Enter Request Date" />
                   </div>
                   <div class="col-md-4">
                     <label for="request-status" class="form-label" style="font-weight: bold;">Request Status:</label>
-                    <input type="text" style="background-color: #fff0db;" class="form-control" id="request-status"
+                    <input type="text" style="background-color: #fff0db;" class="form-control" id="clean_up_request_Status"
                       placeholder="Enter Request Status" />
                   </div>
                 </div>
@@ -1551,17 +1551,17 @@
                     <label for="construction-contractor" class="form-label" style="font-weight: bold;">Construction
                       Contractor:</label>
                     <input type="text" style="background-color: #fff0db;" class="form-control"
-                      id="construction-contractor" placeholder="Enter Contractor Name" />
+                      id="clean_up_construction_contractor" placeholder="Enter Contractor Name" />
                   </div>
                   <div class="col-md-4">
                     <label for="cleanup-kpi" class="form-label" style="font-weight: bold;">Clean-Up KPI:</label>
-                    <input type="text" style="background-color: #fff0db;" class="form-control" id="cleanup-kpi"
+                    <input type="text" style="background-color: #fff0db;" class="form-control" id="clean_up_KPI"
                       placeholder="Enter Clean-Up KPI" />
                   </div>
                   <div class="col-md-4">
                     <label for="cleanup-start-date" class="form-label" style="font-weight: bold;">Clean-Up Start
                       Date:</label>
-                    <input type="text" style="background-color: #fff0db;" class="form-control" id="cleanup-start-date"
+                    <input type="text" style="background-color: #fff0db;" class="form-control" id="clean_up_start_Date"
                       placeholder="Enter Start Date" />
                   </div>
                 </div>
@@ -1571,7 +1571,7 @@
                   <div class="col-md-4">
                     <label for="cleanup-start-status" class="form-label" style="font-weight: bold;">Clean-Up Start
                       Status:</label>
-                    <input type="text" style="background-color: #fff0db;" class="form-control" id="cleanup-start-status"
+                    <input type="text" style="background-color: #fff0db;" class="form-control" id="clean_Up_start_Status"
                       placeholder="Enter Start Status" />
                   </div>
                   <div class="col-md-4">
@@ -1579,13 +1579,13 @@
                       Completion
                       Date:</label>
                     <input type="text" style="background-color: #fff0db;" class="form-control"
-                      id="cleanup-completion-date" placeholder="Enter Completion Date" />
+                      id="clean_up_completion_date" placeholder="Enter Completion Date" />
                   </div>
                   <div class="col-md-4">
                     <label for="post-cleanup-turnover" class="form-label" style="font-weight: bold;">Post Clean-Up
                       Turnover:</label>
                     <input type="text" style="background-color: #fff0db;" class="form-control"
-                      id="post-cleanup-turnover" placeholder="Enter Post Clean-Up Turnover" />
+                      id="clean_up_post_clean_Up_Turnover" placeholder="Enter Post Clean-Up Turnover" />
                   </div>
                 </div>
 
@@ -1593,19 +1593,19 @@
                 <div class="row mb-3">
                   <div class="col-md-4">
                     <label for="monitored-by" class="form-label" style="font-weight: bold;">Monitored By:</label>
-                    <input type="text" style="background-color: #fff0db;" class="form-control" id="monitored-by"
+                    <input type="text" style="background-color: #fff0db;" class="form-control" id="clean_up_monitored_by"
                       placeholder="Enter Monitored By" />
                   </div>
                   <div class="col-md-4">
                     <label for="quantities-details" class="form-label" style="font-weight: bold;">Quantities
                       Details:</label>
-                    <input type="text" style="background-color: #fff0db;" class="form-control" id="quantities-details"
+                    <input type="text" style="background-color: #fff0db;" class="form-control" id="clean_up_Quantities_details"
                       placeholder="Enter Quantities Details" />
                   </div>
                   <div class="col-md-4">
                     <label for="project-team-details" class="form-label" style="font-weight: bold;">Project Team
                       Details:</label>
-                    <input type="text" style="background-color: #fff0db;" class="form-control" id="project-team-details"
+                    <input type="text" style="background-color: #fff0db;" class="form-control" id="clean_up_project_team_details"
                       placeholder="Enter Project Team Details" />
                   </div>
                 </div>
@@ -1614,12 +1614,12 @@
                   <div class="col-md-4">
                     <label for="monitored-by" class="form-label" style="font-weight: bold;">Pre-Clean-Up
                       Turnover:</label>
-                    <input type="text" style="background-color: #fff0db;" class="form-control" id="monitored-by"
+                    <input type="text" style="background-color: #fff0db;" class="form-control" id="clean_up_pre_Clean_Up_Turnover"
                       placeholder="Enter Pre-Clean-Up Turnover" />
                   </div>
                   <div class="col-md-4">
                     <label for="quantities-details" class="form-label" style="font-weight: bold;">Criticality:</label>
-                    <input type="text" style="background-color: #fff0db;" class="form-control" id="quantities-details"
+                    <input type="text" style="background-color: #fff0db;" class="form-control" id="clean_up_Criticality"
                       placeholder="Enter Criticality" />
                   </div>
 
@@ -1637,16 +1637,16 @@
                     <label for="clean-up-request-number" class="form-label" style="font-weight: bold;">Request
                       Number:</label>
                     <input type="text" style="background-color: #fff0db;" class="form-control"
-                      id="clean-up-request-number" placeholder="Enter Request Number" />
+                      id="on_location_support_Request_Number" placeholder="Enter Request Number" />
                   </div>
                   <div class="col-md-4">
                     <label for="request-date" class="form-label" style="font-weight: bold;">Request Date:</label>
-                    <input type="text" style="background-color: #fff0db;" class="form-control" id="request-date"
+                    <input type="text" style="background-color: #fff0db;" class="form-control" id="on_location_support_Request_date"
                       placeholder="Enter Request Date" />
                   </div>
                   <div class="col-md-4">
                     <label for="request-status" class="form-label" style="font-weight: bold;">Request Status:</label>
-                    <input type="text" style="background-color: #fff0db;" class="form-control" id="request-status"
+                    <input type="text" style="background-color: #fff0db;" class="form-control" id="on_location_support_Request_status"
                       placeholder="Enter Request Date" />
                   </div>
                 </div>
@@ -1657,16 +1657,16 @@
                     <label for="construction-contractor" class="form-label"
                       style="font-weight: bold;">Contractor:</label>
                     <input type="text" style="background-color: #fff0db;" class="form-control"
-                      id="construction-contractor" placeholder="Enter Request Status" />
+                      id="on_location_support_contractor" placeholder="Enter Request Status" />
                   </div>
                   <div class="col-md-4">
                     <label for="cleanup-kpi" class="form-label" style="font-weight: bold;">Dispatch By:</label>
-                    <input type="text" style="background-color: #fff0db;" class="form-control" id="cleanup-kpi"
+                    <input type="text" style="background-color: #fff0db;" class="form-control" id="on_location_support_dispatch_By"
                       placeholder="Enter Dispatch By" />
                   </div>
                   <div class="col-md-4">
                     <label for="cleanup-start-date" class="form-label" style="font-weight: bold;">Remark:</label>
-                    <input type="text" style="background-color: #fff0db;" class="form-control" id="cleanup-start-date"
+                    <input type="text" style="background-color: #fff0db;" class="form-control" id="on_location_support_Remark"
                       placeholder="Enter Remark" />
                   </div>
                 </div>
@@ -2097,6 +2097,88 @@
           console.error('Error fetching Rig Move info:', error);
         });
     }
+
+  
+
+    function render_data7(id) {
+      const url = `/Get_Repair_Section/${id}/`; // Adjust the URL structure if needed
+
+      fetch(url)
+        .then((response) => response.json())
+        .then((data) => {
+          document.getElementById("REQ_Repair_NUMBER").value = data.REQ_Repair_NUMBER;
+          document.getElementById("REQ_Repair_Status").value = data.REQ_Repair_Status;
+          document.getElementById("REQ_Repair_Date").value = data.REQ_Repair_Date;
+          document.getElementById("Contractor_Contractor_Repair").value = data.Contractor_Contractor_Repair;
+          document.getElementById("Repair_Start_Date").value = data.Repair_Start_Date;
+          document.getElementById("Repair_status").value = data.Repair_status;
+          document.getElementById("Repair_completion_Date").value = data.Repair_completion_Date;
+          document.getElementById("monitored_By_Repair").value = data.monitored_By_Repair;
+          document.getElementById("Quantities_Details_Repair").value = data.Quantities_Details_Repair;
+          document.getElementById("Project_team_Details_Repair").value = data.Project_team_Details_Repair;
+          document.getElementById("sand_removal").checked = data.sand_removal;
+          document.getElementById("Extension").checked = data.Extension;
+          document.getElementById("Re_Compaction").checked = data.Re_Compaction;
+          document.getElementById("Change_Cellar").checked = data.Change_Cellar;
+          document.getElementById("Modification").checked = data.Modification;
+          document.getElementById("Complete_Repair").checked = data.Complete_Repair;
+          document.getElementById("Additional").checked = data.Additional;
+          
+        })
+        .catch((error) => {
+          console.error('Error fetching Pre-Construction info:', error);
+        });
+    }
+
+    
+    function render_data8(id) {
+      const url = `/Get_Clean_Up_Section/${id}/`; // Adjust the URL structure if needed
+
+      fetch(url)
+        .then((response) => response.json())
+        .then((data) => {
+          document.getElementById("clean_up_request_Number").value = data.clean_up_request_Number;
+          document.getElementById("clean_up_request_Date").value = data.clean_up_request_Date;
+          document.getElementById("clean_up_request_Status").value = data.clean_up_request_Status;
+          document.getElementById("clean_up_construction_contractor").value = data.clean_up_construction_contractor;
+          document.getElementById("clean_up_KPI").value = data.clean_up_KPI;
+          document.getElementById("clean_up_start_Date").value = data.clean_up_start_Date;
+          document.getElementById("clean_Up_start_Status").value = data.clean_Up_start_Status;
+          document.getElementById("clean_up_completion_date").value = data.clean_up_completion_date;
+          document.getElementById("clean_up_post_clean_Up_Turnover").value = data.clean_up_post_clean_Up_Turnover;
+          document.getElementById("clean_up_monitored_by").value = data.clean_up_monitored_by;
+          document.getElementById("clean_up_Quantities_details").value = data.clean_up_Quantities_details;
+          document.getElementById("clean_up_project_team_details").value = data.clean_up_project_team_details;
+          document.getElementById("clean_up_pre_Clean_Up_Turnover").value = data.clean_up_pre_Clean_Up_Turnover;
+          document.getElementById("clean_up_Criticality").value = data.clean_up_Criticality;
+         
+          
+        })
+        .catch((error) => {
+          console.error('Error fetching Pre-Construction info:', error);
+        });
+    }
+
+    function render_data9(id) {
+      const url = `/Get_location_Support/${id}/`; // Adjust the URL structure if needed
+
+      fetch(url)
+        .then((response) => response.json())
+        .then((data) => {
+          document.getElementById("on_location_support_Request_Number").value = data.on_location_support_Request_Number;
+          document.getElementById("on_location_support_Request_date").value = data.on_location_support_Request_date;
+          document.getElementById("on_location_support_Request_status").value = data.on_location_support_Request_status;
+          document.getElementById("on_location_support_contractor").value = data.on_location_support_contractor;
+          document.getElementById("on_location_support_dispatch_By").value = data.on_location_support_dispatch_By;
+          document.getElementById("on_location_support_Remark").value = data.on_location_support_Remark;
+         
+          
+        })
+        .catch((error) => {
+          console.error('Error fetching Pre-Construction info:', error);
+        });
+    }
+
 
 
   </script>

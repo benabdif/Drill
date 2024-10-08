@@ -13,6 +13,9 @@ from .models import (
     Cellar,
     HDPE_Installation,
     Rig_Move,
+    RepairSection,
+    Clean_Up_Section,
+    location_Support,
 
 )
 # from datetime import datetime
@@ -349,12 +352,76 @@ def Get_Rig_Move(request, pk):
     )
 
 
+def Get_Repair_Section(request, pk):
+    # Fetch the RepairSection object using the primary key (pk)
+    Repair_Section_info = get_object_or_404(RepairSection, pk=pk)
+
+    # Return the required information in a JSON response
+    return JsonResponse(
+        {
+            "REQ_Repair_NUMBER": Repair_Section_info.REQ_Repair_NUMBER,
+            "REQ_Repair_Status": Repair_Section_info.REQ_Repair_Status,
+            "REQ_Repair_Date": Repair_Section_info.REQ_Repair_Date,
+            "Contractor_Contractor_Repair": Repair_Section_info.Contractor_Contractor_Repair,
+            "Repair_Start_Date": Repair_Section_info.Repair_Start_Date,
+            "Repair_status": Repair_Section_info.Repair_status,
+            "Repair_completion_Date": Repair_Section_info.Repair_completion_Date,
+            "monitored_By_Repair": Repair_Section_info.monitored_By_Repair,
+            "Quantities_Details_Repair": Repair_Section_info.Quantities_Details_Repair,
+            "Project_team_Details_Repair": Repair_Section_info.Project_team_Details_Repair,
+            "sand_removal": Repair_Section_info.sand_removal,
+            "Extension":Repair_Section_info.Extension,
+            "Re_Compaction":Repair_Section_info.Re_Compaction,
+            "Change_Cellar":Repair_Section_info.Change_Cellar,
+            "Modification":Repair_Section_info.Modification,
+            "Complete_Repair":Repair_Section_info.Complete_Repair,
+            "Additional":Repair_Section_info.Additional,
+            
+        }
+    )
 
 
 
-# def get_Construction_info(request, pk):
-#     Construction_info = get_object_or_404()
-    
+
+def Get_Clean_Up_Section(request, pk):
+    # Fetch the RepairSection object using the primary key (pk)
+    Clean_Up_Section_info = get_object_or_404(Clean_Up_Section, pk=pk)
+
+    # Return the required information in a JSON response
+    return JsonResponse(
+        {
+            "clean_up_request_Number": Clean_Up_Section_info.clean_up_request_Number,
+            "clean_up_request_Date": Clean_Up_Section_info.clean_up_request_Date,
+            "clean_up_request_Status": Clean_Up_Section_info.clean_up_request_Status,
+            "clean_up_construction_contractor": Clean_Up_Section_info.clean_up_construction_contractor,
+            "clean_up_KPI": Clean_Up_Section_info.clean_up_KPI,
+            "clean_up_start_Date": Clean_Up_Section_info.clean_up_start_Date,
+            "clean_Up_start_Status": Clean_Up_Section_info.clean_Up_start_Status,
+            "clean_up_completion_date": Clean_Up_Section_info.clean_up_completion_date,
+            "clean_up_post_clean_Up_Turnover": Clean_Up_Section_info.clean_up_post_clean_Up_Turnover,
+            "clean_up_monitored_by": Clean_Up_Section_info.clean_up_monitored_by,
+            "clean_up_Quantities_details": Clean_Up_Section_info.clean_up_Quantities_details,
+            "clean_up_project_team_details": Clean_Up_Section_info.clean_up_project_team_details,
+            "clean_up_pre_Clean_Up_Turnover": Clean_Up_Section_info.clean_up_pre_Clean_Up_Turnover,
+            "clean_up_Criticality": Clean_Up_Section_info.clean_up_Criticality,
+          
+            
+        }
+    )
+
+def Get_location_Support(request, pk):
+    location_Support_info = get_object_or_404(location_Support, pk=pk)
+    return JsonResponse(
+        {
+            "on_location_support_Request_Number":location_Support_info.on_location_support_Request_Number,
+            "on_location_support_Request_date":location_Support_info.on_location_support_Request_date,
+            "on_location_support_Request_status":location_Support_info.on_location_support_Request_status,
+            "on_location_support_contractor":location_Support_info.on_location_support_contractor,
+            "on_location_support_dispatch_By":location_Support_info.on_location_support_dispatch_By,
+            "on_location_support_Remark":location_Support_info.on_location_support_Remark,
+        }
+    )
+
 
 
 def save_note(request):
@@ -379,4 +446,3 @@ def save_note(request):
 
 
 ######
-
