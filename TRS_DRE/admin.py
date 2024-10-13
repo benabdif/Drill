@@ -18,7 +18,7 @@ from .models import (
     Cellar,
     HDPE_Installation,
     Rig_Move,
-    RepairSection
+    RepairSection,
     
     )
 
@@ -38,4 +38,4 @@ admin.site.register(RepairSection)
 
 
 
- 
+

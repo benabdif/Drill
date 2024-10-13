@@ -1,4 +1,9 @@
 from django.shortcuts import render
+from django.db.models.fields.files import FieldFile
+
+from auditlog.models import LogEntry
+from TRS_DRE.models import Movementg
+from django.forms.models import model_to_dict
 
 # from django.http import HttpResponse
 # from django.template import loader
@@ -13,18 +18,19 @@ from .models import (
     Cellar,
     HDPE_Installation,
     Rig_Move,
-
 )
+
 # from datetime import datetime
 from django.db import connection
 from django.db.models import Min, Max
+
 # from django.shortcuts import get_object_or_404, redirect
 from django.http import JsonResponse
 
 
 ####################################################################
 # from django.http import JsonResponse
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, get_list_or_404
 # from .models import Pre_Construction
 
 
@@ -189,10 +195,10 @@ def getMyinfo_JAX(request, pk):
 # Well Construction (1)
 def get_Well_Construction_Info(request, pk):
     construction_info = get_object_or_404(Well_Construction_Info, pk=pk)
-    
+
     return JsonResponse(
         {
-            "name": construction_info.well_construction_name,  
+            "name": construction_info.well_construction_name,
             "objective": construction_info.well_construction_objective,
             "BI": construction_info.well_construction_BI,
             "Spud_date": construction_info.well_construction_Spud_date,
@@ -209,10 +215,11 @@ def get_Well_Construction_Info(request, pk):
         }
     )
 
+
 # Rig Construction (2)
 def get_Rig_Construction_Info(request, pk):
     Rig_construction_info = get_object_or_404(Rigg, pk=pk)
-    
+
     return JsonResponse(
         {
             "Rig_name": Rig_construction_info.Rig_name,
@@ -220,8 +227,8 @@ def get_Rig_Construction_Info(request, pk):
             "Operation_Department": Rig_construction_info.Operation_Department,
             "Operation_Manager": Rig_construction_info.Operation_Manager,
             "Permanent_Construction_Cc": Rig_construction_info.Permanent_Construction_Cc,
-            "Last_Update_Permanent_Construction_Cc": Rig_construction_info.Last_Update_Permanent_Construction_Cc, 
-            "Permanent_HDPE_Contractor":Rig_construction_info.Permanent_HDPE_Contractor,
+            "Last_Update_Permanent_Construction_Cc": Rig_construction_info.Last_Update_Permanent_Construction_Cc,
+            "Permanent_HDPE_Contractor": Rig_construction_info.Permanent_HDPE_Contractor,
             "Last_Update_Permanent_HDPE_Contractor": Rig_construction_info.Last_Update_Permanent_HDPE_Contractor,
             "Permanent_Soil_Test_Contractor": Rig_construction_info.Permanent_Soil_Test_Contractor,
             "Last_Update_Permanent_Soil_Test_Contractor": Rig_construction_info.Last_Update_Permanent_Soil_Test_Contractor,
@@ -229,10 +236,10 @@ def get_Rig_Construction_Info(request, pk):
             "Current_Assigned_WS_Engineer": Rig_construction_info.Current_Assigned_WS_Engineer,
         }
     )
-    
+
+
 def get_Location_Map():
     pass
-
 
 
 def get_Pre_Construction_Info(request, pk):
@@ -246,10 +253,8 @@ def get_Pre_Construction_Info(request, pk):
             "Approved_Lay_out": Pre_Construction_Info.Approved_Lay_out,
             "Date_Approved_Lay_out": Pre_Construction_Info.Date_Approved_Lay_out,
             "R_Completio_Date": Pre_Construction_Info.R_Completio_Date,
-
         }
     )
-
 
 
 def get_Construction_Department(request, pk):
@@ -262,22 +267,18 @@ def get_Construction_Department(request, pk):
             "REQ_Start_Date": Construction_Department_Info.REQ_Start_Date,
             "REQ_Status": Construction_Department_Info.REQ_Status,
             "CONSTR_Contractor": Construction_Department_Info.CONSTR_Contractor,
-
             "CONSTR_KPI": Construction_Department_Info.CONSTR_KPI,
             "CONSTR_KOM": Construction_Department_Info.CONSTR_KOM,
             "Conducted_by_KOM": Construction_Department_Info.Conducted_by_KOM,
             "Construction_Status": Construction_Department_Info.Construction_Status,
-
             "CONSTR_Skid_ROAD_DIST": Construction_Department_Info.CONSTR_Skid_ROAD_DIST,
             "Final_Survey": Construction_Department_Info.Final_Survey,
             "Conducted_by_Final_Survey": Construction_Department_Info.Conducted_by_Final_Survey,
             "Unit": Construction_Department_Info.Unit,
-
             "Post_CONSTR_Rurn_OVER": Construction_Department_Info.Post_CONSTR_Rurn_OVER,  # Corrected "Rurn" to "Turn"
             "REQ_End_Date": Construction_Department_Info.REQ_End_Date,
             "Quanatities_Detities": Construction_Department_Info.Quanatities_Detities,  # Corrected "Quanatities_Detities"
             "Project_team_Details": Construction_Department_Info.Project_team_Details,
-
             "Remark_and_Hold": Construction_Department_Info.Remark_and_Hold,
             "Criticality": Construction_Department_Info.Criticality,
         }
@@ -298,8 +299,6 @@ def get_Cellar(request, pk):
     )
 
 
-
-
 def get_HDPE_Installation(request, pk):
     HDPE_Installation_Info = get_object_or_404(HDPE_Installation, pk=pk)
     return JsonResponse(
@@ -312,31 +311,21 @@ def get_HDPE_Installation(request, pk):
             "Total_Area_Installed": HDPE_Installation_Info.Total_Area_Installed,
             "Lining_Contractor": HDPE_Installation_Info.Lining_Contractor,
             "Conducted_by_info": HDPE_Installation_Info.Conducted_by_info,
-            "Quantities_Details": HDPE_Installation_Info.Quantities_Details,        
+            "Quantities_Details": HDPE_Installation_Info.Quantities_Details,
         }
     )
 
 
-# def Get_Rig_Move(request, pk):
-#     Rig_Move_Info = get_object_or_404(Rig_Move, pk=pk)
-#     return JsonResponse(
-#         {
-#             "RIG_MOVE_REQ": Rig_Move_Info.RIG_MOVE_REQ,
-#             "RIG_MOVE_NAME":Rig_Move_Info.RIG_MOVE_NAME,
-#             "RIG_MOVE_WELL":Rig_Move_Info.RIG_MOVE_WELL,
-#             "RIG_MOVE_STATUS":Rig_Move_Info.RIG_MOVE_STATUS,
-#             "RIG_MOVE_DOCUMENTS":Rig_Move_Info.RIG_MOVE_DOCUMENTS,
-#             "RIG_MOVE_CONDUCTED_BY":Rig_Move_Info.RIG_MOVE_CONDUCTED_BY,
-                    
-#         }
-#     )
-
 def Get_Rig_Move(request, pk):
     Rig_Move_Info = get_object_or_404(Rig_Move, pk=pk)
-    
+
     # Handle file field, check if file exists
-    rig_move_documents_url = Rig_Move_Info.RIG_MOVE_DOCUMENTS.url if Rig_Move_Info.RIG_MOVE_DOCUMENTS else None
-    
+    rig_move_documents_url = (
+        Rig_Move_Info.RIG_MOVE_DOCUMENTS.url
+        if Rig_Move_Info.RIG_MOVE_DOCUMENTS
+        else None
+    )
+
     return JsonResponse(
         {
             "RIG_MOVE_REQ": Rig_Move_Info.RIG_MOVE_REQ,
@@ -347,14 +336,6 @@ def Get_Rig_Move(request, pk):
             "RIG_MOVE_CONDUCTED_BY": Rig_Move_Info.RIG_MOVE_CONDUCTED_BY,
         }
     )
-
-
-
-
-
-# def get_Construction_info(request, pk):
-#     Construction_info = get_object_or_404()
-    
 
 
 def save_note(request):
@@ -380,3 +361,89 @@ def save_note(request):
 
 ######
 
+
+def get_movement_log(request, pk):
+    if request.method != "GET":
+        return JsonResponse({"error": "Method not allowed"}, status=405)
+
+    # Get the instance of the model
+    instance = get_object_or_404(Movementg, pk=pk)
+
+    # Filter logs for the specific instance
+    logs = LogEntry.objects.filter(
+        object_id=instance.pk, content_type__model="movementg"
+    )
+
+    def resolve_rig_names(changes):
+        """Replace rig IDs with rig names in the changes dict."""
+        if "rig" in changes:
+            rig_ids = changes["rig"]
+            rigs = Rigg.objects.filter(id__in=rig_ids)
+            rig_names = [
+                rig.Rig_name for rig in rigs
+            ]  # Assuming Rig has a 'name' field
+            changes["rig"] = rig_names
+        return changes
+
+    # Prepare the response data
+    log_data = [
+        {
+            "actor": log.actor.username
+            if log.actor
+            else "System",  # Use username or handle None
+            "object": log.object_repr,
+            "changes": resolve_rig_names(
+                log.changes_dict
+            ),  # Resolve rig names for changes
+            "action_time": log.timestamp.strftime(
+                "%Y-%m-%d %H:%M:%S"
+            ),  # Format the timestamp
+        }
+        for log in logs
+    ]
+
+    # Return the logs as a JSON response (safe=False to allow lists)
+    return JsonResponse(log_data, safe=False)
+
+
+
+def serialize_related_object(obj):
+    """Helper function to serialize a related object if it exists."""
+    if obj:
+        data = model_to_dict(obj)
+        
+        # Handle FieldFile fields by converting them to their URL or path
+        for field, value in data.items():
+            if isinstance(value, FieldFile):
+                data[field] = value.url if value and hasattr(value, 'url') else None
+        
+        return data
+    return None
+
+def get_movementg(request, well_name):
+    # Get the list of Movementg instances associated with the well_name
+    instances = get_list_or_404(Movementg, Well_Construction_Infotion__well_construction_name=well_name)
+    
+    # Serialize the instances with sub-model fields expanded
+    serialized_instances = []
+    for instance in instances:
+        serialized_instance = model_to_dict(instance)
+
+        # Serialize related foreign key fields
+        serialized_instance['rig'] = serialize_related_object(instance.rig)
+        serialized_instance['well'] = serialize_related_object(instance.well)
+        serialized_instance['Well_Construction_Infotion'] = serialize_related_object(instance.Well_Construction_Infotion)
+        serialized_instance['Cellar'] = serialize_related_object(instance.Cellar)
+        serialized_instance['Units'] = serialize_related_object(instance.Units)
+        serialized_instance['Eng'] = serialize_related_object(instance.Eng)
+        serialized_instance['Contractor'] = serialize_related_object(instance.Contractor)
+        serialized_instance['Construction_Departmeent'] = serialize_related_object(instance.Construction_Departmeent)
+        serialized_instance['HDPE_Installation'] = serialize_related_object(instance.HDPE_Installation)
+        serialized_instance['Pre_Construction'] = serialize_related_object(instance.Pre_Construction)
+        serialized_instance['Rig_Move'] = serialize_related_object(instance.Rig_Move)
+
+        # Append the serialized instance to the list
+        serialized_instances.append(serialized_instance)
+    
+    # Return the list of serialized instances as JSON
+    return JsonResponse(serialized_instances, safe=False)
