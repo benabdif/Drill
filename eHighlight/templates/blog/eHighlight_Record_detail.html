@@ -1,0 +1,190 @@
+{% extends 'blog/base_generic.html' %}
+
+
+{% block content %}
+<style>
+  .record-container {
+    background-color: #ffffff;
+    padding: 30px;
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+  }
+
+  .record-detail {
+    margin-bottom: 20px;
+    font-size: 18px;
+    color: #333;
+  }
+
+  .record-detail strong {
+    color: #007bff;
+  }
+
+  .button {
+    display: inline-block;
+    padding: 10px 30px;
+    margin: 5px;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    background-color: #007bff;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+
+  .button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+  }
+
+  .button-danger {
+    background-color: #dc3545;
+  }
+
+  .button-danger:hover {
+    background-color: #c82333;
+  }
+
+  .button-secondary {
+    background-color: #6c757d;
+  }
+
+  .button-secondary:hover {
+    background-color: #5a6268;
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+  }
+
+  .container {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .header h1 {
+    font-size: 36px;
+    color: #333;
+  }
+
+  .box {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .box h2 {
+    font-size: 24px;
+    color: #007bff;
+  }
+
+  .box p {
+    font-size: 16px;
+    color: #666;
+  }
+
+  .col-md-2, .col-md-4 {
+    display: none;
+  }
+
+  @media (min-width: 768px) {
+    .col-md-2, .col-md-4 {
+      display: block;
+    }
+  }
+</style>
+
+<!-- Include SweetAlert2 CSS and JS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+
+<div class="container">
+  <div class="col-md-2">
+    <div class="box">
+      <h2>Info Box</h2>
+      <p>Some additional information here.</p>
+    </div>
+  </div>
+  <div class="col-md-8">
+    <div class="header">
+      <h1>Record Details</h1>
+    </div>
+    <div class="record-container">
+      <div class="record-detail"><strong>Date:</strong> {{ record.date }}</div>
+      <div class="record-detail"><strong>Date for Today:</strong> {{ record.user_date }}</div>
+      <div class="record-detail"><strong>Week:</strong> {{ record.week }}</div>
+      <div class="record-detail"><strong>Cost:</strong> {{ record.Cost }}</div>
+      <div class="record-detail"><strong>Unit:</strong> {{ record.unit }}</div>
+      <div class="record-detail"><strong>Highlight Type:</strong> {{ record.highlight_type }}</div>
+      <div class="record-detail"><strong>Wellsite Activity:</strong> {{ record.wellsite_activity }}</div>
+      <div class="record-detail"><strong>Details:</strong> {{ record.details }}</div>
+
+      <div class="button-container">
+        <a href="#" class="button" id="edit-button">Edit</a>
+        <a href="#" class="button button-danger" id="delete-button">Delete</a>
+      
+        <form id="delete-form" action="{% url "eHighlight_Record_delete" record.pk %}" method="post" style="display:none;">
+          {% csrf_token %}
+          <button type="submit">Confirm</button>
+        </form>
+      
+        <a href="{% url 'eHighlight_Record_list' %}" class="button button-secondary">Back to list</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2">
+    <div class="box">
+      <h2>Additional Box</h2>
+      <p>More information here.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.getElementById('delete-button').addEventListener('click', function(event) {
+    event.preventDefault();
+
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        document.getElementById('delete-form').submit();
+
+      }
+    })
+  });
+
+  document.getElementById('edit-button').addEventListener('click', function(event) {
+    event.preventDefault();
+    Swal.fire({
+      title: 'Are you sure you want to edit this record?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#007bff',
+      cancelButtonColor: '#dc3545',
+      confirmButtonText: 'Yes, edit it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.href = "{% url 'eHighlight_Record_edit' record.pk %}";
+      }
+    });
+  });
+</script>
+
+{% endblock %}

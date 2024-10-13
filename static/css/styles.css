@@ -1,3 +1,516 @@
-body{
-    background-color: aqua;
+.fahdel {
+    background-color: rgb(248, 15, 15);
+}
+
+
+
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+      
+      body {
+        font-family: 'Inter', sans-serif;
+        line-height: 1.5;
+        font-size: 16px;
+        background-color: #f5f5f5;
+        color: #000000c9;
+        height: 300vh;
+      }
+      
+      .container1 {
+        width: 90vw;
+        margin: 40px auto 0;
+        text-align: center;
+        border: 1px solid #00000024;
+        border-radius: 10px;
+        box-shadow: 0px 0px 20px 3px rgba(0, 0, 0, 0.1);
+        overflow: auto;
+        max-height: 65vh;
+      }
+      
+      .timeline {
+        display: flex;
+        flex-direction: column;
+      }
+      
+      .timeline.header {
+        display: flex;
+        flex-direction: row;
+        color: #fff;
+      }
+      
+      .timeline.year {
+        display: flex;
+        flex-direction: column;
+        background-color: #38a4e2;
+        /* background: linear-gradient(to left, #38a4e2, #d2c110); */
+        position: relative;
+      }
+      
+      .timeline.year::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 2px;
+        height: 100%;
+        background-color: #cccbcb;
+      }
+      
+      .timeline.year:last-child::after {
+        display: none;
+      }
+      
+      .timeline.year > div:first-child {
+        font-size: 20px;
+        font-weight: 800;
+        padding: 10px;
+      }
+      
+      .timeline.year > div:not(:first-child) {
+        display: flex;
+        flex-direction: row;
+      }
+      
+      .timeline .title {
+        display: flex;
+        font-weight: 800;
+        color: #000000c9;
+        background-color: #fff;
+        justify-content: center;
+        align-items: center;
+        padding: 0 15px;
+        width: 300px;
+      }
+      
+      .timeline.year > div:not(:first-child) .month {
+        border-right: 1px solid #00000024;
+        width: 200px;
+        padding: 10px 30px;
+        font-weight: 800;
+        color: #000000c9;
+        background-color: #eeecec;
+      }
+      
+      .navbar {
+        background: linear-gradient(to left, #d2c110, #38a4e2);
+        overflow: hidden;
+        width: 100%;
+      }
+      
+      .navbar a {
+        float: left;
+        display: block;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+      }
+      
+      .navbar a:hover {
+        background-color: #ddd;
+        color: black;
+      }
+      
+      .navbar a.active {
+        background-color: #04aa6d;
+        color: white;
+      }
+      
+      .timeline.rows {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        gap: 1px;
+      }
+      
+      .timeline .project {
+        display: flex;
+        flex-direction: row;
+        height: 100px;
+      }
+      
+      .timeline.rows .now {
+        position: relative;
+        left: 0;
+        top: 0;
+        height: 110%;
+        width: 2px;
+        background-color: red;
+        z-index: 2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition-duration: 0.3s;
+      }
+      
+      .timeline.rows .now .border-effect {
+        width: 22px;
+        height: 100%;
+        position: absolute;
+        left: -10px;
+        border: 10px solid transparent;
+        transition: border-color 0.3s;
+        pointer-events: none;
+      }
+      
+      .timeline.rows .now .date {
+        min-width: 150px;
+        min-height: 75px;
+        background-color: #848484;
+        border-radius: 12px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        font-weight: 700;
+        font-size: 20px;
+        opacity: 0;
+        transition-duration: 0.3s;
+      }
+      
+      .timeline.rows .now:hover .border-effect {
+        border-color: #000;
+      }
+      
+      .timeline.rows .now:hover .date {
+        opacity: 1;
+      }
+      
+      .project .name {
+        align-self: flex-start;
+        background-color: #edd2b4;
+        min-width: 150px;
+        min-height: 80px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        z-index: 2;
+        right: 0;
+        transition-duration: 0.3s;
+      }
+      
+      .project .project-info {
+        width: 300px;
+        background-color: #38a4e2;
+        color: #fff;
+        font-weight: 100;
+        font-size: 10px;
+        height: 80px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 2;
+      }
+      
+      .project .project-card {
+        display: flex;
+        flex-direction: row;
+        position: absolute;
+        z-index: 3;
+        transition-duration: 0.3s;
+      }
+      
+      .project .name-placeholder {
+        width: 300px;
+      }
+      
+      .project .project-info:hover + .name {
+        opacity: 0;
+      }
+      
+      .project .movements .done {
+        background-color: #00ce00;
+        /* border-top: 15px solid #ffd900; */
+        /* border-bottom: 15px solid #ffd900; */
+      }
+      
+      .project .movements .clean-up {
+        background-color: rgb(151, 101, 101);
+        /* border-top: 15px solid #00ce00; */
+        /* border-bottom: 15px solid #00ce00; */
+      }
+      
+      .project .movements {
+        display: flex;
+        flex-direction: row;
+        position: relative;
+      }
+      
+      .project .movement {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        color: #fff;
+        background-color: #38a4e2;
+        justify-content: center;
+        padding: 0 15px;
+        height: 100px;
+        border-radius: 10px;
+        /* height: fit-content; */
+        height: 100px;
+      }
+      
+      .today {
+        position: absolute;
+        z-index: 3;
+        margin: 13px;
+        padding: 10px 25px;
+        border: none;
+        outline: none;
+        transition-duration: 0.2s;
+        border-radius: 4px;
+        background: linear-gradient(to left, #38a4e2, #d2c110);
+      }
+      
+      .today:active {
+        background-color: #777;
+        color: #fff;
+      }
+      
+      .home {
+        position: absolute;
+        z-index: 3;
+        margin: 13px;
+        padding: 10px 25px;
+        border: none;
+        outline: none;
+        transition-duration: 0.2s;
+        border-radius: 2px;
+        background: linear-gradient(to left, #38a4e2, #d2c110);
+        color: whitesmoke;
+        font-size: 14px;
+        font-weight: bold;
+        margin: 0 9px;
+        text-align: center;
+      }
+      
+      .home:active {
+        background-color: #777;
+        color: #fff;
+      }
+      
+      .timeline .project .movement .area {
+        align-self: center;
+        font-weight: 600;
+      }
+      
+      .timeline .project .movement > div:not(.note) {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+      }
+      
+      .totale {
+        padding: 2%;
+        margin: 10%;
+        width: 20%;
+        background-color: rgb(196, 213, 207);
+        text-align: center;
+        border-radius: 20px;
+        border: none;
+      }
+      
+      .totale p {
+        font-size: 53px;
+      }
+      
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgb(0, 0, 0);
+        background-color: rgba(0, 0, 0, 0.4);
+      }
+      
+      .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 20%;
+      }
+      
+      .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+      }
+      
+      .close:hover,
+      .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      
+      textarea {
+        width: 100%;
+        height: 100px;
+        margin-top: 10px;
+      }
+      
+      .save-button {
+        background-color: #4caf50;
+        color: white;
+        padding: 10px 20px;
+        margin-top: 10px;
+        border: none;
+        cursor: pointer;
+      }
+      
+      .save-button:hover {
+        background-color: #45a049;
+      }
+      
+      .icon-button {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+      }
+      
+      .icon-button img {
+        transition: transform 0.3s ease, opacity 0.3s ease;
+      }
+      
+      .icon-button img:hover {
+        transform: scale(1.1);
+        opacity: 0.8;
+      }
+      
+      .horvsntal {
+        writing-mode: vertical-rl;
+        text-orientation: mixed;
+        background-color: rgb(49, 36, 225);
+        position: relative;
+        top: 0;
+        /* Adjust as needed for exact alignment */
+        left: 0;
+        /* Adjust as needed for exact alignment */
+        padding: 10px 5px;
+        /* Adjust padding to better fit within the box */
+        color: white;
+        /* Ensure the text color contrasts well with the background */
+        font-weight: bold;
+        /* Make sure the text stands out */
+        text-align: center;
+        /* Center the text within the element */
+        font-size: 14px;
+        /* Adjust font size if needed */
+      }
+      
+      .tab-content {
+        padding: 3%;
+        border-radius: 10px;
+        background-color: #e8e6e6;
+      }
+      
+      .gradient-border {
+        border: 10px;
+        position: relative;
+        padding-top: 15px;
+        /* Adjust based on your content */
+      }
+      
+      .gradient-border::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 70px;
+        /* Same as the border size you want */
+        background-image: linear-gradient(to right, #00ce00, #4ba8c9);
+        /* Your gradient colors */
+        z-index: 1;
+        border-radius: 10px 10px 0 0;
+      }
+      
+      .gradient-border > * {
+        position: relative;
+        z-index: 2;
+      }
+      
+      .custom-input-bg {
+        background-color: #f5deb3;
+      }
+      
+      .start {
+        /* min-height: 100px; */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 10px;
+      }
+      
+      .today {
+        /* position: fixed; Fixes the button's position relative to the viewport */
+        right: 83px;
+        /* Positions the button 20px from the right edge */
+        top: 1px;
+        /* Positions the button 20px from the top edge */
+        padding: 10px 25px;
+        border: none;
+        outline: none;
+        transition-duration: 0.3s;
+        border-radius: 30px;
+        background: linear-gradient(to right, #38a4e2, #d2c110);
+        color: #ffffff;
+        font-size: 16px;
+        font-weight: bold;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        z-index: 999;
+        /* Ensures the button stays on top of other elements */
+      }
+      
+      .today:hover {
+        background: linear-gradient(to right, #2d88c7, #c4af0f);
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+        transform: translateY(-2px);
+      }
+      
+      .today:active {
+        background: linear-gradient(to right, #266fa4, #a48d0e);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        transform: translateY(0);
+      }
+      
+      /* nav bar */
+      .navbar-light .navbar-nav .nav-link {
+        color: #000;
+      }
+      
+      .nav-link {
+        border-radius: 5px;
+        /* margin-left: 10px; */
+      }
+      
+      .nav-item .nav-link:hover {
+        background-color: #e3c209;
+      }
+      
+      .form-check {
+        width: 18%;
+      }
+    
+
+
+/* Media Queries */
+@media (max-width: 1600px)  {
+  .tab-pane .form-check-label {
+    font-size: 14px;
+    text-transform: capitalize;
+  }
 }

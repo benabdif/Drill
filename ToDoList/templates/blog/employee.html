@@ -1,0 +1,42 @@
+{% extends 'blog/mainpage.html' %}
+
+{% block content %}
+{% include "chat/chat_popup.html" %}
+
+<div class="no-access-container">
+    <h1 class="no-access-message">Access Denied</h1>
+    <p class="no-access-description">You do not have the permission to assign tasks yet.</p>
+    <p class="no-access-suggestion">Please contact your administrator if you believe this is a mistake.</p>
+</div>
+
+<style>
+    .no-access-container {
+        text-align: center;
+        padding: 10% 5%;
+        background-color: #a099993a;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .no-access-message {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 1rem;
+    }
+
+    .no-access-description {
+        font-size: 1.25rem;
+        color: #666;
+        margin-bottom: 1rem;
+    }
+
+    .no-access-suggestion {
+        font-size: 1rem;
+        color: #888;
+    }
+</style>
+
+{% endblock %}

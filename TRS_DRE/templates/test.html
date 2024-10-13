@@ -1,0 +1,5 @@
+{% for log in logs %}
+<h1>{{log.actor.username}}</h1>
+<h1>{{log.object_repr}}</h1>
+<hr>
+{% endfor %}

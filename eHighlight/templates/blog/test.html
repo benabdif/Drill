@@ -1,0 +1,1700 @@
+
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap demo</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <style>
+    .genealogy-scroll::-webkit-scrollbar {
+      width: 5px;
+      height: 8px;
+    }
+    .genealogy-scroll::-webkit-scrollbar-track {
+      border-radius: 10px;
+      background-color: #e4e4e4;
+
+    }
+    .genealogy-scroll::-webkit-scrollbar-thumb {
+      background: #212121;
+      border-radius: 10px;
+      transition: 0.5s;
+    }
+    .genealogy-scroll::-webkit-scrollbar-thumb:hover {
+      background: #d5b14c;
+      transition: 0.5s;
+    }
+    .genealogy-body {
+      white-space: nowrap;
+      overflow-y: hidden;
+      padding: 50px;
+      min-height: 500px;
+      padding-top: 10px;
+    
+    }
+    .genealogy-tree ul {
+      padding-top: 20px;
+      position: relative;
+      padding-left: 0px;
+      display: flex;
+    }
+    .genealogy-tree li {
+      float: left;
+      text-align: center;
+      list-style-type: none;
+      position: relative;
+      padding: 20px 5px 0 5px;
+      
+    }
+    .genealogy-tree li::before, .genealogy-tree li::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 50%;
+      border-top: 2px solid #ccc;
+      width: 50%;
+      height: 18px;
+
+    }
+    .genealogy-tree li::after {
+      right: auto;
+      left: 50%;
+      border-left: 2px solid #ccc;
+
+    }
+    .genealogy-tree li:only-child::after, .genealogy-tree li:only-child::before {
+      display: none;
+      
+    }
+    .genealogy-tree li:only-child {
+      padding-top: 0;
+      
+    }
+    .genealogy-tree li:first-child::before, .genealogy-tree li:last-child::after {
+      border: 0 none;
+    }
+    .genealogy-tree li:last-child::before {
+      border-right: 2px solid #ccc;
+      border-radius: 0 5px 0 0;
+      -webkit-border-radius: 0 5px 0 0;
+      -moz-border-radius: 0 5px 0 0;
+    }
+    .genealogy-tree li:first-child::after {
+      border-radius: 5px 0 0 0;
+      -webkit-border-radius: 5px 0 0 0;
+      -moz-border-radius: 5px 0 0 0;
+    }
+    .genealogy-tree ul ul::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      border-left: 2px solid #ccc;
+      width: 0;
+      height: 20px;
+    }
+    .genealogy-tree li a {
+      text-decoration: none;
+      color: #666;
+      font-family: Arial, Verdana, Tahoma;
+      font-size: 11px;
+      display: inline-block;
+      border-radius: 5px;
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+    }
+    .genealogy-tree li a:hover + ul li::after,
+    .genealogy-tree li a:hover + ul li::before,
+    .genealogy-tree li a:hover + ul::before,
+    .genealogy-tree li a:hover + ul ul::before {
+      border-color: #fbba00;
+      
+    }
+
+
+ 
+    .member-view-box2 {
+      padding: 10px 20px;
+      text-align: center;
+      border-radius: 4px;
+      position: relative;
+      background-color: #eee6e6;
+      border: 1px solid #ccc;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      transition: box-shadow 0.3s, border-left-width 0.3s;
+    }
+    .member-view-box2::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 15px;
+      background: linear-gradient(180deg, #505cde, #b0c4de);
+      transition: width 0.3s;
+      border-top-left-radius: 4px;
+      border-bottom-left-radius: 4px;
+    }
+    .member-view-box2:hover {
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    }
+    .member-view-box2:hover::before {
+      width: 30px;
+    }
+    .member-view-box {
+      padding: 10px 20px;
+      text-align: center;
+      border-radius: 4px;
+      position: relative;
+      background-color: #eee6e6;
+      border: 1px solid #ccc;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      transition: box-shadow 0.3s;
+    }
+    .member-view-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 15px;
+      background: linear-gradient(180deg, #84BD00, #b0ef05);
+      transition: width 0.3s;
+      border-top-left-radius: 4px;
+      border-bottom-left-radius: 4px;
+    }
+    .member-view-box:hover {
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    }
+    .member-view-box:hover::before {
+      width: 30px;
+    }
+    .member-view-box1 {
+      padding: 10px 20px;
+      text-align: center;
+      border-radius: 4px;
+      position: relative;
+      background-color: #eee6e6; /* here is the colore for the card */
+      border: 1px solid #ccc;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      transition: box-shadow 0.3s;
+    }
+    .member-view-box1::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 12px;
+      background: linear-gradient(180deg, #0b05c2, #00A3E0);
+      transition: width 0.3s;
+      border-top-left-radius: 4px;
+      border-bottom-left-radius: 4px;
+    }
+    .member-view-box1:hover {
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    }
+    .member-view-box1:hover::before {
+      width: 30px;
+    }
+    /* .member-image img {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background-color: #000;
+      z-index: 1;
+    } */
+    .member-details h3 {
+      margin: 0;
+      color: #333;
+      font-size: 12px;
+    }
+    .row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 25px;
+      border: 1px solid #ccc;
+    }
+    .col-4 {
+      text-align: center;
+      flex: 2;
+      margin: 0 10px;
+    }
+    .in_10 {
+      transition: all 0.3s ease;
+    }
+    .in_10:hover {
+      background-color: #e0f7fa;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      transform: scale(1.05);
+    }
+    .in_10 div {
+      transition: transform 0.3s ease;
+    }
+    .in_10 div:hover {
+      transform: translateY(-5px);
+    }
+    .title-M{
+        text-align: center;
+    }
+    .title-Orgnazation {
+    margin-left: 30%;
+    width: 100%;
+    margin: 3%;
+    /* background-color: #c8ccce; */
+    background: linear-gradient(to right, #666764, #fefefe);
+    -webkit-background-clip: text;
+    color: transparent;
+    font-size: 50px;
+    border-radius: 10px;
+    border: #b0c4de;
+    text-align: center;
+}
+
+.mybutton a {
+    display: inline-block;
+    padding: 10px 19px;
+    margin: 26px 67px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    color: #fff;
+    background-color: #fcfcfc00;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s, transform 0.3s;
+    position: relative;
+}
+
+.mybutton a .hover-text {
+    color: rgba(245, 222, 179, 0); /* Make text transparent initially */
+    transition: color 0.3s; /* Smooth transition for color change */
+}
+
+.mybutton a:hover .hover-text {
+    color: #fff; /* Change color on hover to make it visible */
+}
+
+.mybutton a:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+
+
+.rigs h3:first-child {
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.rigs {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.rig-name {
+    margin: 0;
+    padding: 6px 8px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 18px;
+    font-weight: 500;
+    color: #333;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    cursor: pointer;
+    text-align: left;
+}
+
+.rig-name:hover {
+    background-color: #a8a3a3;
+    transform: translateY(-2px);
+}
+
+
+
+</style>
+</head>
+<body style="background: linear-gradient(to right, #047adb, #7bbb0e);">
+  
+    <p class="title-Orgnazation">WellSite Orgnazation Chart</p>    
+    <div class="genealogy-body genealogy-scroll">
+        <div class="genealogy-tree">
+          <ul>
+            <li>
+              <a href="javascript:void(0);">
+                <div class="member-view-box2">
+                  <div class="member-image">
+                    <div class="member-details" style="margin: 10px;">
+                      <h3>SA WellSite Construction Div</h3>
+                      <p>30003792</p>
+                      <p style="font-weight: 600;">Manager</p>
+                      <p style="font-size: 16px;">Musa'ad A.Al Ahmari</p>
+                    </div>
+                  </div>
+                </div>
+              </a>
+              <ul class="">
+                <li>
+                  <a href="javascript:void(0);" style="padding: 0; margin: 0;">
+                    <div class="member-view-box1" style="margin: 0px; padding: 0px;">
+                      <div class="member-image" style="margin: 10px; padding: 0;">
+                        <div class="member-details" style="margin: 0; padding: 0;">
+                          <h3 style="margin: 0; padding: 0;">SA WellSite Construction Eng Supp Unit</h3>
+                          <p style="margin: 0; padding: 0;">30003792</p>
+                          <p style="font-weight: 600; margin: 0; padding: 0;">Supervisor Support</p>
+                          <p style="margin: 0; padding: 0;">Mohammed Hakami</p>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                  <ul>
+                    <li>
+                      <a href="javascript:void(0);">
+                        <div class="member-view-box">
+                          <div class="member-image">
+                            <div class="member-details">
+                              <h3>Technical Support Group</h3>
+                              <p style="margin: 0; padding: 0;">Ahmed O Al-Saif</p>
+                            </div>
+                          </div>
+                        </div>
+                      </a>
+                      <ul>
+                        <li>
+                          <a href="javascript:void(0);">
+                            <div class="member-view-box">
+                              <div class="member-image">
+                                <div class="member-details">
+                                  <h3>employerr for sup contractotr 1-1</h3>
+                                </div>
+                              </div>
+                            </div>
+                          </a>
+                          <ul>
+                            <li>
+                              <a href="javascript:void(0);">
+                                <div class="member-view-box">
+                                  <div class="member-image">
+                                    <div class="member-details">
+                                      <h3>employerr for sup contractotr 1-1</h3>
+                                    </div>
+                                  </div>
+                                </div>
+                              </a>
+                            </li>
+                          </ul>
+                        </li>
+                        <li>
+                          <a href="javascript:void(0);">
+                            <div class="member-view-box">
+                              <div class="member-image">
+                                <div class="member-details">
+                                  <h3>employerr for sup contractotr 1-1</h3>
+                                </div>
+                              </div>
+                            </div>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="javascript:void(0);">
+                            <div class="member-view-box">
+                              <div class="member-image">
+                                <div class="member-details">
+                                  <h3>employerr for sup contractotr 1-1</h3>
+                                </div>
+                              </div>
+                            </div>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="javascript:void(0);">
+                            <div class="member-view-box">
+                              <div class="member-image">
+                                <div class="member-details">
+                                  <h3>employerr for sup contractotr 1-1</h3>
+                                </div>
+                              </div>
+                            </div>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="javascript:void(0);">
+                            <div class="member-view-box">
+                              <div class="member-image">
+                                <div class="member-details">
+                                  <h3>employerr for sup contractotr 1-1</h3>
+                                </div>
+                              </div>
+                            </div>
+                          </a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li>
+                      <a href="javascript:void(0);">
+                        <div class="member-view-box">
+                          <div class="member-image">
+                            <div class="member-details">
+                              <h3>Digitalization& Knowledge Management Group</h3>
+                              <p style="margin: 0; padding: 0;">Fadhel Ben Abdi</p>
+                            </div>
+                          </div>
+                        </div>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="javascript:void(0);">
+                        <div class="member-view-box">
+                          <div class="member-image">
+                            <div class="member-details">
+                              <h3>Data Analysis Group</h3>
+                              <p style="margin: 0; padding: 0;">Moath Al Atallah</p>
+                            </div>
+                          </div>
+                        </div>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="javascript:void(0);">
+                        <div class="member-view-box">
+                          <div class="member-image">
+                            <div class="member-details">
+                              <h3>Strategic Resources Management Group</h3>
+                              <p style="margin: 0; padding: 0;">Amer Alfudhayli</p>
+                            </div>
+                          </div>
+                        </div>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <a href="javascript:void(0);" style="padding: 0; margin: 0;">
+                    <div class="member-view-box1" style="margin: 0px; padding: 0px;">
+                      <div class="member-image" style="margin: 10px; padding: 0;">
+                        <div class="member-details" style="margin: 0; padding: 0;">
+                          <h3 style="margin: 0; padding: 0;">SA WellSite Construction Unit 3</h3>
+                          <p style="margin: 0; padding: 0;">30003795</p>
+                          <p style="font-weight: 600; margin: 0; padding: 0;">Supervisor Construction</p>
+                          <p style="margin: 0; padding: 0;">Fahad M. Al Qahtani (A)</p>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                  <ul class="">
+                    <li>
+                      <a href="javascript:void(0);">
+                        <div class="member-view-box">
+                          <div class="member-image">
+                            <div class="member-details">
+                              <h3>John Doe</h3>
+                            </div>
+                          </div>
+                        </div>
+                      </a>
+                      <ul>
+                        <li>
+                          <a href="javascript:void(0);">
+                            <div class="member-view-box">
+                              <div class="member-image">
+                                <div class="member-details">
+                                  <h3>John Doe</h3>
+                                </div>
+                              </div>
+                            </div>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="javascript:void(0);">
+                            <div class="member-view-box">
+                              <div class="member-image">
+                                <div class="member-details">
+                                  <h3>John Doe</h3>
+                                </div>
+                              </div>
+                            </div>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="javascript:void(0);">
+                            <div class="member-view-box">
+                              <div class="member-image">
+                                <div class="member-details">
+                                  <h3>John Doe</h3>
+                                </div>
+                              </div>
+                            </div>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="javascript:void(0);">
+                            <div class="member-view-box">
+                              <div class="member-image">
+                                <div class="member-details">
+                                  <h3>John Doe</h3>
+                                </div>
+                              </div>
+                            </div>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="javascript:void(0);">
+                            <div class="member-view-box">
+                              <div class="member-image">
+                                <div class="member-details">
+                                  <h3>John Doe</h3>
+                                </div>
+                              </div>
+                            </div>
+                          </a>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <a href="javascript:void(0);" style="padding: 0; margin: 0;">
+                    <div class="member-view-box1" style="margin: 0px; padding: 0px;">
+                      <div class="member-image" style="margin: 10px; padding: 0;">
+                        <div class="member-details" style="margin: 0; padding: 0;">
+                          <h3 style="margin: 0; padding: 0;">SA WellSite Construction Unit 1</h3>
+                          <p style="margin: 0; padding: 0;">30003796</p>
+                          <p style="font-weight: 600; margin: 0; padding: 0;">Supervisor Construction</p>
+                          <p style="margin: 0; padding: 0;">Trad D. Alshehri (A)</p>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                  <ul class="">
+                    <li>
+                      <a href="javascript:void(0);">
+                        <div class="member-view-box">
+                          <div class="member-image">
+                            <div class="member-details">
+                              <h3>John Doe</h3>
+                            </div>
+                          </div>
+                        </div>
+                      </a>
+                      <ul>
+                        <li>
+                          <a href="javascript:void(0);">
+                            <div class="member-view-box">
+                              <div class="member-image">
+                                <div class="member-details">
+                                  <h3>John Doe</h3>
+                                </div>
+                              </div>
+                            </div>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="javascript:void(0);">
+                            <div class="member-view-box">
+                              <div class="member-image">
+                                <div class="member-details">
+                                  <h3>John Doe</h3>
+                                </div>
+                              </div>
+                            </div>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="javascript:void(0);">
+                            <div class="member-view-box">
+                              <div class="member-image">
+                                <div class="member-details">
+                                  <h3>John Doe</h3>
+                                </div>
+                              </div>
+                            </div>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="javascript:void(0);">
+                            <div class="member-view-box">
+                              <div class="member-image">
+                                <div class="member-details">
+                                  <h3>John Doe</h3>
+                                </div>
+                              </div>
+                            </div>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="javascript:void(0);">
+                            <div class="member-view-box">
+                              <div class="member-image">
+                                <div class="member-details">
+                                  <h3>John Doe</h3>
+                                </div>
+                              </div>
+                            </div>
+                          </a>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <a href="javascript:void(0);" style="padding: 0; margin: 0;">
+                    <div class="member-view-box1" style="margin: 0px; padding: 0px;">
+                      <div class="member-image" style="margin: 10px; padding: 0;">
+                        <div class="member-details" style="margin: 0; padding: 0;">
+                          <h3 style="margin: 0; padding: 0;">SA WellSite Construction Unit 4</h3>
+                          <p style="margin: 0; padding: 0;">30017102</p>
+                          <p style="font-weight: 600; margin: 0; padding: 0;">Supervisor Construction</p>
+                          <p style="margin: 0; padding: 0;">Ali A. Al Gamdi</p>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                  <ul class="">
+                    <li>
+                      <a href="javascript:void(0);">
+                        <div class="member-view-box">
+                          <div class="member-image">
+                            <div class="member-details">
+                              <h3>John Doe</h3>
+                            </div>
+                          </div>
+                        </div>
+                      </a>
+                      <ul>
+                        <li>
+                          <a href="javascript:void(0);">
+                            <div class="member-view-box">
+                              <div class="member-image">
+                                <div class="member-details">
+                                  <h3>John Doe</h3>
+                                </div>
+                              </div>
+                            </div>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="javascript:void(0);">
+                            <div class="member-view-box">
+                              <div class="member-image">
+                                <div class="member-details">
+                                  <h3>John Doe</h3>
+                                </div>
+                              </div>
+                            </div>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="javascript:void(0);">
+                            <div class="member-view-box">
+                              <div class="member-image">
+                                <div class="member-details">
+                                  <h3>John Doe</h3>
+                                </div>
+                              </div>
+                            </div>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="javascript:void(0);">
+                            <div class="member-view-box">
+                              <div class="member-image">
+                                <div class="member-details">
+                                  <h3>John Doe</h3>
+                                </div>
+                              </div>
+                            </div>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="javascript:void(0);">
+                            <div class="member-view-box">
+                              <div class="member-image">
+                                <div class="member-details">
+                                  <h3>John Doe</h3>
+                                </div>
+                              </div>
+                            </div>
+                          </a>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <a href="javascript:void(0);" style="padding: 0; margin: 0;">
+                    <div class="member-view-box1" style="margin: 0px; padding: 0px;">
+                      <div class="member-image" style="margin: 10px; padding: 0;">
+                        <div class="member-details" style="margin: 0; padding: 0;">
+                          <h3 style="margin: 0; padding: 0;">SA WellSite Construction Unit 2</h3>
+                          <p style="margin: 0; padding: 0;">30028240</p>
+                          <p style="font-weight: 600; margin: 0; padding: 0;">Supervisor Workover</p>
+                          <p style="margin: 0; padding: 0;">Mohammed S.Al Ghafli</p>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                  <ul>
+                    <li>
+                      <a href="javascript:void(0);">
+                        <div class="member-view-box">
+                          <div class="member-image">
+                            <div class="member-details">
+                              <h3 style="margin: 0; padding: 0; font-weight: bold;">Muhsan Ali</h3>
+                              <p style="margin: 0; padding: 0;">013-574-4635</p>
+                              
+                              <!-- <div style="display: flex; align-items: center; margin: 0; padding: 0;">
+                                  <p style="margin: 0; padding: 0;">013-574-4635</p>
+                                  <img src="{% static 'phone.png' %}" alt="Phone Icon" style="height: 20px; margin-left: 8px;">
+                              </div> -->
+                              <p style="font-weight: 600; margin: 0; padding: 0;">Secretary</p>
+                          </div>
+                          
+                          </div>
+                        </div>
+                      </a>
+                      <ul class="active">
+                        <li>
+                          <a href="javascript:void(0);">
+                            <div class="member-view-box">
+                              <div class="member-image">
+                                <div class="member-details" style="margin: 0; padding: 0;">
+                                  <h3 style="margin: 0; padding: 0; font-weight: bold;">SA-UTMN</h3>
+                                  <p style="margin: 0; padding: 0;">572-0548 | 056-901-9197</p>
+                                  <p style="font-weight: 600; margin: 0; padding: 0;">Group Leader</p>
+                                  <p style="margin: 0; padding: 0;">Bader F. Al Dossari</p>
+                                </div>
+                              </div>
+                            </div>
+                          </a>
+                          <!-- Engineering -->
+                          <ul class="active">
+                            <li>
+                              <a href="javascript:void(0);">
+                                <div class="member-view-box">
+                                  <div class="member-image">
+                                    <div class="member-details" style="margin: 0; padding: 0;">
+                                      <h3 style="margin: 0; padding: 0; font-weight: bold;">Engineering</h3>
+                                      <p style="margin: 0; padding: 0;">053-930-0167</p>
+                                      <!-- <p style="font-weight: 600; margin: 0; padding: 0;">Group Leader</p> -->
+                                      <p style="margin: 0; padding: 0;">Adnan Khan</p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </a>
+                              <ul class="active">
+                                <li>
+                                  <a href="javascript:void(0);">
+                                    <div class="member-view-box">
+                                      <div class="member-image">
+                                        <div class="member-details" style="margin: 0; padding: 0;">
+                                          <h3 style="margin: 0; padding: 0; font-weight: bold;">HARAD</h3>
+                                          <p style="margin: 0; padding: 0;"></p>
+                                          <!-- <p style="font-weight: 600; margin: 0; padding: 0;">Group Leader</p> -->
+                                          <p style="margin: 0; padding: 0;"></p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </a>
+                                  <ul class="active">
+                                    <li>
+                                      <a href="javascript:void(0);">
+                                        <div class="member-view-box">
+                                          <div class="member-image">
+                                            <div class="member-details">
+                                              <div class="rigs"> 
+                                                <h3 style="font-weight: bold; margin-bottom: 15px; display: flex; align-items: center;">
+                                                    Rigs:
+                                                    <img src="{% static 'oil-well.png' %}" alt="Oil Well Icon" style="height: 40px; margin-left: 40px;">
+                                                </h3>
+                                                <h3 class="rig-name">1. SINO-5L</h3>
+                                                <h3 class="rig-name">2. SND-2008</h3>
+                                                <h3 class="rig-name">3. SND-2011</h3>
+                                                <h3 class="rig-name">4. T-914</h3>
+                                                <h3 class="rig-name">5. ADC-14</h3>
+                                                <h3 class="rig-name">6. SP-107</h3>
+                                                <h3 class="rig-name">7. ZPEC-1</h3>
+                                                <h3 class="rig-name">8. ZPEC-2</h3>
+                                              </div>  
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </a>
+                                    </li>
+                                  </ul>
+                                </li>
+                              </ul>
+
+                             
+                            </li>
+                            <li>
+                              <a href="javascript:void(0);">
+                                <div class="member-view-box">
+                                  <div class="member-image">
+                                    <div class="member-details" style="margin: 0; padding: 0;">
+                                      <h3 style="margin: 0; padding: 0; font-weight: bold;">Engineering</h3>
+                                      <p style="margin: 0; padding: 0;">054-237-6536</p>
+                                      <!-- <p style="font-weight: 600; margin: 0; padding: 0;">Group Leader</p> -->
+                                      <p style="margin: 0; padding: 0;">Krishnan Unni</p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </a>
+                              <ul class="active">
+                                <li>
+                                  <a href="javascript:void(0);">
+                                    <div class="member-view-box">
+                                      <div class="member-image">
+                                        <div class="member-details" style="margin: 0; padding: 0;">
+                                          <h3 style="margin: 0; padding: 0; font-weight: bold;">HARAD</h3>
+                                          <p style="margin: 0; padding: 0;"></p>
+                                          <!-- <p style="font-weight: 600; margin: 0; padding: 0;">Group Leader</p> -->
+                                          <p style="margin: 0; padding: 0;"></p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </a>
+                                  <ul class="active">
+                                    <li>
+                                      <a href="javascript:void(0);">
+                                        <div class="member-view-box">
+                                          <div class="member-image">
+                                            <div class="member-details">
+                                              <div class="rigs"> 
+                                                <h3 style="font-weight: bold; margin-bottom: 15px; display: flex; align-items: center;">
+                                                    Rigs:
+                                                    <img src="{% static 'oil-well.png' %}" alt="Oil Well Icon" style="height: 40px; margin-left: 40px;">
+                                                </h3>
+                                                <h3 class="rig-name">1. NBR-196S</h3>
+                                                <h3 class="rig-name">2. SINO-26</h3>
+                                                <h3 class="rig-name">3. SINO-37L</h3>
+                                                <h3 class="rig-name">4. SINO-45L</h3>
+                                                <h3 class="rig-name">5. SCTD-2</h3>
+                                                <h3 class="rig-name">6. SND-1502</h3>
+                                                <h3 class="rig-name">7. HWU-5</h3>
+                                                <h3 class="rig-name">8. DPS-45</h3>
+                                                <h3 class="rig-name">9. BCTD-9</h3>
+                                            </div>  
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </a>
+                                    </li>
+                                  </ul>
+                                </li>
+                              </ul>
+                            </li>
+                            <li>
+                              <a href="javascript:void(0);">
+                                <div class="member-view-box">
+                                  <div class="member-image">
+                                    <div class="member-details" style="margin: 0; padding: 0;">
+                                      <h3 style="margin: 0; padding: 0; font-weight: bold;">Engineering</h3>
+                                      <p style="margin: 0; padding: 0;">0539300160</p>
+                                      <!-- <p style="font-weight: 600; margin: 0; padding: 0;">Group Leader</p> -->
+                                      <p style="margin: 0; padding: 0;">Anselmo Toledo</p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </a>
+                              <ul class="active">
+                                <li>
+                                  <a href="javascript:void(0);">
+                                    <div class="member-view-box">
+                                      <div class="member-image">
+                                        <div class="member-details" style="margin: 0; padding: 0;">
+                                          <h3 style="margin: 0; padding: 0; font-weight: bold;">HARAD</h3>
+                                          <p style="margin: 0; padding: 0;"></p>
+                                          <!-- <p style="font-weight: 600; margin: 0; padding: 0;">Group Leader</p> -->
+                                          <p style="margin: 0; padding: 0;"></p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </a>
+                                  <ul class="active">
+                                    <li>
+                                      <a href="javascript:void(0);">
+                                        <div class="member-view-box">
+                                          <div class="member-image">
+                                            <div class="member-details">
+                                              <div class="rigs"> 
+                                                <h3 style="font-weight: bold; margin-bottom: 15px; display: flex; align-items: center;">
+                                                    Rigs:
+                                                    <img src="{% static 'oil-well.png' %}" alt="Oil Well Icon" style="height: 40px; margin-left: 40px;">
+                                                </h3>
+                                                <h3 class="rig-name">1. SINO-19L</h3>
+                                                <h3 class="rig-name">2. ADES-40</h3>
+                                                <h3 class="rig-name">3. T218</h3>
+                                                <h3 class="rig-name">4. NBR-797S</h3>
+                                                <h3 class="rig-name">5. SP-107</h3>
+                                            </div>  
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </a>
+                                    </li>
+                                  </ul>
+
+                                </li>
+                              </ul>
+                             
+                            </li>
+                            <li>
+                              <a href="javascript:void(0);">
+                                <div class="member-view-box">
+                                  <div class="member-image">
+                                    <div class="member-details" style="margin: 0; padding: 0;">
+                                      <h3 style="margin: 0; padding: 0; font-weight: bold;">Engineering</h3>
+                                      <p style="margin: 0; padding: 0;">055-452-2120</p>
+                                      <!-- <p style="font-weight: 600; margin: 0; padding: 0;">Group Leader</p> -->
+                                      <p style="margin: 0; padding: 0;">Abbas Al-Najrani</p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </a>
+                              <ul class="active">
+                                <li>
+                                  <a href="javascript:void(0);">
+                                    <div class="member-view-box">
+                                      <div class="member-image">
+                                        <div class="member-details" style="margin: 0; padding: 0;">
+                                          <h3 style="margin: 0; padding: 0; font-weight: bold;">Harad</h3>
+                                          <p style="margin: 0; padding: 0;"></p>
+                                          <!-- <p style="font-weight: 600; margin: 0; padding: 0;">Group Leader</p> -->
+                                          <p style="margin: 0; padding: 0;"></p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </a>
+                                  <ul class="active">
+                                    <li>
+                                      <a href="javascript:void(0);">
+                                        <div class="member-view-box">
+                                          <div class="member-image">
+                                            <div class="member-details">
+                                              <div class="rigs"> 
+                                                <h3 style="font-weight: bold; margin-bottom: 15px; display: flex; align-items: center;">
+                                                    Rigs:
+                                                    <img src="{% static 'oil-well.png' %}" alt="Oil Well Icon" style="height: 40px; margin-left: 40px;">
+                                                </h3>
+                                                <h3 class="rig-name">1. ADC-31</h3>
+                                                <h3 class="rig-name">2. ADES-173</h3>
+                                                <h3 class="rig-name">3. SCTD-1</h3>
+                                                <h3 class="rig-name">4. DPS-46</h3>
+                                                <h3 class="rig-name">5. T-562</h3>
+                                                <h3 class="rig-name">6. T-570</h3>
+                                            </div>  
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </a>
+                                  
+                                    </li>
+                                  </ul>
+
+                                </li>
+                              </ul>
+                            
+                            </li>
+                            <li>
+                              <a href="javascript:void(0);">
+                                <div class="member-view-box">
+                                  <div class="member-image">
+                                    <div class="member-details" style="margin: 0; padding: 0;">
+                                      <h3 style="margin: 0; padding: 0; font-weight: bold;">Engineering</h3>
+                                      <p style="margin: 0; padding: 0;">055-452-2120</p>
+                                      <!-- <p style="font-weight: 600; margin: 0; padding: 0;">Group Leader</p> -->
+                                      <p style="margin: 0; padding: 0;">Saleh Al-Sandoug</p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </a>
+                              <ul class="active">
+                                <li>
+                                  <a href="javascript:void(0);">
+                                    <div class="member-view-box">
+                                      <div class="member-image">
+                                        <div class="member-details" style="margin: 0; padding: 0;">
+                                          <h3 style="margin: 0; padding: 0; font-weight: bold;">HARAD</h3>
+                                          <p style="margin: 0; padding: 0;"></p>
+                                          <!-- <p style="font-weight: 600; margin: 0; padding: 0;">Group Leader</p> -->
+                                          <p style="margin: 0; padding: 0;"></p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </a>
+                                  <ul class="active">
+                                    <li>
+                                      <a href="javascript:void(0);">
+                                        <div class="member-view-box">
+                                          <div class="member-image">
+                                            <div class="member-details">
+                                              <div class="rigs"> 
+                                                <h3 style="font-weight: bold; margin-bottom: 15px; display: flex; align-items: center;">
+                                                    Rigs:
+                                                    <img src="{% static 'oil-well.png' %}" alt="Oil Well Icon" style="height: 40px; margin-left: 40px;">
+                                                </h3>
+                                                <h3 class="rig-name">1. ADC-32</h3>
+                                                <h3 class="rig-name">2. ADC-67L</h3>
+                                                <h3 class="rig-name">3. SINO-50L</h3>
+                                                <h3 class="rig-name">4. SINO-6L</h3>
+                                                <h3 class="rig-name">5. SP-53L</h3>
+                                                <h3 class="rig-name">6. DPS-44</h3>
+                                            </div>  
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </a>
+                                    </li>
+                                  </ul>
+                                </li>
+                              </ul>
+                            </li>
+                            <li>
+                              <a href="javascript:void(0);">
+                                <div class="member-view-box">
+                                  <div class="member-image">
+                                    <div class="member-details" style="margin: 0; padding: 0;">
+                                      <h3 style="margin: 0; padding: 0; font-weight: bold;">Engineering</h3>
+                                      <p style="margin: 0; padding: 0;">055-016-0590</p>
+                                      <!-- <p style="font-weight: 600; margin: 0; padding: 0;">Group Leader</p> -->
+                                      <p style="margin: 0; padding: 0;">Ali Algarni</p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </a>
+                              <ul>
+                                <li></li>
+                              </ul>
+                              <ul class="active">
+                                <li>
+                                  <a href="javascript:void(0);">
+                                    <div class="member-view-box">
+                                      <div class="member-image">
+                                        <div class="member-details">
+                                          <div class="rigs"> 
+                                            <h3 style="font-weight: bold; margin-bottom: 15px; display: flex; align-items: center;">
+                                                Rigs:
+                                                <img src="{% static 'oil-well.png' %}" alt="Oil Well Icon" style="height: 40px; margin-left: 40px;">
+                                            </h3>
+                                            <h3 class="rig-name" style="background-color: red; text-align: center;">SPARK OFFICE</h3>
+                                            <!-- <h3 class="rig-name">2. </h3>
+                                            <h3 class="rig-name">3. </h3>
+                                            <h3 class="rig-name">4. </h3>
+                                            <h3 class="rig-name">5. </h3>
+                                            <h3 class="rig-name">6. </h3> -->
+                                        </div>  
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </a>
+                                </li>
+                              </ul>
+                            </li>
+                            <li>
+                              <a href="javascript:void(0);">
+                                <div class="member-view-box">
+                                  <div class="member-image">
+                                    <div class="member-details" style="margin: 0; padding: 0;">
+                                      <h3 style="margin: 0; padding: 0; font-weight: bold;">Engineering</h3>
+                                      <p style="margin: 0; padding: 0;">050-705-0999</p>
+                                      <!-- <p style="font-weight: 600; margin: 0; padding: 0;">Group Leader</p> -->
+                                      <p style="margin: 0; padding: 0;">Mohammed Al-Qahtani</p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </a>
+                              <ul class="active">
+                                <li>
+                                  <a href="javascript:void(0);">
+                                    <div class="member-view-box">
+                                      <div class="member-image">
+                                        <div class="member-details" style="margin: 0; padding: 0;">
+                                          <h3 style="margin: 0; padding: 0; font-weight: bold;">HARAD</h3>
+                                          <p style="margin: 0; padding: 0;"></p>
+                                          <!-- <p style="font-weight: 600; margin: 0; padding: 0;">Group Leader</p> -->
+                                          <p style="margin: 0; padding: 0;"></p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </a>
+                                  <ul class="active">
+                                    <li>
+                                      <a href="javascript:void(0);">
+                                        <div class="member-view-box">
+                                          <div class="member-image">
+                                            <div class="member-details">
+                                              <div class="rigs"> 
+                                                <h3 style="font-weight: bold; margin-bottom: 15px; display: flex; align-items: center;">
+                                                    Rigs:
+                                                    <img src="{% static 'oil-well.png' %}" alt="Oil Well Icon" style="height: 40px; margin-left: 40px;">
+                                                </h3>
+                                                <h3 class="rig-name">1. ADC-52</h3>
+                                                <h3 class="rig-name">2. SP-123</h3>
+                                                <h3 class="rig-name">3. NA-393S</h3>
+                                                <h3 class="rig-name">4. SP-58</h3>
+                                                <h3 class="rig-name">5. PA-604S</h3>
+                                                <h3 class="rig-name">6. SP-96</h3>
+                                                <h3 class="rig-name">6. JACK-202</h3>
+                                            </div>  
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </a>
+                                    </li>
+                                  </ul>
+
+                                </li>
+                              </ul>
+                              
+                            </li>
+                            <li>
+                              <a href="javascript:void(0);">
+                                <div class="member-view-box">
+                                  <div class="member-image">
+                                    <div class="member-details" style="margin: 0; padding: 0;">
+                                      <h3 style="margin: 0; padding: 0; font-weight: bold;">Engineering</h3>
+                                      <p style="margin: 0; padding: 0;">055-600-1597</p>
+                                      <!-- <p style="font-weight: 600; margin: 0; padding: 0;">Group Leader</p> -->
+                                      <p style="margin: 0; padding: 0;">Mohammed Al-Yami</p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </a>
+                              <ul class="active">
+                                <li>
+                                  <a href="javascript:void(0);">
+                                    <div class="member-view-box">
+                                      <div class="member-image">
+                                        <div class="member-details" style="margin: 0; padding: 0;">
+                                          <h3 style="margin: 0; padding: 0; font-weight: bold;">HARAD</h3>
+                                          <p style="margin: 0; padding: 0;"></p>
+                                          <!-- <p style="font-weight: 600; margin: 0; padding: 0;">Group Leader</p> -->
+                                          <p style="margin: 0; padding: 0;"></p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </a>
+                                  <ul class="active">
+                                    <li>
+                                      <a href="javascript:void(0);">
+                                        <div class="member-view-box">
+                                          <div class="member-image">
+                                            <div class="member-details">
+                                              <div class="rigs"> 
+                                                <h3 style="font-weight: bold; margin-bottom: 15px; display: flex; align-items: center;">
+                                                    Rigs:
+                                                    <img src="{% static 'oil-well.png' %}" alt="Oil Well Icon" style="height: 40px; margin-left: 40px;">
+                                                </h3>
+                                                <h3 class="rig-name">1. ADC-34</h3>
+                                                <h3 class="rig-name">2. ADC-35</h3>
+                                                <h3 class="rig-name">3. NA-18S</h3>
+                                                <h3 class="rig-name">4. P-861S</h3>
+                                                <h3 class="rig-name">5. SINO-47</h3>
+                                                <h3 class="rig-name">6. SND-2001</h3>
+                                            </div>  
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </a>
+                                    </li>
+                                  </ul>
+                                </li>
+                              </ul>
+                            </li>
+                            <li>
+                              <a href="javascript:void(0);">
+                                <div class="member-view-box">
+                                  <div class="member-image">
+                                    <div class="member-details" style="margin: 0; padding: 0;">
+                                      <h3 style="margin: 0; padding: 0; font-weight: bold;">Engineering</h3>
+                                      <p style="margin: 0; padding: 0;">053-459-3764</p>
+                                      <!-- <p style="font-weight: 600; margin: 0; padding: 0;">Group Leader</p> -->
+                                      <p style="margin: 0; padding: 0;">Mohammed A.Al-Harbi</p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </a>
+                              <ul class="active">
+                                <li>
+                                  <a href="javascript:void(0);">
+                                    <div class="member-view-box">
+                                      <div class="member-image">
+                                        <div class="member-details" style="margin: 0; padding: 0;">
+                                          <h3 style="margin: 0; padding: 0; font-weight: bold;">HARAD</h3>
+                                          <p style="margin: 0; padding: 0;"></p>
+                                          <!-- <p style="font-weight: 600; margin: 0; padding: 0;">Group Leader</p> -->
+                                          <p style="margin: 0; padding: 0;"></p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </a>
+                                  <ul class="active">
+                                    <li>
+                                      <a href="javascript:void(0);">
+                                        <div class="member-view-box">
+                                          <div class="member-image">
+                                            <div class="member-details">
+                                              <div class="rigs"> 
+                                                <h3 style="font-weight: bold; margin-bottom: 15px; display: flex; align-items: center;">
+                                                    Rigs:
+                                                    <img src="{% static 'oil-well.png' %}" alt="Oil Well Icon" style="height: 40px; margin-left: 40px;">
+                                                </h3>
+                                                <h3 class="rig-name">1. ADC-41L</h3>
+                                                <h3 class="rig-name">2. ADC-42L</h3>
+                                                <h3 class="rig-name">3. ADC-46L</h3>
+                                                <h3 class="rig-name">4. ADC-46L</h3>
+                                                <h3 class="rig-name">5. NBR-654S</h3>
+                                                <h3 class="rig-name">6. T-569</h3>
+                                            </div>  
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </a>
+                                    </li>
+                                  </ul>
+                                </li>
+                              </ul>
+                             
+                            </li>                            
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                    
+                  </ul>
+                </li>
+                <li>
+                  <a href="javascript:void(0);" style="padding: 0; margin: 0;">
+                    <div class="member-view-box1" style="margin: 0px; padding: 0px;">
+                      <div class="member-image" style="margin: 10px; padding: 0;">
+                        <div class="member-details" style="margin: 0; padding: 0;">
+                          <h3 style="margin: 0; padding: 0;">SA Operations Support Unit</h3>
+                          <p style="margin: 0; padding: 0;">30032937</p>
+                          <p style="font-weight: 600; margin: 0; padding: 0;">Supervisor R&Ws inspection</p>
+                          <p style="margin: 0; padding: 0;">Raja M. Al Hajri (A)</p>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                  <ul class="">
+                    <li >
+                      <a href="javascript:void(0);">
+                        <div class="member-view-box">
+                          <div class="member-image">
+                            <div class="member-details">
+                              <h3 style="margin: 0; padding: 0; font-weight: bold;">Christian Perez</h3>
+                              <p style="margin: 0; padding: 0;">572-7983</p>
+                              
+                              <!-- <div style="display: flex; align-items: center; margin: 0; padding: 0;">
+                                  <p style="margin: 0; padding: 0;">013-574-4635</p>
+                                  <img src="{% static 'phone.png' %}" alt="Phone Icon" style="height: 20px; margin-left: 8px;">
+                              </div> -->
+                              <p style="font-weight: 600; margin: 0; padding: 0;">Secretary</p>
+                          </div>
+                          
+                          </div>
+                        </div>
+                      </a>
+                      <ul>
+                        <li>
+                          <!-- Group Leader -->
+                          <a href="javascript:void(0);">
+                            <div class="member-view-box">
+                              <div class="member-image">
+                                <div class="member-details" style="margin: 0; padding: 0;">
+                                  <h3 style="margin: 0; padding: 0; font-weight: bold;">All Area WWCP</h3>
+                                  <p style="margin: 0; padding: 0;">055-054-3310</p>
+                                  <p style="font-weight: 600; margin: 0; padding: 0;">Group Leader WWDP</p>
+                                  <p style="margin: 0; padding: 0;">Mohsin Abbas</p>
+                                </div>
+                              </div>
+                            </div>
+                          </a>
+                          <ul>
+                            <!-- 1 -->
+                            <li> 
+                              <!-- Group Leader -->
+                              <a href="javascript:void(0);">
+                                <div class="member-view-box">
+                                  <div class="member-image">
+                                    <div class="member-details" style="margin: 0; padding: 0;">
+                                      <h3 style="margin: 0; padding: 0; font-weight: bold;">ABQQ AREA</h3>
+                                      <p style="margin: 0; padding: 0;">050-881-0001</p>
+                                      <!-- <p style="font-weight: 600; margin: 0; padding: 0;">Group Leader</p> -->
+                                      <p style="font-weight: 600; margin: 0; padding: 0;">Inspector</p>
+                                      <p style="margin: 0; padding: 0;">Ali Talib Al Marri</p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </a>
+                            </li>
+                            <!-- 2 -->
+                            <li> 
+                              <!-- Group Leader -->
+                              <a href="javascript:void(0);">
+                                <div class="member-view-box">
+                                  <div class="member-image">
+                                    <div class="member-details" style="margin: 0; padding: 0;">
+                                      <h3 style="margin: 0; padding: 0; font-weight: bold;">SDGM & ANDR AREA</h3>
+                                      <p style="margin: 0; padding: 0;">056-560-7481</p>
+                                      <p style="font-weight: 600; margin: 0; padding: 0;">Inspector</p>
+                                      <!-- <p style="font-weight: 600; margin: 0; padding: 0;">Group Leader</p> -->
+                                      <p style="margin: 0; padding: 0;">Mathkar M. Al Hajri</p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </a>
+                            </li>
+                            <!-- 3 -->
+                            <li> 
+                              <!-- Group Leader -->
+                              <a href="javascript:void(0);">
+                                <div class="member-view-box">
+                                  <div class="member-image">
+                                    <div class="member-details" style="margin: 0; padding: 0;">
+                                      <h3 style="margin: 0; padding: 0; font-weight: bold;">UTMN AREA</h3>
+                                      <p style="margin: 0; padding: 0;">050-335-8555</p>
+                                      <p style="font-weight: 600; margin: 0; padding: 0;">Inspector</p>
+                                      <!-- <p style="font-weight: 600; margin: 0; padding: 0;">Group Leader</p> -->
+                                      <p style="margin: 0; padding: 0;">Fahad Theeb Al Hajri</p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </a>
+                            </li>
+                            <!-- 4 -->
+                            <li> 
+                              <!-- Group Leader -->
+                              <a href="javascript:void(0);">
+                                <div class="member-view-box">
+                                  <div class="member-image">
+                                    <div class="member-details" style="margin: 0; padding: 0;">
+                                      <h3 style="margin: 0; padding: 0; font-weight: bold;">MDRK/ZMLH/AWTD/WDHY/SHDN/GHZL</h3>
+                                      <p style="margin: 0; padding: 0;">053-145-6664</p>
+                                      <p style="font-weight: 600; margin: 0; padding: 0;">Inspector</p>
+                                      <!-- <p style="font-weight: 600; margin: 0; padding: 0;">Group Leader</p> -->
+                                      <p style="margin: 0; padding: 0;">Hamed S. Al Marri</p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </a>
+                            </li>
+                            <!-- 5 -->
+                            <li> 
+                              <!-- Group Leader -->
+                              <a href="javascript:void(0);">
+                                <div class="member-view-box">
+                                  <div class="member-image">
+                                    <div class="member-details" style="margin: 0; padding: 0;">
+                                      <h3 style="margin: 0; padding: 0; font-weight: bold;">MDRK/ZMLH/AWTD/WDHY/SHDN/GHZL</h3>
+                                      <p style="margin: 0; padding: 0;">053-930-0164</p>
+                                      <p style="font-weight: 600; margin: 0; padding: 0;">Inspector</p>
+                                      <!-- <p style="font-weight: 600; margin: 0; padding: 0;">Group Leader</p> -->
+                                      <p style="margin: 0; padding: 0;">Abdulaziz Al N Qahtani</p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </a>
+                            </li>
+                            <!-- 6 -->
+                            <li> 
+                              <!-- Group Leader -->
+                              <a href="javascript:void(0);">
+                                <div class="member-view-box">
+                                  <div class="member-image">
+                                    <div class="member-details" style="margin: 0; padding: 0;">
+                                      <h3 style="margin: 0; padding: 0; font-weight: bold;">MDRK/ZMLH/AWTD/WDHY/SHDN/GHZL</h3>
+                                      <p style="margin: 0; padding: 0;">055-056-1934</p>
+                                      <p style="font-weight: 600; margin: 0; padding: 0;">Inspector</p>
+                                      <!-- <p style="font-weight: 600; margin: 0; padding: 0;">Group Leader</p> -->
+                                      <p style="margin: 0; padding: 0;">Fahad Al Subaie</p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </a>
+                            </li>
+                            <!-- 7 -->
+                            <li> 
+                              <!-- Group Leader -->
+                              <a href="javascript:void(0);">
+                                <div class="member-view-box">
+                                  <div class="member-image">
+                                    <div class="member-details" style="margin: 0; padding: 0;">
+                                      <h3 style="margin: 0; padding: 0; font-weight: bold;">HRDH/HWYH/HRML AREA</h3>
+                                      <p style="margin: 0; padding: 0;">055-445-0693</p>
+                                      <p style="font-weight: 600; margin: 0; padding: 0;">Inspector</p>
+                                      <!-- <p style="font-weight: 600; margin: 0; padding: 0;">Group Leader</p> -->
+                                      <p style="margin: 0; padding: 0;">Saeed S. Al Hajri</p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </a>
+                            </li>
+                            <!-- 8 -->
+                            <li> 
+                              <!-- Group Leader -->
+                              <a href="javascript:void(0);">
+                                <div class="member-view-box">
+                                  <div class="member-image">
+                                    <div class="member-details" style="margin: 0; padding: 0;">
+                                      <h3 style="margin: 0; padding: 0; font-weight: bold;">HRDH/HWYH/HRML AREA</h3>
+                                      <p style="margin: 0; padding: 0;">055-600-1594</p>
+                                      <p style="font-weight: 600; margin: 0; padding: 0;">Inspector</p>
+                                      <!-- <p style="font-weight: 600; margin: 0; padding: 0;">Group Leader</p> -->
+                                      <p style="margin: 0; padding: 0;">Harran S. Al Marri</p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </a>
+                            </li>
+                          </ul>
+                        <li>
+                          <a href="javascript:void(0);">
+                            <div class="member-view-box">
+                              <div class="member-image">
+                                <div class="member-details" style="margin: 0; padding: 0;">
+                                  <h3 style="margin: 0; padding: 0; font-weight: bold;">All Area Survey</h3>
+                                  <p style="margin: 0; padding: 0;">053-016-1619</p>
+                                  <p style="font-weight: 600; margin: 0; padding: 0;">Group Leader Survey & GIS</p>
+                                  <p style="margin: 0; padding: 0;">Nawaf M. Alanazi</p>
+                                </div>
+                              </div>
+                            </div>
+                          </a>
+                          <ul>
+                            <!-- 1 -->
+                            <li> 
+                              <!-- Group Leader -->
+                              <a href="javascript:void(0);">
+                                <div class="member-view-box">
+                                  <div class="member-image">
+                                    <div class="member-details" style="margin: 0; padding: 0;">
+                                      <h3 style="margin: 0; padding: 0; font-weight: bold;">HRDH & HRML AREA</h3>
+                                      <p style="margin: 0; padding: 0;">055-056-1928</p>
+                                      <!-- <p style="font-weight: 600; margin: 0; padding: 0;">Group Leader</p> -->
+                                      <p style="font-weight: 600; margin: 0; padding: 0;">Surveyor</p>
+                                      <p style="margin: 0; padding: 0;">Floriano C. Almacin</p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </a>
+                            </li>
+                            <!-- 2 -->
+                            <li> 
+                              <!-- Group Leader -->
+                              <a href="javascript:void(0);">
+                                <div class="member-view-box">
+                                  <div class="member-image">
+                                    <div class="member-details" style="margin: 0; padding: 0;">
+                                      <h3 style="margin: 0; padding: 0; font-weight: bold;">HWYH & SATELLITE AREA</h3>
+                                      <p style="margin: 0; padding: 0;">056-560-7481</p>
+                                      <p style="font-weight: 600; margin: 0; padding: 0;">Surveyor</p>
+                                      <!-- <p style="font-weight: 600; margin: 0; padding: 0;">Group Leader</p> -->
+                                      <p style="margin: 0; padding: 0;">Edmund S. Antonio</p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </a>
+                            </li>
+                            <!-- 3 -->
+                            <li> 
+                              <!-- Group Leader -->
+                              <a href="javascript:void(0);">
+                                <div class="member-view-box">
+                                  <div class="member-image">
+                                    <div class="member-details" style="margin: 0; padding: 0;">
+                                      <h3 style="margin: 0; padding: 0; font-weight: bold;">HRDH & HRML AREA</h3>
+                                      <p style="margin: 0; padding: 0;">050-060-1276</p>
+                                      <p style="font-weight: 600; margin: 0; padding: 0;">Surveyor</p>
+                                      <!-- <p style="font-weight: 600; margin: 0; padding: 0;">Group Leader</p> -->
+                                      <p style="margin: 0; padding: 0;">Visva Subramaniam</p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </a>
+                            </li>
+                            <!-- 4 -->
+                            <li> 
+                              <!-- Group Leader -->
+                              <a href="javascript:void(0);">
+                                <div class="member-view-box">
+                                  <div class="member-image">
+                                    <div class="member-details" style="margin: 0; padding: 0;">
+                                      <h3 style="margin: 0; padding: 0; font-weight: bold;">ABQQ/ANDR FZRN/SDGM</h3>
+                                      <p style="margin: 0; padding: 0;">055-736-5809</p>
+                                      <p style="font-weight: 600; margin: 0; padding: 0;">Surveyor</p>
+                                      <!-- <p style="font-weight: 600; margin: 0; padding: 0;">Group Leader</p> -->
+                                      <p style="margin: 0; padding: 0;">Benjie S. Graganta</p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </a>
+                            </li>
+                            <!-- 5 -->
+                            <li> 
+                              <!-- Group Leader -->
+                              <a href="javascript:void(0);">
+                                <div class="member-view-box">
+                                  <div class="member-image">
+                                    <div class="member-details" style="margin: 0; padding: 0;">
+                                      <h3 style="margin: 0; padding: 0; font-weight: bold;">HWYH & SATELLITE AREA</h3>
+                                      <p style="margin: 0; padding: 0;">054-421-0710</p>
+                                      <p style="font-weight: 600; margin: 0; padding: 0;">Surveyor</p>
+                                      <!-- <p style="font-weight: 600; margin: 0; padding: 0;">Group Leader</p> -->
+                                      <p style="margin: 0; padding: 0;">Nawazish l. Ali</p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </a>
+                            </li>
+                            <!-- 6 -->
+                            <li> 
+                              <!-- Group Leader -->
+                              <a href="javascript:void(0);">
+                                <div class="member-view-box">
+                                  <div class="member-image">
+                                    <div class="member-details" style="margin: 0; padding: 0;">
+                                      <h3 style="margin: 0; padding: 0; font-weight: bold;">UTMN AREA</h3>
+                                      <p style="margin: 0; padding: 0;">054-947-6870</p>
+                                      <p style="font-weight: 600; margin: 0; padding: 0;">Surveyor</p>
+                                      <!-- <p style="font-weight: 600; margin: 0; padding: 0;">Group Leader</p> -->
+                                      <p style="margin: 0; padding: 0;">Muhammad Idrees</p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </a>
+                            </li>
+                            <!-- 7 -->
+                            <li> 
+                              <!-- Group Leader -->
+                              <a href="javascript:void(0);">
+                                <div class="member-view-box">
+                                  <div class="member-image">
+                                    <div class="member-details" style="margin: 0; padding: 0;">
+                                      <h3 style="margin: 0; padding: 0; font-weight: bold;">Dispatch</h3>
+                                      <p style="margin: 0; padding: 0;">572-4716</p>
+                                      <p style="font-weight: 600; margin: 0; padding: 0;">Surveyor</p>
+                                      <!-- <p style="font-weight: 600; margin: 0; padding: 0;">Group Leader</p> -->
+                                      <p style="margin: 0; padding: 0;">Saeed S. Al Hajri</p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </a>
+                            </li>
+                          </ul>
+                        </li>
+                          
+
+                        </li>
+                     
+                        <li>
+                          <a href="javascript:void(0);">
+                            <div class="member-view-box">
+                              <div class="member-image">
+                                <div class="member-details" style="margin: 0; padding: 0;">
+                                  <h3 style="margin: 0; padding: 0; font-weight: bold;">Dispatch</h3>
+                                  <p style="margin: 0; padding: 0;">572-5010 | 050-337-3069</p>
+                                  <p style="font-weight: 600; margin: 0; padding: 0;">Group Leader Dispatch</p>
+                                  <p style="margin: 0; padding: 0;">Nawaf M. Kassar</p>
+                                </div>
+                              </div>
+                            </div>
+                          </a>
+                          <ul>
+                            <!-- 1 -->
+                            <li> 
+                              <!-- Group Leader -->
+                              <a href="javascript:void(0);">
+                                <div class="member-view-box">
+                                  <div class="member-image">
+                                    <div class="member-details" style="margin: 0; padding: 0;">
+                                      <h3 style="margin: 0; padding: 0; font-weight: bold;">Dispatch</h3>
+                                      <p style="margin: 0; padding: 0;">572-2839</p>
+                                      <!-- <p style="font-weight: 600; margin: 0; padding: 0;">Group Leader</p> -->
+                                      <p style="font-weight: 600; margin: 0; padding: 0;">Dispatch</p>
+                                      <p style="margin: 0; padding: 0;">Abdullelah S. Enezi</p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </a>
+                            </li>
+                            <!-- 2 -->
+                            <li> 
+                              <!-- Group Leader -->
+                              <a href="javascript:void(0);">
+                                <div class="member-view-box">
+                                  <div class="member-image">
+                                    <div class="member-details" style="margin: 0; padding: 0;">
+                                      <h3 style="margin: 0; padding: 0; font-weight: bold;">SPARK</h3>
+                                      <p style="margin: 0; padding: 0;">572-7161</p>
+                                      <p style="font-weight: 600; margin: 0; padding: 0;">Dispatch</p>
+                                      <!-- <p style="font-weight: 600; margin: 0; padding: 0;">Group Leader</p> -->
+                                      <p style="margin: 0; padding: 0;">Muffruheen T.</p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </a>
+                            </li>
+                        
+                            
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div> 
+      <p class="mybutton">
+        <a href="{% url 'All_apps' %}" class="backhomebutton">
+            <span class="hidden-text">Go back </span>Apps
+        </a>
+    </p>
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script>
+    $(function () {
+      $('.genealogy-tree ul').hide();
+      $('.genealogy-tree > ul').show();
+      $('.genealogy-tree ul.active').show();
+      $('.genealogy-tree li').on('click', function (e) {
+        var children = $(this).find('> ul');
+        if (children.is(":visible")) {
+          children.hide('fast').removeClass('active');
+        } else {
+          children.show('fast').addClass('active');
+        }
+        e.stopPropagation();
+      });
+    });
+  </script>
+</body>
+
+</html>
+
+

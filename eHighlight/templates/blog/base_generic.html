@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Site{% endblock %}</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <link rel="stylesheet" href="{% static 'css/cssc.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+    {% block extra_head %}
+    <!-- Extra head content can be inserted by extending templates -->
+    {% endblock %}
+</head>
+
+<style>
+    header {
+        background: linear-gradient(to right, #047adb, #7bbb0e)
+    }
+    
+    .margin-right-20 {
+        margin-right: 20px;
+    }
+    
+    
+</style>
+
+<body>
+    <header class="">
+        <div class="container-fluid">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <a class="navbar-brand" href="{% url 'eHighlight_Record_list' %}" style="width: 15%;">
+                    <img src="{% static 'MANGMENT.png' %}" alt="Logo" style="height: 25px;">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mr-auto" style="font-family: 'Poppins', sans-serif;">
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{% url 'eHighlight_Record_list' %}"></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{% url 'eHighlight_Record_new' %}"></a>
+                        </li>
+                    </ul>
+                    
+                    {% comment %} <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="btn btn-primary margin-right-20" style="background-color: #00a3e0; border: none;" href="{% url 'All_apps' %}">All Apps</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-primary" style="background-color: #00a3e0; border: none;" href="{% url 'eHighlight_Record_new' %}">New Highlight</a>
+                        </li>
+                    </ul>  {% endcomment %}
+                </div>
+            </nav>
+        </div>
+        
+    </header>
+    
+    
+    <main class="container my-4">
+
+    
+        {% block content %}
+
+        <!-- Page-specific content will be inserted here -->
+        {% endblock %}
+    </main>
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="{% static 'js/scripts.js' %}"></script>
+    
+    {% block extra_scripts %}
+    <!-- Extra scripts can be inserted by extending templates -->
+    {% endblock %}
+</body>
+</html>

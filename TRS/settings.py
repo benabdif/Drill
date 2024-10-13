@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,13 +26,15 @@ SECRET_KEY = "django-insecure-ch55)2h!m^^+9y++dxt#leq%5n2w9zls#5!fw9d242wx6s#*)1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    "timeline5",
+    "daphne",
+    "channels",
+    "chat",
     "TRS_DRE2",
     "TRS_DRE",
     "django.contrib.admin",
@@ -41,7 +44,18 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.humanize",
+    "eHighlight",
+    "bootstrap5",
+    "crispy_forms",
+    "django_filters",
+    "ToDoList",
+    "crispy_bootstrap5",
+    "accounts",
+    "auditlog"
 ]
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -51,6 +65,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "auditlog.middleware.AuditlogMiddleware",
 ]
 
 ROOT_URLCONF = "TRS.urls"
@@ -62,6 +77,7 @@ TEMPLATES = [
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
+                "chat.context_processors.user_groups",
                 "django.template.context_processors.debug",
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
@@ -72,6 +88,9 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "TRS.wsgi.application"
+ASGI_APPLICATION = "TRS.asgi.application"
+
+LOGIN_URL = "/login_app/"
 
 
 # Database
@@ -79,17 +98,16 @@ WSGI_APPLICATION = "TRS.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-        # 'ENGINE': 'django.db.backends.postgresql',
-        # 'NAME': 'Drilleye',
-        # 'USER' : 'postgres',
-        # 'PASSWORD' : 'Ff123456',
-        # 'HOST' : 'localhost',
-        # 'PORT' : '5432'
+        # "ENGINE": "django.db.backends.sqlite3",
+        # "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "drill-test",  # 'Drill-info', test-test2
+        "USER": "postgres",
+        "PASSWORD": "Ff123456",
+        "HOST": "localhost",
+        "PORT": "5432",
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -125,16 +143,25 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = "/static/"
-STATIC_ROOT = BASE_DIR / "static"
-# STATICFILES_DIRS = [
-#     BASE_DIR / 'static',
-# ]
+# STATIC_URL = "/static/"
+# STATIC_ROOT = BASE_DIR / "static"
 
 
-# STATIC_URL = 'static/'
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+
+
+STATIC_URL = "static/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+MEDIA_ROOT = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+
+CHANNEL_LAYERS = {"default": {"BACKEND": "channels.layers.InMemoryChannelLayer"}}

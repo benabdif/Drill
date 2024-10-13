@@ -1,0 +1,25 @@
+<div class="area">
+    {% comment %} <a href="{% url 'rig_timeline' movement.well.pk %}">{{ movement.well.name }} fadhel</a> {% endcomment %}
+    <a href="#" class="well-link" data-id="{{ movement.well.pk }}">{{ movement.well.name }} Hello</a>
+  </div>
+<div style="padding: 10%;">
+    <li class="nav-item">
+        <a class="nav-link" id="group-task-tab" data-bs-toggle="tab" href="#group-task2" role="tab" 
+          aria-controls="group-task" aria-selected="false" style="font-size: 14px;">Pre-Construction</a>
+      </li>
+      
+      <div class="tab-pane fade" id="group-task2" role="tabpanel" aria-labelledby="group-task-tab">
+        <form>
+          <div class="row mb-3">
+            <!-- Approval Status -->
+            <div class="col-md-6">
+              <div class="d-flex align-items-center">
+                <label for="approval-status" class="form-label me-3" style="width: 300px;">Approval Status:</label>
+                <input type="text" class="form-control approval-input" id="approval-status" placeholder="Enter Approval Status">
+              </div>
+            </div>
+      
+        </form>
+    </div>
+</div>
+  
