@@ -27,4 +27,8 @@ urlpatterns = [
     path("Get_Rig_Move/<int:pk>/", views.Get_Rig_Move, name="Get_Rig_Move"),
     path("test/<int:pk>/", views.get_movement_log),
     path("get_movementg/<str:well_name>", views.get_movementg)
+    path("Get_Repair_Section/<int:pk>/", views.Get_Repair_Section, name="Get_Repair_Section"), 
+    path("Get_Clean_Up_Section/<int:pk>/", views.Get_Clean_Up_Section, name="Get_Clean_Up_Section"), 
+    path("Get_location_Support/<int:pk>/", views.Get_location_Support, name="Get_location_Support"), 
+   
 ]

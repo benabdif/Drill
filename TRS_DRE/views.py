@@ -18,6 +18,7 @@ from .models import (
     Cellar,
     HDPE_Installation,
     Rig_Move,
+
 )
 
 # from datetime import datetime
@@ -338,6 +339,14 @@ def Get_Rig_Move(request, pk):
     )
 
 
+
+
+
+# def get_Construction_info(request, pk):
+#     Construction_info = get_object_or_404()
+    
+
+
 def save_note(request):
     if request.method == "POST":
         movement_id = request.POST.get("movement_id")
@@ -361,89 +370,3 @@ def save_note(request):
 
 ######
 
-
-def get_movement_log(request, pk):
-    if request.method != "GET":
-        return JsonResponse({"error": "Method not allowed"}, status=405)
-
-    # Get the instance of the model
-    instance = get_object_or_404(Movementg, pk=pk)
-
-    # Filter logs for the specific instance
-    logs = LogEntry.objects.filter(
-        object_id=instance.pk, content_type__model="movementg"
-    )
-
-    def resolve_rig_names(changes):
-        """Replace rig IDs with rig names in the changes dict."""
-        if "rig" in changes:
-            rig_ids = changes["rig"]
-            rigs = Rigg.objects.filter(id__in=rig_ids)
-            rig_names = [
-                rig.Rig_name for rig in rigs
-            ]  # Assuming Rig has a 'name' field
-            changes["rig"] = rig_names
-        return changes
-
-    # Prepare the response data
-    log_data = [
-        {
-            "actor": log.actor.username
-            if log.actor
-            else "System",  # Use username or handle None
-            "object": log.object_repr,
-            "changes": resolve_rig_names(
-                log.changes_dict
-            ),  # Resolve rig names for changes
-            "action_time": log.timestamp.strftime(
-                "%Y-%m-%d %H:%M:%S"
-            ),  # Format the timestamp
-        }
-        for log in logs
-    ]
-
-    # Return the logs as a JSON response (safe=False to allow lists)
-    return JsonResponse(log_data, safe=False)
-
-
-
-def serialize_related_object(obj):
-    """Helper function to serialize a related object if it exists."""
-    if obj:
-        data = model_to_dict(obj)
-        
-        # Handle FieldFile fields by converting them to their URL or path
-        for field, value in data.items():
-            if isinstance(value, FieldFile):
-                data[field] = value.url if value and hasattr(value, 'url') else None
-        
-        return data
-    return None
-
-def get_movementg(request, well_name):
-    # Get the list of Movementg instances associated with the well_name
-    instances = get_list_or_404(Movementg, Well_Construction_Infotion__well_construction_name=well_name)
-    
-    # Serialize the instances with sub-model fields expanded
-    serialized_instances = []
-    for instance in instances:
-        serialized_instance = model_to_dict(instance)
-
-        # Serialize related foreign key fields
-        serialized_instance['rig'] = serialize_related_object(instance.rig)
-        serialized_instance['well'] = serialize_related_object(instance.well)
-        serialized_instance['Well_Construction_Infotion'] = serialize_related_object(instance.Well_Construction_Infotion)
-        serialized_instance['Cellar'] = serialize_related_object(instance.Cellar)
-        serialized_instance['Units'] = serialize_related_object(instance.Units)
-        serialized_instance['Eng'] = serialize_related_object(instance.Eng)
-        serialized_instance['Contractor'] = serialize_related_object(instance.Contractor)
-        serialized_instance['Construction_Departmeent'] = serialize_related_object(instance.Construction_Departmeent)
-        serialized_instance['HDPE_Installation'] = serialize_related_object(instance.HDPE_Installation)
-        serialized_instance['Pre_Construction'] = serialize_related_object(instance.Pre_Construction)
-        serialized_instance['Rig_Move'] = serialize_related_object(instance.Rig_Move)
-
-        # Append the serialized instance to the list
-        serialized_instances.append(serialized_instance)
-    
-    # Return the list of serialized instances as JSON
-    return JsonResponse(serialized_instances, safe=False)

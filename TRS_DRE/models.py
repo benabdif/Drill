@@ -149,9 +149,14 @@ class Rig_Move(models.Model):
     def __str__(self):
         return self.RIG_MOVE_NAME
 
-
 class RepairSection(models.Model):
-    # REQ_Repair = models.CharField(max_length=100, null=True, blank=True) I will work on it next time.
+    sand_removal = models.BooleanField(default=False, blank=True)
+    Extension = models.BooleanField(default=False, blank=True)
+    Re_Compaction = models.BooleanField(default=False, blank=True)
+    Change_Cellar = models.BooleanField(default=False, blank=True)
+    Modification = models.BooleanField(default=False, blank=True)
+    Complete_Repair = models.BooleanField(default=False, blank=True)
+    Additional = models.BooleanField(default=False, blank=True)
     REQ_Repair_NUMBER = models.IntegerField(null=True, blank=True)
     REQ_Repair_Status = models.CharField(max_length=100, null=True, blank=True)
     REQ_Repair_Date = models.DateField(null=True, blank=True)
@@ -171,6 +176,50 @@ class RepairSection(models.Model):
     Repair_Criticality = models.CharField(
         max_length=10, choices=FLUID_TYPE_CHOICES, default="N/A"
     )
+
+
+# This is for the clean up table models 
+class Clean_Up_Section(models.Model):
+    clean_up_request_Number = models.IntegerField(null=True, blank=True)
+    clean_up_request_Date = models.DateField(null=True, blank=True)
+    clean_up_request_Status = models.CharField(max_length=100, null=True, blank=True)
+    clean_up_construction_contractor = models.CharField(max_length=100, null=True, blank=True)
+    clean_up_KPI = models.IntegerField(null=True, blank=True)
+    clean_up_start_Date = models.DateField(null=True, blank=True) 
+    clean_Up_start_Status = models.CharField(max_length=100, null=True, blank=True)
+    clean_up_completion_date = models.DateField(null=True, blank=True)
+    clean_up_post_clean_Up_Turnover = models.CharField(max_length=100, null=True, blank=True)
+    clean_up_monitored_by = models.CharField(max_length=100, null=True, blank=True)
+    clean_up_Quantities_details = models.CharField(max_length=200, null=True, blank=True)
+    clean_up_project_team_details = models.CharField(max_length=200, null=True, blank=True)
+    clean_up_pre_Clean_Up_Turnover = models.CharField(max_length=100, null=True, blank=True)
+    FLUID_TYPE_CHOICES_CRITICALITY = [
+        ('YES','YES'),
+        ('No','No'),
+    ]
+    clean_up_Criticality = models.CharField(max_length=10, choices=FLUID_TYPE_CHOICES_CRITICALITY, default='N/A')
+
+    def __str__(self):
+        return self.clean_up_construction_contractor
+
+# This is the new modle we
+class location_Support(models.Model):
+    on_location_support_Request_Number = models.IntegerField(null=True, blank=True)
+    on_location_support_Request_date = models.DateField(null=True, blank=True)
+    on_location_support_Request_status = models.CharField(max_length=100, null=True, blank=True)
+    on_location_support_contractor = models.CharField(max_length=100, null=True, blank=True)
+    on_location_support_dispatch_By = models.CharField(max_length=100, null=True, blank=True)
+    on_location_support_Remark = models.CharField(max_length=100, null=True, blank=True)
+
+
+
+
+
+
+
+
+
+
 
 
 class Units(models.Model):
