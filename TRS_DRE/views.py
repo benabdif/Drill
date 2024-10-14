@@ -1,4 +1,9 @@
 from django.shortcuts import render
+from django.db.models.fields.files import FieldFile
+
+from auditlog.models import LogEntry
+from TRS_DRE.models import Movementg
+from django.forms.models import model_to_dict
 
 # from django.http import HttpResponse
 # from django.template import loader
@@ -13,21 +18,20 @@ from .models import (
     Cellar,
     HDPE_Installation,
     Rig_Move,
-    RepairSection,
-    Clean_Up_Section,
-    location_Support,
 
 )
+
 # from datetime import datetime
 from django.db import connection
 from django.db.models import Min, Max
+
 # from django.shortcuts import get_object_or_404, redirect
 from django.http import JsonResponse
 
 
 ####################################################################
 # from django.http import JsonResponse
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, get_list_or_404
 # from .models import Pre_Construction
 
 
@@ -196,10 +200,10 @@ def getMyinfo_JAX(request, pk):
 # Well Construction (1)
 def get_Well_Construction_Info(request, pk):
     construction_info = get_object_or_404(Well_Construction_Info, pk=pk)
-    
+
     return JsonResponse(
         {
-            "name": construction_info.well_construction_name,  
+            "name": construction_info.well_construction_name,
             "objective": construction_info.well_construction_objective,
             "BI": construction_info.well_construction_BI,
             "Spud_date": construction_info.well_construction_Spud_date,
@@ -221,7 +225,7 @@ def get_Well_Construction_Info(request, pk):
 # Rig Construction (2)
 def get_Rig_Construction_Info(request, pk):
     Rig_construction_info = get_object_or_404(Rigg, pk=pk)
-    
+
     return JsonResponse(
         {
             "Rig_name": Rig_construction_info.Rig_name,
@@ -229,8 +233,8 @@ def get_Rig_Construction_Info(request, pk):
             "Operation_Department": Rig_construction_info.Operation_Department,
             "Operation_Manager": Rig_construction_info.Operation_Manager,
             "Permanent_Construction_Cc": Rig_construction_info.Permanent_Construction_Cc,
-            "Last_Update_Permanent_Construction_Cc": Rig_construction_info.Last_Update_Permanent_Construction_Cc, 
-            "Permanent_HDPE_Contractor":Rig_construction_info.Permanent_HDPE_Contractor,
+            "Last_Update_Permanent_Construction_Cc": Rig_construction_info.Last_Update_Permanent_Construction_Cc,
+            "Permanent_HDPE_Contractor": Rig_construction_info.Permanent_HDPE_Contractor,
             "Last_Update_Permanent_HDPE_Contractor": Rig_construction_info.Last_Update_Permanent_HDPE_Contractor,
             "Permanent_Soil_Test_Contractor": Rig_construction_info.Permanent_Soil_Test_Contractor,
             "Last_Update_Permanent_Soil_Test_Contractor": Rig_construction_info.Last_Update_Permanent_Soil_Test_Contractor,
@@ -245,7 +249,6 @@ def get_Location_Map():
     pass
 
 
-
 def get_Pre_Construction_Info(request, pk):
     Pre_Construction_Info = get_object_or_404(Pre_Construction, pk=pk)
 
@@ -257,10 +260,8 @@ def get_Pre_Construction_Info(request, pk):
             "Approved_Lay_out": Pre_Construction_Info.Approved_Lay_out,
             "Date_Approved_Lay_out": Pre_Construction_Info.Date_Approved_Lay_out,
             "R_Completio_Date": Pre_Construction_Info.R_Completio_Date,
-
         }
     )
-
 
 
 def get_Construction_Department(request, pk):
@@ -273,22 +274,18 @@ def get_Construction_Department(request, pk):
             "REQ_Start_Date": Construction_Department_Info.REQ_Start_Date,
             "REQ_Status": Construction_Department_Info.REQ_Status,
             "CONSTR_Contractor": Construction_Department_Info.CONSTR_Contractor,
-
             "CONSTR_KPI": Construction_Department_Info.CONSTR_KPI,
             "CONSTR_KOM": Construction_Department_Info.CONSTR_KOM,
             "Conducted_by_KOM": Construction_Department_Info.Conducted_by_KOM,
             "Construction_Status": Construction_Department_Info.Construction_Status,
-
             "CONSTR_Skid_ROAD_DIST": Construction_Department_Info.CONSTR_Skid_ROAD_DIST,
             "Final_Survey": Construction_Department_Info.Final_Survey,
             "Conducted_by_Final_Survey": Construction_Department_Info.Conducted_by_Final_Survey,
             "Unit": Construction_Department_Info.Unit,
-
             "Post_CONSTR_Rurn_OVER": Construction_Department_Info.Post_CONSTR_Rurn_OVER,  # Corrected "Rurn" to "Turn"
             "REQ_End_Date": Construction_Department_Info.REQ_End_Date,
             "Quanatities_Detities": Construction_Department_Info.Quanatities_Detities,  # Corrected "Quanatities_Detities"
             "Project_team_Details": Construction_Department_Info.Project_team_Details,
-
             "Remark_and_Hold": Construction_Department_Info.Remark_and_Hold,
             "Criticality": Construction_Department_Info.Criticality,
         }
@@ -322,17 +319,21 @@ def get_HDPE_Installation(request, pk):
             "Total_Area_Installed": HDPE_Installation_Info.Total_Area_Installed,
             "Lining_Contractor": HDPE_Installation_Info.Lining_Contractor,
             "Conducted_by_info": HDPE_Installation_Info.Conducted_by_info,
-            "Quantities_Details": HDPE_Installation_Info.Quantities_Details,        
+            "Quantities_Details": HDPE_Installation_Info.Quantities_Details,
         }
     )
 
 
 def Get_Rig_Move(request, pk):
     Rig_Move_Info = get_object_or_404(Rig_Move, pk=pk)
-    
+
     # Handle file field, check if file exists
-    rig_move_documents_url = Rig_Move_Info.RIG_MOVE_DOCUMENTS.url if Rig_Move_Info.RIG_MOVE_DOCUMENTS else None
-    
+    rig_move_documents_url = (
+        Rig_Move_Info.RIG_MOVE_DOCUMENTS.url
+        if Rig_Move_Info.RIG_MOVE_DOCUMENTS
+        else None
+    )
+
     return JsonResponse(
         {
             "RIG_MOVE_REQ": Rig_Move_Info.RIG_MOVE_REQ,
@@ -458,3 +459,4 @@ def save_note(request):
 
 
 ######
+
