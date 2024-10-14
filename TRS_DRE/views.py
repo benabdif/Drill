@@ -182,11 +182,15 @@ def your_view(request):
     return render(request, "your_template.html", context)
 
 
+
+
+
 def getMyinfo(request, pk):
     constructore_info = get_object_or_404(Construction_Departmeent, pk=pk)
     return render(
         request, "blog/rig_timeline1.html", {"constructore_info": constructore_info}
     )
+
 
 
 def getMyinfo_JAX(request, pk):
@@ -220,6 +224,7 @@ def get_Well_Construction_Info(request, pk):
     )
 
 
+
 # Rig Construction (2)
 def get_Rig_Construction_Info(request, pk):
     Rig_construction_info = get_object_or_404(Rigg, pk=pk)
@@ -240,6 +245,7 @@ def get_Rig_Construction_Info(request, pk):
             "Current_Assigned_WS_Engineer": Rig_construction_info.Current_Assigned_WS_Engineer,
         }
     )
+    
 
 
 def get_Location_Map():
@@ -303,6 +309,7 @@ def get_Cellar(request, pk):
     )
 
 
+
 def get_HDPE_Installation(request, pk):
     HDPE_Installation_Info = get_object_or_404(HDPE_Installation, pk=pk)
     return JsonResponse(
@@ -342,12 +349,95 @@ def Get_Rig_Move(request, pk):
     )
 
 
+def Get_Repair_Section(request, pk):
+    # Fetch the RepairSection object using the primary key (pk)
+    Repair_Section_info = get_object_or_404(RepairSection, pk=pk)
+
+    # Return the required information in a JSON response
+    return JsonResponse(
+        {
+            "REQ_Repair_NUMBER": Repair_Section_info.REQ_Repair_NUMBER,
+            "REQ_Repair_Status": Repair_Section_info.REQ_Repair_Status,
+            "REQ_Repair_Date": Repair_Section_info.REQ_Repair_Date,
+            "Contractor_Contractor_Repair": Repair_Section_info.Contractor_Contractor_Repair,
+            "Repair_Start_Date": Repair_Section_info.Repair_Start_Date,
+            "Repair_status": Repair_Section_info.Repair_status,
+            "Repair_completion_Date": Repair_Section_info.Repair_completion_Date,
+            "monitored_By_Repair": Repair_Section_info.monitored_By_Repair,
+            "Quantities_Details_Repair": Repair_Section_info.Quantities_Details_Repair,
+            "Project_team_Details_Repair": Repair_Section_info.Project_team_Details_Repair,
+            "sand_removal": Repair_Section_info.sand_removal,
+            "Extension":Repair_Section_info.Extension,
+            "Re_Compaction":Repair_Section_info.Re_Compaction,
+            "Change_Cellar":Repair_Section_info.Change_Cellar,
+            "Modification":Repair_Section_info.Modification,
+            "Complete_Repair":Repair_Section_info.Complete_Repair,
+            "Additional":Repair_Section_info.Additional,
+            
+        }
+    )
 
 
 
-# def get_Construction_info(request, pk):
-#     Construction_info = get_object_or_404()
+def Get_Clean_Up_Section(request, pk):
+    # Fetch the RepairSection object using the primary key (pk)
+    Clean_Up_Section_info = get_object_or_404(Clean_Up_Section, pk=pk)
+
+    # Return the required information in a JSON response
+    return JsonResponse(
+        {
+            "clean_up_request_Number": Clean_Up_Section_info.clean_up_request_Number,
+            "clean_up_request_Date": Clean_Up_Section_info.clean_up_request_Date,
+            "clean_up_request_Status": Clean_Up_Section_info.clean_up_request_Status,
+            "clean_up_construction_contractor": Clean_Up_Section_info.clean_up_construction_contractor,
+            "clean_up_KPI": Clean_Up_Section_info.clean_up_KPI,
+            "clean_up_start_Date": Clean_Up_Section_info.clean_up_start_Date,
+            "clean_Up_start_Status": Clean_Up_Section_info.clean_Up_start_Status,
+            "clean_up_completion_date": Clean_Up_Section_info.clean_up_completion_date,
+            "clean_up_post_clean_Up_Turnover": Clean_Up_Section_info.clean_up_post_clean_Up_Turnover,
+            "clean_up_monitored_by": Clean_Up_Section_info.clean_up_monitored_by,
+            "clean_up_Quantities_details": Clean_Up_Section_info.clean_up_Quantities_details,
+            "clean_up_project_team_details": Clean_Up_Section_info.clean_up_project_team_details,
+            "clean_up_pre_Clean_Up_Turnover": Clean_Up_Section_info.clean_up_pre_Clean_Up_Turnover,
+            "clean_up_Criticality": Clean_Up_Section_info.clean_up_Criticality,
+          
+            
+        }
+    )
+
+def Get_location_Support(request, pk):
+    location_Support_info = get_object_or_404(location_Support, pk=pk)
+    return JsonResponse(
+        {
+            "on_location_support_Request_Number":location_Support_info.on_location_support_Request_Number,
+            "on_location_support_Request_date":location_Support_info.on_location_support_Request_date,
+            "on_location_support_Request_status":location_Support_info.on_location_support_Request_status,
+            "on_location_support_contractor":location_Support_info.on_location_support_contractor,
+            "on_location_support_dispatch_By":location_Support_info.on_location_support_dispatch_By,
+            "on_location_support_Remark":location_Support_info.on_location_support_Remark,
+        }
+    )
+
+from django.http import JsonResponse
+from django.shortcuts import render
+from .models import Well_Construction_Info, Rig_Move
+
+def well_list(request):
+    wells = Well_Construction_Info.objects.all()  # Fetch all wells to display in the list
+    return render(request, 'blog/rig_timeline1.html', {'wells': wells})
+
+def get_rigs_for_well(request):
+    if request.is_ajax():
+        well_id = request.GET.get('well_id', None)
+        if well_id:
+            well = Well_Construction_Info.objects.get(pk=well_id)  # Get the well based on the ID
+            rigs = well.rig_moves.all()  # Get all rig moves related to the selected well
+
+            # Prepare the data for JSON response
+            rigs_data = list(rigs.values('RIG_MOVE_NAME', 'RIG_MOVE_STATUS', 'RIG_MOVE_CONDUCTED_BY'))
+            return JsonResponse({'rigs': rigs_data})
     
+    return JsonResponse({'error': 'Invalid request'}, status=400)
 
 
 def save_note(request):

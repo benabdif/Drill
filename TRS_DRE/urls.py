@@ -30,5 +30,12 @@ urlpatterns = [
     path("Get_Repair_Section/<int:pk>/", views.Get_Repair_Section, name="Get_Repair_Section"), 
     path("Get_Clean_Up_Section/<int:pk>/", views.Get_Clean_Up_Section, name="Get_Clean_Up_Section"), 
     path("Get_location_Support/<int:pk>/", views.Get_location_Support, name="Get_location_Support"), 
+
+
+
+
+
+    path('wells/', views.well_list, name='well_list'),  # Page to display wells
+    path('get-rigs-for-well/', views.get_rigs_for_well, name='get_rigs_for_well'),  # AJAX endpoint
    
 ]
