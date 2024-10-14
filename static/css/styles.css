@@ -1,22 +1,39 @@
-.fahdel {
-    background-color: rgb(248, 15, 15);
+@font-face {
+  font-family: "Ghawar Bold";
+  src: url("../../font1/ghawar-web/Ghawar-Bold.woff");
 }
+/* @font-face {
+  font-family: "Ghawar SemiBold";
+  src: url("../../font1/ghawar-web/Ghawar-SmeiBold.woff");
+}
+@font-face {
+  font-family: "Ghawar Regular";
+  src: url("../../font1/ghawar-web/Ghawar-Regular.woff");
+}
+@font-face {
+  font-family: "Ghawar Light";
+  src: url("../../font1/ghawar-web/Ghawar-Light.woff");
+}
+@font-face {
+  font-family: "Ghawar Thin";
+  src: url("../../font1/ghawar-web/Ghawar-Thin.woff");
+} */
 
-
-
-      * {
+* {
         padding: 0;
         margin: 0;
         box-sizing: border-box;
       }
       
       body {
-        font-family: 'Inter', sans-serif;
         line-height: 1.5;
         font-size: 16px;
         background-color: #f5f5f5;
         color: #000000c9;
         height: 300vh;
+        font-family: 'Ghawar Regular',Fallback, sans-serif;
+        font-size: 15px;
+        font-weight: 400;  
       }
       
       .container1 {
@@ -94,13 +111,13 @@
         background-color: #eeecec;
       }
       
-      .navbar {
+      /* .navbar {
         background: linear-gradient(to left, #d2c110, #38a4e2);
         overflow: hidden;
         width: 100%;
-      }
+      } */
       
-      .navbar a {
+      /* .navbar a {
         float: left;
         display: block;
         color: #f2f2f2;
@@ -118,7 +135,7 @@
       .navbar a.active {
         background-color: #04aa6d;
         color: white;
-      }
+      } */
       
       .timeline.rows {
         display: flex;
@@ -200,7 +217,7 @@
         color: #fff;
         font-weight: 100;
         font-size: 10px;
-        height: 80px;
+        height: 100px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -497,14 +514,108 @@
         /* margin-left: 10px; */
       }
       
-      .nav-item .nav-link:hover {
+      /* .nav-item .nav-link:hover {
         background-color: #e3c209;
-      }
+      } */
       
       .form-check {
         width: 18%;
       }
+   
     
+      
+
+:root {
+  /* Colors */
+  --aramco-primary-color: #00A3E0;
+  --aramco-secondary-color: #84BD00;
+  --aramco-light-gray: #DADADA;
+  --aramco-dark-gray: #323232;
+  --text-color: #727272;
+  --light-bg: #F9F9F9;
+  --white-color: #fff;
+      
+  /* Button */
+  --btn-radius: 20px;
+      
+  /* Shadow Background */
+  --container-shadow:  0px 7px 25px 0px rgba(0,0,0,0.05);
+  --primary-btn-shadow: 0px 0px 10px 0px rgba(0,163,224,0.5);
+  --primary-btn-hover-shadow: 0px 0px 10px 0px rgb(132,189,0.5);
+        
+  }
+
+
+/* Styling by Saad */
+
+/* Repeated Classes */
+.btn-primary-custom{
+  background-color: var(--aramco-primary-color);
+  color: var(--white-color);
+  border-radius: var(--btn-radius);
+  padding: 7px 30px;
+  box-shadow: var(--primary-btn-shadow);
+  --webkit-box-shadow: var(--primary-btn-shadow);
+  -moz-box-shadow: var(--primary-btn-shadow);
+  transition: all 0.4s ease-in-out;
+  font-size: 13px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.btn-primary-custom:hover,.btn-primary-custom:active,.btn-primary-custom:visited,.btn-primary-custom:focus{
+  color: var(--white-color);
+  background-color: var(--aramco-secondary-color);
+  box-shadow: var(--primary-btn-hover-shadow);
+  --webkit-box-shadow: var(--primary-btn-hover-shadow);
+  -moz-box-shadow:var(--primary-btn-hover-shadow);
+}
+
+
+
+/* Navbar */
+
+.navbar{
+ padding: 0; 
+}
+.custom-navbar .container-fluid {
+  background-color: var(--light-bg); 
+  max-width: 90vw;
+  padding: 10px 20px;
+  border-radius: 15px;
+  box-shadow: var(--container-shadow);
+-webkit-box-shadow: var(--container-shadow);
+-moz-box-shadow: var(--container-shadow);
+border: 2px solid var(--white-color);
+margin-top: 10px;
+}
+.custom-navbar .navbar-brand  {
+  width: 12%;
+}
+.custom-navbar .navbar-nav {
+  margin: 0 auto;
+}
+.custom-navbar .nav-item {
+  margin-right: 15px;
+}
+
+.custom-navbar .nav-item .nav-link {
+  color: var(--text-color);
+  transition: all 0.4s ease;
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.custom-navbar .nav-item .nav-link.active,.custom-navbar .nav-item .nav-link:hover,.custom-navbar .nav-item .nav-link:focus,.custom-navbar .nav-item .nav-link:active{
+  color: var(--aramco-primary-color);
+  transition: all 0.4s ease-in-out;
+}
+
+
+/* Rig List */
+.rig-list-container
+
+/* Rig List Ends*/
+
 
 
 /* Media Queries */
@@ -514,3 +625,6 @@
     text-transform: capitalize;
   }
 }
+
+/* Styling by Saad Ends*/
+

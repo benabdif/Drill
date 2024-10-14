@@ -175,11 +175,15 @@ def your_view(request):
     return render(request, "your_template.html", context)
 
 
+
+
+
 def getMyinfo(request, pk):
     constructore_info = get_object_or_404(Construction_Departmeent, pk=pk)
     return render(
         request, "blog/rig_timeline1.html", {"constructore_info": constructore_info}
     )
+
 
 
 def getMyinfo_JAX(request, pk):
@@ -212,6 +216,8 @@ def get_Well_Construction_Info(request, pk):
         }
     )
 
+
+
 # Rig Construction (2)
 def get_Rig_Construction_Info(request, pk):
     Rig_construction_info = get_object_or_404(Rigg, pk=pk)
@@ -233,6 +239,8 @@ def get_Rig_Construction_Info(request, pk):
         }
     )
     
+
+
 def get_Location_Map():
     pass
 
@@ -302,7 +310,6 @@ def get_Cellar(request, pk):
 
 
 
-
 def get_HDPE_Installation(request, pk):
     HDPE_Installation_Info = get_object_or_404(HDPE_Installation, pk=pk)
     return JsonResponse(
@@ -319,20 +326,6 @@ def get_HDPE_Installation(request, pk):
         }
     )
 
-
-# def Get_Rig_Move(request, pk):
-#     Rig_Move_Info = get_object_or_404(Rig_Move, pk=pk)
-#     return JsonResponse(
-#         {
-#             "RIG_MOVE_REQ": Rig_Move_Info.RIG_MOVE_REQ,
-#             "RIG_MOVE_NAME":Rig_Move_Info.RIG_MOVE_NAME,
-#             "RIG_MOVE_WELL":Rig_Move_Info.RIG_MOVE_WELL,
-#             "RIG_MOVE_STATUS":Rig_Move_Info.RIG_MOVE_STATUS,
-#             "RIG_MOVE_DOCUMENTS":Rig_Move_Info.RIG_MOVE_DOCUMENTS,
-#             "RIG_MOVE_CONDUCTED_BY":Rig_Move_Info.RIG_MOVE_CONDUCTED_BY,
-                    
-#         }
-#     )
 
 def Get_Rig_Move(request, pk):
     Rig_Move_Info = get_object_or_404(Rig_Move, pk=pk)
@@ -382,7 +375,6 @@ def Get_Repair_Section(request, pk):
 
 
 
-
 def Get_Clean_Up_Section(request, pk):
     # Fetch the RepairSection object using the primary key (pk)
     Clean_Up_Section_info = get_object_or_404(Clean_Up_Section, pk=pk)
@@ -422,6 +414,26 @@ def Get_location_Support(request, pk):
         }
     )
 
+from django.http import JsonResponse
+from django.shortcuts import render
+from .models import Well_Construction_Info, Rig_Move
+
+def well_list(request):
+    wells = Well_Construction_Info.objects.all()  # Fetch all wells to display in the list
+    return render(request, 'blog/rig_timeline1.html', {'wells': wells})
+
+def get_rigs_for_well(request):
+    if request.is_ajax():
+        well_id = request.GET.get('well_id', None)
+        if well_id:
+            well = Well_Construction_Info.objects.get(pk=well_id)  # Get the well based on the ID
+            rigs = well.rig_moves.all()  # Get all rig moves related to the selected well
+
+            # Prepare the data for JSON response
+            rigs_data = list(rigs.values('RIG_MOVE_NAME', 'RIG_MOVE_STATUS', 'RIG_MOVE_CONDUCTED_BY'))
+            return JsonResponse({'rigs': rigs_data})
+    
+    return JsonResponse({'error': 'Invalid request'}, status=400)
 
 
 def save_note(request):
