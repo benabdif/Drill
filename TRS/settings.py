@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     "ToDoList",
     "crispy_bootstrap5",
     "accounts",
-    "auditlog"
+    "auditlog",
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"

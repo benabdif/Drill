@@ -21,7 +21,6 @@ from .models import (
     location_Support,
     Clean_Up_Section,
     RepairSection,
-
 )
 
 # from datetime import datetime
@@ -182,15 +181,11 @@ def your_view(request):
     return render(request, "your_template.html", context)
 
 
-
-
-
 def getMyinfo(request, pk):
     constructore_info = get_object_or_404(Construction_Departmeent, pk=pk)
     return render(
         request, "blog/rig_timeline1.html", {"constructore_info": constructore_info}
     )
-
 
 
 def getMyinfo_JAX(request, pk):
@@ -224,7 +219,6 @@ def get_Well_Construction_Info(request, pk):
     )
 
 
-
 # Rig Construction (2)
 def get_Rig_Construction_Info(request, pk):
     Rig_construction_info = get_object_or_404(Rigg, pk=pk)
@@ -245,7 +239,6 @@ def get_Rig_Construction_Info(request, pk):
             "Current_Assigned_WS_Engineer": Rig_construction_info.Current_Assigned_WS_Engineer,
         }
     )
-    
 
 
 def get_Location_Map():
@@ -295,19 +288,66 @@ def get_Construction_Department(request, pk):
     )
 
 
-def get_Cellar(request, pk):
-    Cellar_Info = get_object_or_404(Cellar, pk=pk)
-    return JsonResponse(
-        {
-            "Cellar_Installation": Cellar_Info.Cellar_Installation,
-            "Soil_Test_Request": Cellar_Info.Soil_Test_Request,
-            "REQ_Date": Cellar_Info.REQ_Date,
-            "Cellar_REQ_Status": Cellar_Info.Cellar_REQ_Status,
-            "Soil_Test_Contractor": Cellar_Info.Soil_Test_Contractor,
-            "Conducted_by": Cellar_Info.Conducted_by,
-        }
-    )
+# def get_Cellar(request, pk):
+#     Cellar_Info = get_object_or_404(Cellar, pk=pk)
+#     return JsonResponse(
+#         {
+#             "Cellar_Installation": Cellar_Info.Cellar_Installation,
+#             "Soil_Test_Request": Cellar_Info.Soil_Test_Request,
+#             "REQ_Date": Cellar_Info.REQ_Date,
+#             "Cellar_REQ_Status": Cellar_Info.Cellar_REQ_Status,
+#             "Soil_Test_Contractor": Cellar_Info.Soil_Test_Contractor,
+#             "Conducted_by": Cellar_Info.Conducted_by,
+#         }
+#     )
 
+# I I have to fiux this problem I make this with
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
+from django.views.decorators.csrf import csrf_exempt
+from .models import Cellar
+
+
+@csrf_exempt  # This allows POST requests without CSRF token (use carefully)
+def get_Cellar(request, pk=None):
+    if request.method == "GET":
+        # Fetch existing data for a given primary key
+        Cellar_Info = get_object_or_404(Cellar, pk=pk)
+        return JsonResponse(
+            {
+                "id": Cellar_Info.pk,
+                "Cellar_Installation": Cellar_Info.Cellar_Installation,
+                "Soil_Test_Request": Cellar_Info.Soil_Test_Request,
+                "REQ_Date": Cellar_Info.REQ_Date,
+                "Cellar_REQ_Status": Cellar_Info.Cellar_REQ_Status,
+                "Soil_Test_Contractor": Cellar_Info.Soil_Test_Contractor,
+                "Conducted_by": Cellar_Info.Conducted_by,
+            }
+        )
+
+    elif request.method == "POST":
+        print(pk)
+        data = request.POST
+        Cellar.objects.filter(id=pk).update(
+            Cellar_Installation=data.get("Cellar_Installation"),
+            Soil_Test_Request=data.get("Soil_Test_Request"),
+            REQ_Date=data.get("REQ_Date"),
+            Cellar_REQ_Status=data.get("Cellar_REQ_Status"),
+            Soil_Test_Contractor=data.get("Soil_Test_Contractor"),
+            Conducted_by=data.get("Conducted_by"),
+        )
+        # Get data from the request body (POST)
+        Cellar_Info = Cellar.objects.create(
+            Cellar_Installation=data.get("Cellar_Installation"),
+            Soil_Test_Request=data.get("Soil_Test_Request"),
+            REQ_Date=data.get("REQ_Date"),
+            Cellar_REQ_Status=data.get("Cellar_REQ_Status"),
+            Soil_Test_Contractor=data.get("Soil_Test_Contractor"),
+            Conducted_by=data.get("Conducted_by"),
+        )
+        return JsonResponse(
+            {"message": "Cellar information added successfully!"}, status=201
+        )
 
 
 def get_HDPE_Installation(request, pk):
@@ -367,16 +407,14 @@ def Get_Repair_Section(request, pk):
             "Quantities_Details_Repair": Repair_Section_info.Quantities_Details_Repair,
             "Project_team_Details_Repair": Repair_Section_info.Project_team_Details_Repair,
             "sand_removal": Repair_Section_info.sand_removal,
-            "Extension":Repair_Section_info.Extension,
-            "Re_Compaction":Repair_Section_info.Re_Compaction,
-            "Change_Cellar":Repair_Section_info.Change_Cellar,
-            "Modification":Repair_Section_info.Modification,
-            "Complete_Repair":Repair_Section_info.Complete_Repair,
-            "Additional":Repair_Section_info.Additional,
-            
+            "Extension": Repair_Section_info.Extension,
+            "Re_Compaction": Repair_Section_info.Re_Compaction,
+            "Change_Cellar": Repair_Section_info.Change_Cellar,
+            "Modification": Repair_Section_info.Modification,
+            "Complete_Repair": Repair_Section_info.Complete_Repair,
+            "Additional": Repair_Section_info.Additional,
         }
     )
-
 
 
 def Get_Clean_Up_Section(request, pk):
@@ -400,44 +438,54 @@ def Get_Clean_Up_Section(request, pk):
             "clean_up_project_team_details": Clean_Up_Section_info.clean_up_project_team_details,
             "clean_up_pre_Clean_Up_Turnover": Clean_Up_Section_info.clean_up_pre_Clean_Up_Turnover,
             "clean_up_Criticality": Clean_Up_Section_info.clean_up_Criticality,
-          
-            
         }
     )
+
 
 def Get_location_Support(request, pk):
     location_Support_info = get_object_or_404(location_Support, pk=pk)
     return JsonResponse(
         {
-            "on_location_support_Request_Number":location_Support_info.on_location_support_Request_Number,
-            "on_location_support_Request_date":location_Support_info.on_location_support_Request_date,
-            "on_location_support_Request_status":location_Support_info.on_location_support_Request_status,
-            "on_location_support_contractor":location_Support_info.on_location_support_contractor,
-            "on_location_support_dispatch_By":location_Support_info.on_location_support_dispatch_By,
-            "on_location_support_Remark":location_Support_info.on_location_support_Remark,
+            "on_location_support_Request_Number": location_Support_info.on_location_support_Request_Number,
+            "on_location_support_Request_date": location_Support_info.on_location_support_Request_date,
+            "on_location_support_Request_status": location_Support_info.on_location_support_Request_status,
+            "on_location_support_contractor": location_Support_info.on_location_support_contractor,
+            "on_location_support_dispatch_By": location_Support_info.on_location_support_dispatch_By,
+            "on_location_support_Remark": location_Support_info.on_location_support_Remark,
         }
     )
+
 
 from django.http import JsonResponse
 from django.shortcuts import render
 from .models import Well_Construction_Info, Rig_Move
 
+
 def well_list(request):
-    wells = Well_Construction_Info.objects.all()  # Fetch all wells to display in the list
-    return render(request, 'blog/rig_timeline1.html', {'wells': wells})
+    wells = (
+        Well_Construction_Info.objects.all()
+    )  # Fetch all wells to display in the list
+    return render(request, "blog/rig_timeline1.html", {"wells": wells})
+
 
 def get_rigs_for_well(request):
-    if request.is_ajax():
-        well_id = request.GET.get('well_id', None)
+    if request.headers.get("X-Requested-With") == "XMLHttpRequest":
+        well_id = request.GET.get("well_id", None)
         if well_id:
-            well = Well_Construction_Info.objects.get(pk=well_id)  # Get the well based on the ID
-            rigs = well.rig_moves.all()  # Get all rig moves related to the selected well
+            well = Well_Construction_Info.objects.get(
+                pk=well_id
+            )  # Get the well based on the ID
+            rigs = (
+                well.rig_moves.all()
+            )  # Get all rig moves related to the selected well
 
             # Prepare the data for JSON response
-            rigs_data = list(rigs.values('RIG_MOVE_NAME', 'RIG_MOVE_STATUS', 'RIG_MOVE_CONDUCTED_BY'))
-            return JsonResponse({'rigs': rigs_data})
-    
-    return JsonResponse({'error': 'Invalid request'}, status=400)
+            rigs_data = list(
+                rigs.values("RIG_MOVE_NAME", "RIG_MOVE_STATUS", "RIG_MOVE_CONDUCTED_BY")
+            )
+            return JsonResponse({"rigs": rigs_data})
+
+    return JsonResponse({"error": "Invalid request"}, status=400)
 
 
 def save_note(request):
@@ -462,8 +510,6 @@ def save_note(request):
 
 
 ######
-
-
 
 
 def get_movement_log(request, pk):
@@ -510,49 +556,59 @@ def get_movement_log(request, pk):
     return JsonResponse(log_data, safe=False)
 
 
-
 def serialize_related_object(obj):
     """Helper function to serialize a related object if it exists."""
     if obj:
         data = model_to_dict(obj)
-        
+
         # Handle FieldFile fields by converting them to their URL or path
         for field, value in data.items():
             if isinstance(value, FieldFile):
-                data[field] = value.url if value and hasattr(value, 'url') else None
-        
+                data[field] = value.url if value and hasattr(value, "url") else None
+
         return data
     return None
 
+
 def get_movementg(request, well_name):
     # Get the list of Movementg instances associated with the well_name
-    instances = get_list_or_404(Movementg, Well_Construction_Infotion__well_construction_name=well_name)
-    
+    instances = get_list_or_404(
+        Movementg, Well_Construction_Infotion__well_construction_name=well_name
+    )
+
     # Serialize the instances with sub-model fields expanded
     serialized_instances = []
     for instance in instances:
         serialized_instance = model_to_dict(instance)
 
         # Serialize related foreign key fields
-        serialized_instance['rig'] = serialize_related_object(instance.rig)
-        serialized_instance['well'] = serialize_related_object(instance.well)
-        serialized_instance['Well_Construction_Infotion'] = serialize_related_object(instance.Well_Construction_Infotion)
-        serialized_instance['Cellar'] = serialize_related_object(instance.Cellar)
-        serialized_instance['Units'] = serialize_related_object(instance.Units)
-        serialized_instance['Eng'] = serialize_related_object(instance.Eng)
-        serialized_instance['Contractor'] = serialize_related_object(instance.Contractor)
-        serialized_instance['Construction_Departmeent'] = serialize_related_object(instance.Construction_Departmeent)
-        serialized_instance['HDPE_Installation'] = serialize_related_object(instance.HDPE_Installation)
-        serialized_instance['Pre_Construction'] = serialize_related_object(instance.Pre_Construction)
-        serialized_instance['Rig_Move'] = serialize_related_object(instance.Rig_Move)
+        serialized_instance["rig"] = serialize_related_object(instance.rig)
+        serialized_instance["well"] = serialize_related_object(instance.well)
+        serialized_instance["Well_Construction_Infotion"] = serialize_related_object(
+            instance.Well_Construction_Infotion
+        )
+        serialized_instance["Cellar"] = serialize_related_object(instance.Cellar)
+        serialized_instance["Units"] = serialize_related_object(instance.Units)
+        serialized_instance["Eng"] = serialize_related_object(instance.Eng)
+        serialized_instance["Contractor"] = serialize_related_object(
+            instance.Contractor
+        )
+        serialized_instance["Construction_Departmeent"] = serialize_related_object(
+            instance.Construction_Departmeent
+        )
+        serialized_instance["HDPE_Installation"] = serialize_related_object(
+            instance.HDPE_Installation
+        )
+        serialized_instance["Pre_Construction"] = serialize_related_object(
+            instance.Pre_Construction
+        )
+        serialized_instance["Rig_Move"] = serialize_related_object(instance.Rig_Move)
 
         # Append the serialized instance to the list
         serialized_instances.append(serialized_instance)
-    
+
     # Return the list of serialized instances as JSON
     return JsonResponse(serialized_instances, safe=False)
-
-
 
 
 def Get_Repair_Section(request, pk):
@@ -573,17 +629,14 @@ def Get_Repair_Section(request, pk):
             "Quantities_Details_Repair": Repair_Section_info.Quantities_Details_Repair,
             "Project_team_Details_Repair": Repair_Section_info.Project_team_Details_Repair,
             "sand_removal": Repair_Section_info.sand_removal,
-            "Extension":Repair_Section_info.Extension,
-            "Re_Compaction":Repair_Section_info.Re_Compaction,
-            "Change_Cellar":Repair_Section_info.Change_Cellar,
-            "Modification":Repair_Section_info.Modification,
-            "Complete_Repair":Repair_Section_info.Complete_Repair,
-            "Additional":Repair_Section_info.Additional,
-            
+            "Extension": Repair_Section_info.Extension,
+            "Re_Compaction": Repair_Section_info.Re_Compaction,
+            "Change_Cellar": Repair_Section_info.Change_Cellar,
+            "Modification": Repair_Section_info.Modification,
+            "Complete_Repair": Repair_Section_info.Complete_Repair,
+            "Additional": Repair_Section_info.Additional,
         }
     )
-
-
 
 
 def Get_Clean_Up_Section(request, pk):
@@ -607,22 +660,19 @@ def Get_Clean_Up_Section(request, pk):
             "clean_up_project_team_details": Clean_Up_Section_info.clean_up_project_team_details,
             "clean_up_pre_Clean_Up_Turnover": Clean_Up_Section_info.clean_up_pre_Clean_Up_Turnover,
             "clean_up_Criticality": Clean_Up_Section_info.clean_up_Criticality,
-          
-            
         }
     )
+
 
 def Get_location_Support(request, pk):
     location_Support_info = get_object_or_404(location_Support, pk=pk)
     return JsonResponse(
         {
-            "on_location_support_Request_Number":location_Support_info.on_location_support_Request_Number,
-            "on_location_support_Request_date":location_Support_info.on_location_support_Request_date,
-            "on_location_support_Request_status":location_Support_info.on_location_support_Request_status,
-            "on_location_support_contractor":location_Support_info.on_location_support_contractor,
-            "on_location_support_dispatch_By":location_Support_info.on_location_support_dispatch_By,
-            "on_location_support_Remark":location_Support_info.on_location_support_Remark,
+            "on_location_support_Request_Number": location_Support_info.on_location_support_Request_Number,
+            "on_location_support_Request_date": location_Support_info.on_location_support_Request_date,
+            "on_location_support_Request_status": location_Support_info.on_location_support_Request_status,
+            "on_location_support_contractor": location_Support_info.on_location_support_contractor,
+            "on_location_support_dispatch_By": location_Support_info.on_location_support_dispatch_By,
+            "on_location_support_Remark": location_Support_info.on_location_support_Remark,
         }
     )
-
-

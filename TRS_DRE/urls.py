@@ -23,6 +23,7 @@ urlpatterns = [
     path("get_Pre_Construction_Info/<int:pk>/", views.get_Pre_Construction_Info, name="get_Pre_Construction_Info"),
     path("get_Construction_Department/<int:pk>/", views.get_Construction_Department, name="get_Construction_Department"),
     path("get_Cellar/<int:pk>/", views.get_Cellar, name="get_Cellar"),
+    path("get_Cellar/", views.get_Cellar, name="get_Cellar"),
     path("get_HDPE_Installation/<int:pk>/", views.get_HDPE_Installation, name="get_HDPE_Installation"),
     path("Get_Rig_Move/<int:pk>/", views.Get_Rig_Move, name="Get_Rig_Move"),
     path("test/<int:pk>/", views.get_movement_log),
