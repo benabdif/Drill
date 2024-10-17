@@ -549,7 +549,7 @@
 
 /* Styling by Saad */
 
-/* Repeated Classes */
+/* Utility Classes */
 .btn-primary-custom{
   background-color: var(--aramco-primary-color);
   color: var(--white-color);
@@ -570,6 +570,7 @@
   --webkit-box-shadow: var(--primary-btn-hover-shadow);
   -moz-box-shadow:var(--primary-btn-hover-shadow);
 }
+
 
 
 
@@ -619,9 +620,16 @@ margin-top: 10px;
   border-radius: 15px;
   border: 5px solid var(--white-color);
   box-shadow: 10px 0px 23px 0px rgba(228,228,228,0.8);
--webkit-box-shadow: 10px 0px 23px 0px rgba(228,228,228,0.8);
--moz-box-shadow: 10px 0px 23px 0px rgba(228,228,228,0.8);
-padding: 30px 12px;
+  -webkit-box-shadow: 10px 0px 23px 0px rgba(228,228,228,0.8);
+  -moz-box-shadow: 10px 0px 23px 0px rgba(228,228,228,0.8);
+  padding: 30px 12px;
+  max-height: 557px;
+  overflow-y: scroll;
+  scrollbar-color: var(--border-color) var(--white-color);
+  scrollbar-width: thin;
+  scroll-snap-align: center;
+  direction: rtl;
+  text-align: left;
 }
 .rig-list-container h3 {
   font-size: 30px;
