@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 <style>
   @import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@100;200;300;400;500;600;700;800;900&display=swap");
-  
+
   :root {
     --c-text-primary: #282a32;
     --c-text-secondary: #686b87;
@@ -697,13 +697,15 @@
     width: 100%;
     background-color: wheat;
   }
+
+
 </style>
 
 
 {% comment %} 
 <div class="header-navigation-actions">
   <div class="sp">
-    <a href="{% url 'eHighlight_Record_new' %}" class="button" id="add-task-button">
+    <a href="{% url 'eHighlight_Record_new' %}" class="button"  id="add-task-button">
       <i class="ph-plus-bold"></i>
       <span>New E-Highlight</span>
     </a>
@@ -737,9 +739,13 @@
       <input type="date" id="endDate" placeholder="End Date">
       <button id="filterButton">Filter</button>
     </div>
-    <div class="filter-By_date">
+    <div class="DownloadExcelAdd-ehilight d-flex gap-2">
       <a href="{% url 'download_records_excel' %}" class="btn btn-primary download-btn">Download as Excel</a>
+      <a href="{% url 'eHighlight_Record_new' %}" class="btn btn-primary download-btn" style="background-color: #7bbb0e;">Add new e-highlight</a>
     </div>
+    
+    
+    
   </div>
   
   <div class="card-all">
