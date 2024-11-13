@@ -65,14 +65,14 @@ body {
 }
 
 .container1 {
-  width: 90vw;
+  /* width: 69vw; */
   margin: 40px auto 0;
   text-align: center;
   border: 1px solid #00000024;
   border-radius: 10px;
   box-shadow: 0px 0px 20px 3px rgba(0, 0, 0, 0.1);
   overflow: auto;
-  max-height: 65vh;
+  max-height:44vh;
   scrollbar-color: var(--border-color) var(--white-color);
   scrollbar-width: thin;
   scroll-snap-align: center;
@@ -259,12 +259,22 @@ body {
 }
 
 .project .project-card {
+  
   display: flex;
   flex-direction: row;
   position: absolute;
   z-index: 3;
   transition-duration: 0.3s;
+  /* position: fixed; */
+  
+
+/* top: 120px; Adjust the distance from the top of the viewport */
+/* right: 1220px; Adjust the distance from the right of the viewport */
+/* z-index: 0; */
+/* background-color: #fff; Optional: Prevent transparency */
 }
+
+
 
 .project .name-placeholder {
   width: 300px;

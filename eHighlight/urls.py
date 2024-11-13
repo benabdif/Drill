@@ -15,7 +15,6 @@
 
 from django.urls import path
 from . import views
-from django.urls import path
 from .views import download_records_excel  # Adjust the import according to your view location
 from django.contrib.auth import views as auth_views
 
