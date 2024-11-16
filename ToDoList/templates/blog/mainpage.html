@@ -6,10 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block title %}My Site{% endblock %}</title>
     
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    
+    <!-- Google Charts Loader -->
     <script src="https://www.gstatic.com/charts/loader.js"></script>
+    
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'css/cssc.css' %}" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+
+    <!-- FontAwesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com"> 
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     {% block extra_head %}
       <!-- Extra head content can be inserted by extending templates -->
@@ -17,94 +33,66 @@
   </head>
   
   <body>
-    
-    <header style="background: linear-gradient(to right, #047adb, #7bbb0e)">
+    <nav class="navbar navbar-expand-md custom-navbar">
       <div class="container-fluid">
         {% if user.is_authenticated %}
-        <nav class="navbar navbar-expand-lg navbar-light">
-            <a class="navbar-brand" href="{% url 'All_apps' %}" style="width: 15%;">
-                <img src="{% static 'MANGMENT.png' %}" alt="Logo" style="height: 25px;" />
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                {% comment %} <ul class="navbar-nav mr-auto" style="font-family: 'Poppins', sans-serif;">
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="{% url 'All_apps' %}"></a>
-                    </li>
-                </ul> {% endcomment %}
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-user"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#"><i class="fas fa-cog"></i> Profile Settings</a>
-                            <a class="dropdown-item" href="#"><i class="fas fa-user"></i> Account</a>
-                            <a class="dropdown-item" href="#"><i class="fas fa-user"></i> {{ user }}</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
-                        </div>
-                    </li>
-                </ul>
+        <a href="{% url 'All_apps' %}" class="navbar-brand">
+          <img src="{% static 'wellmanage.png' %}" alt="Wellmanage" class="img-fluid" />
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain"
+          aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarMain">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="{% url 'All_apps' %}"><i class="fa-solid fa-house me-1"></i>Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="{% url 'eHighlight_Record_list' %}"><i class="fa-solid fa-chart-bar me-1"></i>E-Highlight</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link " aria-current="page" href="{% url 'mytest' %}"><i class="fa-solid fa-sitemap me-1"></i>WSD-Organization</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link " aria-current="page" href="{% url 'add_task' %}"><i class="fa-solid fa-list-check me-1"></i>To Do Task</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link " aria-current="page" href="{% url 'add_task' %}"><i class="fa-solid fa-user-pen me-1"></i>Pre-Construction</a>
+            </li>
+          </ul>
+          <div class="user-profile-cont">
+            <!-- <button onclick="scrollToDiv('now')" class="btn btn-primary-custom me-3">Today</button> -->
+            <div class="dropdown">
+              <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa-solid fa-user"></i>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end p-0">
+                <li><a class="dropdown-item" href="#"><i class="fa-regular fa-user m-1"></i> Welcome {{ user|capfirst }}</a></li>
+                <li><a class="dropdown-item" href="#"><i class="fa-solid fa-gear me-1"></i> Settings</a></li>
+                <li><a class="dropdown-item" href="#"><i class="fa-solid fa-arrow-right-from-bracket me-1"></i> Sign Out</a></li>
+              </ul>
             </div>
-        </nav>
-        {% endif %}
-    </div>
-    
-      {% block content-1 %}
-      <header class="header">
-        <div class="header-content responsive-wrapper">
-          <div class="header-logo">
-            <a href="#"><div></div></a>
           </div>
-          <div class="header-navigation">
-            <nav class="header-navigation-links">
-              <a href="{% url 'All_apps' %}">All Aps</a>
-              <a href="#">Dashboard</a>
-              <a href="{% url 'eHighlight_Record_list' %}">E-highlight</a>
-              <a href="{% url 'dashboard' %}">Special Tasks</a>
-              <a href="#">Reporting</a>
-              <a href="#">Users</a>
-            </nav>           
-          
-            <div class="header-navigation-actions">
-              {% block header_navigation_actions %}
-              <div class="sp">
-                <a href="{% url 'createTaske' %}" class="button" id="add-task-button">
-                  <i class="ph-plus-bold"></i>
-                  <span>Add New Task</span>
-                </a>
-              </div>
-              {% endblock %}
-            </div>
-            
-            
-          </div>
-          <a href="#" class="button">
-            <i class="ph-list-bold"></i>
-            <span>Menu</span>
-          </a>
         </div>
-      </header>
-    </header>
-    {% endblock %}
+      </div>
+      {% endif %}
+    </nav>
+   
 
     <main class="">
       {% block content %}
-
       {% endblock %}
     </main>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Bootstrap Bundle JS (includes Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
     <script src="{% static 'js/scripts.js' %}"></script>
 
     {% block extra_scripts %}
       <!-- Extra scripts can be inserted by extending templates -->
     {% endblock %}
-
   </body>
 </html>

@@ -105,6 +105,12 @@ class Pre_Construction(models.Model):
 
     Approval_Date = models.DateField(null=True, blank=True)
     R_Completio_Date = models.DateField(null=True, blank=True)
+
+
+    def __str__(self):
+        return f"ID #: {self.id}"
+
+    
     
 
 

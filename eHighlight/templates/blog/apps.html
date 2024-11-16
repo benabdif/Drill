@@ -3,7 +3,7 @@
 {% block content %}
 {% include "chat/chat_popup.html" %}
 
-<style>
+<!-- <style>
     body {
         background: url("{% static 'imageee.png' %}") no-repeat center center fixed;
         background-size: cover;
@@ -198,10 +198,10 @@
             transform: translateX(-100%);
         }
     }
-</style>
+</style> -->
 
 <body>
-    <div class="marquee-container">
+    <!-- <div class="marquee-container">
         <div class="marquee">
             <span>This is an infinite marquee animation using pure CSS. </span>
             <span>This from me fahdel</span>
@@ -332,9 +332,270 @@
         <a href="#services">Contact US</a>
         <a href="#about">Related Applications</a>
         <a href="#contact">Time Date</a>
-    </div>
+    </div> -->
 
+
+        <!-- Apps Container -->
+        <div class="apps-container">
+            <!-- <div class="container-fluid"> -->
+                <div class="row">
+                    <div class="col-12 col-md-6 col-lg-3 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card-icon mb-3">
+                                    <img src="../../../static/icon-img/daily-report.png" class="img-fluid" alt="Daily Report">
+                                </div>
+                                <h5 class="card-title mb-3">Daily Report</h5>
+                                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipiscing elit non, justo ac imperdiet viverra praesent </p>
+                                <!-- <a href="#" class="btn btn-card">Read More</a> <br> -->
+                                <div class="dropdown">
+                                    <i class="fa-solid fa-arrow-right-long apps-dropdown-icon"  type="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Item 1</a></li>
+                                    <li><a class="dropdown-item" href="#">Item 2</a></li>
+                                    <li><a class="dropdown-item" href="#">Item 3</a></li>
+                                    <li><a class="dropdown-item" href="#">Item 3</a></li>
+                                    <li><a class="dropdown-item" href="#">Item 3</a></li>
+                                    <li><a class="dropdown-item" href="#">Item 3</a></li>
+                                    <li><a class="dropdown-item" href="#">Item 3</a></li>
+                                    <li><a class="dropdown-item" href="#">Item 3</a></li>
+                                    <li><a class="dropdown-item" href="#">Item 3</a></li>
+                                    <li><a class="dropdown-item" href="#">Item 3</a></li>
+                                    <li><a class="dropdown-item" href="#">Item 3</a></li>
+                                    <li><a class="dropdown-item" href="#">Item 3</a></li>
+                                    <li><a class="dropdown-item" href="#">Item 3</a></li>
+                                    <li><a class="dropdown-item" href="#">Item 3</a></li>
+                                    <li><a class="dropdown-item" href="#">Item 3</a></li>
+                                  </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card-icon mb-3">
+                                    <img src="../../../static/icon-img/special-task.png" class="img-fluid" alt="Special Task">
+                                </div>
+                                <h5 class="card-title mb-3">Special Task</h5>
+                                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipiscing elit non, justo ac imperdiet viverra praesent </p>
+                                <!-- <a href="#" class="btn btn-card">Read More</a> <br> -->
+                                <div class="dropdown">
+                                    <i class="fa-solid fa-arrow-right-long apps-dropdown-icon"  type="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Item N/A</a></li>
+                                    <li><a class="dropdown-item" href="#">Item N/A</a></li>
+                                    <li><a class="dropdown-item" href="#">Item N/A</a></li>
+                                  </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card-icon mb-3">
+                                    <img src="../../../static/icon-img/e-highlight.png" class="img-fluid" alt="E-Highlight">
+                                </div>
+                                
+                                    <h5  class="card-title mb-3">E-Highlight</h5>
+                                  
+                                <!-- <h5 class="card-title mb-3" href="{% url 'eHighlight_Record_list' %}">E-Highlight</h5> -->
+                                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipiscing elit non, justo ac imperdiet viverra praesent </p>
+
+                                <a href="{% url 'eHighlight_Record_list' %}">
+                                    <i class="fa-solid fa-arrow-right-long apps-dropdown-icon" ></i>
+                                </a>
+                                <!-- <a href="#" class="btn btn-card">Read More</a> <br> -->
+                                <!-- <div class="dropdown">
+                                    <i class="fa-solid fa-arrow-right-long apps-dropdown-icon"  type="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">E-Highlight</a></li>
+                                    <li><a class="dropdown-item" href="#">Item N/A</a></li>
+                                    <li><a class="dropdown-item" href="#">Item N/A</a></li>
+                                  </ul>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card-icon mb-3">
+                                    <img src="../../../static/icon-img/announcements.png" class="img-fluid" alt="Announcements">
+                                </div>
+                                <h5 class="card-title mb-3">Announcements</h5>
+                                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipiscing elit non, justo ac imperdiet viverra praesent </p>
+                                <!-- <a href="#" class="btn btn-card">Read More</a> <br> -->
+                                <div class="dropdown">
+                                    <i class="fa-solid fa-arrow-right-long apps-dropdown-icon"  type="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Item 1</a></li>
+                                    <li><a class="dropdown-item" href="#">Item 2</a></li>
+                                    <li><a class="dropdown-item" href="#">Item 3</a></li>
+                                  </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card-icon mb-3">
+                                    <img src="../../../static/icon-img/wih.png" class="img-fluid" alt="WIH">
+                                </div>
+                                <h5 class="card-title mb-3">WIH</h5>
+                                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipiscing elit non, justo ac imperdiet viverra praesent </p>
+                                <!-- <a href="#" class="btn btn-card">Read More</a> <br> -->
+                                <div class="dropdown">
+                                    <i class="fa-solid fa-arrow-right-long apps-dropdown-icon"  type="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">KPI'S & Target</a></li>
+                                    <li><a class="dropdown-item" href="#">WS Projects & Numbers</a></li>
+                                    <li><a class="dropdown-item" href="#">Requests Tracking</a></li>
+                                    <li><a class="dropdown-item" href="#">Market Share</a></li>
+                                    <li><a class="dropdown-item" href="#">Waste Manifest</a></li>
+                                    <li><a class="dropdown-item" href="#">Water Consumption</a></li>
+                                    <li><a class="dropdown-item" href="#">LUP Status</a></li>
+                                    <li><a class="dropdown-item" href="#">Contractor Dashboard</a></li>
+                                    <li><a class="dropdown-item" href="#">Asset Management</a></li>
+                                    <li><a class="dropdown-item" href="#">Field Distribution</a></li>
+                                    <li><a class="dropdown-item" href="#">Employees Distribution</a></li>
+                                    <li><a class="dropdown-item" href="#">Location Maps</a></li>
+                                    
+                                  </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card-icon mb-3">
+                                    <img src="../../../static/icon-img/daily-report.png" class="img-fluid" alt="WDH">
+                                </div>
+                                <h5 class="card-title mb-3">WDH</h5>
+                                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipiscing elit non, justo ac imperdiet viverra praesent </p>
+                                <!-- <a href="#" class="btn btn-card">Read More</a> <br> -->
+                                <div class="dropdown">
+                                    <i class="fa-solid fa-arrow-right-long apps-dropdown-icon"  type="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Item 1</a></li>
+                                    <li><a class="dropdown-item" href="#">Item 2</a></li>
+                                    <li><a class="dropdown-item" href="#">Item 3</a></li>
+                                  </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card-icon mb-3">
+                                    <img src="../../../static/icon-img/organizational-chart.png" class="img-fluid" alt="Organizational Chart">
+                                </div>
+                                <h5 class="card-title mb-3">Organizational Chart</h5>
+                                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipiscing elit non, justo ac imperdiet viverra praesent </p>
+                                <!-- <a href="#" class="btn btn-card">Read More</a> <br> -->
+                                <div class="dropdown">
+                                    <i class="fa-solid fa-arrow-right-long apps-dropdown-icon"  type="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Item 1</a></li>
+                                    <li><a class="dropdown-item" href="#">Item 2</a></li>
+                                    <li><a class="dropdown-item" href="#">Item 3</a></li>
+                                  </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card-icon mb-3">
+                                    <img src="../../../static/icon-img/logistics.png" class="img-fluid" alt="Logistics">
+                                </div>
+                                <h5 class="card-title mb-3">Logistics</h5>
+                                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipiscing elit non, justo ac imperdiet viverra praesent </p>
+                                <!-- <a href="#" class="btn btn-card">Read More</a> <br> -->
+                                <div class="dropdown">
+                                    <i class="fa-solid fa-arrow-right-long apps-dropdown-icon"  type="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Item 1</a></li>
+                                    <li><a class="dropdown-item" href="#">Item 2</a></li>
+                                    <li><a class="dropdown-item" href="#">Item 3</a></li>
+                                  </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card-icon mb-3">
+                                    <img src="../../../static/icon-img/chat-app.png" class="img-fluid" alt="Chat App">
+                                </div>
+                                <h5 class="card-title mb-3">Chat App</h5>
+                                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipiscing elit non, justo ac imperdiet viverra praesent </p>
+                                <!-- <a href="#" class="btn btn-card">Read More</a> <br> -->
+                                <div class="dropdown">
+                                    <i class="fa-solid fa-arrow-right-long apps-dropdown-icon"  type="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Item 1</a></li>
+                                    <li><a class="dropdown-item" href="#">Item 2</a></li>
+                                    <li><a class="dropdown-item" href="#">Item 3</a></li>
+                                  </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card-icon mb-3">
+                                    <img src="../../../static/icon-img/navigator.png" class="img-fluid" alt="Navigator">
+                                </div>
+                                <h5 class="card-title mb-3">Navigator</h5>
+                                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipiscing elit non, justo ac imperdiet viverra praesent </p>
+                                <!-- <a href="#" class="btn btn-card">Read More</a> <br> -->
+                                <div class="dropdown">
+                                    <i class="fa-solid fa-arrow-right-long apps-dropdown-icon"  type="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Item 1</a></li>
+                                    <li><a class="dropdown-item" href="#">Item 2</a></li>
+                                    <li><a class="dropdown-item" href="#">Item 3</a></li>
+                                  </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            <!-- </div> -->
+         </div>
+        <!-- Apps Container Ends -->
     
+        <!-- Important Links Container -->
+         <div class="important-links">
+            <div class="list-group">
+                <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                    <i class="fa-solid fa-file-shield"  data-bs-toggle="tooltip" data-bs-title="Access Required"></i>
+                    
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="fa-solid fa-phone"  data-bs-toggle="tooltip" data-bs-title="Contact Us"></i>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="fa-solid fa-computer"  data-bs-toggle="tooltip" data-bs-title="Related Applications"></i>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="fa-solid fa-calendar-days"  data-bs-toggle="tooltip" data-bs-title="Time Date"></i>
+                </a>
+                
+              </div>
+         </div>
+        <!-- Important Links Container Ends -->
+
+   
     
     <script src="{% static 'script.js' %}"></script>
 

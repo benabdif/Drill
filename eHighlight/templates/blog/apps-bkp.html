@@ -1,0 +1,359 @@
+{% extends 'blog/base_Apps_page.html' %}
+{% load static %}
+{% block content %}
+{% include "chat/chat_popup.html" %}
+
+<style>
+    body {
+        background: url("{% static 'imageee.png' %}") no-repeat center center fixed;
+        background-size: cover;
+        font-family: 'Arial', sans-serif;
+        color: #333;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .card-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 20px;
+    }
+
+    .card {
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        text-align: center;
+        flex: 1 1 calc(20% - 40px); /* Adjust the width to fit more cards in a row */
+        min-width: 200px; /* Reduced min-width */
+        max-width: 250px; /* Reduced max-width */
+        margin: 20px auto;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .card::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 20px;
+        background: linear-gradient(to right, #047adb, #7bbb0e);
+    }
+
+    .card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-icon {
+        width: 50px;
+        height: 50px;
+        transition: transform 0.3s ease;
+    }
+
+    .card-icon:hover {
+        transform: rotate(360deg);
+    }
+
+    .card-title {
+        font-size: 1.4em;
+        margin: 10px 0;
+        transition: color 0.3s ease;
+    }
+
+    .card-title:hover {
+        color: #2a9d8f;
+    }
+
+    .dropdown-btn {
+        font-size: 1em;
+        color: #a16a6a;
+        border: 1px solid rgb(180, 174, 174);
+        border-radius: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
+        margin: 10px 0;
+        transition: background-color 0.3s ease;
+    }
+
+    .dropdown-btn:hover {
+        background-color: #f0f0f0;
+    }
+
+    .feature-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s ease-out, opacity 0.5s ease-out;
+        opacity: 0;
+        text-align: left;
+        border-top: 1px solid #ddd;
+        padding-top: 10px;
+        margin-top: 10px;
+    }
+
+    .feature-list.show {
+        max-height: 300px;
+        opacity: 1;
+        text-align: center;
+    }
+
+    .feature-list li {
+        margin: 5px 0;
+    }
+
+    .feature-list a {
+        color: #21867a;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .feature-list a:hover {
+        color: #1b6b63;
+    }
+
+    @media (max-width: 768px) {
+        .card {
+            flex: 1 1 calc(50% - 40px);
+        }
+    }
+
+    @media (max-width: 480px) {
+        .card {
+            flex: 1 1 100%;
+            max-width: none;
+        }
+    }
+
+    .InButtom {
+        background-color: #00a3e0;
+    }
+
+    .navbara {
+        position: relative;
+        bottom: 0;
+        width: 100%;
+        background-color: #8aba24;
+        overflow: hidden;
+        display: flex;
+        justify-content: space-around;
+        border-radius: 10px;
+        background: linear-gradient(to right, #047adb, #7bbb0e);
+    }
+
+    .navbara a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 20px;
+        text-decoration: none;
+        transition: color 0.3s ease;
+        border-radius: 10px;
+    }
+
+    .navbara a:hover {
+        background-color: #ddd;
+        color: black;
+        transition: color 0.3s ease;
+    }
+
+    .marquee-container {
+        width: 100%;
+        overflow: hidden;
+        background-color: #f0f0f0;
+        white-space: nowrap;
+    }
+
+    .marquee {
+        display: inline-block;
+        padding-left: 100%;
+        animation: marquee 30s linear infinite;
+    }
+
+    .marquee span {
+        display: inline-block;
+        padding-right: 100%;
+    }
+
+    @keyframes marquee {
+        0% {
+            transform: translateX(0%);
+        }
+        100% {
+            transform: translateX(-100%);
+        }
+    }
+</style>
+
+<body>
+    <div class="marquee-container">
+        <div class="marquee">
+            <span>This is an infinite marquee animation using pure CSS. </span>
+            <span>This from me fahdel</span>
+        </div>
+    </div>
+    
+    <div class="card-container">
+        <div class="card">
+            <img src="{% static 'data-analytics.png' %}" class="card-icon" alt="Logo">
+            <p class="card-title">Daily Report</p>
+            <div class="dropdown-btn">More</div>
+            <ul class="feature-list">
+                <li><a href="{% url 'dashboard' %}">To Do Tasks test</a></li>
+                <li><a href="{% url 'rig_timeline' %}">Daily Report</a></li> 
+                <li>Earthwork Activities</li>
+                <li>Description</li>
+                <li>Site Review</li>
+                <li>Waste Management</li>
+                <li>HSE</li>
+            </ul>
+        </div>
+        <div class="card">
+            <img src="{% static 'oil-well.png' %}" class="card-icon" alt="Logo">
+            <p class="card-title">Special Task</p>
+            <div class="dropdown-btn">More</div>
+            <ul class="feature-list">
+                <li>WS Manual</li>
+                <li>B-62</li>
+            </ul>
+        </div>
+        <div class="card">
+            <img src="{% static 'highlighter.png' %}" class="card-icon" alt="Logo">
+            <a href="{% url 'eHighlight_Record_list' %}" class="card-title-link" style="text-decoration: none;">
+                <p class="card-title">E-Highlight</p>
+            </a>
+            <div class="dropdown-btn">More</div>
+            <ul class="feature-list">
+                <li>Feature 1</li>
+                <li>Feature 2</li>
+                <li>Feature 3</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <img src="{% static 'advertisement.png' %}" class="card-icon" alt="Logo">
+            <a href="{% url 'eHighlight_Record_list' %}" class="card-title-link" style="text-decoration: none;">
+                <p class="card-title">Announcements</p>
+            </a>
+            <div class="dropdown-btn">More</div>
+            <ul class="feature-list">
+                <li>Feature 1</li>
+                <li>Feature 2</li>
+                <li>Feature 3</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <img src="{% static 'COM.png' %}" class="card-icon" alt="Logo">
+            <p class="card-title">WIH</p>
+            <div class="dropdown-btn">More</div>
+            <ul class="feature-list">
+                <li><a href="#" target="_blank">KPI'S & Target</a></li>
+                <li><a href="#" target="_blank">WS Projects & Numbers</a></li>
+                <li><a href="#" target="_blank">Requests Tracking</a></li>
+                <li><a href="#" target="_blank">Market Share</a></li>
+                <li><a href="#" target="_blank">Waste Manifest</a></li>
+                <li><a href="#" target="_blank">Water Consumption</a></li>
+                <li><a href="#" target="_blank">LUP Status</a></li>
+                <li><a href="#" target="_blank">Contractor Dashboard</a></li>
+                <li><a href="#" target="_blank">Asset Management</a></li>
+                <li><a href="#" target="_blank">Field Distribution</a></li>
+                <li><a href="#" target="_blank">Employees Distribution</a></li>
+                <li><a href="#" target="_blank">Location Maps</a></li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <img src="{% static 'highlighter.png' %}" class="card-icon" alt="Logo">
+            <a href="{% url 'eHighlight_Record_list' %}" class="card-title-link">
+                <p class="card-title">WDH</p>
+            </a>
+            <div class="dropdown-btn">More</div>
+            <ul class="feature-list">
+                <li>Templet & Format</li>
+                <li>Guidelines</li>
+                <li>Infographics</li>
+                <li>References</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <img src="{% static 'hierarchy.png' %}" class="card-icon" alt="Logo">
+            <a href="{% url 'mytest' %}" class="card-title-link" style="text-decoration: none;">
+                <p class="card-title">Organiz Chart</p>
+            </a>
+            <div class="dropdown-btn">More</div>
+        </div>
+
+        <div class="card">
+            <img src="{% static 'bar-chart.png' %}" class="card-icon" alt="Logo">
+            <p class="card-title">Logistics</p>
+            <div class="dropdown-btn">More</div>
+            <ul class="feature-list">
+                <li>Work Permit</li>
+                <li>Access</li>
+                <li>Coming Soon</li>
+            </ul>
+        </div>
+        <div class="card">
+            
+            <img src="{% static 'chat.png' %}" class="card-icon" alt="Logo">
+            <a href="{% url 'mytest' %}" class="card-title-link" style="text-decoration: none;">
+                <p class="card-title">Chat App</p>
+            </a>
+            <div class="dropdown-btn">More</div>
+            
+        </div>
+
+        <div class="card">
+            <img src="{% static 'bar-chart.png' %}" class="card-icon" alt="Logo">
+            <p class="card-title">Navigator</p>
+            <div class="dropdown-btn">More</div>
+        </div>
+    </div>
+
+    <div class="navbara">
+        <a href="#home">Access Required</a>
+        <a href="#services">Contact US</a>
+        <a href="#about">Related Applications</a>
+        <a href="#contact">Time Date</a>
+    </div>
+
+
+    
+
+    
+    
+    <script src="{% static 'script.js' %}"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const dropdownBtns = document.querySelectorAll(".dropdown-btn");
+            dropdownBtns.forEach(function(dropdownBtn) {
+                dropdownBtn.addEventListener("click", function() {
+                    const featureList = this.nextElementSibling;
+                    featureList.classList.toggle("show");
+                    this.textContent = featureList.classList.contains("show") ? "-" : "+";
+                });
+            });
+        });
+    </script>
+</body>
+{% endblock %}
+
+
