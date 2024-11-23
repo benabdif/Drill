@@ -52,7 +52,6 @@ INSTALLED_APPS = [
     "crispy_bootstrap5",
     "accounts",
     "auditlog",
-
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
