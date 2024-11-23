@@ -288,7 +288,7 @@ class Rigg(models.Model):
     def __str__(self):
         return self.Rig_name
 
-
+# We have to cancel this models
 class Wellg(models.Model):
     name = models.CharField(max_length=100)
     location = models.CharField(max_length=255, null=True, blank=True)
