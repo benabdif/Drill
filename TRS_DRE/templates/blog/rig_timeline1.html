@@ -214,20 +214,7 @@
           <div class="movements">
             {% for movement in rig.movementg_set.all %}
             <div class="movement {% if movement.is_cleaned_up %}
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      clean-up
-
-
-
-
-
-
+            clean-up
 
                     {% elif movement.end_date|is_past %}
                       
